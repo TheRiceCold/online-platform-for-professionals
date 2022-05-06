@@ -1,7 +1,17 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
+import type { NextPage } from "next"
+import Head from "next/head"
+
+import {useForm, SubmitHandler} from "react-hook-form"
+import {ISignUpForm} from "@/interfaces/auth"
+
 
 const SignUp: NextPage = () => {
+  const { register, handleSubmit, watch } = useForm<ISignUpForm>();
+
+  const submitHandler: SubmitHandler<ISignUpForm> = data => {
+    console.log('form data is ', data);
+  }
+
   return (
     <div>
       <Head>
@@ -10,6 +20,19 @@ const SignUp: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Sign Up</h1>
+
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <input {...register("email")} />
+        <input {...register("password")} type="password" />
+        <input {...register("firstname")} />
+        <input {...register("lastname")} />
+        <input {...register("city")} />
+        <input {...register("region")} />
+        <input {...register("role")} />
+
+        <input type="submit"/>
+      </form>
+      <pre>{JSON.stringify(watch(), null, 2)}</pre>
     </div>
   )
 }
