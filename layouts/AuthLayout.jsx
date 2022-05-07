@@ -75,7 +75,12 @@ const AuthLayout = props => {
               </FormControl>
             )
           })}
-          <Button mt={4} colorScheme="teal" type="submit">
+          <Button 
+            mt={4} 
+            type="submit"
+            colorScheme="teal" 
+            isLoading={isSubmitting}
+            >
             {buttonLabel}
           </Button>
         </form>
