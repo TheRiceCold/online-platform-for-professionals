@@ -15,8 +15,7 @@ const AuthButtons = () => {
         variant="outline"
         borderRadius="60"
         onClick={() => {}}
-      >
-        Sign in
+      >Sign in
       </Button>
     </Flex>
   )

@@ -2,7 +2,7 @@ import {
   Flex, Input, InputGroup, Button,
   InputLeftElement, InputRightElement
   } from "@chakra-ui/react"
-import {CgSearch} from "react-icons/cg"
+import {SearchIcon} from "@chakra-ui/icons"
 
 const SearchInput = () => {
   return (
@@ -11,7 +11,7 @@ const SearchInput = () => {
         <Input placeholder="Search"/>
         <Input placeholder="Location"/>
         <Button>
-          <CgSearch size={48}/>
+          <SearchIcon />
         </Button>
       </InputGroup>
     </Flex>

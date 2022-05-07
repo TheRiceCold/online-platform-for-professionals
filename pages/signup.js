@@ -23,7 +23,7 @@ const SignUp = () => {
       <AuthLayout 
         fields={fields}
         linkTo={linkTo}
-        buttonLabel="Register"
+        buttonLabel="Join"
         heading="Create an Account"
         submitHandler={submitHandler}
       />

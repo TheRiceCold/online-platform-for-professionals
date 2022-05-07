@@ -1,16 +1,16 @@
 import {
-  Flex,
+  Flex, Checkbox,
   FormErrorMessage,
   FormLabel, FormControl,
   Input, Button, Select,
 } from "@chakra-ui/react"
-import PasswordField from "./PasswordField"
+import PasswordInput from "./PasswordInput"
 import {capitalize} from "@/utils/stringHelpers"
 
 const Form = props => {
-  const { 
-    formHook, formModalButton,
-    submitHandler, fields, buttonLabel } = props
+  const { formHook, isLoginAuth, fields,
+    submitHandler, buttonLabel } = props
+
   const { register, handleSubmit, formState } = formHook
   const { errors, isSubmitting } = formState
 
@@ -33,8 +33,9 @@ const Form = props => {
               {label}
             </FormLabel>
             {isPassword ? 
-              <PasswordField 
+              <PasswordInput
                 id={id} 
+                isLoginAuth
                 label={label}
                 register={register}
               />
@@ -60,23 +61,21 @@ const Form = props => {
           </FormControl>
         )
       })}
-      {formModalButton &&
-        <Flex mt={4}>
+      {isLoginAuth &&
+        <Flex mt={4} justify="space-between" align="center">
+          <Checkbox colorScheme="teal">Remember me</Checkbox>
           <Button 
             bg="none"
             color="teal" 
             borderRadius={60}
-          >{formModalButton}
+          >Forgot Password?
           </Button>
         </Flex>
       }
       <Button 
-        mt={4} 
-        width="100%"
-        type="submit"
-        borderRadius={60}
-        colorScheme="teal" 
+        mt={4} w="100%"
         isLoading={isSubmitting}
+        type="submit" colorScheme="teal" 
         > {buttonLabel}
       </Button>
     </form>

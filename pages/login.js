@@ -21,12 +21,12 @@ const Login = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthLayout 
+        isLoginAuth
         fields={fields}
         linkTo={linkTo}
         heading="Sign In"
         buttonLabel="Login"
         submitHandler={submitHandler}
-        formModalButton="Forgot Password?"
       />
     </main>
   )
