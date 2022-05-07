@@ -9,9 +9,9 @@ import {
   Input, InputGroup,
   Button, Select,
 } from "@chakra-ui/react"
-import {BsEye} from "react-icons/bs"
 import {useForm} from "react-hook-form"
 import {capitalize} from "@/utils/stringHelpers"
+import PasswordField from "@/components/PasswordField"
 
 const AuthLayout = props => {
   const { heading, fields, submitHandler } = props
@@ -30,19 +30,7 @@ const AuthLayout = props => {
           {fields.map(({id, type, label, options}) => {
             const isPassword = (type === "password")
             const isSelect = (type === "select")
-
-            const PasswordField = ({id, label}) => (
-              <InputGroup>
-                <Input 
-                  id={id}
-                  type="password"
-                  {...register(id)}
-                  placeholder={label}
-                  autoComplete="new-password"
-                />
-                <Button><BsEye/></Button>
-              </InputGroup>
-            )
+            const isEmail = (type === "email")
 
             return (
               <FormControl 
@@ -54,7 +42,11 @@ const AuthLayout = props => {
                   {label}
                 </FormLabel>
                 {isPassword ? 
-                  <PasswordField id={id} label={label} />
+                  <PasswordField 
+                    id={id} 
+                    label={label}
+                    register={register}
+                  />
                   : isSelect ?
                     <Select {...register(id)}>
                       {options?.map(item => (
@@ -67,6 +59,8 @@ const AuthLayout = props => {
                         id={id} 
                         {...register(id)}
                         placeholder={label}
+                        // DOM warnings
+                        autoComplete={isEmail && "username"}
                       />
                 }
                 <FormErrorMessage>
