@@ -11,7 +11,7 @@ const PasswordField = ({id, label, isSignUp, register}) => {
         id={id}
         {...register(id)}
         placeholder={label}
-        type={!show && "password"}
+        type={show ? "text" : "password"}
         // DOM warnings
         autoComplete={isSignUp ? "new-password" : "current-password" }
       />

@@ -42,3 +42,17 @@ export const signUpFields = [
     options: ["client", "professional", "admin"]
   }
 ]
+
+export const loginFields = [
+  {
+    required: true,
+    id: "email",
+    label: "Email"
+  },
+  {
+    required: true,
+    id: "password",
+    type: "password",
+    label: "Password"
+  }
+]

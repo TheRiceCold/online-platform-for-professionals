@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import AuthLayout from "@/layouts/AuthLayout"
-import {signUpFields} from "@/constants/authInputFields"
+import {signUpFields as fields} from "@/constants/authInputFields"
 
 const SignUp = () => {
   const submitHandler = data => {
@@ -15,10 +15,10 @@ const SignUp = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthLayout 
-        heading="Create an Account"
-        fields={signUpFields}
-        submitHandler={submitHandler}
+        fields={fields}
         buttonLabel="Register"
+        heading="Create an Account"
+        submitHandler={submitHandler}
       />
     </main>
   )
