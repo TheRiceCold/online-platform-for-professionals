@@ -22,7 +22,7 @@ const SignUp = () => {
       </Head>
       <AuthLayout 
         linkTo={linkTo}
-        buttonLabel="Join"
+        submitValue="Join"
         inputList={inputList}
         heading="Create an Account"
         submitHandler={submitHandler}

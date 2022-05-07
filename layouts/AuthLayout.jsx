@@ -19,9 +19,15 @@ const AuthLayout = ({heading, linkTo, isLoginAuth, ...props}) => {
         alignItems="center"
         justifyContent="center" 
       >
-        <Stack width="500px" p="8" boxShadow="xl" borderRadius="xl">
+        <Stack 
+          p="8" 
+          width="500px" 
+          boxShadow="xl" 
+          borderRadius="xl"
+        >
           <Heading>{heading}</Heading>
-          <Form {...props} 
+          <Form 
+            {...props} 
             formHook={formHook}
             isLoginAuth={isLoginAuth}
           />

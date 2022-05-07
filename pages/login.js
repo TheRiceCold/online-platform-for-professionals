@@ -24,7 +24,7 @@ const Login = () => {
         isLoginAuth
         linkTo={linkTo}
         heading="Sign In"
-        buttonLabel="Login"
+        submitValue="Login"
         inputList={inputList}
         submitHandler={submitHandler}
       />

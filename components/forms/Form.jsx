@@ -4,7 +4,7 @@ import {Flex, Checkbox, Button} from "@chakra-ui/react"
 const Form = props => {
   const { 
     formHook, isLoginAuth, inputList, 
-    submitHandler, buttonLabel 
+    submitHandler, submitValue
   } = props
 
   const {
@@ -37,8 +37,7 @@ const Form = props => {
         mt={4} w="100%"
         colorScheme="teal" 
         isLoading={isSubmitting}
-      > 
-        {buttonLabel}
+      > {submitValue}
       </Button>
     </form>
   )
