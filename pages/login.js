@@ -7,6 +7,12 @@ const Login = () => {
     console.log("submitted data: ", data)
   }
 
+  const linkTo = {
+    href: "/signup",
+    text: "No Account?",
+    linkText: "Join now"
+  }
+
   return (
     <main>
       <Head>
@@ -15,10 +21,12 @@ const Login = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthLayout 
-        heading="Sign In"
         fields={fields}
+        linkTo={linkTo}
+        heading="Sign In"
         buttonLabel="Login"
         submitHandler={submitHandler}
+        formModalButton="Forgot Password?"
       />
     </main>
   )

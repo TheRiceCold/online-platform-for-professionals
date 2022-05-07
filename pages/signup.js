@@ -7,6 +7,12 @@ const SignUp = () => {
     console.log("submitted data: ", data)
   }
 
+  const linkTo = {
+    href: "/login",
+    text: "Already have an account?",
+    linkText: "Sign in"
+  }
+
   return (
     <main>
       <Head>
@@ -16,6 +22,7 @@ const SignUp = () => {
       </Head>
       <AuthLayout 
         fields={fields}
+        linkTo={linkTo}
         buttonLabel="Register"
         heading="Create an Account"
         submitHandler={submitHandler}

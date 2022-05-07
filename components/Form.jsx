@@ -9,16 +9,15 @@ import {capitalize} from "@/utils/stringHelpers"
 
 const Form = props => {
   const { 
-    submitHandler, handleSubmit,
-    fields, buttonLabel, register,  
-    formState: {errors, isSubmitting}} = props
+    formHook, formModalButton,
+    submitHandler, fields, buttonLabel } = props
+  const { register, handleSubmit, formState } = formHook
+  const { errors, isSubmitting } = formState
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       {fields.map(field => {
-        const {
-          id, type, label, 
-          options, required} = field
+        const {id, type, label, required} = field
 
         const isPassword = (type === "password")
         const isSelect = (type === "select")
@@ -41,7 +40,7 @@ const Form = props => {
               />
               : isSelect ?
                 <Select {...register(id)}>
-                  {options?.map(item => (
+                  {field?.options?.map(item => (
                     <option key={item} value={item}>
                       {capitalize(item)}
                     </option>
@@ -61,23 +60,25 @@ const Form = props => {
           </FormControl>
         )
       })}
-      <Flex mt={4}>
-        <Button 
-          bg="none"
-          color="teal" 
-          borderRadius={60}
-        >Forgot Password?
-        </Button>
-      </Flex>
-        <Button 
-          mt={4} 
-          width="100%"
-          type="submit"
-          borderRadius={60}
-          colorScheme="teal" 
-          isLoading={isSubmitting}
-          > {buttonLabel}
-        </Button>
+      {formModalButton &&
+        <Flex mt={4}>
+          <Button 
+            bg="none"
+            color="teal" 
+            borderRadius={60}
+          >{formModalButton}
+          </Button>
+        </Flex>
+      }
+      <Button 
+        mt={4} 
+        width="100%"
+        type="submit"
+        borderRadius={60}
+        colorScheme="teal" 
+        isLoading={isSubmitting}
+        > {buttonLabel}
+      </Button>
     </form>
   )
 }
