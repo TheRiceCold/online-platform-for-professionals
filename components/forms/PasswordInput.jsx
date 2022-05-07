@@ -6,7 +6,8 @@ import {
   InputRightElement,
 } from "@chakra-ui/react"
 
-const PasswordInput = ({id, label, isLoginAuth, register}) => {
+const PasswordInput = props => {
+  const {id, label, isLoginAuth, register} = props
   const [show, setShow] = useState(false)
 
   return (

@@ -15,6 +15,11 @@ export const signUpFields = [
     label: "Email"
   },
   {
+    type: "tel",
+    id: "phoneNo",
+    label: "Phone No."
+  },
+  {
     required: true,
     id: "password",
     type: "password",

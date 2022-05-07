@@ -10,9 +10,11 @@ const SearchInput = () => {
       <InputGroup>
         <Input placeholder="Search"/>
         <Input placeholder="Location"/>
-        <Button>
-          <SearchIcon />
-        </Button>
+        <InputRightElement>
+          <Button bg="none">
+            <SearchIcon />
+          </Button>
+        </InputRightElement>
       </InputGroup>
     </Flex>
   )

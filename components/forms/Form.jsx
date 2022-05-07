@@ -4,6 +4,7 @@ import {
   FormLabel, FormControl,
   Input, Button, Select,
 } from "@chakra-ui/react"
+import PhoneInput from "./PhoneInput"
 import PasswordInput from "./PasswordInput"
 import {capitalize} from "@/utils/stringHelpers"
 
@@ -22,6 +23,7 @@ const Form = props => {
         const isPassword = (type === "password")
         const isSelect = (type === "select")
         const isEmail = (type === "email")
+        const isPhone = (type === "tel")
 
         return (
           <FormControl 
@@ -39,21 +41,27 @@ const Form = props => {
                 label={label}
                 register={register}
               />
-              : isSelect ?
-                <Select {...register(id)}>
-                  {field?.options?.map(item => (
-                    <option key={item} value={item}>
-                      {capitalize(item)}
-                    </option>
-                  ))} 
-                </Select>
-                : <Input 
-                    id={id} 
-                    {...register(id)}
-                    placeholder={label}
-                    // DOM warnings
-                    autoComplete={isEmail ? "username" : "off"}
-                  />
+              : isPhone ? 
+                <PhoneInput
+                  id={id}
+                  label={label}
+                  register={register}
+                />
+                : isSelect ?
+                  <Select {...register(id)}>
+                    {field?.options?.map(item => (
+                      <option key={item} value={item}>
+                        {capitalize(item)}
+                      </option>
+                    ))} 
+                  </Select>
+                  : <Input 
+                      id={id} 
+                      {...register(id)}
+                      placeholder={label}
+                      // DOM warnings
+                      autoComplete={isEmail ? "username" : "off"}
+                    />
             }
             <FormErrorMessage>
               {errors[id]?.message}

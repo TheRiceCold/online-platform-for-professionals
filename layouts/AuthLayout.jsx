@@ -1,7 +1,7 @@
 import NextLink from "next/link"
-import Form from "@/components/Form"
 import Modal from "@/components/Modal"
 import {useForm} from "react-hook-form"
+import Form from "@/components/forms/Form"
 import {Container, Stack} from "@chakra-ui/layout"
 import {useDisclosure as useModal} from '@chakra-ui/react'
 import {Text, Heading, Link, Button} from "@chakra-ui/react"
