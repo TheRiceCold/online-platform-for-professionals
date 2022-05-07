@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import AuthLayout from "@/layouts/AuthLayout"
-import {loginFields as fields} from "@/constants/authInputFields"
+import {loginInputs as inputList} from "@/constants/authInputFields"
 
 const Login = () => {
   const submitHandler = data => {
@@ -22,10 +22,10 @@ const Login = () => {
       </Head>
       <AuthLayout 
         isLoginAuth
-        fields={fields}
         linkTo={linkTo}
         heading="Sign In"
         buttonLabel="Login"
+        inputList={inputList}
         submitHandler={submitHandler}
       />
     </main>

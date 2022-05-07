@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import AuthLayout from "@/layouts/AuthLayout"
-import {signUpFields as fields} from "@/constants/authInputFields"
+import {signUpInputs as inputList} from "@/constants/authInputFields"
 
 const SignUp = () => {
   const submitHandler = data => {
@@ -21,9 +21,9 @@ const SignUp = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthLayout 
-        fields={fields}
         linkTo={linkTo}
         buttonLabel="Join"
+        inputList={inputList}
         heading="Create an Account"
         submitHandler={submitHandler}
       />

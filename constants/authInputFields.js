@@ -1,4 +1,4 @@
-export const signUpFields = [
+export const signUpInputs = [
   {
     required: true,
     id: "firstname",
@@ -48,7 +48,7 @@ export const signUpFields = [
   }
 ]
 
-export const loginFields = [
+export const loginInputs = [
   {
     required: true,
     id: "email",

@@ -1,6 +1,7 @@
 import {Flex} from "@chakra-ui/react"
 import SearchInput from "./SearchInput"
 import AuthButtons from "./AuthButtons"
+import UserMenu from "./UserMenu"
 
 const Navbar = () => {
   return (
@@ -10,6 +11,7 @@ const Navbar = () => {
       </Flex>
       <SearchInput/>
       <AuthButtons/>
+      <UserMenu/>
     </Flex>
   )
 }
