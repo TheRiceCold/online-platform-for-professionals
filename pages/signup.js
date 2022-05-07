@@ -15,9 +15,10 @@ const SignUp = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthLayout 
-        heading="Sign Up"
+        heading="Create an Account"
         fields={signUpFields}
         submitHandler={submitHandler}
+        buttonLabel="Register"
       />
     </main>
   )

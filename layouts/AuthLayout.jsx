@@ -14,7 +14,9 @@ import {capitalize} from "@/utils/stringHelpers"
 import PasswordField from "@/components/PasswordField"
 
 const AuthLayout = props => {
-  const { heading, fields, submitHandler } = props
+  const { 
+    heading, fields, 
+    buttonLabel, submitHandler } = props
 
   const {
     register, handleSubmit, 
@@ -69,6 +71,9 @@ const AuthLayout = props => {
               </FormControl>
             )
           })}
+          <Button mt={4} colorScheme="teal" type="submit">
+            {buttonLabel}
+          </Button>
         </form>
       </Stack>
     </Container>
