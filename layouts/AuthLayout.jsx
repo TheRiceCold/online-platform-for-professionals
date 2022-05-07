@@ -3,13 +3,19 @@ import Modal from "@/components/Modal"
 import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
 import {Container, Stack} from "@chakra-ui/layout"
-import {useDisclosure as useModal} from '@chakra-ui/react'
+import {useLocations} from "@/contexts/LocationsProvider"
+import {useDisclosure as useModal} from "@chakra-ui/react"
 import {Text, Heading, Link, Button} from "@chakra-ui/react"
 import EmailConfirmLayout from "@/layouts/EmailConfirmLayout"
 
 const AuthLayout = ({heading, linkTo, isLoginAuth, ...props}) => {
   const formHook = useForm()
   const {onOpen : openModal, ...modalProps} = useModal()
+
+  if (!isLoginAuth) {
+    const {regions, cities} = useLocations()
+    console.log(cities, regions)
+  }
 
   return (
     <>

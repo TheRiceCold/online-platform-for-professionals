@@ -1,4 +1,13 @@
-export const signUpInputs = [
+import regions from "../data/regions"
+
+const signUpInputs = [
+  {
+    required: true,
+    id: "role",
+    type: "select",
+    label: "Select Role",
+    options: ["client", "professional", "admin"]
+  },
   {
     required: true,
     id: "firstname",
@@ -31,33 +40,17 @@ export const signUpInputs = [
     type: "password",
     label: "Password Confirmation"
   },
-  {
-    id: "city",
+  { 
+    id: "region", 
+    type: "select",
+    label: "Region",
+    label: "Select Region",
+    options: regions
+  },
+  { 
+    id: "city", 
     label: "City"
   },
-  {
-    id: "region",
-    label: "Region"
-  },
-  {
-    required: true,
-    id: "role",
-    type: "select",
-    label: "Select Role",
-    options: ["client", "professional", "admin"]
-  }
 ]
 
-export const loginInputs = [
-  {
-    required: true,
-    id: "email",
-    label: "Email"
-  },
-  {
-    required: true,
-    id: "password",
-    type: "password",
-    label: "Password"
-  }
-]
+export default signUpInputs

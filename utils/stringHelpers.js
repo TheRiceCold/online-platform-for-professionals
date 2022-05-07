@@ -1,2 +1,3 @@
 export const capitalize = word => 
-  word.charAt(0).toUpperCase() + word.slice(1)
+  word.toLowerCase().charAt(0)
+    .toUpperCase() + word.slice(1)

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import AuthLayout from "@/layouts/AuthLayout"
-import {loginInputs as inputList} from "@/constants/authInputFields"
+import inputList from "@/constants/auth/loginInputs"
 
 const Login = () => {
   const submitHandler = data => {
