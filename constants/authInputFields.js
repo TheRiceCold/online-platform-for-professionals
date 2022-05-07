@@ -1,22 +1,27 @@
 export const signUpFields = [
   {
+    required: true,
     id: "firstname",
     label: "First Name"
   },
   {
+    required: true,
     id: "lastname",
     label: "Last Name"
   },
   {
+    required: true,
     id: "email",
     label: "Email"
   },
   {
+    required: true,
     id: "password",
     type: "password",
     label: "Password"
   },
   {
+    required: true,
     id: "confirmPassword",
     type: "password",
     label: "Password Confirmation"
@@ -30,6 +35,7 @@ export const signUpFields = [
     label: "Region"
   },
   {
+    required: true,
     id: "role",
     type: "select",
     label: "Select Role",

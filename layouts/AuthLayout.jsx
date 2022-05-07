@@ -29,7 +29,11 @@ const AuthLayout = props => {
       <Stack width="500px" p="4" boxShadow="xl" borderRadius="xl">
         <Heading>{heading}</Heading>
         <form onSubmit={handleSubmit(submitHandler)}>
-          {fields.map(({id, type, label, options}) => {
+          {fields.map(field => {
+            const {
+              id, type, label, 
+              options, required} = field
+
             const isPassword = (type === "password")
             const isSelect = (type === "select")
             const isEmail = (type === "email")
@@ -37,7 +41,7 @@ const AuthLayout = props => {
             return (
               <FormControl 
                 key={id}
-                isRequired 
+                isRequired={required}
                 isInvalid={errors[id]}
               >
                 <FormLabel mt={4} htmlFor={id}>
@@ -62,7 +66,7 @@ const AuthLayout = props => {
                         {...register(id)}
                         placeholder={label}
                         // DOM warnings
-                        autoComplete={isEmail && "username"}
+                        autoComplete={isEmail ? "username" : "off"}
                       />
                 }
                 <FormErrorMessage>
