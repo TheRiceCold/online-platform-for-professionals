@@ -3,12 +3,22 @@ import Head from 'next/head'
 import AuthLayout from "@/layouts/AuthLayout"
 import {removeAttr, renameKeys} from "@/utils/jsonHelpers"
 import {signUpInputs} from "@/constants/auth/signUpInputs"
+import {dehydrate, QueryClient, useQuery} from "react-query"
 
-const SignUp = ({regions}) => {
+
+const fetchLocationsBy = async type => {
+  const BASE_URL = "https://ph-locations-api.buonzz.com/v1/"
+  const {data: {data}} = await Axios.get(BASE_URL+type)
+  return data
+}
+
+const SignUp = () => {
+  const {data: regions} = useQuery("regions", () => fetchLocationsBy("regions"))
+  console.log(regions)
+
   const submitHandler = data => {
     console.log("submitted data: ", data)
   }
-  console.log(regions)
 
   const linkTo = {
     href: "/login",
@@ -35,19 +45,19 @@ const SignUp = ({regions}) => {
 }
 
 export const getServerSideProps = async() => {
-  const BASE_URL = "https://ph-locations-api.buonzz.com/v1/"
-  const {data: {data: regions}} = await Axios.get(BASE_URL+"regions")
+  const queryClient = new QueryClient()
+  await queryClient.prefetchQuery("regions", () => fetchLocationsBy("regions"))
 
-  // removes href attribute
-  removeAttr(regions, "href")
+  // // removes href attribute
+  // removeAttr(regions, "href")
+  //
+  // // rename keys ex. id -> value
+  // renameKeys(regions, [
+  //   { oldKey: "id", newKey: "value" },
+  //   { oldKey: "name", newKey: "label" },
+  // ])
 
-  // rename keys ex. id -> value
-  renameKeys(regions, [
-    { oldKey: "id", newKey: "value" },
-    { oldKey: "name", newKey: "label" },
-  ])
-
-  return { props: { regions }}
+  return { props: { dehydrateState: dehydrate(queryClient)}}
 }
 
 export default SignUp

@@ -1,4 +1,3 @@
-
 export const removeAttr = (data, attr) => 
   data.forEach(item => delete item[attr]) 
 
