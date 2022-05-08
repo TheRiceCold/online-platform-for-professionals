@@ -1,6 +1,11 @@
 export const removeAttr = (data, attr) => 
   data.forEach(item => delete item[attr]) 
 
+export const removeAttributes = (data, attributes) => 
+  data.forEach(item => {
+    attributes.forEach(attr => delete item[attr]) 
+  })
+
 // renames one key
 export const renameKey = (data, oldKey, newKey) => 
   data.forEach(item => {

@@ -1,11 +1,16 @@
 import InputMap from "./InputMap"
+import Select from "react-select"
+import {useQuery} from "react-query"
+import {fetchLocations} from "@/utils/locationsApi"
 import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
   const { 
     formHook, isLoginAuth, inputList, 
-    submitHandler, submitValue
-  } = props
+    submitHandler, submitValue } = props
+
+  const {data: locations} = useQuery("locations", 
+    fetchLocations, { enabled: !isLoginAuth })
 
   const {
     register, handleSubmit, 
@@ -32,6 +37,7 @@ const Form = props => {
           </Button>
         </Flex>
       }
+      {/* <Select options={}/> */}
       <Button 
         type="submit" 
         mt={4} w="100%"

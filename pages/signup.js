@@ -1,21 +1,10 @@
-import Axios from "axios"
-import Head from 'next/head'
+import Head from "next/head"
 import AuthLayout from "@/layouts/AuthLayout"
-import {removeAttr, renameKeys} from "@/utils/jsonHelpers"
+import {dehydrate, QueryClient} from "react-query"
+import {fetchLocations} from "@/utils/locationsApi"
 import {signUpInputs} from "@/constants/auth/signUpInputs"
-import {dehydrate, QueryClient, useQuery} from "react-query"
-
-
-const fetchLocationsBy = async type => {
-  const BASE_URL = "https://ph-locations-api.buonzz.com/v1/"
-  const {data: {data}} = await Axios.get(BASE_URL+type)
-  return data
-}
 
 const SignUp = () => {
-  const {data: regions} = useQuery("regions", () => fetchLocationsBy("regions"))
-  console.log(regions)
-
   const submitHandler = data => {
     console.log("submitted data: ", data)
   }
@@ -46,16 +35,7 @@ const SignUp = () => {
 
 export const getServerSideProps = async() => {
   const queryClient = new QueryClient()
-  await queryClient.prefetchQuery("regions", () => fetchLocationsBy("regions"))
-
-  // // removes href attribute
-  // removeAttr(regions, "href")
-  //
-  // // rename keys ex. id -> value
-  // renameKeys(regions, [
-  //   { oldKey: "id", newKey: "value" },
-  //   { oldKey: "name", newKey: "label" },
-  // ])
+  await queryClient.prefetchQuery("locations", fetchLocations)
 
   return { props: { dehydrateState: dehydrate(queryClient)}}
 }
