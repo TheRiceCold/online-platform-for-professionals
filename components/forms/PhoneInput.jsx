@@ -3,7 +3,9 @@ import {
   InputLeftAddon,
 } from "@chakra-ui/react"
 
-const PhoneInput = ({id, label, register}) => {
+const PhoneInput = props => {
+  const {id, label, register} = props
+
   return (
     <InputGroup>
       <InputLeftAddon 
@@ -12,6 +14,7 @@ const PhoneInput = ({id, label, register}) => {
       />
       <Input 
         id={id}
+        name={id}
         type="tel"
         {...register(id)}
         placeholder={label}

@@ -1,8 +1,8 @@
+import Axios from "axios"
 import {
   removeAttributes,
   renameKey, removeAttr
-} from "./jsonHelpers"
-import Axios from "axios"
+} from "@/utils/jsonHelpers"
 
 const BASE_URL = "https://ph-locations-api.buonzz.com/v1/"
 

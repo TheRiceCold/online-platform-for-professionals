@@ -3,7 +3,9 @@ import PhoneInput from "./PhoneInput"
 import SelectInput from "./SelectInput"
 import PasswordInput from "./PasswordInput"
 
-const InputSwitch = ({input, register}) => {
+const InputSwitch = props => {
+  const {input, register, isLoginPage} = props
+
   const {id, type, label} = input
   const isEmail = (type === "email")
 
@@ -21,9 +23,9 @@ const InputSwitch = ({input, register}) => {
       return (
       <PasswordInput
         id={id} 
-        isLoginAuth
         label={label}
         register={register}
+        isLoginPage={isLoginPage}
       />
     )
 
@@ -40,8 +42,8 @@ const InputSwitch = ({input, register}) => {
       return (
         <TextInput
           id={id}
-          isEmail
           label={label}
+          isEmail={isEmail}
           register={register}
         />
       )

@@ -7,26 +7,27 @@ import {
 } from "@chakra-ui/react"
 
 const PasswordInput = props => {
-  const {id, label, isLoginAuth, register} = props
   const [show, setShow] = useState(false)
+  const type = (show ? "text" : "password")
+  const {id, label, register, isLoginPage} = props
+  const Icon = (show ? <ViewOffIcon/> : <ViewIcon/>)
+  const autoComplete = isLoginPage ? "current-password" :  "new-password" 
 
   return (
     <InputGroup>
       <Input 
         id={id}
+        name={id}
+        type={type}
         {...register(id)}
         placeholder={label}
-        type={show ? "text" : "password"}
-        // DOM warnings
-        autoComplete={isLoginAuth ? "current-password" :  "new-password" }
+        autoComplete={autoComplete}
       />
       <InputRightElement width="4em">
         <Button 
-          h="2em"
-          size="sm"
-          bg="none"
-          onClick={() => setShow(!show)}>
-          {show ? <ViewOffIcon/> : <ViewIcon/>}
+          h="2em" bg="none" size="sm"
+          onClick={() => setShow(!show)}
+        > {Icon}
         </Button>
       </InputRightElement>
     </InputGroup>

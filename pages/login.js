@@ -29,10 +29,11 @@ const Login = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthLayout 
-        isLoginAuth
+        isLoginPage
         linkTo={linkTo}
         heading="Sign In"
         submitValue="Login"
+        isLoading={isLoading}
         inputList={inputList}
         submitHandler={submitHandler}
       />

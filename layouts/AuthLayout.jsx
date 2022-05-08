@@ -1,15 +1,19 @@
 import NextLink from "next/link"
-import Modal from "@/components/Modal"
 import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
 import {Container, Stack} from "@chakra-ui/layout"
+import {zodResolver} from "@hookform/resolvers/zod"
+import FormModal from "@/components/modal/FormModal"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 import {Text, Heading, Link, Button} from "@chakra-ui/react"
-import EmailConfirmLayout from "@/layouts/EmailConfirmLayout"
 
-const AuthLayout = ({heading, linkTo, isLoginAuth, ...props}) => {
-  const formHook = useForm()
+const AuthLayout = ({schema, linkTo, heading, isLoginPage, ...props}) => {
   const {onOpen : openModal, ...modalProps} = useModal()
+  // TODO: remove after auth complete
+  const formHook = useForm({
+    mode: "onChange",
+    resolvers: zodResolver(schema)
+  })
 
   return (
     <>
@@ -26,10 +30,10 @@ const AuthLayout = ({heading, linkTo, isLoginAuth, ...props}) => {
           borderRadius="xl"
         >
           <Heading>{heading}</Heading>
-          <Form 
+          <Form
             {...props} 
             formHook={formHook}
-            isLoginAuth={isLoginAuth}
+            isLoginPage={isLoginPage}
           />
         </Stack>
         {linkTo && 
@@ -42,7 +46,7 @@ const AuthLayout = ({heading, linkTo, isLoginAuth, ...props}) => {
             </NextLink>
           </Text>
         }
-        {isLoginAuth && 
+        {isLoginPage && 
           <Button 
             mt={4}
             bg="none"
@@ -53,10 +57,9 @@ const AuthLayout = ({heading, linkTo, isLoginAuth, ...props}) => {
           </Button>
         }
       </Container>
-      <Modal 
+      <FormModal 
         {...modalProps}
         heading="Resend Confirmation"
-        content={<EmailConfirmLayout/>}
       />
       <pre>{JSON.stringify(formHook.watch(), null, 2)}</pre>
     </>

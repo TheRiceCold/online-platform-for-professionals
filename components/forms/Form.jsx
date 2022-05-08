@@ -6,15 +6,16 @@ import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
   const { 
-    formHook, isLoginAuth, inputList, 
+    formHook, inputList, 
+    isLoading, isLoginPage,
     submitHandler, submitValue } = props
 
   const {data: locations} = useQuery("locations", 
-    fetchLocations, { enabled: !isLoginAuth })
+    fetchLocations, { enabled: !isLoginPage })
 
   const {
     register, handleSubmit, 
-    formState: {errors, isSubmitting}
+    formState: {errors, isValid}
   } = formHook
 
   return (
@@ -23,8 +24,9 @@ const Form = props => {
         errors={errors}
         register={register}
         inputList={inputList}
+        isLoginPage={isLoginPage}
       />}
-      {isLoginAuth &&
+      {isLoginPage &&
         <Flex mt={4} justify="space-between" align="center">
           <Checkbox colorScheme="teal">
             Remember me
@@ -33,12 +35,13 @@ const Form = props => {
             bg="none"
             color="teal" 
             borderRadius={60}
-          >Forgot Password?
+          >
+            Forgot Password?
           </Button>
         </Flex>
       }
       {/* TODO: */}
-      {/* {!isLoginAuth && */}
+      {/* {!isLoginPage && */}
       {/*   <GroupSelectInput  */}
       {/*     label="Locations" */}
       {/*     options={locations} */}
@@ -48,8 +51,10 @@ const Form = props => {
         type="submit" 
         mt={4} w="100%"
         colorScheme="teal" 
-        isLoading={isSubmitting}
-      > {submitValue}
+        disabled={!isValid}
+        isLoading={isLoading}
+      > 
+        {submitValue}
       </Button>
     </form>
   )

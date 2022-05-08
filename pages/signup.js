@@ -2,8 +2,9 @@ import Head from "next/head"
 import {signup} from "@/api/authApi"
 import AuthLayout from "@/layouts/AuthLayout"
 import {fetchLocations} from "@/api/locationsApi"
-import {dehydrate, QueryClient} from "react-query"
 import {signUpInputs} from "@/constants/auth/signUpInputs"
+import {QueryClient, useMutation, dehydrate} from "react-query"
+import {signUpSchema as schema} from "@/validations/signUpSchema"
 
 const SignUp = () => {
   const {
@@ -30,8 +31,10 @@ const SignUp = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthLayout 
+        schema={schema}
         linkTo={linkTo}
         submitValue="Join"
+        isLoading={isLoading}
         inputList={signUpInputs}
         heading="Create an Account"
         submitHandler={submitHandler}
