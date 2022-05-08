@@ -1,3 +1,7 @@
+
+export const addAttr = (data, attrList) => 
+  data.forEach((item, idx) => item[attrList[idx].key] = attrList[idx].value)
+
 export const removeAttr = (data, attr) => 
   data.forEach(item => delete item[attr]) 
 

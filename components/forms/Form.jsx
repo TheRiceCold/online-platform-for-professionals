@@ -1,7 +1,7 @@
 import InputMap from "./InputMap"
-import Select from "react-select"
 import {useQuery} from "react-query"
-import {fetchLocations} from "@/utils/locationsApi"
+import {fetchLocations} from "@/api/locationsApi"
+import GroupSelectInput from "./GroupSelectInput"
 import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
@@ -37,7 +37,13 @@ const Form = props => {
           </Button>
         </Flex>
       }
-      {/* <Select options={}/> */}
+      {/* TODO: */}
+      {/* {!isLoginAuth && */}
+      {/*   <GroupSelectInput  */}
+      {/*     label="Locations" */}
+      {/*     options={locations} */}
+      {/*   /> */}
+      {/* } */}
       <Button 
         type="submit" 
         mt={4} w="100%"

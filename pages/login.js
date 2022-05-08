@@ -1,10 +1,18 @@
 import Head from 'next/head'
+import {login} from "@/api/authApi"
+import {useMutation} from "react-query"
 import AuthLayout from "@/layouts/AuthLayout"
 import inputList from "@/constants/auth/loginInputs"
 
 const Login = () => {
-  const submitHandler = data => {
+  const {
+    isLoading, isError,
+    mutateAsync, data, error
+  } = useMutation("login", login)
+
+  const submitHandler = async data => {
     console.log("submitted data: ", data)
+    await mutateAsync({...data})
   }
 
   const linkTo = {
