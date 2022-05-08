@@ -1,5 +1,5 @@
-import axios from "axios"
+import Axios from "axios"
 
-axios.create({
+Axios.create({
   baseUrl: ""
 })
