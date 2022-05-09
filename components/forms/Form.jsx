@@ -1,22 +1,34 @@
 import InputMap from "./InputMap"
 import {useQuery} from "react-query"
+import {useForm} from "react-hook-form"
+// import {useFormContext} from "react-hook-form"
 import {fetchLocations} from "@/api/locationsApi"
-import GroupSelectInput from "./GroupSelectInput"
+import {zodResolver} from "@hookform/resolvers/zod"
+import {signUpSchema} from "@/validations/signUpSchema"
 import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
   const { 
-    formHook, inputList, 
     isLoading, isLoginPage,
-    submitHandler, submitValue } = props
-
-  const {data: locations} = useQuery("locations", 
-    fetchLocations, { enabled: !isLoginPage })
+    inputList, submitValue
+  } = props
 
   const {
     register, handleSubmit, 
     formState: {errors, isValid}
-  } = formHook
+  } = useForm({
+    mode: "onChange",
+    resolver: zodResolver(signUpSchema)
+  })
+
+  const submitHandler = async data => {
+    console.log("submitted data: ", data)
+    console.log("errors: ", errors)
+    // await mutateAsync({...data}) 
+  }
+
+  const {data: locations} = useQuery("locations", 
+    fetchLocations, { enabled: !isLoginPage })
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>

@@ -1,19 +1,16 @@
 import NextLink from "next/link"
-import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
 import {Container, Stack} from "@chakra-ui/layout"
-import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/modal/FormModal"
+import {useForm, FormProvider} from "react-hook-form"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 import {Text, Heading, Link, Button} from "@chakra-ui/react"
 
-const AuthLayout = ({schema, linkTo, heading, isLoginPage, ...props}) => {
+const AuthLayout = props => {
+  const {linkTo, heading, isLoginPage} = props
   const {onOpen : openModal, ...modalProps} = useModal()
   // TODO: remove after auth complete
-  const formHook = useForm({
-    mode: "onChange",
-    resolvers: zodResolver(schema)
-  })
+  // const formMethods = useForm({resolvers: zodResolver(signUpSchema)})
 
   return (
     <>
@@ -30,11 +27,12 @@ const AuthLayout = ({schema, linkTo, heading, isLoginPage, ...props}) => {
           borderRadius="xl"
         >
           <Heading>{heading}</Heading>
-          <Form
-            {...props} 
-            formHook={formHook}
-            isLoginPage={isLoginPage}
-          />
+          {/* <FormProvider {...formMethods}> */}
+            <Form 
+              {...props} 
+              isLoginPage={isLoginPage} 
+            />
+          {/* </FormProvider> */}
         </Stack>
         {linkTo && 
           <Text mt={8}>
@@ -61,7 +59,6 @@ const AuthLayout = ({schema, linkTo, heading, isLoginPage, ...props}) => {
         {...modalProps}
         heading="Resend Confirmation"
       />
-      <pre>{JSON.stringify(formHook.watch(), null, 2)}</pre>
     </>
   )
 }

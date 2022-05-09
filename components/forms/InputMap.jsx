@@ -12,8 +12,8 @@ const InputMap = props => {
   } = props
 
   return (
-    <>
-      {inputList.map(input => {
+    <> {
+      inputList.map(input => {
         const {id, label, required} = input
         const error = errors[id]
 
@@ -32,12 +32,11 @@ const InputMap = props => {
               isLoginPage={isLoginPage}
             />
             <FormErrorMessage>
-              {error?.message}
+              {error && error?.message}
             </FormErrorMessage>
           </FormControl> 
-          )
-        })
-      }
+        )}
+      )}
     </>
   )
 }

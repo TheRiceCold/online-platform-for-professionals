@@ -7,7 +7,6 @@ const TextInput = props => {
   return (
     <Input 
       id={id} 
-      name={id}
       {...register(id)}
       placeholder={label}
       autoComplete={autoComplete}

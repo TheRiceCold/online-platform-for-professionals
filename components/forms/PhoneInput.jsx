@@ -14,7 +14,6 @@ const PhoneInput = props => {
       />
       <Input 
         id={id}
-        name={id}
         type="tel"
         {...register(id)}
         placeholder={label}

@@ -5,7 +5,7 @@ const SelectInput = props => {
   const {id, input, register} = props
 
   return (
-    <Select {...register(id)}>
+    <Select id={id} {...register(id)}>
       {input?.options?.map(item => {
         let label = item
         let value = item

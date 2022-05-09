@@ -17,7 +17,6 @@ const PasswordInput = props => {
     <InputGroup>
       <Input 
         id={id}
-        name={id}
         type={type}
         {...register(id)}
         placeholder={label}

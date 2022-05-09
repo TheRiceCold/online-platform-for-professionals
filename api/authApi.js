@@ -10,8 +10,7 @@ export const login = async ({email, password}) => {
       user: { email, password } })
     return data
   } catch (err) {
-    const message = err.response.data.message
-    throw Error(message)
+    throw Error(err)
   }
 }
 

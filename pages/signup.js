@@ -4,7 +4,6 @@ import AuthLayout from "@/layouts/AuthLayout"
 import {fetchLocations} from "@/api/locationsApi"
 import {signUpInputs} from "@/constants/auth/signUpInputs"
 import {QueryClient, useMutation, dehydrate} from "react-query"
-import {signUpSchema as schema} from "@/validations/signUpSchema"
 
 const SignUp = () => {
   const {
@@ -12,15 +11,10 @@ const SignUp = () => {
     mutateAsync, data, error
   } = useMutation("signup", signup)
 
-  const submitHandler = async data => {
-    console.log("submitted data: ", data)
-    await mutateAsync({...data}) 
-  }
-
   const linkTo = {
     href: "/login",
+    linkText: "Sign in",
     text: "Already have an account?",
-    linkText: "Sign in"
   }
 
   return (
@@ -31,13 +25,11 @@ const SignUp = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <AuthLayout 
-        schema={schema}
         linkTo={linkTo}
         submitValue="Join"
         isLoading={isLoading}
         inputList={signUpInputs}
         heading="Create an Account"
-        submitHandler={submitHandler}
       />
     </main>
   )
