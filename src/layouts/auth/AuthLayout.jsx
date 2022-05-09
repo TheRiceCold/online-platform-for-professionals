@@ -25,7 +25,7 @@ const AuthLayout = props => {
   }
 
   if (isError) 
-    toast({ title: error.message, status: "error"})
+    toast({title: error.message, status: "error"})
 
   return (
     <AuthProvider isLoginPage={isLoginPage}>

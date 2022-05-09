@@ -1,6 +1,6 @@
 import Head from "next/head"
-import AuthLayout from "@/layouts/AuthLayout"
 import {fetchLocations} from "@/api/locationsApi"
+import AuthLayout from "@/layouts/auth/AuthLayout"
 import {QueryClient, dehydrate} from "react-query"
 import {signUpInputs} from "@/constants/auth/signUpInputs"
 
