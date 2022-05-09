@@ -1,5 +1,7 @@
 import Axios from "axios"
+import {useRouter} from "next/router"
 import {useMutation} from "react-query"
+import {useAuthState} from "./AuthStateContext"
 import {useState, useContext, createContext} from "react"
 
 const axios = Axios.create({
@@ -9,7 +11,9 @@ const axios = Axios.create({
 const AuthContext = createContext({})
 
 const AuthProvider = ({children, isLoginPage}) => {
-  const [auth, setAuth] = useState({})
+  const router = useRouter()
+  const [auth, setAuth] = useState()
+  const [{token}, dispatch] = useAuthState()
 
   const authKey = isLoginPage ? "login" : "signup"
 
@@ -19,6 +23,14 @@ const AuthProvider = ({children, isLoginPage}) => {
       return data
     } catch (err) {
       throw new Error(err?.response.data.message)
+    }
+  },
+  {
+    onSuccess: data => {
+      // TODO: extract token from header
+      const token = data
+      dispatch({ type: "SET_TOKEN", value: token })
+      router.push("/") 
     }
   })
   

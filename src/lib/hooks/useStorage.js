@@ -2,7 +2,7 @@ import {useEffect, useState} from "react"
 
 const PREFIX = ""
 
-const useLocalStorage = (key, initValue) => {
+const useStorage = (key, initValue) => {
   const prefixedKey = PREFIX + key
 
   const [value, setValue] = useState(() => {
@@ -23,4 +23,4 @@ const useLocalStorage = (key, initValue) => {
   return [value, setValue]
 }
 
-export default useLocalStorage
+export default useStorage

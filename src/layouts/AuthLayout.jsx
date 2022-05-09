@@ -12,10 +12,12 @@ import {Text, Heading, Link, Button} from "@chakra-ui/react"
 const AuthLayout = props => {
   const toast = useToast()
   const {authMutation} = useAuth()
-  const resolver = zodResolver(signUpSchema)
+
   const {linkTo, heading, isLoginPage} = props
   const {onOpen : openModal, ...modalProps} = useModal()
+
   const {isLoading, isError, error, mutateAsync} = authMutation
+  const resolver = isLoginPage ? null : zodResolver(signUpSchema)
 
   const submitHandler = async data => {
     console.log("submitted data: ", data)
