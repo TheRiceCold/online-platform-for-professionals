@@ -2,8 +2,8 @@ import '../styles/globals.css'
 import {useState} from "react"
 import {Hydrate} from "react-query/hydration"
 import {ChakraProvider} from "@chakra-ui/react"
-import AuthProvider from "@/contexts/AuthContext"
-import StateProvider from "@/contexts/StateContext"
+import AuthProvider from "@/context/AuthContext"
+import StateProvider from "@/context/StateContext"
 import {ReactQueryDevtools} from "react-query/devtools"
 import {QueryClientProvider, QueryClient} from "react-query"
 

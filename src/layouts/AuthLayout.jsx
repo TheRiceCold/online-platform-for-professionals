@@ -6,7 +6,7 @@ import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/modal/FormModal"
 import {signUpSchema} from "@/validations/signUpSchema"
 import {useDisclosure as useModal} from "@chakra-ui/react"
-import AuthProvider, {useAuth} from "@/contexts/AuthContext"
+import AuthProvider, {useAuth} from "@/context/AuthContext"
 import {Text, Heading, Link, Button} from "@chakra-ui/react"
 
 const AuthLayout = props => {
