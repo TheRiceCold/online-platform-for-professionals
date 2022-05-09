@@ -1,20 +1,8 @@
 import Head from 'next/head'
-import {login} from "@/api/authApi"
-import {useMutation} from "react-query"
 import AuthLayout from "@/layouts/AuthLayout"
 import inputList from "@/constants/auth/loginInputs"
 
 const Login = () => {
-  const {
-    isLoading, isError,
-    mutateAsync, data, error
-  } = useMutation("login", login)
-
-  const submitHandler = async data => {
-    console.log("submitted data: ", data)
-    await mutateAsync({...data})
-  }
-
   const linkTo = {
     href: "/signup",
     text: "No Account?",
@@ -33,9 +21,7 @@ const Login = () => {
         linkTo={linkTo}
         heading="Sign In"
         submitValue="Login"
-        isLoading={isLoading}
         inputList={inputList}
-        submitHandler={submitHandler}
       />
     </main>
   )

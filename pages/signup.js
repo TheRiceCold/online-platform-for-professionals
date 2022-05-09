@@ -1,16 +1,10 @@
 import Head from "next/head"
-import {signup} from "@/api/authApi"
 import AuthLayout from "@/layouts/AuthLayout"
 import {fetchLocations} from "@/api/locationsApi"
+import {QueryClient, dehydrate} from "react-query"
 import {signUpInputs} from "@/constants/auth/signUpInputs"
-import {QueryClient, useMutation, dehydrate} from "react-query"
 
 const SignUp = () => {
-  const {
-    isLoading, isError,
-    mutateAsync, data, error
-  } = useMutation("signup", signup)
-
   const linkTo = {
     href: "/login",
     linkText: "Sign in",
@@ -27,7 +21,6 @@ const SignUp = () => {
       <AuthLayout 
         linkTo={linkTo}
         submitValue="Join"
-        isLoading={isLoading}
         inputList={signUpInputs}
         heading="Create an Account"
       />

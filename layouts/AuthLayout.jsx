@@ -1,19 +1,27 @@
 import NextLink from "next/link"
 import Form from "@/components/forms/Form"
 import {Container, Stack} from "@chakra-ui/layout"
+import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/modal/FormModal"
-import {useForm, FormProvider} from "react-hook-form"
+import {signUpSchema} from "@/validations/signUpSchema"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 import {Text, Heading, Link, Button} from "@chakra-ui/react"
+import AuthProvider, {useAuth} from "@/contexts/AuthProvider"
 
 const AuthLayout = props => {
+  const {authMutation} = useAuth()
+  const resolver = zodResolver(signUpSchema)
   const {linkTo, heading, isLoginPage} = props
+  const {isLoading, mutateAsync, error} = authMutation
   const {onOpen : openModal, ...modalProps} = useModal()
-  // TODO: remove after auth complete
-  // const formMethods = useForm({resolvers: zodResolver(signUpSchema)})
+
+  const submitHandler = async data => {
+    console.log("submitted data: ", data)
+    await mutateAsync({...data})
+  }
 
   return (
-    <>
+    <AuthProvider isLoginPage={isLoginPage}>
       <Container 
         display="flex" 
         flexDir="column"
@@ -27,12 +35,14 @@ const AuthLayout = props => {
           borderRadius="xl"
         >
           <Heading>{heading}</Heading>
-          {/* <FormProvider {...formMethods}> */}
-            <Form 
-              {...props} 
-              isLoginPage={isLoginPage} 
-            />
-          {/* </FormProvider> */}
+          <Form 
+            {...props} 
+            resolver={resolver}            
+            isLoading={isLoading}
+            mutationError={error}
+            isLoginPage={isLoginPage} 
+            submitHandler={submitHandler}
+          />
         </Stack>
         {linkTo && 
           <Text mt={8}>
@@ -59,7 +69,7 @@ const AuthLayout = props => {
         {...modalProps}
         heading="Resend Confirmation"
       />
-    </>
+    </AuthProvider>
   )
 }
 

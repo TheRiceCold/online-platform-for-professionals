@@ -1,31 +1,20 @@
 import InputMap from "./InputMap"
 import {useQuery} from "react-query"
 import {useForm} from "react-hook-form"
-// import {useFormContext} from "react-hook-form"
 import {fetchLocations} from "@/api/locationsApi"
-import {zodResolver} from "@hookform/resolvers/zod"
-import {signUpSchema} from "@/validations/signUpSchema"
 import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
   const { 
+    mutationError,
+    inputList, resolver,
     isLoading, isLoginPage,
-    inputList, submitValue
+    submitHandler, submitValue
   } = props
 
-  const {
-    register, handleSubmit, 
-    formState: {errors, isValid}
-  } = useForm({
-    mode: "onChange",
-    resolver: zodResolver(signUpSchema)
+  const {register, handleSubmit, formState} = useForm({
+    mode: "onChange", resolver: resolver
   })
-
-  const submitHandler = async data => {
-    console.log("submitted data: ", data)
-    console.log("errors: ", errors)
-    // await mutateAsync({...data}) 
-  }
 
   const {data: locations} = useQuery("locations", 
     fetchLocations, { enabled: !isLoginPage })
@@ -33,9 +22,9 @@ const Form = props => {
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       {<InputMap 
-        errors={errors}
         register={register}
         inputList={inputList}
+        errors={formState.errors}
         isLoginPage={isLoginPage}
       />}
       {isLoginPage &&
@@ -63,8 +52,8 @@ const Form = props => {
         type="submit" 
         mt={4} w="100%"
         colorScheme="teal" 
-        disabled={!isValid}
         isLoading={isLoading}
+        disabled={!formState.isValid}
       > 
         {submitValue}
       </Button>
