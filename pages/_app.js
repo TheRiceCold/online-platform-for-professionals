@@ -3,6 +3,7 @@ import {useState} from "react"
 import {Hydrate} from "react-query/hydration"
 import {ChakraProvider} from "@chakra-ui/react"
 import AuthProvider from "@/contexts/AuthContext"
+import StateProvider from "@/contexts/StateContext"
 import {ReactQueryDevtools} from "react-query/devtools"
 import {QueryClientProvider, QueryClient} from "react-query"
 
@@ -14,9 +15,11 @@ const MyApp = ({ Component, pageProps }) => {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false}/>
-          <AuthProvider>
-            <Component {...pageProps} />
-          </AuthProvider>
+          <StateProvider>
+            <AuthProvider>
+              <Component {...pageProps} />
+            </AuthProvider>
+          </StateProvider>
         </Hydrate>
       </QueryClientProvider>
     </ChakraProvider>

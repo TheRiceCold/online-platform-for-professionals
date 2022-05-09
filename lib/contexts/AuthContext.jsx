@@ -1,17 +1,12 @@
-import {
-  useState,
-  useContext,
-  createContext
-} from "react"
 import Axios from "axios"
 import {useMutation} from "react-query"
+import {useState, useContext, createContext} from "react"
 
 const axios = Axios.create({
   baseURL: "https://localhost:3000"
 })
 
 const AuthContext = createContext({})
-export const useAuth = () => useContext(AuthContext)
 
 const AuthProvider = ({children, isLoginPage}) => {
   const [auth, setAuth] = useState({})
@@ -34,4 +29,5 @@ const AuthProvider = ({children, isLoginPage}) => {
   )
 }
 
+export const useAuth = () => useContext(AuthContext)
 export default AuthProvider

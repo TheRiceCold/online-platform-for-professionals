@@ -1,7 +1,7 @@
 import {useState} from "react"
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons"
 import {
-  Button,
+  Button, Tooltip,
   Input, InputGroup, 
   InputRightElement,
 } from "@chakra-ui/react"
@@ -26,7 +26,10 @@ const PasswordInput = props => {
         <Button 
           h="2em" bg="none" size="sm"
           onClick={() => setShow(!show)}
-        > {Icon}
+        > 
+          <Tooltip label="Toggle Password">
+            {Icon}
+          </Tooltip>
         </Button>
       </InputRightElement>
     </InputGroup>

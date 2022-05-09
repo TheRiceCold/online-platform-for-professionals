@@ -1,4 +1,5 @@
 import NextLink from "next/link"
+import {useToast} from "@chakra-ui/toast"
 import Form from "@/components/forms/Form"
 import {Container, Stack} from "@chakra-ui/layout"
 import {zodResolver} from "@hookform/resolvers/zod"
@@ -9,16 +10,20 @@ import AuthProvider, {useAuth} from "@/contexts/AuthContext"
 import {Text, Heading, Link, Button} from "@chakra-ui/react"
 
 const AuthLayout = props => {
+  const toast = useToast()
   const {authMutation} = useAuth()
   const resolver = zodResolver(signUpSchema)
   const {linkTo, heading, isLoginPage} = props
-  const {isLoading, mutateAsync, error} = authMutation
   const {onOpen : openModal, ...modalProps} = useModal()
+  const {isLoading, isError, error, mutateAsync} = authMutation
 
   const submitHandler = async data => {
     console.log("submitted data: ", data)
     await mutateAsync({...data})
   }
+
+  if (isError) 
+    toast({ title: error.message, status: "error"})
 
   return (
     <AuthProvider isLoginPage={isLoginPage}>
@@ -39,7 +44,6 @@ const AuthLayout = props => {
             {...props} 
             resolver={resolver}            
             isLoading={isLoading}
-            mutationError={error}
             isLoginPage={isLoginPage} 
             submitHandler={submitHandler}
           />
