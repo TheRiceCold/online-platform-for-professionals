@@ -1,6 +1,6 @@
 import {useReducer, useContext, createContext} from "react"
 
-const initialState = { token: null }
+const initialState = { token: null, role: "" }
 const AuthStateContext = createContext([initialState, () => initialState])
 
 const reducer = (state, action) => {
