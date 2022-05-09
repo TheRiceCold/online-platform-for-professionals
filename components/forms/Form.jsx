@@ -1,7 +1,6 @@
 import InputMap from "./InputMap"
 import {useQuery} from "react-query"
 import {useForm} from "react-hook-form"
-import {fetchLocations} from "@/api/locationsApi"
 import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
@@ -15,9 +14,6 @@ const Form = props => {
   const {register, handleSubmit, formState} = useForm({
     mode: "onChange", resolver: resolver
   })
-
-  const {data: locations} = useQuery("locations", 
-    fetchLocations, { enabled: !isLoginPage })
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>

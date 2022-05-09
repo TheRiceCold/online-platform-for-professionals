@@ -2,14 +2,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/api/*": ["api/*"],
-      "@/hooks/*": ["hooks/*"],
-      "@/utils/*": ["utils/*"],
       "@/layouts/*": ["layouts/*"],
-      "@/contexts/*": ["contexts/*"],
-      "@/constants/*": ["constants/*"],
       "@/components/*": ["components/*"],
-      "@/validations/*": ["validations/*"]
+      
+      "@/api/*": ["lib/api/*"],
+      "@/hooks/*": ["lib/hooks/*"],
+      "@/utils/*": ["lib/utils/*"],
+      "@/contexts/*": ["lib/contexts/*"],
+      "@/constants/*": ["lib/constants/*"],
+      "@/validations/*": ["lib/validations/*"]
     }
   }
 }

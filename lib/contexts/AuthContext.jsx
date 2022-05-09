@@ -19,14 +19,16 @@ const AuthProvider = ({children, isLoginPage}) => {
   const authKey = isLoginPage ? "login" : "signup"
 
   const authMutation = useMutation(authKey, async values => {
-    const {data} = await axios.post(authKey, {user: {...values}})
-    return data
+    try {
+      const {data} = await axios.post(authKey, {user: {...values}})
+      return data
+    } catch (err) {
+      throw new Error(err?.response.data.message)
+    }
   })
   
   return (
-    <AuthContext.Provider value={{
-      auth, setAuth, authMutation
-    }}>
+    <AuthContext.Provider value={{auth, setAuth, authMutation}}>
       {children}
     </AuthContext.Provider>
   )
