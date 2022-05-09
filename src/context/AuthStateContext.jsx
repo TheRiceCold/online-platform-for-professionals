@@ -23,5 +23,5 @@ const AuthStateProvider = ({children}) => {
   )
 }
 
-export const useAuthState = () => useContext(AuthStateContext)
 export default AuthStateProvider
+export const useAuthState = () => useContext(AuthStateContext)
