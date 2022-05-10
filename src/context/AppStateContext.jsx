@@ -4,9 +4,9 @@ const initialState = { token: null, role: "" }
 const AppStateContext = createContext([initialState, () => initialState])
 
 // ACTION TYPES
-const SESSION =  symbol("SESSION")
-const LOCAL = symbol("LOCAL")
-const LOGOUT =  symbol("LOGOUT")
+const SESSION = Symbol("SESSION")
+const LOCAL = Symbol("LOCAL")
+const LOGOUT = Symbol("LOGOUT")
 
 // REDUCER
 const reducer = (state, action) => {
