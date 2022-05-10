@@ -7,7 +7,7 @@ const SignUp = ({locations}) => {
   console.log(locations)
 
   const linkTo = {
-    href: "/login",
+    href: "/",
     linkText: "Sign in",
     text: "Already have an account?",
   }
