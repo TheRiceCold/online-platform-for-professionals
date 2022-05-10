@@ -1,7 +1,7 @@
 import Axios from "axios"
 import {useRouter} from "next/router"
 import {useMutation} from "react-query"
-import {useAuthState} from "./AuthStateContext"
+import {useAppState} from "./AppStateContext"
 import {useContext, createContext} from "react"
 
 const axios = Axios.create({
@@ -12,7 +12,7 @@ const AuthContext = createContext({})
 
 const AuthProvider = ({children, isLoginPage}) => {
   const router = useRouter()
-  const [{}, dispatch] = useAuthState()
+  const [{}, dispatch] = useAppState()
 
   const authKey = isLoginPage ? "login" : "signup"
 

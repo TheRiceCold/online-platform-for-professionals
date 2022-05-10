@@ -1,12 +1,13 @@
 import {useEffect, useState} from "react"
 
-const PREFIX = ""
+const PREFIX = "OPFP:"
 
-const useStorage = (key, initValue) => {
-  const prefixedKey = PREFIX + key
+const useStorage = (type= "local", key, initValue) => {
+  const storage = window[type+"Storage"]
+  key = PREFIX + key
 
   const [value, setValue] = useState(() => {
-    const jsonValue = localStorage.getItem(prefixedKey)  
+    const jsonValue = storage.getItem(key)  
 
     if (jsonValue !== null) return JSON.parse(jsonValue)
 
@@ -16,10 +17,7 @@ const useStorage = (key, initValue) => {
       return initValue
   })
 
-  useEffect(() => 
-    localStorage.setItem(prefixedKey, JSON.stringify(value))
-  , [prefixedKey, value])
-
+  useEffect(() => storage.setItem(key, JSON.stringify(value)), [key, value])
   return [value, setValue]
 }
 
