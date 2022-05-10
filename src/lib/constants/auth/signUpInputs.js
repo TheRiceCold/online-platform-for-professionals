@@ -1,6 +1,6 @@
 import regions from "../data/regions"
 
-export const signUpInputs = [
+const SIGNUP_INPUTS = [
   {
     required: true,
     id: "role",
@@ -52,3 +52,5 @@ export const signUpInputs = [
     label: "City"
   },
 ]
+
+export default SIGNUP_INPUTS

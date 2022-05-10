@@ -1,5 +1,6 @@
-import {Heading, Button} from "@chakra-ui/react"
+import {Heading} from "@chakra-ui/react"
 import {useStorage} from "@/hooks/useStorage"
+import Navbar from "@/components/navbars/user/UserNavbar"
 
 const ProfessionalLayout = () => {
   const storage = useStorage()
@@ -10,10 +11,10 @@ const ProfessionalLayout = () => {
   }
 
   return (
-    <div>
+    <>
+      <Navbar/>
       <Heading> Professional </Heading>
-      <Button onClick={handleLogout}>Logout</Button>
-    </div>
+    </>
   )
 }
 

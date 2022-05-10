@@ -1,4 +1,4 @@
-const loginInputs = [
+const LOGIN_INPUTS = [
   {
     id: "email",
     label: "Email"
@@ -10,4 +10,4 @@ const loginInputs = [
   }
 ]
 
-export default loginInputs
+export default LOGIN_INPUTS
