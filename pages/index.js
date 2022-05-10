@@ -1,6 +1,8 @@
 import Head from 'next/head'
+import {useAuth} from "@/context/AuthContext"
 import {useStorage} from "@/context/StorageContext"
 // Layouts
+import LoadingLayout from "@/layouts/LoadingLayout"
 import LoginLayout from "@/layouts/auth/LoginLayout"
 import AdminLayout from "@/layouts/users/AdminLayout"
 import ClientLayout from "@/layouts/users/ClientLayout"
@@ -10,10 +12,11 @@ const Home = () => {
   let title = "Sign In"
   let authData = null
   const REMEMBER_USER = false
+  const {isUserRole} = useAuth()
 
-  if (typeof window === "undefined") {
-    return <h1>Loading...</h1>
-  } else {
+  if (typeof window === "undefined")
+    return <LoadingLayout/>
+  else {
     const {getStorage} = useStorage()
     const storageType = !REMEMBER_USER && "session"
     authData = getStorage({type: storageType, key: "AUTH"})
@@ -21,7 +24,9 @@ const Home = () => {
     title = authData && "Home"
   }
 
-  const isProfessional = (authData && authData.userRole === "professional")
+  const isAdmin = isUserRole(authData, 'admin')
+  const isClient= isUserRole(authData, 'client')
+  const isProfessional = isUserRole(authData, 'professional')
 
   return (
     <main>
@@ -32,13 +37,10 @@ const Home = () => {
       </Head> 
       {
         isProfessional ? <ProfessionalLayout/> :
+        isClient ? <ClientLayout/> :
+        isAdmin ? <AdminLayout/> :
         <LoginLayout/>
       }
-      {/* { */}
-      {/*   isAdmin ? <AdminLayout/> */}
-      {/*   : isClient ? <ClientLayout/> */}
-      {/*   : <LoginLayout/> */}
-      {/* } */}
     </main>
   )
 }

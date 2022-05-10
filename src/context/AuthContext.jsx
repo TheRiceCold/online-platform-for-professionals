@@ -14,6 +14,9 @@ const AuthProvider = ({children, isLoginPage}) => {
   const {setStorage} = useStorage()
   const endpoint = isLoginPage ? "login" : "signup"
 
+  const isUserRole = (data, role) => 
+    data && data?.userRole?.toLowerCase() === role.toLowerCase()
+
   const apiCall = async values => {
     const submittedData = {user: {...values}}
 
@@ -40,7 +43,9 @@ const AuthProvider = ({children, isLoginPage}) => {
   })
   
   return (
-    <AuthContext.Provider value={{authMutation}}>
+    <AuthContext.Provider value={{
+      authMutation, isUserRole
+    }}>
       {children}
     </AuthContext.Provider>
   )
