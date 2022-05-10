@@ -19,27 +19,24 @@ const AuthProvider = ({children, isLoginPage}) => {
 
   const apiCall = async values => {
     const submittedData = {user: {...values}}
-
-    console.log("submitted data: ", submittedData)
     return await axios.post(endpoint, submittedData)
   }
 
-  const authMutation = useMutation(endpoint, apiCall, {
-    onSuccess: res => {
-      // SUCCESSFUL API CALL
-      const data = res.data.data
-      const token = res.headers.token
-      const userRole = data.attributes.role
+  // SUCCESSFUL API CALL
+  const onSuccess = res => {
+    const data = res.data.data
+    const token = res.headers.token
+    const userRole = data.attributes.role
 
-      console.log("user role: ", userRole)
-      console.log("token: ", token)
-      // TODO: set to local if remember me is true
-      storage.setItem({
-        type: "session",
-        key: "AUTH",
-        value: JSON.stringify({token, userRole})
-      })
-    }
+    // TODO: set to local if remember me is true
+    storage.setItem({
+      type: "session", key: "auth",
+      value: JSON.stringify({token, userRole})
+    })
+  }
+
+  const authMutation = useMutation(endpoint, apiCall, {
+    onSuccess, onSettled: () => location.reload()
   })
   
   return (

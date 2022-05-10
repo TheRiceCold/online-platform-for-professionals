@@ -1,6 +1,19 @@
+import {Heading, Button} from "@chakra-ui/react"
+import {useStorage} from "@/hooks/useStorage"
+
 const ProfessionalLayout = () => {
+  const storage = useStorage()
+
+  const handleLogout = () => {
+    storage.removeItem({type: "session", key: "auth"})
+    location.reload()
+  }
+
   return (
-    <h1>ProfessionalLayout</h1>
+    <div>
+      <Heading> Professional </Heading>
+      <Button onClick={handleLogout}>Logout</Button>
+    </div>
   )
 }
 
