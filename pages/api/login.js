@@ -1,6 +1,6 @@
 const login = (req, res) => {
   res.status(200)
-    .setHeader("Token", "abcd1234")
+    .setHeader("token", "abcd1234")
     .json({
     data: {
       id: "2",

@@ -1,7 +1,7 @@
 import {
   Button, Flex,
+  InputRightElement,
   Input, InputGroup, 
-  InputRightElement
 } from "@chakra-ui/react"
 import {SearchIcon} from "@chakra-ui/icons"
 
@@ -10,16 +10,13 @@ const SearchInput = () => {
     <Flex align="center">
       <InputGroup>
         <Input 
-          borderRightRadius={0}
-          placeholder="Search"
+          h={8}
+          bg="gray.50"
+          placeholder="Search" 
         />
-        <Input 
-          borderLeftRadius={0}
-          placeholder="Location"
-        />
-        <InputRightElement>
-          <Button bg="none">
-            <SearchIcon />
+        <InputRightElement h={8}>
+          <Button bg="none" _hover={{ bg: "none" }}>
+            <SearchIcon boxSize={3}/>
           </Button>
         </InputRightElement>
       </InputGroup>

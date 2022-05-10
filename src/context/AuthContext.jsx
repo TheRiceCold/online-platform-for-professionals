@@ -40,9 +40,7 @@ const AuthProvider = ({children, isLoginPage}) => {
   })
   
   return (
-    <AuthContext.Provider value={{
-      authMutation, isUserRole
-    }}>
+    <AuthContext.Provider value={{authMutation, isUserRole}}>
       {children}
     </AuthContext.Provider>
   )
