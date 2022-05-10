@@ -1,7 +1,8 @@
+import {Heading} from "@chakra-ui/react"
 
 const LoadingLayout = props => {
   return (
-    <h1>Loading</h1>
+    <Heading alignItems="center">Loading...</Heading>
   )
 }
 

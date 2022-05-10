@@ -1,7 +1,7 @@
 import Axios from "axios"
 import {useMutation} from "react-query"
+import {useStorage} from "@/hooks/useStorage"
 import {useContext, createContext} from "react"
-import {useStorage} from "@/context/StorageContext"
 
 const axios = Axios.create({
   baseURL: "http://localhost:3000/api/"
@@ -11,7 +11,7 @@ const AuthContext = createContext({})
 const useAuth = () => useContext(AuthContext)
 
 const AuthProvider = ({children, isLoginPage}) => {
-  const {setStorage} = useStorage()
+  const storage = useStorage()
   const endpoint = isLoginPage ? "login" : "signup"
 
   const isUserRole = (data, role) => 
@@ -34,9 +34,9 @@ const AuthProvider = ({children, isLoginPage}) => {
       console.log("user role: ", userRole)
       console.log("token: ", token)
       // TODO: set to local if remember me is true
-      setStorage({
-        type: "session", 
-        key: "AUTH", 
+      storage.setItem({
+        type: "session",
+        key: "AUTH",
         value: JSON.stringify({token, userRole})
       })
     }

@@ -1,8 +1,8 @@
-import Head from 'next/head'
+import Head from "next/head"
+// import {useEffect} from "react"
 import {useAuth} from "@/context/AuthContext"
-import {useStorage} from "@/context/StorageContext"
 // Layouts
-import LoadingLayout from "@/layouts/LoadingLayout"
+// import LoadingLayout from "@/layouts/LoadingLayout"
 import LoginLayout from "@/layouts/auth/LoginLayout"
 import AdminLayout from "@/layouts/users/AdminLayout"
 import ClientLayout from "@/layouts/users/ClientLayout"
@@ -13,16 +13,16 @@ const Home = () => {
   let authData = null
   const REMEMBER_USER = false
   const {isUserRole} = useAuth()
+  // const {getStorage} = useStorage()
 
-  if (typeof window === "undefined")
-    return <LoadingLayout/>
-  else {
-    const {getStorage} = useStorage()
-    const storageType = !REMEMBER_USER && "session"
-    authData = getStorage({type: storageType, key: "AUTH"})
-    authData = JSON.parse(authData)
-    title = authData && "Home"
-  }
+  // useEffect(() => {
+  //   const storageType = !REMEMBER_USER && "session"
+  //   authData = getStorage({type: storageType, key: "AUTH"})
+  //   authData = JSON.parse(authData)
+  //   title = authData && "Home"
+  // }, [])
+  //
+  // console.log(authData)
 
   const isAdmin = isUserRole(authData, 'admin')
   const isClient= isUserRole(authData, 'client')
