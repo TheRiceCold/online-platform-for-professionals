@@ -8,15 +8,25 @@ const StorageProvider = ({children}) => {
 
   const setStorage = ({type, key, value}) => {
     type || "local"
-    window[type+"Storage"].setItem(key, value)
+    window[type+"Storage"].setItem(PREFIX+key, value)
   }
 
-  const getStorage = key => {
+  const getStorage = ({type, key}) => {
+    type || "local"
+    const value = window[type+"Storage"].getItem(PREFIX+key)
+    return value
+  }
 
+  const isStorageKeyExist = ({type, key}) => {
+    type || "local"
+    if (window[type+"Storage"].getItem(PREFIX+key))
+      return true
   }
 
   return (
-    <StorageContext.Provider value={{setStorage, getStorage}}>
+    <StorageContext.Provider value={{
+      setStorage, getStorage, isStorageKeyExist
+    }}>
       {children}
     </StorageContext.Provider>
   )

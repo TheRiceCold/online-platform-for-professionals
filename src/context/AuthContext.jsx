@@ -25,15 +25,16 @@ const AuthProvider = ({children, isLoginPage}) => {
     onSuccess: res => {
       // SUCCESSFUL API CALL
       const data = res.data.data
-      const extractedToken = res.headers.token
+      const token = res.headers.token
       const userRole = data.attributes.role
 
       console.log("user role: ", userRole)
-      console.log("token: ", extractedToken)
+      console.log("token: ", token)
+      // TODO: set to local if remember me is true
       setStorage({
         type: "session", 
-        key: "TOKEN", 
-        value: extractedToken
+        key: "AUTH", 
+        value: JSON.stringify({token, userRole})
       })
     }
   })
