@@ -1,12 +1,12 @@
 import NextLink from "next/link"
 import {useToast} from "@chakra-ui/toast"
 import Form from "@/components/forms/Form"
+import {useAuth} from "@/context/AuthContext"
 import {Container, Stack} from "@chakra-ui/layout"
 import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/modal/FormModal"
 import {signUpSchema} from "@/validations/signUpSchema"
 import {useDisclosure as useModal} from "@chakra-ui/react"
-import AuthProvider, {useAuth} from "@/context/AuthContext"
 import {Text, Heading, Link, Button} from "@chakra-ui/react"
 
 const AuthLayout = props => {
@@ -20,7 +20,6 @@ const AuthLayout = props => {
   const resolver = isLoginPage ? null : zodResolver(signUpSchema)
 
   const submitHandler = async data => {
-    console.log("submitted data: ", data)
     await mutateAsync({...data})
   }
 
@@ -28,7 +27,7 @@ const AuthLayout = props => {
     toast({title: error.message, status: "error"})
 
   return (
-    <AuthProvider isLoginPage={isLoginPage}>
+    <>
       <Container 
         display="flex" 
         flexDir="column"
@@ -44,7 +43,7 @@ const AuthLayout = props => {
           <Heading>{heading}</Heading>
           <Form 
             {...props} 
-            resolver={resolver}            
+            resolver={resolver}
             isLoading={isLoading}
             isLoginPage={isLoginPage} 
             submitHandler={submitHandler}
@@ -75,7 +74,7 @@ const AuthLayout = props => {
         {...modalProps}
         heading="Resend Confirmation"
       />
-    </AuthProvider>
+    </>
   )
 }
 

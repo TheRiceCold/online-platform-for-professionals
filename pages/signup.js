@@ -1,10 +1,11 @@
 import Head from "next/head"
 import {fetchLocations} from "@/api/locationsApi"
 import AuthLayout from "@/layouts/auth/AuthLayout"
-import {QueryClient, dehydrate} from "react-query"
 import {signUpInputs} from "@/constants/auth/signUpInputs"
 
-const SignUp = () => {
+const SignUp = ({locations}) => {
+  console.log(locations)
+
   const linkTo = {
     href: "/login",
     linkText: "Sign in",
@@ -28,11 +29,9 @@ const SignUp = () => {
   )
 }
 
-export const getServerSideProps = async() => {
-  const queryClient = new QueryClient()
-  await queryClient.prefetchQuery("locations", fetchLocations)
-
-  return { props: { dehydrateState: dehydrate(queryClient)}}
+export const getStaticProps = async() => {
+  const data = await fetchLocations()
+  return {props: { locations: data }}
 }
 
 export default SignUp

@@ -1,4 +1,5 @@
 import AuthLayout from "./AuthLayout"
+import AuthProvider from "@/context/AuthContext"
 import inputList from "@/constants/auth/loginInputs"
 
 const LoginLayout = () => {
@@ -9,6 +10,7 @@ const LoginLayout = () => {
   }
 
   return (
+  <AuthProvider isLoginPage>
     <AuthLayout 
       isLoginPage
       linkTo={linkTo}
@@ -16,6 +18,7 @@ const LoginLayout = () => {
       submitValue="Login"
       inputList={inputList}
     />
+  </AuthProvider>
   )
 }
 
