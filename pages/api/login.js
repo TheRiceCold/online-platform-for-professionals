@@ -20,39 +20,39 @@ const login = (req, res) => {
         }
       }
     },
-  included: [
-    {
-      id: "1", 
-      type: "professional",
-      attributes: {
-        field: "Programmer",
-        licenseNumber: "0012345",
-        officeAddress: null,
-        headline: null
-      },
-      relationships: { 
-        user: {
-          data: { id: "2", type: "personalDetails" }
-          },
-          workPortfolios: {
-            data: [
-              { id: "1", type: "workPortfolio" }
-            ]
-          },
-          services: {
-            data: [ { id: "1", type: "service" } ]
-          },
-          reviews: {
-            data: [
-              { id: "1", type: "review" },
-              { id: "2", type: "review" },
-              { id: "3", type: "review" }
-            ]
+    included: [
+      {
+        id: "1", 
+        type: "professional",
+        attributes: {
+          field: "Programmer",
+          licenseNumber: "0012345",
+          officeAddress: null,
+          headline: null
+        },
+        relationships: { 
+          user: {
+            data: { id: "2", type: "personalDetails" }
+            },
+            workPortfolios: {
+              data: [
+                { id: "1", type: "workPortfolio" }
+              ]
+            },
+            services: {
+              data: [ { id: "1", type: "service" } ]
+            },
+            reviews: {
+              data: [
+                { id: "1", type: "review" },
+                { id: "2", type: "review" },
+                { id: "3", type: "review" }
+              ]
+            }
           }
         }
-      }
-    ]
-  })
+      ]
+    })
 }
 
 export default login

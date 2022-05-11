@@ -1,13 +1,13 @@
-import NextLink from "next/link"
 import {useToast} from "@chakra-ui/toast"
 import Form from "@/components/forms/Form"
 import {useAuth} from "@/context/AuthContext"
+import Link from "@/components/navigation/Link"
 import {Container, Stack} from "@chakra-ui/layout"
 import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/modals/FormModal"
+import {Text, Heading, Button} from "@chakra-ui/react"
 import {signUpSchema} from "@/validations/signUpSchema"
 import {useDisclosure as useModal} from "@chakra-ui/react"
-import {Text, Heading, Link, Button} from "@chakra-ui/react"
 
 const AuthLayout = props => {
   const toast = useToast()
@@ -52,11 +52,9 @@ const AuthLayout = props => {
         {linkTo && 
           <Text mt={8}>
             {`${linkTo.text} `}
-            <NextLink href={linkTo.href}>
-              <Link color="teal" href='#'>
-                {linkTo.linkText}
-              </Link>
-            </NextLink>
+            <Link to={linkTo.href} color="teal">
+              {linkTo.linkText}
+            </Link>
           </Text>
         }
         {isLoginPage && 

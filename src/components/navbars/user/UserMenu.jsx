@@ -11,7 +11,8 @@ import {useUser} from "@/context/UserContext"
 import {TriangleDownIcon} from "@chakra-ui/icons"
 
 const UserMenu = () => {
-  const {user} = useUser()
+  const {user, isProfessional} = useUser()
+  const {signOut} = useAuth()
 
   const MENU_ITEMS = [
     {
@@ -29,7 +30,7 @@ const UserMenu = () => {
     "divider",
     {
       label: "Sign out",
-      handleOnClick: useAuth().signOut
+      handleOnClick: signOut
     }
   ]
 
@@ -51,7 +52,9 @@ const UserMenu = () => {
           <Avatar size="md" src="https://avatars.dicebear.com/api/male/username.svg" />
           <Stack ml={2} spacing={0}>
             <Heading size="3x1">{user?.fullname}</Heading>
-            <Text>{user?.role}</Text>
+            <Text>
+              {isProfessional ? user?.field : user?.role}
+            </Text>
           </Stack>
         </Flex>
         <MenuDivider />

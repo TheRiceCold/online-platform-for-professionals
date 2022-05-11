@@ -22,7 +22,12 @@ const AuthProvider = ({children, isLoginPage}) => {
 
   const onSuccess = res => {
     const token = res.headers.token
-    const attr = res.data.data.attributes
+    let attr = res.data.data.attributes
+  
+    if (attr.role === "professional") {
+      const field = res.data?.included[0]?.attributes.field
+      attr = {...attr, field}
+    }
 
     // TODO: set to local if remember me is true
     storage.setItem({
