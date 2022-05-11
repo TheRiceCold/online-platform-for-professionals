@@ -5,11 +5,12 @@ import {
   MenuButton, MenuDivider,
   Menu, MenuList, MenuItem,
 } from "@chakra-ui/react"
-import {useStorage} from "@/hooks/useStorage"
+import {Fragment} from "react"
+import {useAuth} from "@/context/AuthContext"
 import {TriangleDownIcon} from "@chakra-ui/icons"
 
 const UserMenu = () => {
-  const storage = useStorage()
+  const {user} = useAuth()
 
   const MENU_ITEMS = [
     {
@@ -23,10 +24,7 @@ const UserMenu = () => {
     "divider",
     {
       label: "Sign out",
-      handleOnClick: () => {
-        storage.removeItem({type: "session", key: "auth"})
-        location.reload()
-      }
+      handleOnClick: user.signOut
     }
   ]
 
@@ -47,23 +45,20 @@ const UserMenu = () => {
         <Flex alignItems="center" ml={3}>
           <Avatar size="md" src="https://avatars.dicebear.com/api/male/username.svg" />
           <Stack ml={2} spacing={0}>
-            <Heading size="3x1">Name</Heading>
-            <Text>Role</Text>
+            <Heading size="3x1">{user.fullname}</Heading>
+            <Text>{user.role}</Text>
           </Stack>
         </Flex>
         <MenuDivider />
-        {MENU_ITEMS.map(item => ( 
-          <> 
+        {MENU_ITEMS.map((item, i) => ( 
+          <Fragment key={i}> 
             {item === "divider" ?
               <MenuDivider/> :
-              <MenuItem 
-                key={item.label} 
-                onClick={item.handleOnClick}
-              >
+              <MenuItem onClick={item.handleOnClick}>
                 {item.label}
               </MenuItem>
             }
-          </>
+          </Fragment>
         ))}
       </MenuList>
     </Menu>

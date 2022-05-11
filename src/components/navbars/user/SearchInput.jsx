@@ -15,7 +15,7 @@ const SearchInput = () => {
           placeholder="Search" 
         />
         <InputRightElement h={8}>
-          <Button bg="none" _hover={{ bg: "none" }}>
+          <Button bg="none" _hover={{bg: "none"}}>
             <SearchIcon boxSize={3}/>
           </Button>
         </InputRightElement>
