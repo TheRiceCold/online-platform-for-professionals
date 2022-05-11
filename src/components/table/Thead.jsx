@@ -1,6 +1,6 @@
 import {Th, Tr, Thead as ChakraThead} from "@chakra-ui/react"
 
-const Thead = ({table}) => (
+const Thead = ({table, isSort}) => (
   <ChakraThead>
     {
       table.headerGroups.map(hGroup => {
@@ -16,7 +16,7 @@ const Thead = ({table}) => (
                 return (
                   <Th {...headerProps} textAlign="center">
                     {col.render("Header")}
-                    <span>{sortLabel}</span>
+                    {isSort && <span>{sortLabel}</span>}
                   </Th>
                 )
               })
