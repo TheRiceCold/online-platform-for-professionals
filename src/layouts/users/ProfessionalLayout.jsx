@@ -32,7 +32,7 @@ const ProfessionalLayout = () => {
                   {user?.field}
                 </Text>
                 <Text fontSize="14px" color="gray.600">
-                  City, Region - {" "}
+                  {user?.city}, {user?.region}, Philippines - {" "}
                   <Link color="blue.500" fontWeight={500}>
                     Contact Info
                   </Link>

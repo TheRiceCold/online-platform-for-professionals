@@ -23,7 +23,9 @@ const UserProvider = ({children}) => {
   const user = {
     fullname: attributes?.firstName + " " + attributes?.lastName,
     role: attributes?.role,
+    city: attributes?.city,
     field: attributes?.field,
+    region: attributes?.region,
   }
 
   return (

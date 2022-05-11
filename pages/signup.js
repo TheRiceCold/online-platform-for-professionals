@@ -1,7 +1,7 @@
 import Head from "next/head"
 import {fetchLocations} from "@/api/locationsApi"
 import AuthLayout from "@/layouts/auth/AuthLayout"
-import SIGNUP_INPUTS from "@/constants/auth/signUpInputs"
+import inputList from "@/constants/forms/signUpInputs"
 
 const SignUp = ({locations}) => {
   console.log(locations)
@@ -20,7 +20,7 @@ const SignUp = ({locations}) => {
       <AuthLayout 
         linkTo={linkTo}
         submitValue="Join"
-        inputList={SIGNUP_INPUTS}
+        inputList={inputList}
         heading="Create an Account"
       />
     </main>

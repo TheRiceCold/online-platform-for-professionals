@@ -1,6 +1,6 @@
 import AuthLayout from "./AuthLayout"
 import AuthProvider from "@/context/AuthContext"
-import inputList from "@/constants/auth/loginInputs"
+import inputList from "@/constants/forms/loginInputs"
 
 const LoginLayout = () => {
   const linkTo = {
