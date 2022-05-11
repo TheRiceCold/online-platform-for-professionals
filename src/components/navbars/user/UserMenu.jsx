@@ -7,24 +7,29 @@ import {
 } from "@chakra-ui/react"
 import {Fragment} from "react"
 import {useAuth} from "@/context/AuthContext"
+import {useUser} from "@/context/UserContext"
 import {TriangleDownIcon} from "@chakra-ui/icons"
 
 const UserMenu = () => {
-  const {user} = useAuth()
+  const {user} = useUser()
 
   const MENU_ITEMS = [
     {
       label: "Profile", 
-      handleOnClick: () => { }
+      handleOnClick: () => { 
+        console.log("going to profile page")
+      }
     },
     {
       label: "Settings",
-      handleOnClick: () => { }
+      handleOnClick: () => { 
+        console.log("going to profile settings")
+      }
     },
     "divider",
     {
       label: "Sign out",
-      handleOnClick: user.signOut
+      handleOnClick: useAuth().signOut
     }
   ]
 
@@ -45,8 +50,8 @@ const UserMenu = () => {
         <Flex alignItems="center" ml={3}>
           <Avatar size="md" src="https://avatars.dicebear.com/api/male/username.svg" />
           <Stack ml={2} spacing={0}>
-            <Heading size="3x1">{user.fullname}</Heading>
-            <Text>{user.role}</Text>
+            <Heading size="3x1">{user?.fullname}</Heading>
+            <Text>{user?.role}</Text>
           </Stack>
         </Flex>
         <MenuDivider />

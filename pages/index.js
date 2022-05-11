@@ -1,10 +1,10 @@
 import Head from "next/head"
-import {useAuth} from "@/context/AuthContext"
+import {useUser} from "@/context/UserContext"
 import HomeLayout from "@/layouts/HomeLayout"
 
 const Home = () => {
-  const {isUser} = useAuth()
-  const title = isUser ? "Home" : "Sign in"
+  const {user} = useUser()
+  const title = user ? "Home" : "Sign in"
 
   return (
     <main>

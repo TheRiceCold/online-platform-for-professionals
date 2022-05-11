@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react"
-import {useAuth} from "@/context/AuthContext"
+import {useUser} from "@/context/UserContext"
 import LoadingLayout from "./LoadingLayout"
 import LoginLayout from "./auth/LoginLayout"
 import AdminLayout from "./users/AdminLayout"
@@ -8,7 +8,7 @@ import ProfessionalLayout from "./users/ProfessionalLayout"
 
 const HomeLayout = () => {
   const [mounted, setMounted] = useState(false)
-  const {isAdmin, isClient, isProfessional} = useAuth()
+  const {isAdmin, isClient, isProfessional} = useUser()
 
   useEffect(() => setMounted(true), [])
   
