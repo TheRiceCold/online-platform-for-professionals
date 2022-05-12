@@ -1,15 +1,24 @@
 import Thead from "./Thead"
 import Tbody from "./Tbody"
 import {useMemo} from "react"
+import {
+  useTable, useSortBy, 
+  useGlobalFilter, usePagination
+} from "react-table"
 import TableSearch from "./TableSearch"
+import PaginateButtons from "./PaginateButtons"
 import {Tfoot, Table as ChakraTable} from '@chakra-ui/react'
-import {useTable, useSortBy, useGlobalFilter} from "react-table"
 
 const Table = props => {
-  const {isSearch, isSort} = props
   const data = useMemo(() => props.data, [])
   const columns = useMemo(() => props.columns, [])
-  const table = useTable({columns, data}, useGlobalFilter, useSortBy)
+  const {
+    searchLabel,
+    stripeColor,
+    isSearch, isSort, 
+    isPaginated, isStriped
+  } = props
+  const table = useTable({columns, data}, useGlobalFilter, useSortBy, usePagination)
   const {globalFilter} = table.state
 
   return (
@@ -17,13 +26,25 @@ const Table = props => {
       {isSearch && 
         <TableSearch
           filter={globalFilter}
+          label={isSearch && searchLabel}
           setFilter={table.setGlobalFilter}
         />
       }
-      <ChakraTable {...table.getTableProps}>
+      <ChakraTable 
+        {...table.getTableProps}
+        colorScheme={stripeColor}
+        variant={isStriped && "striped"}
+      >
         <Thead table={table}/>
-        <Tbody table={table} isSort={isSort}/>
+        <Tbody 
+          table={table} 
+          isSort={isSort}
+          isPaginated={isPaginated}
+        />
       </ChakraTable>
+      {isPaginated && 
+        <PaginateButtons table={table}/>
+      }
     </>
   )
 }

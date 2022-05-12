@@ -1,4 +1,5 @@
 import {useMemo} from "react"
+import {Box} from "@chakra-ui/react"
 import Table from "@/components/table/Table"
 import {format as dateFormat} from "date-fns"
 import {useTable, useSortBy} from "react-table"
@@ -20,12 +21,18 @@ const AdminLayout = () => {
   ]
 
   return (
-    <Table 
-      isSort
-      isSearch
-      data={fakeUsers} 
-      columns={COLUMNS}
-    />
+    <Box mt={8}>
+      <Table 
+        isSort
+        isSearch
+        isStriped
+        isPaginated
+        stripeColor="gray"
+        data={fakeUsers} 
+        columns={COLUMNS}
+        searchLabel="Search user"
+      />
+    </Box>
   )
 }
 

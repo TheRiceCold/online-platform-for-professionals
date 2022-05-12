@@ -1,7 +1,8 @@
 import {Tr, Td, Tbody as ChakraTbody} from '@chakra-ui/react'
 
-const Tbody = ({table}) => {
-  const {rows, prepareRow, getTableBodyProps} = table
+const Tbody = ({table, isPaginated}) => {
+  const {page, prepareRow, getTableBodyProps} = table
+  const rows = isPaginated ? page : table.rows
 
   return (
     <ChakraTbody {...getTableBodyProps()}>
