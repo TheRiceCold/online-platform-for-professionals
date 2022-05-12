@@ -16,8 +16,10 @@ const Form = props => {
     <form onSubmit={handleSubmit(mutation.submitHandler)}>
       {<InputMap 
         register={register}
+        mutation={mutation}
         inputList={inputList}
         errors={formState.errors}
+        submitValue={submitValue}
       />}
       {isLoginPage &&
         <Flex mt={4} justify="space-between" align="center">
@@ -33,14 +35,6 @@ const Form = props => {
           </Button>
         </Flex>
       }
-      {/* <Button  */}
-      {/*   type="submit"  */}
-      {/*   mt={4} w="100%" */}
-      {/*   colorScheme="teal"  */}
-      {/*   isLoading={mutation.isLoading} */}
-      {/* >  */}
-      {/*   {submitValue} */}
-      {/* </Button> */}
       <pre>{JSON.stringify(watch(), null, 2)}</pre>
     </form>
   )

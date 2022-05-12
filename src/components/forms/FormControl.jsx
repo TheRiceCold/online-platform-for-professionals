@@ -25,6 +25,7 @@ const FormControl = props => {
         return <SelectInput input={input} register={register}/>
 
       case "radio":
+        console.log(input.id)
         return <RadioGroup input={input} register={register}/>
 
       default:

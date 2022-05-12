@@ -1,14 +1,14 @@
 import {Box, useRadio} from "@chakra-ui/react"
 
 const RadioCard = props => {
-  const { getInputProps, getCheckboxProps } = useRadio(props)
+  const {getInputProps, getCheckboxProps} = useRadio(props)
 
   const input = getInputProps()
   const checkbox = getCheckboxProps()
 
   return (
     <Box as='label'>
-      <input {...input} />
+      <input {...input}/>
       <Box
         {...checkbox}
         cursor='pointer'

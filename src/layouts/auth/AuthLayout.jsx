@@ -37,7 +37,7 @@ const AuthLayout = props => {
           boxShadow="xl" 
           borderRadius="xl"
         >
-          <Heading>{heading}</Heading>
+          {isLoginPage && <Heading>{heading}</Heading>}
           <Form 
             {...props} 
             mutation={mutation}

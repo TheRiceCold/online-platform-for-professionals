@@ -2,19 +2,7 @@ import regions from "../data/regions"
 
 const SIGNUP_INPUTS = [
   {
-    heading: "Select Role",
-    inputs: [
-      {
-        required: true,
-        id: "role",
-        type: "radio",
-        label: "Select Role",
-        options: ["client", "professional", "admin"]
-      }
-    ]
-  },
-  {
-    heading: "Name",
+    heading: "Create an account",
     inputs: [
       {
         required: true,
@@ -25,6 +13,13 @@ const SIGNUP_INPUTS = [
         required: true,
         id: "lastname",
         label: "Last Name"
+      },
+      {
+        required: true,
+        id: "role",
+        type: "radio",
+        label: "Select Role",
+        options: ["client", "professional", "admin"]
       }
     ]
   },
@@ -35,12 +30,7 @@ const SIGNUP_INPUTS = [
         type: "tel",
         id: "phoneNo",
         label: "Phone No."
-      }
-    ]
-  },
-  {
-    heading: "Location",
-    inputs: [
+      },
       { 
         id: "region", 
         type: "select",
