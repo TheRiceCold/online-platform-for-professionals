@@ -8,10 +8,7 @@ const PhoneInput = props => {
 
   return (
     <InputGroup>
-      <InputLeftAddon 
-        bg="gray.50"
-        children="+639" 
-      />
+      <InputLeftAddon children="+639"/>
       <Input 
         id={id}
         type="tel"

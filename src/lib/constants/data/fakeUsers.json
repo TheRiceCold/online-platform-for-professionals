@@ -5,7 +5,8 @@
   "email": "bkorbmaker0@addtoany.com",
   "field": "Internal Auditor",
   "phone_no": "295-323-5967",
-  "date_of_birth": "2021-09-11T17:17:25Z"
+  "date_of_birth": "2021-09-11T17:17:25Z",
+  "verified": true
 }, {
   "id": 2,
   "first_name": "Cherilyn",
@@ -53,7 +54,8 @@
   "email": "ljoscelyn6@statcounter.com",
   "field": "Financial Analyst",
   "phone_no": "535-435-9333",
-  "date_of_birth": "2021-06-04T18:17:01Z"
+  "date_of_birth": "2021-06-04T18:17:01Z",
+  "verified": true
 }, {
   "id": 8,
   "first_name": "Paige",

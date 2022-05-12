@@ -7,13 +7,14 @@ import Navbar from "@/components/navbars/user/UserNavbar"
 
 const ProfessionalLayout = () => {
   const {user} = useUser()
+  const navbarLinks = ["Home", "Connections", "Messages", "Notifications"]
 
   return (
     <>
-      <Navbar/>
+      <Navbar links={navbarLinks}/>
       <Flex direction="column" width="100%" height="300px">
         <Box height="50%" bg="gray.400"/>
-        <Flex justify="center" bg="gray.50" flexGrow={1}>
+        <Flex justify="center" flexGrow={1}>
           <Flex w="95%">
             <Avatar 
               size="2xl" 

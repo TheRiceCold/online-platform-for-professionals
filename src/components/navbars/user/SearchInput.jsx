@@ -11,11 +11,10 @@ const SearchInput = () => {
       <InputGroup>
         <Input 
           h={8}
-          bg="gray.50"
           placeholder="Search" 
         />
         <InputRightElement h={8}>
-          <Button bg="none" _hover={{bg: "none"}}>
+          <Button bg="none" h={8} _hover={{bg: "none"}}>
             <SearchIcon boxSize={3}/>
           </Button>
         </InputRightElement>

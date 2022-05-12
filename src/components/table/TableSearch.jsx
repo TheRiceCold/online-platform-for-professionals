@@ -13,7 +13,6 @@ const TableSearch = props => {
   return (
     <Input 
       ml={8}
-      mb={4}
       w={300}
       size="sm"
       borderRadius={5}

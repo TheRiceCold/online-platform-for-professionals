@@ -9,11 +9,7 @@ import Checkbox from "./Checkbox"
 import TableSearch from "./TableSearch"
 import PaginateSize from "./PaginateSize"
 import PaginateButtons from "./PaginateButtons"
-import {
-  Flex, Button, 
-  Table as ChakraTable
-} from '@chakra-ui/react'
-import {CheckIcon} from "@chakra-ui/icons"
+import {Flex, Table as ChakraTable} from '@chakra-ui/react'
 
 const Table = props => {
   const data = useMemo(() => props.data, [])
@@ -38,20 +34,18 @@ const Table = props => {
             <Checkbox {...prop.getToggleAllRowsSelectedProps()} />
           ),
           Cell: ({row}) => (
-            <Checkbox {...row.getToggleRowSelectedProps} />
+            <Checkbox {...row.getToggleRowSelectedProps()} />
           )
         }, ...col,
       ])
     }
   )
-  const {
-    selectedFlatRows,
-    state: {globalFilter}
-  } = table
+  const {selectedFlatRows, state: {globalFilter}} = table
 
   return (
     <>
       <Flex 
+        mb={4}
         alignItems="center"
         justifyContent="space-between" 
       >
@@ -80,7 +74,13 @@ const Table = props => {
       {isPaginated && 
         <PaginateButtons table={table}/>
       }
-      <pre>{selectedFlatRows.map(row => row.original)}</pre>
+      <pre>
+        <code>
+          {JSON.stringify({
+            selectedFlatRows: selectedFlatRows.map(row => row.original)
+          }, null, 2)}
+        </code>
+      </pre>
     </>
   )
 }

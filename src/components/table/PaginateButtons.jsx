@@ -20,7 +20,10 @@ const PaginateButtons = ({table}) => {
   }
 
   return (
-    <Flex mt={4} justifyContent="center">
+    <Flex 
+      mt={4} mb={8} 
+      justifyContent="center"
+    >
       <PaginateInput table={table}/>
       <Button 
         ml={4}

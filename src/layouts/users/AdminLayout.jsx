@@ -1,8 +1,4 @@
 import {
-  CheckIcon,
-  DeleteIcon, EditIcon
-} from "@chakra-ui/icons"
-import {
   Box, Button,
   useDisclosure as useAlert
 } from "@chakra-ui/react"
@@ -10,6 +6,8 @@ import Table from "@/components/table/Table"
 import Alert from "@/components/alerts/Alert"
 import {format as dateFormat} from "date-fns"
 import fakeUsers from "@/constants/data/fakeUsers.json"
+import Navbar from "@/components/navbars/user/UserNavbar"
+import {DeleteIcon, EditIcon, CheckIcon} from "@chakra-ui/icons"
 
 const AdminLayout = () => {
   const deleteAlert = useAlert()
@@ -27,13 +25,21 @@ const AdminLayout = () => {
     {Header: "Field", accessor: 'field'},
     {Header: "Phone no.", accessor: 'phone_no'},
     {
-      id: "verify",
-      Header: "Verify",
-      Cell: ({ row }) => (
-        <Button size="sm" colorScheme="green">
-          <CheckIcon/>
-        </Button>
-      )
+      Header: "Verification",
+      accessor: "verified",
+      Cell: ({row}) => {
+        const isVerified = row.values.verified
+        return (
+        <> 
+          {isVerified ? 
+            <CheckIcon color="green" w={5} h={5}/> :
+            <Button size="sm" colorScheme="green">
+              Verify
+            </Button>
+          }
+        </>
+        )
+      }
     },
     {
       Header: "Actions",
@@ -55,12 +61,16 @@ const AdminLayout = () => {
     }
   ]
 
+  const navbarLinks = ["Dashboard", "Users", "Messages"]
+
   return (
+  <>
+    <Navbar links={navbarLinks}/>
     <Box mt={8}>
       <Table 
         isSort
         isSearch
-        // isStriped
+        isStriped
         isPaginated
         data={fakeUsers} 
         columns={COLUMNS}
@@ -76,6 +86,7 @@ const AdminLayout = () => {
         label="Are you sure? You can't undo this action afterwards."
       />
     </Box>
+  </>
   )
 }
 

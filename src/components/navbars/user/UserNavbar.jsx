@@ -12,14 +12,12 @@ import {
 import UserMenu from "./UserMenu"
 import SearchInput from "./SearchInput"
 
-const LINKS = ["Home", "Connections", "Messages", "Notifications"]
-
-const UserNavbar = () => {
+const UserNavbar = ({links}) => {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
 
   return (
-    <Box bg="gray.100" px={4}>
+    <Box px={4}>
       <Flex h={14} alignItems="center" justifyContent="space-between">
         <IconButton
           size="md"
@@ -37,7 +35,7 @@ const UserNavbar = () => {
             as="nav" spacing={4}
             display={{ base: 'none', md: 'flex' }}
           >
-            {LINKS.map(link => <Link key={link}>{link}</Link>)}
+            {links.map(link => <Link key={link}>{link}</Link>)}
           </HStack>
         </HStack>
         <Flex alignItems="center">
@@ -53,7 +51,7 @@ const UserNavbar = () => {
         isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as="nav" spacing={4}>
-              {LINKS.map(link => (
+              {links.map(link => (
                 <Link key={link}>
                   {link}
                 </Link>

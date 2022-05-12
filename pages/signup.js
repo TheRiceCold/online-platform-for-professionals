@@ -1,10 +1,10 @@
 import Head from "next/head"
-import {fetchLocations} from "@/api/locationsApi"
 import AuthLayout from "@/layouts/auth/AuthLayout"
+import {fetchLocations} from "@/services/locationsApi"
 import inputList from "@/constants/forms/signUpInputs"
 
 const SignUp = ({locations}) => {
-  console.log(locations)
+  // console.log(locations)
 
   const linkTo = {
     href: "/",
