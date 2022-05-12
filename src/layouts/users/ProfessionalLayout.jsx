@@ -1,13 +1,13 @@
-import {useUser} from "@/context/UserContext"
 import {
   Avatar, Flex, 
   Box, Text, Link
 } from "@chakra-ui/react"
-import Navbar from "@/components/navbars/user/UserNavbar"
+import {useUser} from "@/context/UserContext"
+import Navbar from "@/components/navbars/Navbar"
 
 const ProfessionalLayout = () => {
   const {user} = useUser()
-  const navbarLinks = ["Home", "Connections", "Messages", "Notifications"]
+  const navbarLinks = ["Home", "Portfolio", "Services", "Connections", "Messages", "Reviews"]
 
   return (
     <>

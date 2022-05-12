@@ -1,4 +1,4 @@
-import {isBrowser} from "@/utils/windowHelpers"
+import {isBrowser} from "@/utils/browserHelpers"
 
 const useStorage = () => {
   const PREFIX = "_opfp_"

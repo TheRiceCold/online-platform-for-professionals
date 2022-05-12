@@ -1,23 +1,22 @@
 import {
+  Image, Link,
+  IconButton, Button,
+  Box, Flex, Stack, HStack,
+  useColorMode, useDisclosure
+} from "@chakra-ui/react"
+import {
   SunIcon, MoonIcon,
   HamburgerIcon, CloseIcon
 } from "@chakra-ui/icons"
-import {
-  Box, Flex, 
-  Image, Link,
-  Stack, HStack,
-  IconButton, Button,
-  useColorMode, useDisclosure,
-} from "@chakra-ui/react"
 import UserMenu from "./UserMenu"
 import SearchInput from "./SearchInput"
 
-const UserNavbar = ({links}) => {
+const UserNavbar = ({links, isAdmin}) => {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
 
   return (
-    <Box px={4}>
+    <Box px={4} ml={8}>
       <Flex h={14} alignItems="center" justifyContent="space-between">
         <IconButton
           size="md"
@@ -26,19 +25,24 @@ const UserNavbar = ({links}) => {
           onClick={isOpen ? onClose : onOpen}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
         />
-        <HStack ml={4} spacing={8} alignItems="center">
-          <Box>
-            <Image src="/workflow_logo.svg" height="32px" alt="logo"/>
-          </Box>
-          <SearchInput />
+        <Flex alignItems="center">
+          <Flex>
+            <Image 
+              mr={8}
+              height="32px" alt="logo"
+              src="/workflow_logo.svg" 
+            />
+            {!isAdmin && <SearchInput/>}
+          </Flex>
+        </Flex>
+        <Flex alignItems="center">
           <HStack
-            as="nav" spacing={4}
+            mr={8}
+            as="nav" spacing={8}
             display={{ base: 'none', md: 'flex' }}
           >
             {links.map(link => <Link key={link}>{link}</Link>)}
           </HStack>
-        </HStack>
-        <Flex alignItems="center">
           <Stack direction="row" spacing={6}>
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
