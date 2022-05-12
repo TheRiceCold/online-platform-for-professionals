@@ -2,16 +2,18 @@ import Thead from "./Thead"
 import Tbody from "./Tbody"
 import {useMemo} from "react"
 import {
-  useTable, useSortBy, 
-  useGlobalFilter, usePagination
+  useGlobalFilter, usePagination,
+  useTable, useSortBy, useRowSelect
 } from "react-table"
+import Checkbox from "./Checkbox"
 import TableSearch from "./TableSearch"
 import PaginateSize from "./PaginateSize"
 import PaginateButtons from "./PaginateButtons"
 import {
-  Flex, Tfoot, 
+  Flex, Button, 
   Table as ChakraTable
 } from '@chakra-ui/react'
+import {CheckIcon} from "@chakra-ui/icons"
 
 const Table = props => {
   const data = useMemo(() => props.data, [])
@@ -22,8 +24,30 @@ const Table = props => {
     isSearch, isSort, 
     isPaginated, isStriped
   } = props
-  const table = useTable({columns, data}, useGlobalFilter, useSortBy, usePagination)
-  const {globalFilter} = table.state
+  const table = useTable(
+    {columns, data}, 
+    useGlobalFilter, 
+    useSortBy, 
+    usePagination,
+    useRowSelect,
+    hooks => {
+      hooks.visibleColumns.push(col => [
+        {
+          id: "selection",
+          Header: prop => (
+            <Checkbox {...prop.getToggleAllRowsSelectedProps()} />
+          ),
+          Cell: ({row}) => (
+            <Checkbox {...row.getToggleRowSelectedProps} />
+          )
+        }, ...col,
+      ])
+    }
+  )
+  const {
+    selectedFlatRows,
+    state: {globalFilter}
+  } = table
 
   return (
     <>
@@ -38,9 +62,7 @@ const Table = props => {
             setFilter={table.setGlobalFilter}
           />
         }
-        {isPaginated && 
-          <PaginateSize table={table} />
-        }
+        {isPaginated && <PaginateSize table={table}/>}
       </Flex>
       <ChakraTable 
         {...table.getTableProps}
@@ -58,6 +80,7 @@ const Table = props => {
       {isPaginated && 
         <PaginateButtons table={table}/>
       }
+      <pre>{selectedFlatRows.map(row => row.original)}</pre>
     </>
   )
 }

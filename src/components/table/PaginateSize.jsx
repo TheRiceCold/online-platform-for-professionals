@@ -7,8 +7,8 @@ const PaginateSize = ({table}) => {
   <Flex alignItems="center" mr={8}>
     <Text fontWeight={500}>Show</Text>
     <Select 
-      m="0 8px"
       w="50pt"
+      m="0 8px"
       size="sm"
       borderRadius={5}
       onChange={e => setPageSize(Number(e.target.value))}

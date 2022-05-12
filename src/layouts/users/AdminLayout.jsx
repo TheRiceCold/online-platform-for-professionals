@@ -1,7 +1,11 @@
-import {Box} from "@chakra-ui/react"
+import {Box, Button} from "@chakra-ui/react"
 import Table from "@/components/table/Table"
 import {format as dateFormat} from "date-fns"
 import fakeUsers from "@/constants/data/fakeUsers.json"
+import {
+  CheckIcon,
+  DeleteIcon, EditIcon
+} from "@chakra-ui/icons"
 
 const AdminLayout = () => {
   const COLUMNS = [
@@ -16,7 +20,28 @@ const AdminLayout = () => {
     {Header: "Email", accessor: 'email'},
     {Header: "Field", accessor: 'field'},
     {Header: "Phone no.", accessor: 'phone_no'},
-    {Header: "Actions" }
+    {
+      id: "verify",
+      Header: "Verify",
+      Cell: ({ row }) => (
+        <Button size="sm" colorScheme="green">
+          <CheckIcon/>
+        </Button>
+      )
+    },
+    {
+      Header: "Actions",
+      Cell: ({ row }) => (
+        <>
+          <Button size="sm" colorScheme="teal">
+            <EditIcon/>
+          </Button>
+          <Button size="sm" ml={2} colorScheme="red">
+            <DeleteIcon/>
+          </Button>
+        </>
+      ),
+    }
   ]
 
   return (
@@ -24,11 +49,11 @@ const AdminLayout = () => {
       <Table 
         isSort
         isSearch
-        isStriped
+        // isStriped
         isPaginated
         data={fakeUsers} 
-        stripeColor="gray"
         columns={COLUMNS}
+        // stripeColor="teal"
         searchLabel="Search user"
       />
     </Box>

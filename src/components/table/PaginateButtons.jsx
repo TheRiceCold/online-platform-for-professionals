@@ -14,7 +14,7 @@ const PaginateButtons = ({table}) => {
         gotoPage(0)
       break
       case "last": 
-        gotoPage(pageCount + 1)
+        gotoPage(pageCount - 1)
       break
     }
   }
@@ -28,7 +28,7 @@ const PaginateButtons = ({table}) => {
         disabled={!canPreviousPage}
         onClick={() => goto("first")}
       >
-        {"<<"}
+        First
       </Button>
       <Button 
         ml={2}
@@ -52,7 +52,7 @@ const PaginateButtons = ({table}) => {
         disabled={!canNextPage}
         onClick={() => goto("last")}
       >
-        {">>"}
+        Last
       </Button>
     </Flex>
   )
