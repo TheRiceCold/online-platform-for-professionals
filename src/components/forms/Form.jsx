@@ -4,17 +4,16 @@ import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
   const { 
-    inputList, resolver,
-    isLoading, isLoginPage,
-    submitHandler, submitValue
+    isLoginPage, resolver,
+    mutation, submitValue, inputList
   } = props
 
-  const {watch, register, handleSubmit, formState} = useForm({
-    mode: "onChange", resolver: resolver
-  })
+  const {
+    watch, register, handleSubmit, formState
+  } = useForm({mode: "onChange", resolver})
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
+    <form onSubmit={handleSubmit(mutation.submitHandler)}>
       {<InputMap 
         register={register}
         inputList={inputList}
@@ -34,14 +33,14 @@ const Form = props => {
           </Button>
         </Flex>
       }
-      <Button 
-        type="submit" 
-        mt={4} w="100%"
-        colorScheme="teal" 
-        isLoading={isLoading}
-      > 
-        {submitValue}
-      </Button>
+      {/* <Button  */}
+      {/*   type="submit"  */}
+      {/*   mt={4} w="100%" */}
+      {/*   colorScheme="teal"  */}
+      {/*   isLoading={mutation.isLoading} */}
+      {/* >  */}
+      {/*   {submitValue} */}
+      {/* </Button> */}
       <pre>{JSON.stringify(watch(), null, 2)}</pre>
     </form>
   )

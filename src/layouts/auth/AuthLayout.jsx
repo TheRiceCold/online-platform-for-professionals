@@ -11,20 +11,17 @@ import {useDisclosure as useModal} from "@chakra-ui/react"
 
 const AuthLayout = props => {
   const toast = useToast()
-  const {authMutation} = useAuth()
+  const {mutation} = useAuth()
 
   const {linkTo, heading, isLoginPage} = props
   const {onOpen : openModal, ...modalProps} = useModal()
 
-  const {isLoading, isError, error, mutateAsync} = authMutation
   const resolver = isLoginPage ? null : zodResolver(signUpSchema)
 
-  const submitHandler = async data => {
-    await mutateAsync({...data})
-  }
-
-  if (isError) 
+  if (mutation.isError) {
+    const {error} = mutation
     toast({title: error.message, status: "error"})
+  }
 
   return (
     <>
@@ -43,10 +40,9 @@ const AuthLayout = props => {
           <Heading>{heading}</Heading>
           <Form 
             {...props} 
+            mutation={mutation}
             resolver={resolver}
-            isLoading={isLoading}
             isLoginPage={isLoginPage} 
-            submitHandler={submitHandler}
           />
         </Stack>
         {linkTo && 
