@@ -1,8 +1,6 @@
-import {useMemo} from "react"
 import {Box} from "@chakra-ui/react"
 import Table from "@/components/table/Table"
 import {format as dateFormat} from "date-fns"
-import {useTable, useSortBy} from "react-table"
 import fakeUsers from "@/constants/data/fakeUsers.json"
 
 const AdminLayout = () => {
@@ -17,7 +15,8 @@ const AdminLayout = () => {
     },
     {Header: "Email", accessor: 'email'},
     {Header: "Field", accessor: 'field'},
-    {Header: "Phone no.", accessor: 'phone_no'}
+    {Header: "Phone no.", accessor: 'phone_no'},
+    {Header: "Actions" }
   ]
 
   return (

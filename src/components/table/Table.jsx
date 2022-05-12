@@ -6,8 +6,12 @@ import {
   useGlobalFilter, usePagination
 } from "react-table"
 import TableSearch from "./TableSearch"
+import PaginateSize from "./PaginateSize"
 import PaginateButtons from "./PaginateButtons"
-import {Tfoot, Table as ChakraTable} from '@chakra-ui/react'
+import {
+  Flex, Tfoot, 
+  Table as ChakraTable
+} from '@chakra-ui/react'
 
 const Table = props => {
   const data = useMemo(() => props.data, [])
@@ -23,13 +27,21 @@ const Table = props => {
 
   return (
     <>
-      {isSearch && 
-        <TableSearch
-          filter={globalFilter}
-          label={isSearch && searchLabel}
-          setFilter={table.setGlobalFilter}
-        />
-      }
+      <Flex 
+        alignItems="center"
+        justifyContent="space-between" 
+      >
+        {isSearch && 
+          <TableSearch
+            filter={globalFilter}
+            label={isSearch && searchLabel}
+            setFilter={table.setGlobalFilter}
+          />
+        }
+        {isPaginated && 
+          <PaginateSize table={table} />
+        }
+      </Flex>
       <ChakraTable 
         {...table.getTableProps}
         size={props.size || "sm"}
