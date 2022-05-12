@@ -1,3 +1,4 @@
+import {TriangleDownIcon, TriangleUpIcon} from "@chakra-ui/icons"
 import {Th, Tr, Thead as ChakraThead} from "@chakra-ui/react"
 
 const Thead = ({table, isSort}) => (

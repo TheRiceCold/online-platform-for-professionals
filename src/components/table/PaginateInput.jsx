@@ -10,16 +10,16 @@ const PaginateInput = ({table}) => {
     <Box w={150} d="inline" fontWeight="bold">
       Page{" "}
       <Input 
-        w={35}
-        size={2}
-        maxlength={2}
-        type="number"
+        w={50}
+        size="sm"
+        maxLength="2"
         borderRadius={5}
         fontWeight="bold"
         textAlign="center"
         defaultValue={pageIndex+1}
         onChange={e => {
-          const pageNo = e.target.value ? Number(e.target.value) - 1 : 0
+          const {value} = e.target
+          const pageNo = value ? Number(value) - 1 : 0
           gotoPage(pageNo)
         }}
       />{" "}

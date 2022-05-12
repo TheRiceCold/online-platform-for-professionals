@@ -32,6 +32,7 @@ const Table = props => {
       }
       <ChakraTable 
         {...table.getTableProps}
+        size={props.size || "sm"}
         colorScheme={stripeColor}
         variant={isStriped && "striped"}
       >

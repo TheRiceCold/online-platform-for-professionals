@@ -27,8 +27,8 @@ const AdminLayout = () => {
         isSearch
         isStriped
         isPaginated
-        stripeColor="gray"
         data={fakeUsers} 
+        stripeColor="gray"
         columns={COLUMNS}
         searchLabel="Search user"
       />
