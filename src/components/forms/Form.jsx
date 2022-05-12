@@ -9,7 +9,7 @@ const Form = props => {
     submitHandler, submitValue
   } = props
 
-  const {register, handleSubmit, formState} = useForm({
+  const {watch, register, handleSubmit, formState} = useForm({
     mode: "onChange", resolver: resolver
   })
 
@@ -19,7 +19,6 @@ const Form = props => {
         register={register}
         inputList={inputList}
         errors={formState.errors}
-        isLoginPage={isLoginPage}
       />}
       {isLoginPage &&
         <Flex mt={4} justify="space-between" align="center">
@@ -35,22 +34,15 @@ const Form = props => {
           </Button>
         </Flex>
       }
-      {/* TODO: */}
-      {/* {!isLoginPage && */}
-      {/*   <GroupSelectInput  */}
-      {/*     label="Locations" */}
-      {/*     options={locations} */}
-      {/*   /> */}
-      {/* } */}
       <Button 
         type="submit" 
         mt={4} w="100%"
         colorScheme="teal" 
         isLoading={isLoading}
-        disabled={!formState.isValid}
       > 
         {submitValue}
       </Button>
+      <pre>{JSON.stringify(watch(), null, 2)}</pre>
     </form>
   )
 }

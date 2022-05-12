@@ -1,22 +1,15 @@
-import {
-  Input, InputGroup, 
-  InputLeftAddon,
-} from "@chakra-ui/react"
+import {InputLeftAddon, Input, InputGroup} from "@chakra-ui/react"
 
-const PhoneInput = props => {
-  const {id, label, register} = props
-
-  return (
-    <InputGroup>
-      <InputLeftAddon children="+639"/>
-      <Input 
-        id={id}
-        type="tel"
-        {...register(id)}
-        placeholder={label}
-      />
-    </InputGroup>
-  )
-}
+const PhoneInput = ({register, input}) => (
+  <InputGroup>
+    <InputLeftAddon children="+639"/>
+    <Input 
+      type="tel"
+      id={input.id}
+      {...register(input.id)}
+      placeholder={input.label}
+    />
+  </InputGroup>
+)
 
 export default PhoneInput

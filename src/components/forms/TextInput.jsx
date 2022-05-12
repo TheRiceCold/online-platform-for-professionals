@@ -1,15 +1,13 @@
 import {Input} from "@chakra-ui/react"
 
-const TextInput = props => {
-  const {id, label, register, isEmail} = props
-  const autoComplete = isEmail ? "username" : "off"
-
+const TextInput = ({input, register}) => {
+  const {id} = input
   return (
     <Input 
       id={id} 
       {...register(id)}
-      placeholder={label}
-      autoComplete={autoComplete}
+      placeholder={input.label}
+      autoComplete={input.autoComplete ?? "off"}
     />
   )
 }

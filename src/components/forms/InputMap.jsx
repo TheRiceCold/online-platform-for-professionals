@@ -1,42 +1,35 @@
-import {
-  FormLabel, 
-  FormControl,
-  FormErrorMessage 
-} from "@chakra-ui/react"
-import InputSwitch from "./InputSwitch"
+import FormControl from "./FormControl"
 
 const InputMap = props => {
-  const {
-    errors, register, 
-    inputList, isLoginPage
-  } = props
+  const {errors, register, inputList} = props
 
   return (
-    <> {
-      inputList.map(input => {
-        const {id, label, required} = input
-        const error = errors[id]
+    <> 
+      {
+        inputList.map(obj => {
+          const isGrouped = obj.hasOwnProperty("inputs")
 
-        return (
-          <FormControl 
-            key={id}
-            isInvalid={error}
-            isRequired={required}
-          >
-            <FormLabel mt={4} htmlFor={id}>
-              {label}
-            </FormLabel>
-            <InputSwitch 
-              input={input}
+          if (isGrouped) {
+            return obj.inputs.map(input => (
+              <FormControl 
+                input={input}
+                key={input.id}
+                register={register}
+                error={errors[input.id]}
+              /> 
+            ))
+          }
+
+          return (
+            <FormControl 
+              input={obj}
+              key={obj.id}
               register={register}
-              isLoginPage={isLoginPage}
-            />
-            <FormErrorMessage>
-              {error && error?.message}
-            </FormErrorMessage>
-          </FormControl> 
-        )}
-      )}
+              error={errors[obj.id]}
+            /> 
+          )
+        })
+      }
     </>
   )
 }
