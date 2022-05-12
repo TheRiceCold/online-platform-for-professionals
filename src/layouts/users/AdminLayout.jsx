@@ -1,13 +1,19 @@
-import {Box, Button} from "@chakra-ui/react"
-import Table from "@/components/table/Table"
-import {format as dateFormat} from "date-fns"
-import fakeUsers from "@/constants/data/fakeUsers.json"
 import {
   CheckIcon,
   DeleteIcon, EditIcon
 } from "@chakra-ui/icons"
+import {
+  Box, Button,
+  useDisclosure as useAlert
+} from "@chakra-ui/react"
+import Table from "@/components/table/Table"
+import Alert from "@/components/alerts/Alert"
+import {format as dateFormat} from "date-fns"
+import fakeUsers from "@/constants/data/fakeUsers.json"
 
 const AdminLayout = () => {
+  const deleteAlert = useAlert()
+
   const COLUMNS = [
     {Header: "Id", accessor: "id"},
     {Header: "First Name", accessor: 'first_name'},
@@ -36,7 +42,12 @@ const AdminLayout = () => {
           <Button size="sm" colorScheme="teal">
             <EditIcon/>
           </Button>
-          <Button size="sm" ml={2} colorScheme="red">
+          <Button 
+            ml={2} 
+            size="sm" 
+            colorScheme="red"
+            onClick={deleteAlert.onOpen}
+          >
             <DeleteIcon/>
           </Button>
         </>
@@ -55,6 +66,14 @@ const AdminLayout = () => {
         columns={COLUMNS}
         // stripeColor="teal"
         searchLabel="Search user"
+      />
+      <Alert 
+        // isCentered
+        buttonColor="red"
+        alert={deleteAlert}
+        header="Delete User"
+        buttonLabel="Delete"
+        label="Are you sure? You can't undo this action afterwards."
       />
     </Box>
   )
