@@ -41,15 +41,18 @@ const AuthProvider = ({children, isLoginPage}) => {
     onSuccess, onSettled: () => location.reload()
   })
 
+  const submitHandler = async data => 
+    await authMutation.mutateAsync({...data})
+
+  const mutation = {submitHandler, ...authMutation}
+
   const signOut = () => {
     storage.removeItem({type: "session", key: "auth"})
     location.reload()
   }
 
   return (
-    <AuthContext.Provider value={{
-      authMutation, rememberUser, signOut
-    }}>
+    <AuthContext.Provider value={{mutation, rememberUser, signOut}}>
       {children}
     </AuthContext.Provider>
   )

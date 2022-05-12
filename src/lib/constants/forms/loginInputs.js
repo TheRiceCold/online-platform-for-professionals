@@ -1,12 +1,14 @@
 const LOGIN_INPUTS = [
   {
     id: "email",
-    label: "Email"
+    label: "Email",
+    autoComplete: "username"
   },
   {
     id: "password",
     type: "password",
-    label: "Password"
+    label: "Password",
+    autoComplete: "current-password"
   }
 ]
 

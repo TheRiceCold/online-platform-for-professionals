@@ -9,22 +9,23 @@ import {
 const PasswordInput = props => {
   const [show, setShow] = useState(false)
   const type = (show ? "text" : "password")
-  const {id, label, register, isLoginPage} = props
+  const {id, label, autoComplete} = props.input
   const Icon = (show ? <ViewOffIcon/> : <ViewIcon/>)
-  const autoComplete = isLoginPage ? "current-password" :  "new-password" 
 
   return (
     <InputGroup>
       <Input 
         id={id}
         type={type}
-        {...register(id)}
+        {...props.register(id)}
         placeholder={label}
         autoComplete={autoComplete}
       />
       <InputRightElement width="4em">
         <Button 
-          h="2em" bg="none" size="sm"
+          h="2em" 
+          bg="none" 
+          size="sm"
           onClick={() => setShow(!show)}
         > 
           <Tooltip label="Toggle Password">

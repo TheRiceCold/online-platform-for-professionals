@@ -1,8 +1,8 @@
 import {Select} from "@chakra-ui/react"
 import {capitalize} from "@/utils/stringHelpers"
 
-const SelectInput = props => {
-  const {id, input, register} = props
+const SelectInput = ({input, register})=> {
+  const {id} = input
 
   return (
     <Select id={id} {...register(id)}>
