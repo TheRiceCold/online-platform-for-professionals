@@ -1,9 +1,8 @@
 import Head from "next/head"
 import AuthLayout from "@/layouts/auth/AuthLayout"
-import {fetchLocations} from "@/services/locationsApi"
 import inputList from "@/constants/forms/signUpInputs"
 
-const SignUp = ({locations}) => {
+const SignUp = () => {
   // console.log(locations)
 
   const linkTo = {
@@ -27,9 +26,9 @@ const SignUp = ({locations}) => {
   )
 }
 
-export const getStaticProps = async() => {
-  const data = await fetchLocations()
-  return {props: { locations: data }}
-}
+// export const getStaticProps = async() => {
+//   const data = await fetchLocations()
+//   return {props: { locations: data }}
+// }
 
 export default SignUp

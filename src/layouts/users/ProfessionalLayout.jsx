@@ -2,8 +2,8 @@ import {
   Avatar, Flex, 
   Box, Text, Link
 } from "@chakra-ui/react"
-import {useUser} from "@/context/UserContext"
 import Navbar from "@/components/navbars/Navbar"
+import {useUser} from "@/context/user/UserContext"
 
 const ProfessionalLayout = () => {
   const {user} = useUser()

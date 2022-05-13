@@ -1,6 +1,6 @@
 import Head from "next/head"
 import {useEffect, useState} from "react"
-import {useUser} from "@/context/UserContext"
+import {useUser} from "@/context/user/UserContext"
 import LoadingLayout from "@/layouts/LoadingLayout"
 import LoginLayout from "@/layouts/auth/LoginLayout"
 import AdminLayout from "@/layouts/users/AdminLayout"

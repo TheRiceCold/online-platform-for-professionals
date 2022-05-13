@@ -1,49 +1,16 @@
-import {
-  Button,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogOverlay,
-} from "@chakra-ui/react"
-import {useRef} from "react"
+import {Stack, ChakraAlert, AlertIcon} from '@chakra-ui/react'
 
-const Alert = props => {
-  const {
-    isCentered, 
-    alert, header, label,
-    buttonColor, buttonLabel
-  } = props
-  const {isOpen, onClose} = alert
-  const cancelRef = useRef()
-
-  return (
-    <AlertDialog
-      isOpen={isOpen}
-      onClose={onClose}
-      isCentered={isCentered}
-      motionPreset="slideInBottom"
-      leastDestructiveRef={cancelRef}
-    >
-      <AlertDialogOverlay>
-        <AlertDialogContent>
-          <AlertDialogHeader fontSize='lg' fontWeight='bold'>
-            {header}
-          </AlertDialogHeader>
-          <AlertDialogBody>{label}</AlertDialogBody>
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button ml={3} colorScheme={buttonColor}>
-              {buttonLabel}
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialogOverlay>
-    </AlertDialog>
-  )
-}
+const Alert = ({text}) => (
+  <Stack spacing={3}>
+    {/* <Alert status='success' variant='subtle'> */}
+    {/*   <AlertIcon /> */}
+    {/*   Email Confirmation Sent */}
+    {/* </Alert> */}
+    <ChakraAlert status='success' variant='solid'>
+      <AlertIcon />
+      {text}
+    </ChakraAlert>
+  </Stack> 
+)
 
 export default Alert

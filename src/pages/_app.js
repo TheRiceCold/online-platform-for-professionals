@@ -1,8 +1,7 @@
 import {ChakraProvider} from "@chakra-ui/react"
-import AuthProvider from "@/context/AuthContext"
-import UserProvider from "@/context/UserContext"
+import UserProvider from "@/context/user/UserContext"
+import AuthProvider from "@/context/auth/AuthContext"
 import {ReactQueryDevtools} from "react-query/devtools"
-import AppStateProvider from "@/context/AppStateContext"
 import {QueryClientProvider, QueryClient} from "react-query"
 
 const MyApp = ({Component, pageProps}) => {
@@ -12,13 +11,11 @@ const MyApp = ({Component, pageProps}) => {
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false}/>
-        <AppStateProvider>
           <AuthProvider>
             <UserProvider>
               <Component {...pageProps}/>
             </UserProvider>
           </AuthProvider>
-        </AppStateProvider>
       </QueryClientProvider>
     </ChakraProvider>
   )

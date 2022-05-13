@@ -1,23 +1,21 @@
-import Axios from "axios"
+import Axios from "../axios"
+import {useRouter} from "next/router"
 import {useMutation} from "react-query"
 import {useStorage} from "@/hooks/useStorage"
 import {useContext, createContext} from "react"
-
-const axios = Axios.create({
-  baseURL: "http://localhost:3000/api/"
-})
 
 const AuthContext = createContext({})
 const useAuth = () => useContext(AuthContext)
 
 const AuthProvider = ({children, isLoginPage}) => {
   let rememberUser = false
+  const router = useRouter()
   const storage = useStorage()
   const endpoint = isLoginPage ? "login" : "signup"
 
   const apiCall = async values => {
     const submittedData = {user: {...values}}
-    return await axios.post(endpoint, submittedData)
+    return await Axios.post(endpoint, submittedData)
   }
 
   const onSuccess = res => {
@@ -48,7 +46,7 @@ const AuthProvider = ({children, isLoginPage}) => {
 
   const signOut = () => {
     storage.removeItem({type: "session", key: "auth"})
-    location.reload()
+    router.push("") 
   }
 
   return (

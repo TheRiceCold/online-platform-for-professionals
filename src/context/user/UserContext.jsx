@@ -1,9 +1,8 @@
-import {useAuth} from "@/context/AuthContext"
+import {useAuth} from "../auth/AuthContext"
 import {useStorage} from "@/hooks/useStorage"
 import {useContext, createContext} from "react"
 
 const UserContext = createContext({})
-const useUser = () => useContext(UserContext)
 
 const UserProvider = ({children}) => {
   const storage = useStorage()
@@ -37,5 +36,5 @@ const UserProvider = ({children}) => {
   )
 }
 
-export {useUser}
 export default UserProvider
+export const useUser = () => useContext(UserContext)

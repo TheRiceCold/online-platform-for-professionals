@@ -6,9 +6,9 @@ import {
   Menu, MenuList, MenuItem,
 } from "@chakra-ui/react"
 import {Fragment} from "react"
-import {useAuth} from "@/context/AuthContext"
-import {useUser} from "@/context/UserContext"
 import {TriangleDownIcon} from "@chakra-ui/icons"
+import {useAuth} from "@/context/auth/AuthContext"
+import {useUser} from "@/context/user/UserContext"
 
 const UserMenu = () => {
   const {user, isProfessional} = useUser()

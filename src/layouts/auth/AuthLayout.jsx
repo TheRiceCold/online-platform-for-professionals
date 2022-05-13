@@ -1,7 +1,7 @@
 import {useToast} from "@chakra-ui/toast"
 import Form from "@/components/forms/Form"
-import {useAuth} from "@/context/AuthContext"
 import Link from "@/components/navigation/Link"
+import {useAuth} from "@/context/auth/AuthContext"
 import {Container, Stack} from "@chakra-ui/layout"
 import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/overlay/FormModal"

@@ -3,8 +3,8 @@ import {useReducer, useContext, createContext} from "react"
 const initialState = { token: null, role: "" }
 
 // ACTION TYPES
-const SESSION = Symbol("SESSION")
 const LOCAL = Symbol("LOCAL")
+const SESSION = Symbol("SESSION")
 const LOGOUT = Symbol("LOGOUT")
 
 // REDUCER
@@ -21,8 +21,8 @@ const reducer = (state, action) => {
   }
 }
 
-const AppStateContext = createContext([initialState, () => initialState])
-const useAppState = () => useContext(AppStateContext)
+const AppStateContext = createContext(
+  [initialState, () => initialState])
 
 const AppStateProvider = ({children}) => {
   const [state, dispatch] = useReducer(reducer, initialState)
@@ -52,5 +52,5 @@ const AppStateProvider = ({children}) => {
   )
 }
 
-export {useAppState}
 export default AppStateProvider
+export const useAppState = () => useContext(AppStateContext)
