@@ -1,35 +1,35 @@
 import Head from "next/head"
+import {useEffect, useState} from "react"
 import {useUser} from "@/context/UserContext"
-import HomeLayout from "@/layouts/HomeLayout"
-import {Box, Flex, Image} from "@chakra-ui/react"
+import LoadingLayout from "@/layouts/LoadingLayout"
+import LoginLayout from "@/layouts/auth/LoginLayout"
+import AdminLayout from "@/layouts/users/AdminLayout"
+import ClientLayout from "@/layouts/users/ClientLayout"
+import ProfessionalLayout from "@/layouts/users/ProfessionalLayout"
 
 const Home = () => {
-  const {user} = useUser()
+  const [mounted, setMounted] = useState(false)
+  const {user, isAdmin, isClient, isProfessional} = useUser()
+
   const title = user ? "Home" : "Sign in"
-  const links = ["Link", "Link", "Links", "Link"]
+  useEffect(() => setMounted(true), [])
 
   return (
     <main>
       <Head>
         <title>{title}</title>
       </Head> 
-      <Flex 
-        as="header" 
-        alignItems="center" 
-        justifyContent="space-around"
-        py={4}
-      >
-        <Box as="nav" h={10} >
-          <Image 
-            mr={8}
-            height="32px" alt="logo"
-            src="/workflow_logo.svg" 
-          />
-        </Box>
-      </Flex>
-      <HomeLayout/>
+      {mounted ? 
+        (
+          isProfessional ? <ProfessionalLayout/>  :
+          isClient ? <ClientLayout/>  :
+          isAdmin ? <AdminLayout/>  :
+          <LoginLayout/>
+        ) : <LoadingLayout/>
+      }
     </main>
   )
 }
 
 export default Home
+

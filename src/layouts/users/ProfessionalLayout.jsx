@@ -7,7 +7,7 @@ import Navbar from "@/components/navbars/Navbar"
 
 const ProfessionalLayout = () => {
   const {user} = useUser()
-  const navbarLinks = ["Home", "Portfolio", "Services", "Connections", "Messages", "Reviews"]
+  const navbarLinks = ["Portfolio", "Services", "Connections", "Messages"]
 
   return (
     <>

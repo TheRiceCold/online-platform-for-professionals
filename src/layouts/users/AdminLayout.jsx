@@ -1,6 +1,6 @@
 import Table from "@/components/table/Table"
-import Alert from "@/components/alerts/Alert"
 import Navbar from "@/components/navbars/Navbar"
+import Alert from "@/components/overlay/AlertDialog"
 import fakeUsers from "@/constants/data/fakeUsers.json"
 import usersColumns from "@/constants/tables/usersColumns"
 import {Box, useDisclosure as useAlert} from "@chakra-ui/react"
