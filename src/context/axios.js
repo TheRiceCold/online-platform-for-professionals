@@ -1,5 +1,9 @@
 import Axios from "axios"
 
-export default Axios.create({
-  baseURL: "http://localhost:3000/api/"
-})
+const env = process.env.NODE_ENV
+
+const baseURL = (env === "development") 
+  ? "http://localhost:3001/" 
+  : ""
+
+export default Axios.create({baseURL})

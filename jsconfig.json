@@ -8,9 +8,7 @@
       
       "@/hooks/*": ["src/lib/hooks/*"],
       "@/utils/*": ["src/lib/utils/*"],
-      "@/services/*": ["src/lib/services/*"],
       "@/constants/*": ["src/lib/constants/*"],
-      "@/validations/*": ["src/lib/validations/*"]
     }
   }
 }

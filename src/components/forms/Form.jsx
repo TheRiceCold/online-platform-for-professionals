@@ -12,15 +12,25 @@ const Form = props => {
     watch, register, handleSubmit, formState
   } = useForm({mode: "onChange", resolver})
 
+  const submitHandler = data => {
+    console.log(data)
+  }
+
   return (
-    <form onSubmit={handleSubmit(mutation.submitHandler)}>
+    <form onSubmit={handleSubmit(submitHandler)}>
       {<InputMap 
         register={register}
-        mutation={mutation}
         inputList={inputList}
         errors={formState.errors}
         submitValue={submitValue}
       />}
+      <Button 
+        mt={4} w="100%" 
+        bg="teal" type="submit"
+        isLoading={mutation.isLoading}
+      >
+        {props.submitValue}
+      </Button>
       {isLoginPage &&
         <Flex mt={4} justify="space-between" align="center">
           <Checkbox colorScheme="teal">
@@ -29,6 +39,7 @@ const Form = props => {
           <Button 
             bg="none"
             color="teal" 
+            type="button"
             borderRadius={60}
           >
             Forgot Password?

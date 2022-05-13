@@ -6,16 +6,14 @@ import {Container, Stack} from "@chakra-ui/layout"
 import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/overlay/FormModal"
 import {Text, Heading, Button} from "@chakra-ui/react"
-import {signUpSchema} from "@/validations/signUpSchema"
 import {useDisclosure as useModal} from "@chakra-ui/react"
+import {signUpSchema} from "@/constants/validations/signUpSchema"
 
 const AuthLayout = props => {
   const toast = useToast()
-  const {mutation} = useAuth()
-
-  const {linkTo, heading, isLoginPage} = props
+  const {mutation, isLoginPage} = useAuth()
   const {onOpen : openModal, ...modalProps} = useModal()
-
+  const {linkTo, heading, inputList, submitValue} = props
   const resolver = isLoginPage ? null : zodResolver(signUpSchema)
 
   if (mutation.isError) {
@@ -39,10 +37,11 @@ const AuthLayout = props => {
         >
           {isLoginPage && <Heading>{heading}</Heading>}
           <Form 
-            {...props} 
             mutation={mutation}
             resolver={resolver}
             isLoginPage={isLoginPage} 
+            inputList={props.inputList}
+            submitValue={props.submitValue}
           />
         </Stack>
         {linkTo && 

@@ -35,12 +35,22 @@ const AuthProvider = ({children, isLoginPage}) => {
   }
 
   // login and signup
-  const authMutation = useMutation(endpoint, apiCall, {
-    onSuccess, onSettled: () => location.reload()
+  const authMutation = useMutation(endpoint, apiCall, { 
+    onSuccess: () => {
+      console.log("success")
+    }, 
+    onError: error => {
+      console.log(error)
+    },
+    onSettled: () => {
+      console.log("settled")
+    }
   })
 
-  const submitHandler = async data => 
-    await authMutation.mutateAsync({...data})
+  const submitHandler = async data => {
+    console.log(data)
+    // await authMutation.mutateAsync({...data})
+  }
 
   const mutation = {submitHandler, ...authMutation}
 
@@ -50,7 +60,10 @@ const AuthProvider = ({children, isLoginPage}) => {
   }
 
   return (
-    <AuthContext.Provider value={{mutation, rememberUser, signOut}}>
+    <AuthContext.Provider value={{
+      mutation, rememberUser, 
+      isLoginPage, signOut
+    }}>
       {children}
     </AuthContext.Provider>
   )

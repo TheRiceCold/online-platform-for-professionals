@@ -6,21 +6,21 @@ const SIGNUP_INPUTS = [
     inputs: [
       {
         required: true,
-        id: "firstname",
-        label: "First Name"
-      },
-      {
-        required: true,
-        id: "lastname",
-        label: "Last Name"
-      },
-      {
-        required: true,
         id: "role",
         type: "radio",
         label: "Select Role",
         options: ["client", "professional", "admin"]
-      }
+      },
+      {
+        required: true,
+        id: "first_name",
+        label: "First Name"
+      },
+      {
+        required: true,
+        id: "last_name",
+        label: "Last Name"
+      },
     ]
   },
   {
@@ -28,7 +28,7 @@ const SIGNUP_INPUTS = [
     inputs: [
       {
         type: "tel",
-        id: "phoneNo",
+        id: "contact_number",
         label: "Phone No."
       },
       { 
@@ -62,7 +62,7 @@ const SIGNUP_INPUTS = [
       },
       {
         required: true,
-        id: "confirmPassword",
+        id: "password_confirmation",
         type: "password",
         label: "Password Confirmation",
         autoComplete: "new-password"

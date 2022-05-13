@@ -2,7 +2,8 @@ import {useState} from "react"
 import FormControl from "./FormControl"
 import {Box, Flex, Button, Heading} from "@chakra-ui/react"
 
-const MultiForm = ({inputList, register, errors}) => {
+const MultiForm = props => {
+  const {inputList, register, errors} = props
   const [formStep, setFormStep] = useState(0)
   const numOfSteps = inputList.length - 1
   const form = inputList[formStep] 
@@ -20,7 +21,7 @@ const MultiForm = ({inputList, register, errors}) => {
 
   return (
     <Box key={form.heading}>
-      <Heading>{form.heading}</Heading>
+      <Heading mb={16}>{form.heading}</Heading>
       {form.inputs.map(input => (
         <FormControl
           input={input}
@@ -29,9 +30,13 @@ const MultiForm = ({inputList, register, errors}) => {
           error={errors[input.id]}
         />
       ))}
-      <Flex mt={4} justifyContent="space-around">
+      <Flex mt={8} justifyContent="space-around">
         {formStep !== 0 &&
-          <Button w="8em" onClick={() => gotoStep("back")}>
+          <Button 
+            w="8em" 
+            type="button"
+            onClick={() => gotoStep("back")}
+          >
             Back
           </Button>
         }
@@ -39,14 +44,10 @@ const MultiForm = ({inputList, register, errors}) => {
           <Button 
             w="8em" 
             bg="teal" 
+            type="button"
             onClick={() => gotoStep("next")}
           >
             Next
-          </Button>
-        }
-        {formStep === numOfSteps &&
-          <Button w="8em" bg="teal" type="submit">
-            Submit
           </Button>
         }
       </Flex>

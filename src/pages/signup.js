@@ -1,5 +1,6 @@
 import Head from "next/head"
-import AuthLayout from "@/layouts/auth/AuthLayout"
+import AuthLayout from "@/layouts/AuthLayout"
+import AuthProvider from "@/context/auth/AuthContext"
 import inputList from "@/constants/forms/signUpInputs"
 
 const SignUp = () => {
@@ -16,12 +17,14 @@ const SignUp = () => {
       <Head>
         <title>Create an Account</title>
       </Head>
-      <AuthLayout 
-        linkTo={linkTo}
-        submitValue="Join"
-        inputList={inputList}
-        heading="Create an Account"
-      />
+      <AuthProvider>
+        <AuthLayout 
+          linkTo={linkTo}
+          submitValue="Join"
+          inputList={inputList}
+          heading="Create an Account"
+        />
+      </AuthProvider>
     </main>
   )
 }
