@@ -8,7 +8,7 @@ const MultiForm = props => {
   const numOfSteps = inputList.length - 1
   const form = inputList[formStep] 
 
-  const gotoStep = (type) => {
+  const gotoStep = type => {
     switch (type) {
       case "next": 
         setFormStep(cur => cur+1)

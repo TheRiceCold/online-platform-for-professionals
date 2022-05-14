@@ -1,13 +1,19 @@
-import InputMap from "./InputMap"
+import MultiForm from "./MultiForm"
+import FormControl from "./FormControl"
 import {useForm} from "react-hook-form"
 import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
   const { 
-    mode, mutation,
-    isLoginPage, resolver, 
-    submitValue, inputList,
+    mode, 
+    resolver, 
+    mutation,
+    inputList,
+    submitValue,
+    isLoginPage, 
   } = props
+
+  const isGrouped = inputList[0].hasOwnProperty("inputs")
 
   const {
     watch, 
@@ -18,19 +24,29 @@ const Form = props => {
 
   return (
     <form onSubmit={handleSubmit(mutation.submitHandler)}>
-      {<InputMap 
-        register={register}
-        inputList={inputList}
-        errors={formState.errors}
-        submitValue={submitValue}
-      />}
-      <Button 
-        mt={4} w="100%" 
-        bg="teal" type="submit"
-        isLoading={mutation.isLoading}
-      >
-        {props.submitValue}
-      </Button>
+      {isGrouped ? 
+        <MultiForm
+          register={register}
+          inputList={inputList}
+          errors={formState.errors}
+        />
+      : inputList.map(input => (
+        <FormControl 
+          input={input}
+          key={input.id}
+          register={register}
+          error={formState.errors[input.id]}
+        /> 
+      ))}
+      {!isGrouped &&
+        <Button 
+          mt={4} w="100%" 
+          bg="teal" type="submit"
+          isLoading={mutation.isLoading}
+        >
+          {submitValue}
+        </Button>
+      }
       {isLoginPage &&
         <Flex mt={4} justify="space-between" align="center">
           <Checkbox colorScheme="teal">
