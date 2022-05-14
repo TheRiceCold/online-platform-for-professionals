@@ -4,20 +4,20 @@ import {Flex, Checkbox, Button} from "@chakra-ui/react"
 
 const Form = props => {
   const { 
-    isLoginPage, resolver,
-    mutation, submitValue, inputList
+    mode, mutation,
+    isLoginPage, resolver, 
+    submitValue, inputList,
   } = props
 
   const {
-    watch, register, handleSubmit, formState
-  } = useForm({mode: "onChange", resolver})
-
-  const submitHandler = data => {
-    console.log(data)
-  }
+    watch, 
+    register, 
+    formState, 
+    handleSubmit, 
+  } = useForm({mode, resolver})
 
   return (
-    <form onSubmit={handleSubmit(submitHandler)}>
+    <form onSubmit={handleSubmit(mutation.submitHandler)}>
       {<InputMap 
         register={register}
         inputList={inputList}

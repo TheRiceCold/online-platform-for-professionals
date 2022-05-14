@@ -1,16 +1,32 @@
-import {Stack, ChakraAlert, AlertIcon} from '@chakra-ui/react'
+import {
+  Flex,
+  AlertIcon,
+  useDisclosure,
+  AlertDescription,
+  CloseButton,
+  Alert as ChakraAlert, 
+} from '@chakra-ui/react'
 
-const Alert = ({text}) => (
-  <Stack spacing={3}>
-    {/* <Alert status='success' variant='subtle'> */}
-    {/*   <AlertIcon /> */}
-    {/*   Email Confirmation Sent */}
-    {/* </Alert> */}
-    <ChakraAlert status='success' variant='solid'>
-      <AlertIcon />
-      {text}
+const Alert = ({text, status}) => {
+  const {isOpen, onClose} = useDisclosure({defaultIsOpen: true})
+
+  return isOpen && (
+    <ChakraAlert status={status} variant="solid">
+      <Flex alignItems="center" justifyContent="space-between" w="100%">
+        <Flex>
+          <AlertIcon />
+          <AlertDescription ml={4}>
+            {text}
+          </AlertDescription>
+        </Flex>
+        <CloseButton
+          onClick={onClose}
+          position='relative'
+          alignSelf='flex-start'
+        />
+      </Flex>
     </ChakraAlert>
-  </Stack> 
-)
+  )
+}
 
 export default Alert

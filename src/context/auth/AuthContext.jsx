@@ -2,7 +2,9 @@ import Axios from "../axios"
 import {useRouter} from "next/router"
 import {useMutation} from "react-query"
 import {useStorage} from "@/hooks/useStorage"
-import {useContext, createContext} from "react"
+import {
+  useState, useContext, createContext
+} from "react"
 
 const AuthContext = createContext({})
 const useAuth = () => useContext(AuthContext)
@@ -11,45 +13,38 @@ const AuthProvider = ({children, isLoginPage}) => {
   let rememberUser = false
   const router = useRouter()
   const storage = useStorage()
+  const [alert, setAlert] = useState()
   const endpoint = isLoginPage ? "login" : "signup"
 
-  const apiCall = async values => {
-    const submittedData = {user: {...values}}
-    return await Axios.post(endpoint, submittedData)
+  const apiCall = async data => {
+    try {
+      const submittedData = {user: {...data}}
+      console.log(submittedData)
+      return await Axios.post(endpoint, submittedData)
+    } catch (err) {
+      const message = err.response.data.error
+      setAlert({status: "error", message})
+    }
   }
 
   const onSuccess = res => {
-    const token = res.headers.token
-    let attr = res.data.data.attributes
-  
-    if (attr.role === "professional") {
-      const field = res.data?.included[0]?.attributes.field
-      attr = {...attr, field}
+    if (res) {
+      const token = res.headers.token
+      // TODO: set to local if remember me is true
+      storage.setItem({
+        type: "session", key: "token",
+        value: JSON.stringify(token)
+      })
     }
-
-    // TODO: set to local if remember me is true
-    storage.setItem({
-      type: "session", key: "auth",
-      value: JSON.stringify({token, attr})
-    })
   }
 
   // login and signup
   const authMutation = useMutation(endpoint, apiCall, { 
-    onSuccess: () => {
-      console.log("success")
-    }, 
-    onError: error => {
-      console.log(error)
-    },
-    onSettled: () => {
-      console.log("settled")
-    }
+    onSuccess: () => { }
   })
 
   const submitHandler = async data => {
-    console.log(data)
-    // await authMutation.mutateAsync({...data})
+    await authMutation.mutateAsync({...data})
   }
 
   const mutation = {submitHandler, ...authMutation}
@@ -61,8 +56,11 @@ const AuthProvider = ({children, isLoginPage}) => {
 
   return (
     <AuthContext.Provider value={{
-      mutation, rememberUser, 
-      isLoginPage, signOut
+      alert, 
+      signOut, 
+      mutation, 
+      isLoginPage, 
+      rememberUser, 
     }}>
       {children}
     </AuthContext.Provider>

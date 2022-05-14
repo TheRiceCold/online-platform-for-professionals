@@ -1,28 +1,31 @@
-import {useToast} from "@chakra-ui/toast"
+import {
+  Container, Stack,
+  Text, Heading, Button
+} from "@chakra-ui/react"
 import Form from "@/components/forms/Form"
 import Link from "@/components/navigation/Link"
+import Alert from "@/components/feedback/Alert"
 import {useAuth} from "@/context/auth/AuthContext"
-import {Container, Stack} from "@chakra-ui/layout"
 import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/overlay/FormModal"
-import {Text, Heading, Button} from "@chakra-ui/react"
 import {useDisclosure as useModal} from "@chakra-ui/react"
+import {loginSchema} from "@/constants/validations/loginSchema"
 import {signUpSchema} from "@/constants/validations/signUpSchema"
 
 const AuthLayout = props => {
-  const toast = useToast()
-  const {mutation, isLoginPage} = useAuth()
+  const {mutation, isLoginPage, alert} = useAuth()
   const {onOpen : openModal, ...modalProps} = useModal()
   const {linkTo, heading, inputList, submitValue} = props
-  const resolver = isLoginPage ? null : zodResolver(signUpSchema)
-
-  if (mutation.isError) {
-    const {error} = mutation
-    toast({title: error.message, status: "error"})
-  }
+  const schema = isLoginPage ? loginSchema : signUpSchema
 
   return (
-    <>
+    <> 
+      {alert && 
+        <Alert 
+          text={alert.message} 
+          status={alert.status}
+        /> 
+      }
       <Container 
         display="flex" 
         flexDir="column"
@@ -38,10 +41,11 @@ const AuthLayout = props => {
           {isLoginPage && <Heading>{heading}</Heading>}
           <Form 
             mutation={mutation}
-            resolver={resolver}
+            inputList={inputList}
+            submitValue={submitValue}
             isLoginPage={isLoginPage} 
-            inputList={props.inputList}
-            submitValue={props.submitValue}
+            resolver={zodResolver(schema)}
+            mode={isLoginPage ? "onSubmit" : "onChange"}
           />
         </Stack>
         {linkTo && 
@@ -59,7 +63,8 @@ const AuthLayout = props => {
             color="teal" 
             borderRadius={60}
             onClick={openModal}
-          > I have not received an email
+          > 
+            I have not received an email
           </Button>
         }
       </Container>
