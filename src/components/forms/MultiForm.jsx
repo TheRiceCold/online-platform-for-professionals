@@ -50,6 +50,16 @@ const MultiForm = props => {
             Next
           </Button>
         }
+        {formStep === numOfSteps &&
+          <Button 
+            w="8em" 
+            bg="teal" 
+            type="submit"
+            isLoading={props.isLoading}
+          >
+            Submit
+          </Button>
+        }
       </Flex>
     </Box>
   )

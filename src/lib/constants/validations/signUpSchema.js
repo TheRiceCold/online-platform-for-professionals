@@ -6,10 +6,15 @@ export const signUpSchema = z.object({
   first_name: z.string(),
   last_name: z.string(),
 
-  // contact_number: z.number().min(11),
+  contact_number: z.string().min(11),
   city: z.string(),
   region: z.string(),
 
   email: z.string().email(),
   password: z.string().min(8).max(20),
+  password_confirmation: z.string()
+})
+.refine((data) => data.password === data.password_confirmation, {
+  message: "Passwords don't match",
+  path: ["password_confirmation"], // path of error
 })

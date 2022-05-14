@@ -7,10 +7,10 @@ const Form = props => {
   const { 
     mode, 
     resolver, 
-    mutation,
     inputList,
     submitValue,
     isLoginPage, 
+    mutation: {isLoading, submitHandler},
   } = props
 
   const isGrouped = inputList[0].hasOwnProperty("inputs")
@@ -23,9 +23,10 @@ const Form = props => {
   } = useForm({mode, resolver})
 
   return (
-    <form onSubmit={handleSubmit(mutation.submitHandler)}>
+    <form onSubmit={handleSubmit(submitHandler)}>
       {isGrouped ? 
         <MultiForm
+          isLoading={isLoading}
           register={register}
           inputList={inputList}
           errors={formState.errors}
@@ -40,9 +41,11 @@ const Form = props => {
       ))}
       {!isGrouped &&
         <Button 
-          mt={4} w="100%" 
-          bg="teal" type="submit"
-          isLoading={mutation.isLoading}
+          mt={4} 
+          w="100%" 
+          bg="teal" 
+          type="submit"
+          isLoading={isLoading}
         >
           {submitValue}
         </Button>
