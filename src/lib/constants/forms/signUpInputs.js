@@ -27,7 +27,7 @@ const SIGNUP_INPUTS = [
     heading: "Personal Details",
     inputs: [
       {
-        type: "tel",
+        // type: "tel",
         id: "contact_number",
         label: "Phone No."
       },

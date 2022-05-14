@@ -6,7 +6,8 @@ export const signUpSchema = z.object({
   first_name: z.string(),
   last_name: z.string(),
 
-  contact_number: z.string().min(11),
+  contact_number: z.string().regex(/^(09|\+639)\d{9}$/, 
+    {message: "Contact no. must be a valid 09, 639 format"}),
   city: z.string(),
   region: z.string(),
 
