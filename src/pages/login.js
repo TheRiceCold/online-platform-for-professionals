@@ -47,14 +47,14 @@ const Login = () => {
       <Head>
         <title>Login</title>
       </Head>
-        <AuthLayout 
-          isLoginPage
-          alerts={alerts}
-          heading="Sign In"
-          mutation={mutation}
-          submitValue="Login"
-          inputList={inputList}
-        />
+      <AuthLayout 
+        isLoginPage
+        alerts={alerts}
+        heading="Sign In"
+        mutation={mutation}
+        submitValue="Login"
+        inputList={inputList}
+      />
     </main>
   )
 }

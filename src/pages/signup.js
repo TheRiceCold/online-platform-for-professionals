@@ -1,13 +1,14 @@
 import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
-import {useAuth} from "@/context/auth/context"
+import {useAppState} from "@/context/state/context"
 import AuthLayout from "@/layouts/auth/layout"
 import inputList from "@/constants/forms/signUpInputs"
 
 const SignUp = () => {
-  const {signup} = useAuth()
   const [alerts, setAlerts] = useState([])
+  const {useAuth} = useAppState() 
+  const {signup} = useAuth()
 
   const mutation = useMutation("signup", signup, { 
     onError: error => {

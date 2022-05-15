@@ -1,7 +1,8 @@
 import Head from "next/head"
+import {useState} from "react"
 import dynamic from "next/dynamic"
 import {useRouter} from "next/router"
-import {useState, useLayoutEffect} from "react"
+import useMount from "@/hooks/useMount"
 import {useAppState} from "@/context/state/context"
 
 // export const getServerSideProps = () => {
@@ -9,16 +10,14 @@ import {useAppState} from "@/context/state/context"
 
 const Home = () => {
   const [mounted, setMounted] = useState(false)
+  useMount(() => setMounted(true))
+
   const {useAuth} = useAppState()
   const router = useRouter()
   const {user} = useAuth()
 
-  useLayoutEffect(() => {
-    setMounted(true)
-  }, [])
-
   const homeContent = () => {
-    let Layout = <h1>Loading</h1>
+    let Layout = null
     switch(user.role) {
       case "professional": 
         Layout = dynamic(() => import("@/layouts/professional/Layout"))
