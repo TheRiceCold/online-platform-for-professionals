@@ -17,6 +17,7 @@ const AuthProvider = ({children}) => {
 
   return (
     <AuthContext.Provider value={{
+      user,
       dispatch,
       rememberUser, 
       login: Action.login,

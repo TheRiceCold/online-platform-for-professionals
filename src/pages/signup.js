@@ -6,22 +6,27 @@ import AuthLayout from "@/layouts/auth/layout"
 import inputList from "@/constants/forms/signUpInputs"
 
 const SignUp = () => {
-  const {authenticate} = useAuth()
-  const [alert, setAlert] = useState()
+  const {signup} = useAuth()
+  const [alerts, setAlerts] = useState([])
 
-  const mutation = useMutation("login", 
-    data => authenticate("login", data), { 
-      onError: error => {
-        const {status, data} = error?.response
+  const mutation = useMutation("signup", signup, { 
+    onError: error => {
+      const {status, data} = error?.response
+      const messages = data.errors.map(error => error.title)
 
-        if (status === 401) {
-          const message = data?.errors[0].title
-          setAlert({status: "info", message})
-        }
-
-      }, onSuccess: res => {
-        
+      if (status === 400) {
+        setAlerts(messages.map(message => {
+          return { status: "error", message }
+        }))
       }
+    }, 
+    onSuccess: res => {
+      console.log(res)
+      setAlerts([{ 
+        status: "success", 
+        message: "Email confirmation has been sent" 
+      }])
+    }
   })
 
   return (
@@ -30,7 +35,7 @@ const SignUp = () => {
         <title>Create an Account</title>
       </Head>
       <AuthLayout 
-        alert={alert}
+        alerts={alerts}
         submitValue="Join"
         mutation={mutation}
         inputList={inputList}

@@ -9,18 +9,23 @@ import {Container, Button} from "@chakra-ui/react"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 
 const AuthLayout = props => {
+  const {user} = useAuth()
   const router = useRouter()
-  const {loggedIn} = useAuth()
-  const {alert, isLoginPage} = props
+  const {alerts, isLoginPage} = props
   const {onOpen : openModal, ...modalProps} = useModal()
 
   useEffect(() => {
-    if (loggedIn) router.push("/")
+    if (user.isAuth) 
+      router.push("/")
   }, [])
 
-  return (!loggedIn &&
+  return (!user.isAuth &&
     <>
-      {alert && <Alert {...alert}/>}
+      {alerts && 
+        alerts.map((alert, i) => (
+          <Alert key={i} {...alert}/>
+        ))
+      }
       <Container 
         display="flex" 
         flexDir="column"

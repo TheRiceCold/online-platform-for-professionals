@@ -14,9 +14,10 @@ const Login = () => {
   const mutation = useMutation("login", login, { 
     onError: error => {
       const {status, data} = error?.response
+      const message = data?.error
 
       if (status === 401) 
-        setAlert({status: "error", text: data?.error})
+        setAlert({status: "error", message})
     }, 
     onSuccess: res => {
       const {id, attributes} = res.data.data
