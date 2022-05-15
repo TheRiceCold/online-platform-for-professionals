@@ -1,16 +1,16 @@
-import {reducer} from "./reducer"
-import {initialState} from "./initialState"
-import Action from "./actions"
 import {
   useState,
   useReducer,
   createContext
 } from "react"
+import Actions from "./actions"
+import {reducer} from "./reducer"
+import {initialState} from "./initialState"
 
-export const authContext = createContext()
+const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
-  const {Provider} = authContext
+  const {Provider} = AuthContext
   const [rememberUser, setRememberUser] = useState(false)
   const [user, dispatch] = useReducer(reducer, initialState)
 
@@ -19,13 +19,16 @@ const AuthProvider = ({children}) => {
       user,
       dispatch,
       rememberUser, 
-      login: Action.login,
-      signup: Action.signup,
-      logout: Action.logout,
+      login: Actions.login,
+      signup: Actions.signup,
+      logout: Actions.logout,
     }}>
         {children}
     </Provider>
   )
 }
 
-export default AuthProvider
+export {
+  AuthContext, 
+  AuthProvider
+}

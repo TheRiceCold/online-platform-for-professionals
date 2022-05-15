@@ -1,10 +1,11 @@
 import Head from "next/head"
+import dynamic from "next/dynamic"
 import {useRouter} from "next/router"
 import {useState, useLayoutEffect} from "react"
 import {useAppState} from "@/context/state/context"
-import AdminLayout from "@/layouts/users/AdminLayout"
-import ClientLayout from "@/layouts/users/ClientLayout"
-import ProfessionalLayout from "@/layouts/users/ProfessionalLayout"
+
+// export const getServerSideProps = () => {
+// }
 
 const Home = () => {
   const [mounted, setMounted] = useState(false)
@@ -17,13 +18,17 @@ const Home = () => {
   }, [])
 
   const homeContent = () => {
+    let Layout = <h1>Loading</h1>
     switch(user.role) {
       case "professional": 
-        return <ProfessionalLayout/>
+        Layout = dynamic(() => import("@/layouts/professional/Layout"))
+        return <Layout/>
       case "client":
-        return <ClientLayout/>
+        Layout = dynamic(() => import("@/layouts/client/Layout"))
+        return <Layout/>
       case "admin":
-        return <AdminLayout/>
+        Layout = dynamic(() => import("@/layouts/admin/Layout"))
+        return <Layout/>
       default: 
         router.push("login")
     }
