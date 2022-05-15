@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react'
 
 const Alert = ({text, status}) => {
+
   const {isOpen, onClose} = useDisclosure({defaultIsOpen: true})
 
   return isOpen && (

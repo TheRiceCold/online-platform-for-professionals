@@ -1,8 +1,8 @@
 import {
   useState, 
+  useEffect,
   useContext, 
   createContext,
-  useLayoutEffect,
 } from "react"
 import {useStorage} from "@/hooks/useStorage"
 import AuthProvider from "../auth/AuthContext"
@@ -14,7 +14,7 @@ const AppStateProvider = ({children}) => {
   const [userRole, setUserRole] = useState()
   const authData = storage.getItem({type: "session", key: "auth_data"})
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     setUserRole(JSON.parse(authData)?.role)
   }, [])
 

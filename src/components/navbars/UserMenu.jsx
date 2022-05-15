@@ -7,12 +7,10 @@ import {
 } from "@chakra-ui/react"
 import {Fragment} from "react"
 import Axios from "@/utils/axios"
-import {useRouter} from "next/router"
 import {useStorage} from "@/hooks/useStorage"
 import {TriangleDownIcon} from "@chakra-ui/icons"
 
 const UserMenu = () => {
-  const router = useRouter()
   const storage = useStorage()
 
   const MENU_ITEMS = [
@@ -32,9 +30,9 @@ const UserMenu = () => {
     {
       label: "Sign out",
       handleOnClick: async() => {
-        location.reload()
         await Axios.delete("logout")
         storage.removeItem({type: "session", key: "auth_data"})
+        location.reload()
       }
     }
   ]

@@ -1,22 +1,24 @@
 import {
+  Input, 
+  Button,
+  InputGroup, 
+  InputLeftElement, 
+
+  Modal,
   ModalBody,
   ModalHeader,
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-  Modal as ChakraModal,
 } from '@chakra-ui/react'
-import {
-  InputLeftElement, InputGroup, 
-  Input, Button} from "@chakra-ui/react"
 import {EmailIcon} from "@chakra-ui/icons"
 
-const FormModal = props => {
-  const { heading, isOpen, onClose } = props
+const AuthModal = props => {
+  const {heading, isOpen, onClose} = props
 
   return (
     <>
-      <ChakraModal
+      <Modal
         isOpen={isOpen}
         onClose={onClose}
       >
@@ -44,9 +46,9 @@ const FormModal = props => {
             </form>
           </ModalBody>
         </ModalContent>
-      </ChakraModal>
+      </Modal>
     </>
   )
 }
 
-export default FormModal
+export default AuthModal

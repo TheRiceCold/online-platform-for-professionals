@@ -1,16 +1,11 @@
 import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
-import AuthLayout from "@/layouts/AuthLayout"
+import AuthLayout from "@/layouts/auth/layout"
 import {useAuth} from "@/context/auth/AuthContext"
 import inputList from "@/constants/forms/signUpInputs"
 
 const SignUp = () => {
-  const linkTo = {
-    href: "login",
-    linkText: "Sign in",
-    text: "Already have an account?",
-  }
   const {authenticate} = useAuth()
   const [alert, setAlert] = useState()
 
@@ -36,8 +31,8 @@ const SignUp = () => {
       </Head>
       <AuthLayout 
         alert={alert}
-        linkTo={linkTo}
         submitValue="Join"
+        mutation={mutation}
         inputList={inputList}
         heading="Create an Account"
       />

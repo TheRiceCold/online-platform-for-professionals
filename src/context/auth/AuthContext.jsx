@@ -1,8 +1,8 @@
 import {useStorage} from "@/hooks/useStorage"
 import {authenticate, logout} from "./mutations"
 import {
+  useState, useEffect,
   useContext, createContext,
-  useState, useLayoutEffect,
 } from "react"
 
 const AuthContext = createContext({})
@@ -12,9 +12,9 @@ const AuthProvider = ({children}) => {
   let rememberUser = false
   const storage = useStorage()
   const [authData, setAuthData] = useState()
-  const isLoggedIn = (authData !== null)
+  const loggedIn = (authData !== null)
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const storedAuthData = JSON.parse(
       storage.getItem({
         type: "session",
@@ -29,7 +29,7 @@ const AuthProvider = ({children}) => {
     <AuthContext.Provider value={{
       logout,
       authData,
-      isLoggedIn,
+      loggedIn,
       authenticate,
       rememberUser, 
     }}>
