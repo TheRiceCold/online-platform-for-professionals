@@ -1,8 +1,8 @@
 import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
+import {useAuth} from "@/context/auth/context"
 import AuthLayout from "@/layouts/auth/layout"
-import {useAuth} from "@/context/auth/AuthContext"
 import inputList from "@/constants/forms/signUpInputs"
 
 const SignUp = () => {

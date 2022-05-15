@@ -4,8 +4,8 @@ import {
   useContext, 
   createContext,
 } from "react"
+import AuthProvider from "../auth/context"
 import {useStorage} from "@/hooks/useStorage"
-import AuthProvider from "../auth/AuthContext"
 
 const AppStateContext = createContext({})
 
