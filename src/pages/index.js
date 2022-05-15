@@ -1,7 +1,6 @@
 import Head from "next/head"
-import {useState, useEffect} from "react"
+import {useState} from "react"
 import dynamic from "next/dynamic"
-import {useQuery} from "react-query"
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount"
 import {useAppState} from "@/context/state/context"
@@ -10,10 +9,7 @@ const Home = () => {
   const [mounted, setMounted] = useState(false)
   useMount(() => setMounted(true))
 
-  const {useAuth, useProfessionals} = useAppState()
-  const {getProfessionals} = useProfessionals()
-  const professionals = useQuery(
-    "professionals", getProfessionals)
+  const {useAuth} = useAppState()
   const router = useRouter()
   const {user} = useAuth()
 

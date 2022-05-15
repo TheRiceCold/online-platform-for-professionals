@@ -13,7 +13,8 @@ const Actions = user => {
       })
       return data
     },
-    getById: async id => { 
+    getById: async ({queryKey})=> { 
+      const [_, id] = queryKey
       return await Axios.get(path+id, {
         headers: { 'Authorization': token }
       })

@@ -9,11 +9,11 @@ import {
 import {
   ClientsContext,
   ClientsProvider,
-} from "../client/context"
+} from "../clients/context"
 import {
   ProfessionalsContext,
   ProfessionalsProvider
-} from "../professional/context"
+} from "../professionals/context"
 
 const AppStateContext = createContext()
 
