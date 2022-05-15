@@ -1,53 +1,28 @@
-import {useReducer, useContext, createContext} from "react"
+import {
+  useState, 
+  useContext, 
+  createContext,
+  useLayoutEffect,
+} from "react"
+import {useStorage} from "@/hooks/useStorage"
+import AuthProvider from "../auth/AuthContext"
 
-const initialState = { token: null, role: "" }
-
-// ACTION TYPES
-const LOCAL = Symbol("LOCAL")
-const SESSION = Symbol("SESSION")
-const LOGOUT = Symbol("LOGOUT")
-
-// REDUCER
-const reducer = (state, action) => {
-  switch(action.type) {
-    case SESSION:
-      return {...state, token: action.payload}
-    case LOCAL:
-      return state
-    case LOGOUT:
-      return state
-    default:
-      return state
-  }
-}
-
-const AppStateContext = createContext(
-  [initialState, () => initialState])
+const AppStateContext = createContext({})
 
 const AppStateProvider = ({children}) => {
-  const [state, dispatch] = useReducer(reducer, initialState)
+  const storage = useStorage()
+  const [userRole, setUserRole] = useState()
+  const authData = storage.getItem({type: "session", key: "auth_data"})
 
-  const actions = {
-    session: {
-      action: SESSION,
-      payload: ""
-    },
-    local: {
-      action: LOCAL,
-      payload: ""
-    },
-    logout: {
-      action: LOGOUT,
-      payload: ""
-    }
-  }
+  useLayoutEffect(() => {
+    setUserRole(JSON.parse(authData)?.role)
+  }, [])
 
   return (
-    <AppStateContext.Provider value={{
-      SESSION, LOCAL, LOGOUT,
-      state, dispatch, actions
-    }}>
-      {children}
+    <AppStateContext.Provider value={{userRole}}>
+      <AuthProvider>
+        {children} 
+      </AuthProvider>
     </AppStateContext.Provider>
   )
 }

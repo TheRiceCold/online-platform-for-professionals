@@ -6,13 +6,14 @@ import {
   Menu, MenuList, MenuItem,
 } from "@chakra-ui/react"
 import {Fragment} from "react"
+import Axios from "@/utils/axios"
+import {useRouter} from "next/router"
+import {useStorage} from "@/hooks/useStorage"
 import {TriangleDownIcon} from "@chakra-ui/icons"
-import {useAuth} from "@/context/auth/AuthContext"
-import {useUser} from "@/context/user/UserContext"
 
 const UserMenu = () => {
-  const {user, isProfessional} = useUser()
-  const {signOut} = useAuth()
+  const router = useRouter()
+  const storage = useStorage()
 
   const MENU_ITEMS = [
     {
@@ -30,7 +31,11 @@ const UserMenu = () => {
     "divider",
     {
       label: "Sign out",
-      handleOnClick: signOut
+      handleOnClick: async() => {
+        location.reload()
+        await Axios.delete("logout")
+        storage.removeItem({type: "session", key: "auth_data"})
+      }
     }
   ]
 
@@ -51,9 +56,9 @@ const UserMenu = () => {
         <Flex alignItems="center" ml={3}>
           <Avatar size="md" src="https://avatars.dicebear.com/api/male/username.svg" />
           <Stack ml={2} spacing={0}>
-            <Heading size="3x1">{user?.fullname}</Heading>
+            <Heading size="3x1">
+            </Heading>
             <Text>
-              {isProfessional ? user?.field : user?.role}
             </Text>
           </Stack>
         </Flex>

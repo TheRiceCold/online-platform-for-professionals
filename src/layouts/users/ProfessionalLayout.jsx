@@ -3,10 +3,8 @@ import {
   Box, Text, Link
 } from "@chakra-ui/react"
 import Navbar from "@/components/navbars/Navbar"
-import {useUser} from "@/context/user/UserContext"
 
 const ProfessionalLayout = () => {
-  const {user} = useUser()
   const navbarLinks = ["Portfolio", "Services", "Connections", "Messages"]
 
   return (
@@ -27,13 +25,12 @@ const ProfessionalLayout = () => {
             <Flex padding="10px 16px">
               <Flex direction="column" mr={6}>
                 <Text fontWeight={700} fontSize="26px">
-                  {user?.fullname}
+                  FullName
                 </Text>
                 <Text fontSize="16px">
-                  {user?.field}
+                  Professional 
                 </Text>
                 <Text fontSize="14px" color="gray.600">
-                  {user?.city}, {user?.region}, Philippines - {" "}
                   <Link color="blue.500" fontWeight={500}>
                     Contact Info
                   </Link>

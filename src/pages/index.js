@@ -1,56 +1,39 @@
 import Head from "next/head"
-import {useEffect, useState} from "react"
-
-import {useUser} from "@/context/user/UserContext"
-import AuthProvider from "@/context/auth/AuthContext"
-import inputList from "@/constants/forms/loginInputs"
-
-import AuthLayout from "@/layouts/AuthLayout"
-import LoadingLayout from "@/layouts/LoadingLayout"
+import {useRouter} from "next/router"
+import {useState, useLayoutEffect} from "react"
+import {useAppState} from "@/context/state/AppStateContext"
+// Layouts
 import AdminLayout from "@/layouts/users/AdminLayout"
 import ClientLayout from "@/layouts/users/ClientLayout"
 import ProfessionalLayout from "@/layouts/users/ProfessionalLayout"
 
-const LoginPage = () => {
-  const linkTo = {
-    href: "/signup",
-    text: "No Account?",
-    linkText: "Join now"
-  }
-
-  return (
-    <AuthProvider isLoginPage>
-      <AuthLayout 
-        linkTo={linkTo}
-        heading="Sign In"
-        submitValue="Login"
-        inputList={inputList}
-      />
-    </AuthProvider>
-  )
-}
-
 const Home = () => {
-  // const {isError}
+  const title = "Login"
+  const router = useRouter()
+  const {userRole} = useAppState()
   const [mounted, setMounted] = useState(false)
-  const {user, isAdmin, isClient, isProfessional} = useUser()
 
-  const title = user ? "Home" : "Sign in"
-  useEffect(() => setMounted(true), [])
+  useLayoutEffect(() => setMounted(true), [])
+
+  const homeContent = () => {
+    switch(userRole) {
+      case "professional": 
+        return <ProfessionalLayout/>
+      case "client":
+        return <ClientLayout/>
+      case "admin":
+        return <AdminLayout/>
+      default: 
+        router.push("login")
+    }
+  }
 
   return (
     <main>
       <Head>
         <title>{title}</title>
       </Head> 
-      {mounted ? 
-        (
-          isProfessional ? <ProfessionalLayout/>  :
-          isClient ? <ClientLayout/>  :
-          isAdmin ? <AdminLayout/>  : 
-          <LoginPage/>
-        ) : <LoadingLayout/>
-      }
+      {mounted && homeContent()}
     </main>
   )
 }

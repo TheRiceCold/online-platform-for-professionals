@@ -7,10 +7,11 @@ const Form = props => {
   const { 
     mode, 
     resolver, 
+    mutation,
     inputList,
     submitValue,
     isLoginPage, 
-    mutation: {isLoading, submitHandler},
+    submitHandler
   } = props
 
   const isGrouped = inputList[0].hasOwnProperty("inputs")
@@ -26,10 +27,10 @@ const Form = props => {
     <form onSubmit={handleSubmit(submitHandler)}>
       {isGrouped ? 
         <MultiForm
-          isLoading={isLoading}
           register={register}
           inputList={inputList}
           errors={formState.errors}
+          isLoading={mutation.isLoading}
         />
       : inputList.map(input => (
         <FormControl 
@@ -45,7 +46,7 @@ const Form = props => {
           w="100%" 
           bg="teal" 
           type="submit"
-          isLoading={isLoading}
+          isLoading={mutation.isLoading}
         >
           {submitValue}
         </Button>
@@ -65,7 +66,11 @@ const Form = props => {
           </Button>
         </Flex>
       }
-      <pre>{JSON.stringify(watch(), null, 2)}</pre>
+      <pre> {/* DEVELOPMENT ONLY */}
+        {process.env.NODE_ENV &&
+          JSON.stringify(watch(), null, 2)
+        }
+      </pre>
     </form>
   )
 }

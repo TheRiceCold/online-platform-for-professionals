@@ -2,10 +2,10 @@ import {
   Container, Stack,
   Text, Heading, Button
 } from "@chakra-ui/react"
+import {useState} from "react"
 import Form from "@/components/forms/Form"
 import Link from "@/components/navigation/Link"
 import Alert from "@/components/feedback/Alert"
-import {useAuth} from "@/context/auth/AuthContext"
 import {zodResolver} from "@hookform/resolvers/zod"
 import FormModal from "@/components/overlay/FormModal"
 import {useDisclosure as useModal} from "@chakra-ui/react"
@@ -13,19 +13,23 @@ import {loginSchema} from "@/constants/validations/loginSchema"
 import {signUpSchema} from "@/constants/validations/signUpSchema"
 
 const AuthLayout = props => {
-  const {mutation, isLoginPage, alert} = useAuth()
+  const {
+    alert,
+    linkTo, 
+    heading, 
+    mutation,
+    inputList, 
+    submitValue,
+    isLoginPage,
+  } = props
+
   const {onOpen : openModal, ...modalProps} = useModal()
-  const {linkTo, heading, inputList, submitValue} = props
   const schema = isLoginPage ? loginSchema : signUpSchema
+  const submitHandler = data => mutation.mutate({...data})
 
   return (
     <> 
-      {alert && 
-        <Alert 
-          text={alert.message} 
-          status={alert.status}
-        /> 
-      }
+      {alert && <Alert text={alert.message} status={alert.status}/>}
       <Container 
         display="flex" 
         flexDir="column"
@@ -44,6 +48,7 @@ const AuthLayout = props => {
             inputList={inputList}
             submitValue={submitValue}
             isLoginPage={isLoginPage} 
+            submitHandler={submitHandler}
             resolver={zodResolver(schema)}
             mode={isLoginPage ? "onSubmit" : "onChange"}
           />
