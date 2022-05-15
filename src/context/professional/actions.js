@@ -7,29 +7,31 @@ const Actions = user => {
   return {
     // GET
     getAll: async () => { 
-      return Axios.get(path, {
+      console.log(token)
+      const {data} = await Axios.get(path, {
         headers: { 'Authorization': token }
       })
+      return data
     },
     getById: async id => { 
-      return Axios.get(path+id, {
+      return await Axios.get(path+id, {
         headers: { 'Authorization': token }
       })
     },
 
     // MUTATIONS
     create: async data => { 
-      return Axios.post(path, data, {
+      return await Axios.post(path, data, {
         headers: { 'Authorization': token }
       })
     },
     update: async (id, data) => {
-      return Axios.patch(path+id, data, {
+      return await Axios.patch(path+id, data, {
         headers: { 'Authorization': token }
       })
     },
     delete: async id => {
-      return Axios.delete(path+id, {
+      return await Axios.delete(path+id, {
         headers: { 'Authorization': token }
       })
     }

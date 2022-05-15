@@ -12,9 +12,9 @@ const ProfessionalsProvider = ({children}) => {
 
   return (
     <Provider value={{
-      getProffesionals: call.getAll,
-      getProffesional: call.getById,
-      createProffesional: call.create,
+      getProfessionals: call.getAll,
+      getProfessional: call.getById,
+      createProfessional: call.create,
       updateProfessional: call.update,
       deleteProfessional: call.delete,
     }}>

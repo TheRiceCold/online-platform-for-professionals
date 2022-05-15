@@ -1,18 +1,19 @@
 import Head from "next/head"
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import dynamic from "next/dynamic"
+import {useQuery} from "react-query"
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount"
 import {useAppState} from "@/context/state/context"
-
-// export const getServerSideProps = () => {
-// }
 
 const Home = () => {
   const [mounted, setMounted] = useState(false)
   useMount(() => setMounted(true))
 
-  const {useAuth} = useAppState()
+  const {useAuth, useProfessionals} = useAppState()
+  const {getProfessionals} = useProfessionals()
+  const professionals = useQuery(
+    "professionals", getProfessionals)
   const router = useRouter()
   const {user} = useAuth()
 
