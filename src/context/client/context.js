@@ -1,18 +1,27 @@
-import {useContext, createContext} from "react"
+import Actions from "./actions"
+import {createContext} from "react"
+import {useAppState} from "@/context/state/context"
 
-const ClientContext = createContext({})
+const ClientsContext = createContext()
 
-const ClientProvider = ({children}) => {
+const ClientsProvider = ({children}) => {
+  const {Provider} = ClientsContext
+  const {useAuth} = useAppState()
+  const {user} = useAuth()
+  const call = Actions(user)
 
   return (
-    <ClientContext.Provider>
+    <Provider value={{
+      getClients: call.getAll,
+      getClient: call.getById,
+      deleteClient: call.delete,
+    }}>
       {children}
-    </ClientContext.Provider>
+    </Provider>
   )
 }
 
-export const useClient = () => {
-  useContext(ClientContext)
+export {
+  ClientsContext,
+  ClientsProvider
 }
-
-export default ClientContext
