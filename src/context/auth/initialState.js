@@ -10,8 +10,8 @@ const authData = JSON.parse(
 ) || ""
 
 export const initialState = {
-  isAuth: false,
-  id: authData.id,
-  role: authData.role,
-  token: authData.token,
+  id: authData.id || "",
+  role: authData.role || "",
+  token: authData.token || "",
+  isAuth: authData.isAuth || false,
 }

@@ -1,5 +1,6 @@
 import {useState} from "react"
 import FormControl from "./FormControl"
+import {ChevronLeftIcon} from "@chakra-ui/icons"
 import {Box, Flex, Button, Heading} from "@chakra-ui/react"
 
 const MultiForm = props => {
@@ -21,7 +22,24 @@ const MultiForm = props => {
 
   return (
     <Box key={form.heading}>
-      <Heading mb={16}>{form.heading}</Heading>
+      <Flex 
+        mb={16}
+        alignItems="center" 
+      >
+        {formStep !== 0 &&
+          <Button 
+            w={1} 
+            mr={8}
+            type="button"
+            onClick={() => gotoStep("back")}
+          >
+            <ChevronLeftIcon/>
+          </Button>
+        }
+        <Heading>
+          {form.heading}
+        </Heading>
+      </Flex>
       {form.inputs.map(input => (
         <FormControl
           input={input}
@@ -31,15 +49,6 @@ const MultiForm = props => {
         />
       ))}
       <Flex mt={8} justifyContent="space-around">
-        {formStep !== 0 &&
-          <Button 
-            w="8em" 
-            type="button"
-            onClick={() => gotoStep("back")}
-          >
-            Back
-          </Button>
-        }
         {formStep !== numOfSteps &&
           <Button 
             w="8em" 

@@ -4,19 +4,18 @@ import Action from "./actions"
 import {
   useState,
   useReducer,
-  useContext, 
-  createContext,
+  createContext
 } from "react"
 
-const AuthContext = createContext({})
-const useAuth = () => useContext(AuthContext)
+export const authContext = createContext()
 
 const AuthProvider = ({children}) => {
+  const {Provider} = authContext
   const [rememberUser, setRememberUser] = useState(false)
   const [user, dispatch] = useReducer(reducer, initialState)
 
   return (
-    <AuthContext.Provider value={{
+    <Provider value={{
       user,
       dispatch,
       rememberUser, 
@@ -25,9 +24,8 @@ const AuthProvider = ({children}) => {
       logout: Action.logout,
     }}>
         {children}
-    </AuthContext.Provider>
+    </Provider>
   )
 }
 
-export {useAuth}
 export default AuthProvider

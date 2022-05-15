@@ -2,14 +2,15 @@ import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
 import {useStorage} from "@/hooks/useStorage"
-import {useAuth} from "@/context/auth/context"
 import AuthLayout from "@/layouts/auth/layout"
+import {useAppState} from "@/context/state/context"
 import inputList from "@/constants/forms/loginInputs"
 
 const Login = () => {
   const storage = useStorage()
+  const {useAuth} = useAppState()
   const {login, dispatch} = useAuth()
-  const [alert, setAlert] = useState()
+  const [alerts, setAlerts] = useState()
 
   const mutation = useMutation("login", login, { 
     onError: error => {
@@ -17,7 +18,7 @@ const Login = () => {
       const message = data?.error
 
       if (status === 401) 
-        setAlert({status: "error", message})
+        setAlerts([{status: "error", message}])
     }, 
     onSuccess: res => {
       const {id, attributes} = res.data.data
@@ -48,7 +49,7 @@ const Login = () => {
       </Head>
         <AuthLayout 
           isLoginPage
-          alert={alert}
+          alerts={alerts}
           heading="Sign In"
           mutation={mutation}
           submitValue="Login"

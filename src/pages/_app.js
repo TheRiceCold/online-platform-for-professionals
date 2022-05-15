@@ -1,7 +1,7 @@
 import {ChakraProvider} from "@chakra-ui/react"
+import AppStateProvider from "@/context/state/context"
 import {ReactQueryDevtools} from "react-query/devtools"
 import {QueryClientProvider, QueryClient} from "react-query"
-import AppStateProvider from "@/context/state/AppStateContext"
 
 const MyApp = ({Component, pageProps}) => {
   const queryClient = new QueryClient()

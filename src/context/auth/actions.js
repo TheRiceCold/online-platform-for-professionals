@@ -1,9 +1,11 @@
 import Axios from "@/utils/axios"
+import {useStorage} from "@/hooks/useStorage"
+
+const storage = useStorage()
 
 const Action = {
   signup: async data => {
     const submittedData = signupData(data)
-    console.log(submittedData)
     return await Axios.post("signup", submittedData)
   },
 
@@ -14,6 +16,7 @@ const Action = {
 
   logout: async () => {
     await Axios.delete("logout")
+    storage.removeItem({type: "session", key: "auth_data"})
   }
 }
 

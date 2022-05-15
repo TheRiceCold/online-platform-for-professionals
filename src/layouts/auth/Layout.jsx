@@ -3,23 +3,23 @@ import Links from "./Links"
 import Modal from "./Modal"
 import {useEffect} from "react"
 import {useRouter} from "next/router"
-import {useAuth} from "@/context/auth/context"
 import Alert from "@/components/feedback/Alert"
 import {Container, Button} from "@chakra-ui/react"
+import {useAppState} from "@/context/state/context"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 
 const AuthLayout = props => {
-  const {user} = useAuth()
   const router = useRouter()
+  const {useAuth} = useAppState()
+  const {user: {isAuth}} = useAuth()
   const {alerts, isLoginPage} = props
   const {onOpen : openModal, ...modalProps} = useModal()
 
   useEffect(() => {
-    if (user.isAuth) 
-      router.push("/")
+    if (isAuth) router.push("/")
   }, [])
 
-  return (!user.isAuth &&
+  return (!isAuth &&
     <>
       {alerts && 
         alerts.map((alert, i) => (

@@ -1,9 +1,9 @@
 import {
   Flex,
   AlertIcon,
+  CloseButton,
   useDisclosure,
   AlertDescription,
-  CloseButton,
   Alert as ChakraAlert, 
 } from '@chakra-ui/react'
 
@@ -15,7 +15,11 @@ const Alert = ({message, status}) => {
       status={status} 
       variant="left-accent"
     >
-      <Flex alignItems="center" justifyContent="space-between" w="100%">
+      <Flex 
+        w="100%"
+        alignItems="center" 
+        justifyContent="space-between" 
+      >
         <Flex>
           <AlertIcon />
           <AlertDescription ml={4}>

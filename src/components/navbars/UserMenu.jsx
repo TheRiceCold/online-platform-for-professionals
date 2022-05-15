@@ -6,12 +6,12 @@ import {
   Menu, MenuList, MenuItem,
 } from "@chakra-ui/react"
 import {Fragment} from "react"
-import Axios from "@/utils/axios"
-import {useStorage} from "@/hooks/useStorage"
 import {TriangleDownIcon} from "@chakra-ui/icons"
+import {useAppState} from "@/context/state/context"
 
 const UserMenu = () => {
-  const storage = useStorage()
+  const {useAuth} = useAppState()
+  const {logout, dispatch} = useAuth()
 
   const MENU_ITEMS = [
     {
@@ -29,10 +29,10 @@ const UserMenu = () => {
     "divider",
     {
       label: "Sign out",
-      handleOnClick: async() => {
-        await Axios.delete("logout")
-        storage.removeItem({type: "session", key: "auth_data"})
+      handleOnClick: () => {
+        logout()
         location.reload()
+        dispatch({type: "LOGOUT"})
       }
     }
   ]

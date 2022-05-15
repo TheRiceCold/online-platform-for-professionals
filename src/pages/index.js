@@ -1,22 +1,23 @@
 import Head from "next/head"
 import {useRouter} from "next/router"
 import {useState, useLayoutEffect} from "react"
-import {useAppState} from "@/context/state/AppStateContext"
-// Layouts
+import {useAppState} from "@/context/state/context"
 import AdminLayout from "@/layouts/users/AdminLayout"
 import ClientLayout from "@/layouts/users/ClientLayout"
 import ProfessionalLayout from "@/layouts/users/ProfessionalLayout"
 
 const Home = () => {
-  const title = "Login"
-  const router = useRouter()
-  const {userRole} = useAppState()
   const [mounted, setMounted] = useState(false)
+  const {useAuth} = useAppState()
+  const router = useRouter()
+  const {user} = useAuth()
 
-  useLayoutEffect(() => setMounted(true), [])
+  useLayoutEffect(() => {
+    setMounted(true)
+  }, [])
 
   const homeContent = () => {
-    switch(userRole) {
+    switch(user.role) {
       case "professional": 
         return <ProfessionalLayout/>
       case "client":
@@ -31,7 +32,7 @@ const Home = () => {
   return (
     <main>
       <Head>
-        <title>{title}</title>
+        <title>Home</title>
       </Head> 
       {mounted && homeContent()}
     </main>
