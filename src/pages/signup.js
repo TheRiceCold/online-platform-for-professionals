@@ -1,14 +1,13 @@
 import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
-import {useAppState} from "@/context/state/context"
 import AuthLayout from "@/layouts/auth/layout"
-import inputList from "@/constants/forms/signUpInputs"
+import {useAppState} from "@/context/state/context"
 
 const SignUp = () => {
-  const [alerts, setAlerts] = useState([])
   const {useAuth} = useAppState() 
-  const {signup} = useAuth()
+  const [alerts, setAlerts] = useState([])
+  const {signup, signupInputs} = useAuth()
 
   const mutation = useMutation("signup", signup, { 
     onError: error => {
@@ -39,7 +38,7 @@ const SignUp = () => {
         alerts={alerts}
         submitValue="Join"
         mutation={mutation}
-        inputList={inputList}
+        inputList={signupInputs}
         heading="Create an Account"
       />
     </main>

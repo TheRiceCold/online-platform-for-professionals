@@ -31,7 +31,7 @@ const UserMenu = () => {
       label: "Sign out",
       handleOnClick: () => {
         logout()
-        location.reload()
+        // location.reload()
         dispatch({type: "LOGOUT"})
       }
     }

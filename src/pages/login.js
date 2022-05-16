@@ -4,13 +4,12 @@ import {useMutation} from "react-query"
 import {useStorage} from "@/hooks/useStorage"
 import AuthLayout from "@/layouts/auth/layout"
 import {useAppState} from "@/context/state/context"
-import inputList from "@/constants/forms/loginInputs"
 
 const Login = () => {
   const storage = useStorage()
   const {useAuth} = useAppState()
-  const {login, dispatch} = useAuth()
   const [alerts, setAlerts] = useState()
+  const {login, dispatch, loginInputs} = useAuth()
 
   const mutation = useMutation("login", login, { 
     onError: error => {
@@ -53,7 +52,7 @@ const Login = () => {
         heading="Sign In"
         mutation={mutation}
         submitValue="Login"
-        inputList={inputList}
+        inputList={loginInputs}
       />
     </main>
   )

@@ -3,6 +3,7 @@ import {
   useReducer,
   createContext
 } from "react"
+import Inputs from "./inputs"
 import Actions from "./actions"
 import {reducer} from "./reducer"
 import {initialState} from "./initialState"
@@ -19,9 +20,13 @@ const AuthProvider = ({children}) => {
       user,
       dispatch,
       rememberUser, 
+
       login: Actions.login,
       signup: Actions.signup,
       logout: Actions.logout,
+
+      loginInputs: Inputs.login,
+      signupInputs: Inputs.signup
     }}>
         {children}
     </Provider>

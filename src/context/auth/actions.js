@@ -13,6 +13,7 @@ const Actions = {
   },
 
   logout: async () => {
+    console.log("logout")
     const storage = useStorage()
     await Axios.delete("logout")
     storage.removeItem({type: "session", key: "auth_data"})

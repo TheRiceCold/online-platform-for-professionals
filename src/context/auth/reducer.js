@@ -1,10 +1,10 @@
-export const reducer = (initialState, action) => {
+export const reducer = (state, action) => {
   const {payload} = action
 
   switch (action.type) {
     case "LOGIN":
       return {
-        ...initialState,
+        ...state,
         isAuth: true,
         id: payload.id,
         role: payload.role,
