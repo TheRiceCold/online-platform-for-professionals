@@ -1,4 +1,5 @@
 import {ChakraProvider} from "@chakra-ui/react"
+import RouteGuard from "@/components/RouteGuard"
 import AppStateProvider from "@/context/state/context"
 import {ReactQueryDevtools} from "react-query/devtools"
 import {QueryClientProvider, QueryClient} from "react-query"
@@ -11,7 +12,9 @@ const MyApp = ({Component, pageProps}) => {
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false}/>
         <AppStateProvider>
-          <Component {...pageProps}/>
+          <RouteGuard>
+            <Component {...pageProps}/>
+          </RouteGuard>
         </AppStateProvider>
       </QueryClientProvider>
     </ChakraProvider>

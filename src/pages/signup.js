@@ -21,7 +21,6 @@ const SignUp = () => {
       }
     }, 
     onSuccess: res => {
-      console.log(res)
       setAlerts([{ 
         status: "success", 
         message: "Email confirmation has been sent" 

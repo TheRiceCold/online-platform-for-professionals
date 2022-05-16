@@ -2,7 +2,9 @@ import {InputLeftAddon, Input, InputGroup} from "@chakra-ui/react"
 
 const PhoneInput = ({register, input}) => (
   <InputGroup>
-    <InputLeftAddon children="+639"/>
+    <InputLeftAddon>
+      +639
+    </InputLeftAddon>
     <Input 
       type="tel"
       id={input.id}

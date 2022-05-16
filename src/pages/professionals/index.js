@@ -1,38 +1,34 @@
 import Head from "next/head"
-import {useForm} from "react-hook-form"
-import Form from "@/components/forms/Form"
-import {useQuery, useMutation} from "react-query"
+import {useState} from "react"
+import {useQuery} from "react-query"
+import Alert from "@/components/feedback/Alert"
 import {useAppState} from "@/context/state/context"
 
 const Professionals = () => {
+  const [alert, setAlert] = useState()
   const {useProfessionals} = useAppState()
-  const {
-    resolver,
-    inputList, 
-    getProfessionals,
-    createProfessional,
-  } = useProfessionals()
-  const formHook = useForm({resolver})
-  const mutation = useMutation("newProfessional", createProfessional)
-  const professionals = useQuery("professionals", getProfessionals)
+  const {getProfessionals} = useProfessionals()
 
-  const submitHandler = data => {
-    mutation.mutate({...data})
-  }
+  const data = useQuery(
+    "professionals", getProfessionals, {
+      onError: ({response})=> {
+        setAlert({
+          status: "error", 
+          message: response.data.error
+        })
+      },
+      retry: false,
+    }
+  )
 
   return (
     <main>
       <Head>
         <title>Professionals</title>
       </Head>
-      <Form
-        formHook={formHook}
-        mutation={mutation}
-        inputList={inputList}
-        submitValue="Register"
-        submitHandler={submitHandler}
-      />
+      {alert && <Alert {...alert}/>}
     </main>
   )
 }
+
 export default Professionals
