@@ -1,9 +1,9 @@
 import Axios from "@/utils/axios"
 
-const ServiceActions = user => {
+const PortfolioActions = user => {
   const {token} = user
   const config = {headers: { Authorization: token }}
-  const path = id => `professionals/${id}/services/`
+  const path = id => `professionals/${id}/work_portfolios`
 
   return {
     // GET
@@ -12,27 +12,27 @@ const ServiceActions = user => {
       return await Axios(url, config)
     },
 
-    getById: async (professionalId, id) => { 
+    getById: async (professionalId, id)=> { 
       const url = path(professionalId)+id
       return await Axios(url, config)
     },
 
     // MUTATIONS
-    create: async (professionalId, data) => { 
+    create: async data => { 
       const url = path(professionalId)
       return await Axios.post(url, data, config)
     },
 
-    update: async (professionalId, id, data) => {
+    update: async (id, data) => {
       const url = path(professionalId)+id
       return await Axios.patch(url, data, config)
     },
 
-    delete: async (professionalId, id) => {
+    delete: async id => {
       const url = path(professionalId)+id
       return await Axios.delete(url, config)
     }
   }
 }
 
-export default ServiceActions
+export default PortfolioActions
