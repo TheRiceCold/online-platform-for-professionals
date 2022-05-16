@@ -1,17 +1,37 @@
 import Head from "next/head"
-import {useQuery} from "react-query"
+import {useForm} from "react-hook-form"
+import Form from "@/components/forms/Form"
+import {useQuery, useMutation} from "react-query"
 import {useAppState} from "@/context/state/context"
 
 const Professionals = () => {
   const {useProfessionals} = useAppState()
-  const {getProfessionals} = useProfessionals()
+  const {
+    resolver,
+    inputList, 
+    getProfessionals,
+    createProfessional,
+  } = useProfessionals()
+  const formHook = useForm({resolver})
+  const mutation = useMutation("newProfessional", createProfessional)
   const professionals = useQuery("professionals", getProfessionals)
+
+  const submitHandler = data => {
+    mutation.mutate({...data})
+  }
 
   return (
     <main>
       <Head>
         <title>Professionals</title>
       </Head>
+      <Form
+        formHook={formHook}
+        mutation={mutation}
+        inputList={inputList}
+        submitValue="Register"
+        submitHandler={submitHandler}
+      />
     </main>
   )
 }

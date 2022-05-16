@@ -1,6 +1,6 @@
-import Form from "./Form"
 import Links from "./Links"
 import Modal from "./Modal"
+import AuthForm from "./Form"
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount"
 import {useState, Fragment} from "react"
@@ -12,24 +12,14 @@ import {useDisclosure as useModal} from "@chakra-ui/react"
 const AuthLayout = props => {
   const router = useRouter()
   const {useAuth} = useAppState()
+  const {user: {isAuth}} = useAuth()
   const {alerts, isLoginPage} = props
   const [mounted, setMounted] = useState()
-  const {
-    onOpen : openModal, 
-    ...modalProps
-  } = useModal()
-  const {
-    loginResolver, 
-    signupResolver,
-    user: {isAuth}, 
-  } = useAuth()
-
-  const resolver = isLoginPage ? loginResolver : signupResolver
+  const {onOpen : openModal, ...modalProps} = useModal()
 
   useMount(() => {
     setMounted(true)
-    if (isAuth) 
-      router.push("/")
+    if (isAuth) router.push("/")
   })
 
   return (
@@ -46,7 +36,7 @@ const AuthLayout = props => {
             alignItems="center"
             justifyContent="center" 
           >
-            <Form {...props} resolver={resolver} />
+            <AuthForm {...props}/>
             <Links isLoginPage={isLoginPage}/>
             {isLoginPage && 
               <Button 

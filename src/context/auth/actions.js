@@ -3,20 +3,18 @@ import {useStorage} from "@/hooks/useStorage"
 
 const Actions = {
   signup: async data => {
-    const submittedData = signupData(data)
-    return await Axios.post("signup", submittedData)
+    return await Axios.post("signup", signupData(data))
   },
 
   login: async data => {
-    const submittedData = {user:{...data}}
-    return await Axios.post("login", submittedData)
+    return await Axios.post("login", { user: {...data} })
   },
 
   logout: async () => {
     console.log("logout")
     const storage = useStorage()
     await Axios.delete("logout")
-    storage.removeItem({type: "session", key: "auth_data"})
+    storage.removeItem({ type: "session", key: "auth_data" })
   }
 }
 
@@ -37,7 +35,7 @@ const signupData = data => {
   }
 
   data.contact_number = contactNo
-  return {user: {...data}}
+  return { user: {...data} }
 }
 
 export default Actions

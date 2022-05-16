@@ -49,9 +49,7 @@ const Login = () => {
       <AuthLayout 
         isLoginPage
         alerts={alerts}
-        heading="Sign In"
         mutation={mutation}
-        submitValue="Login"
         inputList={loginInputs}
       />
     </main>

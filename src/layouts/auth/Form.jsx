@@ -1,28 +1,24 @@
 import {
-  Flex, 
-  Stack, 
-  Button,
   Heading, 
-  Checkbox, 
+  Flex, Stack, 
+  Button, Checkbox, 
 } from "@chakra-ui/react"
 import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
+import {useAppState} from "@/context/state/context"
 
 const AuthForm = props => {
-  const {
-    heading, 
-    mutation,
-    inputList, 
-    submitValue,
-    isLoginPage,
-  } = props
+  const {useAuth} = useAppState()
+  const {mutation, inputList, isLoginPage} = props
+  const {loginResolver, signupResolver} = useAuth()
 
+  const submitValue = isLoginPage ? "Login" : "Join"
+  const mode = isLoginPage ? "onSubmit" : "onChange"
+  const heading = isLoginPage ? "Sign in" : "Create an account"
+  const resolver = isLoginPage ? loginResolver : signupResolver
+
+  const formHook = useForm({mode, resolver})
   const submitHandler = data => mutation.mutate({...data})
-
-  const formHook = useForm({
-    mode: isLoginPage ? "onSubmit" : "onChange", 
-    resolver: props.resolver
-  })
 
   return (
     <Stack 

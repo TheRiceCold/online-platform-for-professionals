@@ -36,10 +36,8 @@ const SignUp = () => {
       </Head>
       <AuthLayout 
         alerts={alerts}
-        submitValue="Join"
         mutation={mutation}
         inputList={signupInputs}
-        heading="Create an Account"
       />
     </main>
   )

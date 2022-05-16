@@ -4,4 +4,4 @@
 [Frontend Repo]
 
 [Frontend Repo]: https://github.com/dwghdev/online-platform-for-professionals-frontend
-[Backend Repo]: https://github.com/dwghdev/online-platform-for-professionals-api
+[Backend Repo]: https://github.com/gdperalta/online-platform-for-professionals-api

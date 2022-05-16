@@ -1,5 +1,10 @@
 import {createContext} from "react"
+import {zodResolver} from "@hookform/resolvers/zod"
 import {useAppState} from "@/context/state/context"
+
+import {schema} from "./schema"
+import {inputList} from "./inputs"
+
 // Actions
 import Actions from "./actions"
 import ReviewActions from "./reviews/actions"
@@ -22,6 +27,9 @@ const ProfessionalsProvider = ({children}) => {
 
   return (
     <Provider value={{
+      // Professionals
+      inputList, 
+      resolver: zodResolver(schema),
       getProfessionals: call.getAll,
       getProfessional: call.getById,
       createProfessional: call.create,

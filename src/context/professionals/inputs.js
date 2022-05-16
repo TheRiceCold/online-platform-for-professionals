@@ -1,4 +1,4 @@
-const inputs = [
+const inputList = [
   {
     id: "field",
     label: "Field"
@@ -16,3 +16,5 @@ const inputs = [
     label: "Office Address"
   }
 ]
+
+export {inputList}
