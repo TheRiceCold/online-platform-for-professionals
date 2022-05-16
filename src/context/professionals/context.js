@@ -4,6 +4,7 @@ import {useAppState} from "@/context/state/context"
 import Actions from "./actions/actions"
 import ServiceActions from "./actions/serviceActions"
 import PortfolioActions from "./actions/PortfolioActions"
+import CalendlyTokenActions from "./actions/CalendlyTokenActions"
 
 const ProfessionalsContext = createContext()
 
@@ -13,8 +14,9 @@ const ProfessionalsProvider = ({children}) => {
   const {user} = useAuth()
 
   const call = Actions(user)
-  const callService = ServiceActions(user) 
-  const callPortfolio = PortfolioActions(user)
+  const callServices = ServiceActions(user) 
+  const callPortfolios = PortfolioActions(user)
+  const callCalendlyToken = CalendlyTokenActions(user)
 
   return (
     <Provider value={{
@@ -25,18 +27,24 @@ const ProfessionalsProvider = ({children}) => {
       deleteProfessional: call.delete,
 
       // Professional Services
-      getServices: callService.getAll,
-      getService: callService.getById,
-      createService: callService.create,
-      updateService: callService.update,
-      deleteService: callService.delete,
+      getServices: callServices.getAll,
+      getService: callServices.getById,
+      createService: callServices.create,
+      updateService: callServices.update,
+      deleteService: callServices.delete,
 
       // Professional Work Portfolio
-      getWorkPortfolios: callPortfolio.getAll,
-      getWorkPortfolio: callPortfolio.getById,
-      createWorkPortfolio: callPortfolio.create,
-      updateWorkPortfolio: callPortfolio.update,
-      deleteWorkPortfolio: callPortfolio.delete,
+      getWorkPortfolios: callPortfolios.getAll,
+      getWorkPortfolio: callPortfolios.getById,
+      createWorkPortfolio: callPortfolios.create,
+      updateWorkPortfolio: callPortfolios.update,
+      deleteWorkPortfolio: callPortfolios.delete,
+
+      // Professional Calendly Tokens
+      getCalendlyToken: callCalendlyToken.getById,
+      createCalendlyToken: callCalendlyToken.create,
+      updateCalendlyToken: callCalendlyToken.update,
+      deleteCalendlyToken: callCalendlyToken.delete,
     }}>
       {children}
     </Provider>

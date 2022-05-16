@@ -9,26 +9,26 @@ const PortfolioActions = user => {
     // GET
     getAll: async professionalId => { 
       const url = path(professionalId)
-      return await Axios(url, config)
+      return await Axios.get(url, config)
     },
 
     getById: async (professionalId, id)=> { 
       const url = path(professionalId)+id
-      return await Axios(url, config)
+      return await Axios.get(url, config)
     },
 
     // MUTATIONS
-    create: async data => { 
+    create: async (professionalId, data) => { 
       const url = path(professionalId)
       return await Axios.post(url, data, config)
     },
 
-    update: async (id, data) => {
+    update: async (professionalId, id, data) => {
       const url = path(professionalId)+id
       return await Axios.patch(url, data, config)
     },
 
-    delete: async id => {
+    delete: async (professionalId, id) => {
       const url = path(professionalId)+id
       return await Axios.delete(url, config)
     }

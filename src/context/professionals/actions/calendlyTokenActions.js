@@ -1,23 +1,16 @@
 import Axios from "@/utils/axios"
 
-const ServiceActions = user => {
+const CalendlyTokenActions = user => {
   const {token} = user
   const config = {headers: { Authorization: token }}
-  const path = id => `professionals/${id}/services/`
+  const path = id => `professionals/${id}/calendly_tokens`
 
   return {
-    // GET
-    getAll: async professionalId => { 
-      const url = path(professionalId)
-      return await Axios.get(url, config)
-    },
-
     getById: async (professionalId, id) => { 
       const url = path(professionalId)+id
       return await Axios.get(url, config)
     },
 
-    // MUTATIONS
     create: async (professionalId, data) => { 
       const url = path(professionalId)
       return await Axios.post(url, data, config)
@@ -35,4 +28,4 @@ const ServiceActions = user => {
   }
 }
 
-export default ServiceActions
+export default CalendlyTokenActions
