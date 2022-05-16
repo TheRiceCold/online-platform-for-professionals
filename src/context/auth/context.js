@@ -4,8 +4,8 @@ import {
   createContext
 } from "react"
 import Inputs from "./inputs"
+import Schema from "./schema"
 import Actions from "./actions"
-import Validations from "./validations"
 
 import {reducer} from "./reducer"
 import {initialState} from "./initialState"
@@ -23,6 +23,7 @@ const AuthProvider = ({children}) => {
       user,
       dispatch,
       rememberUser, 
+      setRememberUser,
 
       login: Actions.login,
       signup: Actions.signup,
@@ -31,8 +32,8 @@ const AuthProvider = ({children}) => {
       loginInputs: Inputs.login,
       signupInputs: Inputs.signup,
 
-      loginResolver: zodResolver(Validations.login),
-      signupResolver: zodResolver(Validations.signup),
+      loginResolver: zodResolver(Schema.login),
+      signupResolver: zodResolver(Schema.signup),
     }}>
         {children}
     </Provider>

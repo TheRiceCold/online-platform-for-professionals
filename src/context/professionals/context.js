@@ -1,11 +1,11 @@
 import {createContext} from "react"
 import {useAppState} from "@/context/state/context"
 // Actions
-import Actions from "./actions/actions"
-import ReviewActions from "./actions/reviewActions"
-import ServiceActions from "./actions/serviceActions"
-import PortfolioActions from "./actions/PortfolioActions"
-import CalendlyTokenActions from "./actions/CalendlyTokenActions"
+import Actions from "./actions"
+import ReviewActions from "./reviews/actions"
+import ServiceActions from "./services/actions"
+import PortfolioActions from "./portfolio/actions"
+import CalendlyTokenActions from "./calendlyToken/actions"
 
 const ProfessionalsContext = createContext()
 

@@ -1,4 +1,4 @@
-import regions from "@/constants/data/regions"
+import regions from "@/data/regions"
 
 const Inputs = {
   login: [

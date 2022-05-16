@@ -1,7 +1,7 @@
 import {z} from "zod"
 
-// MUST HAVE THE SAME NAME AS THE INPUTS
-const Validations = {
+// MUST HAVE THE SAME NAME AS THE INPUT IDS
+const Schema = {
   login: z.object({
     email: z.string().email().min(1, 
       { message: "Email can't be empty" }),
@@ -30,4 +30,4 @@ const Validations = {
   })
 }
 
-export default Validations
+export default Schema

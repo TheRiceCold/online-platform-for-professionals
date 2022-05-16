@@ -6,9 +6,9 @@
       "@/layouts/*": ["src/layouts/*"],
       "@/components/*": ["src/components/*"],
       
+      "@/data/*": ["src/lib/data/*"],
       "@/hooks/*": ["src/lib/hooks/*"],
-      "@/utils/*": ["src/lib/utils/*"],
-      "@/constants/*": ["src/lib/constants/*"],
+      "@/utils/*": ["src/lib/utils/*"]
     }
   }
 }
