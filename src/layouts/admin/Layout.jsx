@@ -1,12 +1,13 @@
 import Table from "@/components/table/Table"
 import Navbar from "@/components/navbars/Navbar"
+import {useAppState} from "@/context/state/context"
 import Alert from "@/components/overlay/AlertDialog"
-import fakeUsers from "@/constants/data/fakeUsers.json"
-import usersColumns from "@/constants/tables/usersColumns"
 import {Box, useDisclosure as useAlert} from "@chakra-ui/react"
 
 const AdminLayout = () => {
   const deleteAlert = useAlert()
+  const {useAdmin} = useAppState()
+  const {fakeUsers, userTable} = useAdmin()
   const navbarLinks = ["Dashboard", "Professionals", "Clients", "Bookings"]
 
   return (
@@ -21,7 +22,7 @@ const AdminLayout = () => {
         data={fakeUsers} 
         // stripeColor="teal"
         searchLabel="Search user"
-        columns={usersColumns(deleteAlert)}
+        columns={userTable(deleteAlert)}
       />
       <Alert 
         // isCentered

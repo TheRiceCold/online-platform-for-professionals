@@ -2,7 +2,7 @@ import {Button} from "@chakra-ui/react"
 import {format as dateFormat} from "date-fns"
 import {DeleteIcon, EditIcon, CheckIcon} from "@chakra-ui/icons"
 
-export default (deleteAlert) => [
+const UserTable = deleteAlert => [
   {Header: "Id", accessor: "id"},
   {Header: "First Name", accessor: 'first_name'},
   {Header: "Last Name", accessor: 'last_name'},
@@ -50,3 +50,5 @@ export default (deleteAlert) => [
     ),
   }
 ]
+
+export default UserTable

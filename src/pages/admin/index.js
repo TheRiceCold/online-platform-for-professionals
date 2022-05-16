@@ -1,5 +1,5 @@
 import Head from "next/head"
-import AdminLayout from "@/layouts/users/AdminLayout"
+import AdminLayout from "@/layouts/admin/Layout"
 
 const Admin = () => {
   return (
