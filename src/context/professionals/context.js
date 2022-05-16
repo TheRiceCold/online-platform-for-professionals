@@ -2,6 +2,7 @@ import {createContext} from "react"
 import {useAppState} from "@/context/state/context"
 // Actions
 import Actions from "./actions/actions"
+import ReviewActions from "./actions/reviewActions"
 import ServiceActions from "./actions/serviceActions"
 import PortfolioActions from "./actions/PortfolioActions"
 import CalendlyTokenActions from "./actions/CalendlyTokenActions"
@@ -14,6 +15,7 @@ const ProfessionalsProvider = ({children}) => {
   const {user} = useAuth()
 
   const call = Actions(user)
+  const callReviews = ReviewActions(user)
   const callServices = ServiceActions(user) 
   const callPortfolios = PortfolioActions(user)
   const callCalendlyToken = CalendlyTokenActions(user)
