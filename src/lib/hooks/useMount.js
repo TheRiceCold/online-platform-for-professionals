@@ -1,10 +1,9 @@
 import {useLayoutEffect} from "react"
 
-const useMount = (onMount, onUnMount) => {
+const useMount = onMount => {
   useLayoutEffect(() => {
-    if (typeof onMount === "function") onMount()
-    if (typeof onUnMount === "function") return onUnMount
-  }, [onMount, onUnMount])
+    onMount()
+  }, [])
 }
 
 export default useMount

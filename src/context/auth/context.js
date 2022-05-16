@@ -3,19 +3,44 @@ import {
   useReducer,
   createContext
 } from "react"
-import Inputs from "./inputs"
-import Schema from "./schema"
-import Actions from "./actions"
+import Actions from "./Actions"
+// Login
+import LoginInputs from "./login/Inputs"
+import LoginSchema from "./login/Schema"
+import LoginResponses from "./login/Responses"
+// Signup
+import SignupInputs from "./signup/Inputs"
+import SignupSchema from "./signup/Schema"
+import SignupResponses from "./signup/Responses"
 
 import {reducer} from "./reducer"
-import {initialState} from "./initialState"
+import {useStorage} from "@/hooks/useStorage"
 import {zodResolver} from "@hookform/resolvers/zod"
+
+export { AuthContext, AuthProvider }
 
 const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
+  const storage = useStorage()
   const {Provider} = AuthContext
+  const actions = new Actions(storage)
   const [rememberUser, setRememberUser] = useState(false)
+
+  const storedAuthData = JSON.parse(
+    storage.getItem({
+      type: "session",
+      key: "auth_data"
+    })
+  ) || ""
+
+  const initialState = {
+    id: storedAuthData.id || "",
+    role: storedAuthData.role || "",
+    token: storedAuthData.token || "",
+    isAuth: storedAuthData.isAuth || false,
+  }
+
   const [user, dispatch] = useReducer(reducer, initialState)
 
   return (
@@ -24,23 +49,21 @@ const AuthProvider = ({children}) => {
       dispatch,
       rememberUser, 
       setRememberUser,
-
-      login: Actions.login,
-      signup: Actions.signup,
-      logout: Actions.logout,
-
-      loginInputs: Inputs.login,
-      signupInputs: Inputs.signup,
-
-      loginResolver: zodResolver(Schema.login),
-      signupResolver: zodResolver(Schema.signup),
+      // Responses
+      LoginResponses,
+      SignupResponses,
+      // Actions
+      login: actions.login,
+      signup: actions.signup,
+      logout: actions.logout,
+      // Inputs
+      loginInputs: LoginInputs,
+      signupInputs: SignupInputs,
+      // Resolvers (validations)
+      loginResolver: zodResolver(LoginSchema),
+      signupResolver: zodResolver(SignupSchema),
     }}>
         {children}
     </Provider>
   )
-}
-
-export {
-  AuthContext, 
-  AuthProvider
 }

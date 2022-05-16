@@ -24,8 +24,6 @@ const AuthLayout = props => {
       router.push("/")
   })
 
-  console.log("Hey")
-
   return (!user.isAuth && 
     <>
       {alerts && 

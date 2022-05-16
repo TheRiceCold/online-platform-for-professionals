@@ -5,40 +5,21 @@ import {useStorage} from "@/hooks/useStorage"
 import AuthLayout from "@/layouts/auth/layout"
 import {useAppState} from "@/context/state/context"
 
-const Login = () => {
+function Login() {
   const storage = useStorage()
   const {useAuth} = useAppState()
+  const {
+    login, 
+    dispatch, 
+    loginInputs,
+    LoginResponses,
+  } = useAuth()
   const [alerts, setAlerts] = useState()
-  const {login, dispatch, loginInputs} = useAuth()
+  const responses = new LoginResponses(storage, dispatch, setAlerts)
 
   const mutation = useMutation("login", login, { 
-    onError: error => {
-      const {status, data} = error?.response
-      const message = data?.error
-
-      if (status === 401) 
-        setAlerts([{status: "error", message}])
-    }, 
-    onSuccess: res => {
-      const {id, attributes} = res.data.data
-      const token = res.headers.authorization
-      const data = {
-        id: id,
-        token: token, 
-        isAuth: true,
-        role: attributes.role,
-      }
-
-      // TODO: set to local if remember me is true
-      dispatch({type: "LOGIN", payload: data})
-      storage.setItem({
-        type: "session", 
-        key: "auth_data",
-        value: JSON.stringify(data)
-      })
-
-      location.reload()
-    }
+    onSuccess: responses.onSuccess,
+    onError: responses.onError
   })
 
   return (
@@ -57,3 +38,4 @@ const Login = () => {
 }
 
 export default Login 
+

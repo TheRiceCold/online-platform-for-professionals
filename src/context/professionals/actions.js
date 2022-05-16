@@ -26,6 +26,7 @@ const Actions = user => {
       console.log("Create Professional: ", data)
       return await Axios.post(path, { professional: {...data} }, config)
     },
+
     update: async (id, data) => {
       console.log("Update Professional: ", data)
       return await Axios.patch(path+id, data, config)

@@ -4,28 +4,15 @@ import {useMutation} from "react-query"
 import AuthLayout from "@/layouts/auth/layout"
 import {useAppState} from "@/context/state/context"
 
-const SignUp = () => {
+function SignUp() {
   const {useAuth} = useAppState() 
   const [alerts, setAlerts] = useState([])
   const {signup, signupInputs} = useAuth()
+  const responses = new Responses(setAlerts)
 
   const mutation = useMutation("signup", signup, { 
-    onError: error => {
-      const {status, data} = error?.response
-      const messages = data.errors.map(error => error.title)
-
-      if (status === 400) {
-        setAlerts(messages.map(message => {
-          return { status: "error", message }
-        }))
-      }
-    }, 
-    onSuccess: res => {
-      setAlerts([{ 
-        status: "success", 
-        message: "Email confirmation has been sent" 
-      }])
-    }
+    onSuccess: responses.onSuccess,
+    onError: responses.onError
   })
 
   return (
@@ -41,10 +28,5 @@ const SignUp = () => {
     </main>
   )
 }
-
-// export const getStaticProps = async() => {
-//   const data = await fetchLocations()
-//   return {props: { locations: data }}
-// }
 
 export default SignUp
