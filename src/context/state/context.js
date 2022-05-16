@@ -1,18 +1,22 @@
 import {
   useContext, 
-  createContext
+  createContext,
 } from "react"
 import {
   AuthContext,
-  AuthProvider
+  AuthProvider,
 } from "../auth/context"
+import {
+  AdminContext,
+  AdminProvider,
+} from "../admins/context"
 import {
   ClientsContext,
   ClientsProvider,
 } from "../clients/context"
 import {
   ProfessionalsContext,
-  ProfessionalsProvider
+  ProfessionalsProvider,
 } from "../professionals/context"
 
 const AppStateContext = createContext()
@@ -20,21 +24,25 @@ const AppStateContext = createContext()
 const AppStateProvider = ({children}) => {
   const {Provider} = AppStateContext
   const useAuth = () => useContext(AuthContext)
+  const useAdmin = () => useContext(AdminContext)
   const useClients = () => useContext(ClientsContext)
   const useProfessionals = () => useContext(ProfessionalsContext)
 
   return (
     <Provider value={{
       useAuth,
+      useAdmin,
       useClients,
       useProfessionals,
     }}>
       <AuthProvider>
-        <ClientsProvider>
-          <ProfessionalsProvider>
-            {children} 
-          </ProfessionalsProvider>
-        </ClientsProvider>
+        <AdminProvider>
+          <ClientsProvider>
+            <ProfessionalsProvider>
+              {children} 
+            </ProfessionalsProvider>
+          </ClientsProvider>
+        </AdminProvider>
       </AuthProvider>
     </Provider>
   )

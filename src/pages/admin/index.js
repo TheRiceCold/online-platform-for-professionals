@@ -11,5 +11,5 @@ const Admin = () => {
     </main>
   )
 }
-export default Admin
 
+export default Admin

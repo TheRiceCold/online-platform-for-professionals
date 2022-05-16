@@ -47,6 +47,13 @@ const ProfessionalsProvider = ({children}) => {
       createCalendlyToken: callCalendlyToken.create,
       updateCalendlyToken: callCalendlyToken.update,
       deleteCalendlyToken: callCalendlyToken.delete,
+
+      // Professional Reviews
+      getReviews: callReviews.getAll,
+      getReview: callReviews.getById,
+      createReview: callReviews.create,
+      updateReview: callReviews.update,
+      deleteReview: callReviews.delete,
     }}>
       {children}
     </Provider>
