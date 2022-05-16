@@ -5,8 +5,11 @@ import {
 } from "react"
 import Inputs from "./inputs"
 import Actions from "./actions"
+import Validations from "./validations"
+
 import {reducer} from "./reducer"
 import {initialState} from "./initialState"
+import {zodResolver} from "@hookform/resolvers/zod"
 
 const AuthContext = createContext()
 
@@ -26,7 +29,10 @@ const AuthProvider = ({children}) => {
       logout: Actions.logout,
 
       loginInputs: Inputs.login,
-      signupInputs: Inputs.signup
+      signupInputs: Inputs.signup,
+
+      loginResolver: zodResolver(Validations.login),
+      signupResolver: zodResolver(Validations.signup),
     }}>
         {children}
     </Provider>

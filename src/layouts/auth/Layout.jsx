@@ -12,10 +12,19 @@ import {useDisclosure as useModal} from "@chakra-ui/react"
 const AuthLayout = props => {
   const router = useRouter()
   const {useAuth} = useAppState()
-  const {user: {isAuth}} = useAuth()
   const {alerts, isLoginPage} = props
   const [mounted, setMounted] = useState()
-  const {onOpen : openModal, ...modalProps} = useModal()
+  const {
+    onOpen : openModal, 
+    ...modalProps
+  } = useModal()
+  const {
+    loginResolver, 
+    signupResolver,
+    user: {isAuth}, 
+  } = useAuth()
+
+  const resolver = isLoginPage ? loginResolver : signupResolver
 
   useMount(() => {
     setMounted(true)
@@ -37,7 +46,7 @@ const AuthLayout = props => {
             alignItems="center"
             justifyContent="center" 
           >
-            <Form {...props}/>
+            <Form {...props} resolver={resolver} />
             <Links isLoginPage={isLoginPage}/>
             {isLoginPage && 
               <Button 
