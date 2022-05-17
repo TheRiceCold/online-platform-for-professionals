@@ -1,7 +1,7 @@
 import Axios from "@/utils/axios"
 import {useStorage} from "@/hooks/useStorage"
 
-function Actions(dispatch) {
+function Actions(dispatch, token) {
   const storage = useStorage()
 
   this.signup = async data => 
@@ -11,9 +11,14 @@ function Actions(dispatch) {
     await Axios.post("login", { user: {...data} })
 
   this.logout = async () => {
-    storage.removeItem({ type: "session", key: "auth_data" })
-    await Axios.delete("logout")
+    await Axios.delete("logout", {
+      headers: { Authorization: token }
+    })
     dispatch({type: "LOGOUT"})
+    storage.removeItem({ 
+      type: "session", 
+      key: "auth_data" 
+    })
     location.reload()
   }
 

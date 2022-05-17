@@ -1,6 +1,6 @@
 import Axios from "@/utils/axios"
 
-function Actions (user) {
+function Actions(user) {
   const {token} = user
   const path = "professionals/"
   const config = { headers: { Authorization: token } }
@@ -10,7 +10,8 @@ function Actions (user) {
 
   this.getById = async ({queryKey}) => { 
     const [_, id] = queryKey
-    return await Axios.get(path+id, config)
+    const res = await Axios.get(path+id, config)
+    return res
   }
 
   this.create = async data => 

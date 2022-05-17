@@ -14,7 +14,7 @@ function SignUp() {
   } = useAuth()
   const status = new SignupStatuses(setAlerts)
 
-  const mutation = useMutation("signup", signup, { 
+  const mutation = useMutation(signup, { 
     onSuccess: status.onSuccess,
     onError: status.onError
   })

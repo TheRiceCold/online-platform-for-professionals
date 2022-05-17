@@ -11,9 +11,13 @@ import {useRef} from "react"
 
 const Alert = props => {
   const {
+    alert, 
+    label,
+    header, 
     isCentered, 
-    alert, header, label,
-    buttonColor, buttonLabel
+    buttonColor, 
+    buttonLabel,
+    buttonClick,
   } = props
   const {isOpen, onClose} = alert
   const cancelRef = useRef()
@@ -36,7 +40,11 @@ const Alert = props => {
             <Button ref={cancelRef} onClick={onClose}>
               Cancel
             </Button>
-            <Button ml={3} colorScheme={buttonColor}>
+            <Button 
+              ml={3} 
+              onClick={buttonClick}
+              colorScheme={buttonColor}
+            >
               {buttonLabel}
             </Button>
           </AlertDialogFooter>

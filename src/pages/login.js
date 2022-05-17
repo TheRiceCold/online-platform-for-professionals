@@ -17,7 +17,7 @@ function Login() {
   const [alerts, setAlerts] = useState()
   const status = new LoginStatuses(storage, dispatch, setAlerts)
 
-  const mutation = useMutation("login", login, { 
+  const mutation = useMutation(login, { 
     onSuccess: status.onSuccess,
     onError: status.onError
   })

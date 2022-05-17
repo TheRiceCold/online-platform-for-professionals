@@ -1,5 +1,6 @@
 import Head from "next/head"
 import {useState} from "react"
+import {useRouter} from "next/router"
 import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
@@ -10,9 +11,9 @@ import {useAppState} from "@/context/state/Context"
 const NewProfessional = () => {
   const {useProfessionals} = useAppState()
   const [alerts, setAlerts] = useState()
+  const router = useRouter()
   const {
-    inputs, 
-    resolver,
+    inputs, resolver,
     createProfessional,
   } = useProfessionals()
   const formHook = useForm({resolver})
@@ -21,6 +22,7 @@ const NewProfessional = () => {
     "newProfessional", 
     createProfessional, {
       onSuccess: res => {
+        router.push("/professionals") 
       },
       onError: error => {
         const {status, data} = error?.response

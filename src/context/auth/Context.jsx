@@ -24,7 +24,7 @@ const AuthContext = createContext()
 const AuthProvider = ({children}) => {
   const [user, dispatch] = useReducer(reducer, initialState)
   const [rememberUser, setRememberUser] = useState(false)
-  const call = new Actions(dispatch)
+  const call = new Actions(dispatch, user?.token)
   const {Provider} = AuthContext
 
   return (
