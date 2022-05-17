@@ -18,25 +18,22 @@ const NewProfessional = () => {
   } = useProfessionals()
   const formHook = useForm({resolver})
 
-  const mutation = useMutation(
-    "newProfessional", 
-    createProfessional, {
-      onSuccess: res => {
-        router.push("/professionals") 
-      },
-      onError: error => {
-        const {status, data} = error?.response
-        const messages = data?.errors.map(error => error.title)
+  const mutation = useMutation(createProfessional, {
+    onSuccess: res => {
+      router.push("/professionals") 
+    },
+    onError: error => {
+      const {status, data} = error?.response
+      const messages = data?.errors.map(error => error.title)
 
-        if (status === 422)
-          setAlerts(
-            messages.map(message => {
-            return {status: "error", message}
-          })
-        )
-      }
+      if (status === 422)
+        setAlerts(
+          messages.map(message => {
+          return {status: "error", message}
+        })
+      )
     }
-  )
+  })
 
   const submitHandler = data => {
     mutation.mutate({...data})

@@ -1,0 +1,53 @@
+.searchBarContainer 
+  display: flex
+  flex-direction: column
+  width: 34em
+  height: 3.8em
+  background: #fff
+  border-radius: 6px
+  box-shadow: 0 2px 12px 3px rgba(0, 0, 0, 0.14)
+  overflow: hidden
+
+  .searchInputContainer
+    width: 100%
+    min-height: 4em
+    display: flex
+    align-items: center
+    position: relative
+    padding: 2px 15px
+
+    input.searchInput 
+      width: 100%
+      height: 100%
+      outline: none
+      color: #12112e
+      font-size: 21px
+      background: none
+      font-weight: 500
+      border-radius: 6px
+
+      &:focus 
+        outline: none
+
+        &::placeholder 
+          opacity: 0
+        
+      &::placeholder 
+        color: #bebebe
+        transition: all 250ms ease-in-out
+      
+    .searchIcon
+      display: flex
+      color: #bebebe  
+      font-size: 20px
+      margin-right: 10px
+
+    .closeIcon
+      display: flex
+      color: #bebebe
+      font-size: 14px
+      transition: all 200ms ease-in-out
+      cursor: pointer
+
+      &:hover 
+        color: #bebebe

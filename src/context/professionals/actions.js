@@ -17,8 +17,10 @@ function Actions(user) {
   this.create = async data => 
     await Axios.post(path, { professional: {...data} }, config)
 
-  this.update = async (id, data) => 
-    await Axios.patch(path+id, data, config)
+  this.update = async (id, data) => {
+    console.log(id, data)
+    // await Axios.patch(path+id, data, config)
+  }
 
   this.delete = async id => 
     await Axios.delete(path+id, config)
