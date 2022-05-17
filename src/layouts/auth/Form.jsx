@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react"
 import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
-import {useAppState} from "@/context/state/context"
+import {useAppState} from "@/context/state/Context"
 
 const AuthForm = props => {
   const {useAuth} = useAppState()

@@ -1,4 +1,4 @@
-const inputList = [
+const Inputs = [
   {
     id: "field",
     label: "Field"
@@ -17,4 +17,4 @@ const inputList = [
   }
 ]
 
-export {inputList}
+export default Inputs

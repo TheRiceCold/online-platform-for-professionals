@@ -1,19 +1,19 @@
 import Axios from "@/utils/axios"
+import {useStorage} from "@/hooks/useStorage"
 
-function Actions(storage) {
-  this.storage = storage
+function Actions(dispatch) {
+  const storage = useStorage()
 
-  this.signup = async data => {
-    return await Axios.post("signup", this.signupData(data))
-  }
+  this.signup = async data => 
+    await Axios.post("signup", this.signupData(data))
 
-  this.login = async data => {
-    return await Axios.post("login", { user: {...data} })
-  }
+  this.login = async data => 
+    await Axios.post("login", { user: {...data} })
 
   this.logout = async () => {
-    this.storage.removeItem({ type: "session", key: "auth_data" })
+    storage.removeItem({ type: "session", key: "auth_data" })
     await Axios.delete("logout")
+    dispatch({type: "LOGOUT"})
     location.reload()
   }
 

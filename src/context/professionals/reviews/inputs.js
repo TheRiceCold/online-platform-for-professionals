@@ -1,4 +1,4 @@
-const inputs = [
+const Inputs = [
   {
     id: "rating",
     label: "Rating"
@@ -8,3 +8,5 @@ const inputs = [
     label: "Review"
   }
 ]
+
+export default Inputs

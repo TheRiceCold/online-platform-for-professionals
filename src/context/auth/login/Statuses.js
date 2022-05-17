@@ -1,6 +1,6 @@
 import CryptoAES from "crypto-js/aes"
 
-function Responses (storage, dispatch, setAlerts) {
+function Statuses(storage, dispatch, setAlerts) {
   this.storage = storage
   this.dispatch = dispatch
   this.setAlerts = setAlerts
@@ -11,22 +11,19 @@ function Responses (storage, dispatch, setAlerts) {
     const secret = process.env.NEXT_PUBLIC_SECRET
     const data = JSON.stringify({
       id: id,
+      attributes: attributes,
       token: token, 
       isAuth: true,
-      role: attributes.role,
     })
 
-    // const ciphertext = CryptoAES.encrypt(data, secret)
-    // const _ciphertext = CryptoAES.decrypt(ciphertext.toString(), secret)
-    // console.log(_ciphertext.toString(CryptoENC))
-
-    // TODO: set to local if remember me is true
-    this.dispatch({type: "LOGIN", payload: data})
     this.storage.setItem({
       type: "session", 
       key: "auth_data",
       value: CryptoAES.encrypt(data, secret)
     })
+
+    // NOT_NECESSARY: page reloads after login and gets stored data
+    // this.dispatch({type: "LOGIN", payload: data})
 
     location.reload()
   }
@@ -40,4 +37,4 @@ function Responses (storage, dispatch, setAlerts) {
   }
 }
 
-export default Responses
+export default Statuses

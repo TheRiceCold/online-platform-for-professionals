@@ -2,7 +2,7 @@ import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
 import AuthLayout from "@/layouts/auth/layout"
-import {useAppState} from "@/context/state/context"
+import {useAppState} from "@/context/state/Context"
 
 function SignUp() {
   const {useAuth} = useAppState() 
@@ -10,13 +10,13 @@ function SignUp() {
   const {
     signup, 
     signupInputs,
-    SignupResponses
+    SignupStatuses
   } = useAuth()
-  const responses = new SignupResponses(setAlerts)
+  const status = new SignupStatuses(setAlerts)
 
   const mutation = useMutation("signup", signup, { 
-    onSuccess: responses.onSuccess,
-    onError: responses.onError
+    onSuccess: status.onSuccess,
+    onError: status.onError
   })
 
   return (

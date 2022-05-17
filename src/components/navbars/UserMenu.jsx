@@ -7,11 +7,13 @@ import {
 } from "@chakra-ui/react"
 import {Fragment} from "react"
 import {TriangleDownIcon} from "@chakra-ui/icons"
-import {useAppState} from "@/context/state/context"
+import {useAppState} from "@/context/state/Context"
 
 const UserMenu = () => {
   const {useAuth} = useAppState()
-  const {logout, dispatch} = useAuth()
+  const {logout, dispatch, user} = useAuth()
+  const {firstName, lastName} = user.attributes
+  const fullname = `${firstName} ${lastName}`
 
   const MENU_ITEMS = [
     {
@@ -29,11 +31,7 @@ const UserMenu = () => {
     "divider",
     {
       label: "Sign out",
-      handleOnClick: () => {
-        logout()
-        // location.reload()
-        dispatch({type: "LOGOUT"})
-      }
+      handleOnClick: logout
     }
   ]
 
@@ -56,8 +54,7 @@ const UserMenu = () => {
           <Stack ml={2} spacing={0}>
             <Heading size="3x1">
             </Heading>
-            <Text>
-            </Text>
+            <Text>{fullname}</Text>
           </Stack>
         </Flex>
         <MenuDivider />

@@ -6,4 +6,6 @@ const baseURL = (env === "development")
   ? "http://localhost:3001/" 
   : ""
 
-export default Axios.create({baseURL})
+const headers = { Accept: "application/json" }
+
+export default Axios.create({ baseURL, headers })

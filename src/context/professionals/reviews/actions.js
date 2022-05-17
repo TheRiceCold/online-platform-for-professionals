@@ -1,37 +1,33 @@
 import Axios from "@/utils/axios"
 
-const ReviewActions = user => {
+function ReviewActions(user) {
   const {token} = user
-  const config = {headers: { Authorization: token }}
   const path = id => `professionals/${id}/reviews/`
+  const config = { headers: { Authorization: token } }
 
-  return {
-    // GET
-    getAll: async professionalId => { 
-      const url = path(professionalId)
-      return await Axios.get(url, config)
-    },
+  this.getAll = async professionalId => { 
+    const url = path(professionalId)
+    return await Axios.get(url, config)
+  }
 
-    getById: async (professionalId, id) => { 
-      const url = path(professionalId)+id
-      return await Axios.get(url, config)
-    },
+  this.getById = async (professionalId, id) => { 
+    const url = path(professionalId)+id
+    return await Axios.get(url, config)
+  }
 
-    // MUTATIONS
-    create: async (professionalId, data) => { 
-      const url = path(professionalId)
-      return await Axios.post(url, data, config)
-    },
+  this.create = async (professionalId, data) => { 
+    const url = path(professionalId)
+    return await Axios.post(url, data, config)
+  }
 
-    update: async (professionalId, id, data) => {
-      const url = path(professionalId)+id
-      return await Axios.patch(url, data, config)
-    },
+  this.update = async (professionalId, id, data) => {
+    const url = path(professionalId)+id
+    return await Axios.patch(url, data, config)
+  }
 
-    delete: async (professionalId, id) => {
-      const url = path(professionalId)+id
-      return await Axios.delete(url, config)
-    }
+  this.delete = async (professionalId, id) => {
+    const url = path(professionalId)+id
+    return await Axios.delete(url, config)
   }
 }
 

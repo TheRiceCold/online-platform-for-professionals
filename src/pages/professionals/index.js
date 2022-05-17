@@ -2,7 +2,7 @@ import Head from "next/head"
 import {useState} from "react"
 import {useQuery} from "react-query"
 import Alert from "@/components/feedback/Alert"
-import {useAppState} from "@/context/state/context"
+import {useAppState} from "@/context/state/Context"
 
 const Professionals = () => {
   const [alert, setAlert] = useState()

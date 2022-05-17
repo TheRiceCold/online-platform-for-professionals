@@ -3,7 +3,7 @@ import {useState} from "react"
 import {useMutation} from "react-query"
 import {useStorage} from "@/hooks/useStorage"
 import AuthLayout from "@/layouts/auth/layout"
-import {useAppState} from "@/context/state/context"
+import {useAppState} from "@/context/state/Context"
 
 function Login() {
   const storage = useStorage()
@@ -12,14 +12,14 @@ function Login() {
     login, 
     dispatch, 
     loginInputs,
-    LoginResponses,
+    LoginStatuses,
   } = useAuth()
   const [alerts, setAlerts] = useState()
-  const responses = new LoginResponses(storage, dispatch, setAlerts)
+  const status = new LoginStatuses(storage, dispatch, setAlerts)
 
   const mutation = useMutation("login", login, { 
-    onSuccess: responses.onSuccess,
-    onError: responses.onError
+    onSuccess: status.onSuccess,
+    onError: status.onError
   })
 
   return (
@@ -38,4 +38,3 @@ function Login() {
 }
 
 export default Login 
-

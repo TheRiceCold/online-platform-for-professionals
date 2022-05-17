@@ -1,4 +1,4 @@
-function Responses (setAlerts) {
+function Statuses(setAlerts) {
   this.setAlerts = setAlerts
 
   this.onError = error => {
@@ -22,4 +22,4 @@ function Responses (setAlerts) {
   }
 }
 
-export default Responses
+export default Statuses

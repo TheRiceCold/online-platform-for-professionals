@@ -1,9 +1,9 @@
 import Head from "next/head"
-import {Heading, Stack} from "@chakra-ui/react"
 import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
-import {useAppState} from "@/context/state/context"
+import {Heading, Stack} from "@chakra-ui/react"
+import {useAppState} from "@/context/state/Context"
 
 const NewProfessional = () => {
   const {useProfessionals} = useAppState()

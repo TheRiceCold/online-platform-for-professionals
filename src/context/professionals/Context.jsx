@@ -1,16 +1,16 @@
 import {createContext} from "react"
 import {zodResolver} from "@hookform/resolvers/zod"
-import {useAppState} from "@/context/state/context"
+import {useAppState} from "@/context/state/Context"
 
 import {schema} from "./schema"
-import {inputList} from "./inputs"
+import Inputs from "./Inputs"
 
 // Actions
-import Actions from "./actions"
-import ReviewActions from "./reviews/actions"
-import ServiceActions from "./services/actions"
-import PortfolioActions from "./portfolio/actions"
-import CalendlyTokenActions from "./calendlyToken/actions"
+import Actions from "./Actions"
+import ReviewActions from "./reviews/Actions"
+import ServiceActions from "./services/Actions"
+import PortfolioActions from "./portfolio/Actions"
+import CalendlyTokenActions from "./calendlyToken/Actions"
 
 const ProfessionalsContext = createContext()
 
@@ -19,16 +19,16 @@ const ProfessionalsProvider = ({children}) => {
   const {useAuth} = useAppState()
   const {user} = useAuth()
 
-  const call = Actions(user)
-  const callReviews = ReviewActions(user)
-  const callServices = ServiceActions(user) 
-  const callPortfolios = PortfolioActions(user)
-  const callCalendlyToken = CalendlyTokenActions(user)
+  const call = new Actions(user)
+  const callReviews = new ReviewActions(user)
+  const callServices = new ServiceActions(user) 
+  const callPortfolios = new PortfolioActions(user)
+  const callCalendlyToken = new CalendlyTokenActions(user)
 
   return (
     <Provider value={{
       // Professionals
-      inputList, 
+      inputs: Inputs, 
       resolver: zodResolver(schema),
       getProfessionals: call.getAll,
       getProfessional: call.getById,

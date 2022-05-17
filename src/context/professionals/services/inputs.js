@@ -1,4 +1,4 @@
-const inputs = [
+const Inputs = [
   {
     id: "title",
     label: "Service Title"
@@ -16,3 +16,5 @@ const inputs = [
     label: "Maximum Price"
   }
 ]
+
+export default Inputs

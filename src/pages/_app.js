@@ -1,6 +1,6 @@
 import {ChakraProvider} from "@chakra-ui/react"
 import RouteGuard from "@/components/RouteGuard"
-import AppStateProvider from "@/context/state/context"
+import AppStateProvider from "@/context/state/Context"
 import {ReactQueryDevtools} from "react-query/devtools"
 import {QueryClientProvider, QueryClient} from "react-query"
 

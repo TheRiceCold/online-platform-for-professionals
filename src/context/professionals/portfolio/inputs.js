@@ -1,4 +1,4 @@
-const inputs = [
+const Inputs = [
   {
     id: "title",
     label: "Portfolio Title"
@@ -8,3 +8,5 @@ const inputs = [
     label: "Portfolio Details"
   }
 ]
+
+export default Inputs

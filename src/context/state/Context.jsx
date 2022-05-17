@@ -5,19 +5,19 @@ import {
 import {
   AuthContext,
   AuthProvider,
-} from "../auth/context"
+} from "../auth/Context"
 import {
   AdminContext,
   AdminProvider,
-} from "../admins/context"
+} from "../admins/Context"
 import {
   ClientsContext,
   ClientsProvider,
-} from "../clients/context"
+} from "../clients/Context"
 import {
   ProfessionalsContext,
   ProfessionalsProvider,
-} from "../professionals/context"
+} from "../professionals/Context"
 
 const AppStateContext = createContext()
 

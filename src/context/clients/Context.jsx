@@ -1,6 +1,6 @@
 import Actions from "./actions"
 import {createContext} from "react"
-import {useAppState} from "@/context/state/context"
+import {useAppState} from "@/context/state/Context"
 
 const ClientsContext = createContext()
 
@@ -8,7 +8,7 @@ const ClientsProvider = ({children}) => {
   const {Provider} = ClientsContext
   const {useAuth} = useAppState()
   const {user} = useAuth()
-  const call = Actions(user)
+  const call = new Actions(user)
 
   return (
     <Provider value={{
