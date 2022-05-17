@@ -29,7 +29,8 @@ const AuthLayout = props => {
       {alerts && 
         alerts.map((alert, i) => (
           <Alert key={i} {...alert}/>
-      ))}
+        ))
+      }
       <Container 
         display="flex" 
         flexDir="column"

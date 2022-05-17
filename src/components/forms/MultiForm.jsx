@@ -4,10 +4,10 @@ import {ChevronLeftIcon} from "@chakra-ui/icons"
 import {Box, Flex, Button, Heading} from "@chakra-ui/react"
 
 const MultiForm = props => {
-  const {inputList, register, errors} = props
   const [formStep, setFormStep] = useState(0)
-  const numOfSteps = inputList.length - 1
-  const form = inputList[formStep] 
+  const {inputs, register, errors} = props
+  const numOfSteps = inputs.length - 1
+  const form = inputs[formStep] 
 
   const gotoStep = type => {
     switch (type) {

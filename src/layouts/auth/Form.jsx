@@ -9,7 +9,7 @@ import {useAppState} from "@/context/state/Context"
 
 const AuthForm = props => {
   const {useAuth} = useAppState()
-  const {mutation, inputList, isLoginPage} = props
+  const {mutation, inputs, isLoginPage} = props
   const {loginResolver, signupResolver} = useAuth()
 
   const submitValue = isLoginPage ? "Login" : "Join"
@@ -29,9 +29,9 @@ const AuthForm = props => {
     >
       {isLoginPage && <Heading>{heading}</Heading>}
       <Form 
+        inputs={inputs}
         mutation={mutation}
         formHook={formHook}
-        inputList={inputList}
         submitValue={submitValue}
         submitHandler={submitHandler}
       >

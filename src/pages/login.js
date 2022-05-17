@@ -31,7 +31,7 @@ function Login() {
         isLoginPage
         alerts={alerts}
         mutation={mutation}
-        inputList={loginInputs}
+        inputs={loginInputs}
       />
     </main>
   )

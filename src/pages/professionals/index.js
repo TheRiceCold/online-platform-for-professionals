@@ -8,18 +8,7 @@ const Professionals = () => {
   const [alert, setAlert] = useState()
   const {useProfessionals} = useAppState()
   const {getProfessionals} = useProfessionals()
-
-  const data = useQuery(
-    "professionals", getProfessionals, {
-      onError: ({response})=> {
-        setAlert({
-          status: "error", 
-          message: response.data.error
-        })
-      },
-      retry: false,
-    }
-  )
+  const data = useQuery("professionals", getProfessionals)
 
   return (
     <main>

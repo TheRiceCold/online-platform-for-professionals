@@ -2,7 +2,7 @@ import {createContext} from "react"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useAppState} from "@/context/state/Context"
 
-import {schema} from "./schema"
+import Schema from "./Schema"
 import Inputs from "./Inputs"
 
 // Actions
@@ -29,7 +29,7 @@ const ProfessionalsProvider = ({children}) => {
     <Provider value={{
       // Professionals
       inputs: Inputs, 
-      resolver: zodResolver(schema),
+      resolver: zodResolver(Schema),
       getProfessionals: call.getAll,
       getProfessional: call.getById,
       createProfessional: call.create,

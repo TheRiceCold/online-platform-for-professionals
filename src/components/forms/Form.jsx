@@ -4,32 +4,27 @@ import {Button} from "@chakra-ui/react"
 
 const Form = props => {
   const { 
-    mutation,
+    inputs,
     children,
     formHook,
-    inputList,
+    mutation,
     submitValue,
     submitHandler
   } = props
 
-  const {
-    register, 
-    formState, 
-    handleSubmit
-  } = formHook
-
-  const isGrouped = inputList[0].hasOwnProperty("inputs")
+  const {register, formState, handleSubmit} = formHook
+  const isGrouped = inputs[0].hasOwnProperty("inputs")
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
       {isGrouped ? 
         <MultiForm
+          inputs={inputs}
           register={register}
-          inputList={inputList}
           errors={formState.errors}
           isLoading={mutation.isLoading}
         />
-      : inputList.map(input => (
+      : inputs.map(input => (
         <FormControl 
           input={input}
           key={input.id}

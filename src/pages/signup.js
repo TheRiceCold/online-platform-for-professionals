@@ -27,7 +27,7 @@ function SignUp() {
       <AuthLayout 
         alerts={alerts}
         mutation={mutation}
-        inputList={signupInputs}
+        inputs={signupInputs}
       />
     </main>
   )
