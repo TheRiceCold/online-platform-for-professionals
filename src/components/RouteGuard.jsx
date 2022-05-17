@@ -4,23 +4,32 @@ import useMount from "@/hooks/useMount"
 import {useAppState} from "@/context/state/context"
 
 const RouteGuard = ({children}) => {
-  const [authorized, setAuthorized] = useState(false)
-  const {useAuth} = useAppState()
   const router = useRouter()
-  const {user} = useAuth()
+  const {useAuth} = useAppState()
+  const {user: {isAuth}} = useAuth()
+  const [authorized, setAuthorized] = useState(false)
 
-  useMount(() => authCheck(router.asPath))
+  useMount(() => {
+    authCheck(router.asPath)
+
+    // on route change start - hide page content by setting authorized to false 
+    const hideContent = () => setAuthorized(false)
+    router.events.on("routeChangeStart", hideContent)
+    // on route change complete - run auth check 
+    router.events.on("routeChangeComplete", authCheck)
+  })
 
   const authCheck = url => {
     // redirect to login page if accessing a private page and not logged in 
     const publicPaths = ["/login", "/signup"]
     const path = url.split("?")[0]
 
-    if (!user.isAuth && !publicPaths.includes(path)) {
-      router.push("/login") 
+    if (!isAuth && !publicPaths.includes(path)) {
       setAuthorized(false)
-    } 
-    else setAuthorized(true)
+      router.push("/login") 
+    } else {
+      setAuthorized(true)
+    }
   }
 
   return (authorized && children)

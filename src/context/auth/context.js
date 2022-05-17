@@ -1,3 +1,6 @@
+import CryptoAES from "crypto-js/aes"
+import CryptoENC from "crypto-js/enc-utf8"
+
 import {
   useState,
   useReducer,
@@ -25,20 +28,23 @@ const AuthProvider = ({children}) => {
   const storage = useStorage()
   const {Provider} = AuthContext
   const actions = new Actions(storage)
+  const secret = process.env.NEXT_PUBLIC_SECRET
   const [rememberUser, setRememberUser] = useState(false)
 
-  const storedAuthData = JSON.parse(
+  const storedAuthData = CryptoAES.decrypt(
     storage.getItem({
       type: "session",
       key: "auth_data"
-    })
-  ) || ""
+    }), secret)
+
+  let authData = storedAuthData.toString(CryptoENC)
+  authData = authData && JSON.parse(authData)
 
   const initialState = {
-    id: storedAuthData.id || "",
-    role: storedAuthData.role || "",
-    token: storedAuthData.token || "",
-    isAuth: storedAuthData.isAuth || false,
+    id: authData.id || "",
+    role: authData.role || "",
+    token: authData.token || "",
+    isAuth: authData.isAuth || false,
   }
 
   const [user, dispatch] = useReducer(reducer, initialState)

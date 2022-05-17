@@ -1,14 +1,9 @@
 import Head from "next/head"
-import {useState} from "react"
 import dynamic from "next/dynamic"
 import {useRouter} from "next/router"
-import useMount from "@/hooks/useMount"
 import {useAppState} from "@/context/state/context"
 
 const Home = () => {
-  const [mounted, setMounted] = useState(false)
-  useMount(() => setMounted(true))
-
   const {useAuth} = useAppState()
   const router = useRouter()
   const {user} = useAuth()
@@ -25,8 +20,6 @@ const Home = () => {
       case "admin":
         Layout = dynamic(() => import("@/layouts/admin/Layout"))
         return <Layout/>
-      default: 
-        router.push("login")
     }
   }
 
@@ -35,7 +28,7 @@ const Home = () => {
       <Head>
         <title>Home</title>
       </Head> 
-      {mounted && homeContent()}
+      {homeContent()}
     </main>
   )
 }

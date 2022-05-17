@@ -4,7 +4,7 @@ function Actions(storage) {
   this.storage = storage
 
   this.signup = async data => {
-    return await Axios.post("signup", signupData(data))
+    return await Axios.post("signup", this.signupData(data))
   }
 
   this.login = async data => {
@@ -12,8 +12,9 @@ function Actions(storage) {
   }
 
   this.logout = async () => {
-    await Axios.delete("logout")
     this.storage.removeItem({ type: "session", key: "auth_data" })
+    await Axios.delete("logout")
+    location.reload()
   }
 
   // private

@@ -7,8 +7,12 @@ import {useAppState} from "@/context/state/context"
 function SignUp() {
   const {useAuth} = useAppState() 
   const [alerts, setAlerts] = useState([])
-  const {signup, signupInputs} = useAuth()
-  const responses = new Responses(setAlerts)
+  const {
+    signup, 
+    signupInputs,
+    SignupResponses
+  } = useAuth()
+  const responses = new SignupResponses(setAlerts)
 
   const mutation = useMutation("signup", signup, { 
     onSuccess: responses.onSuccess,
