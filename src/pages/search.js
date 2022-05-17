@@ -1,7 +1,10 @@
 import Head from "next/head"
-import SearchInput from "@/components/SearchInput"
+import {useState} from "react"
+import SearchBar from "@/components/SearchBar"
 
-function SearchBar() {
+function Search() {
+  const [searchQuery, setSearchQuery] = useState("")
+
   return (
     <main>
       <Head>
@@ -12,4 +15,4 @@ function SearchBar() {
   )
 }
 
-export default SearchBar
+export default Search
