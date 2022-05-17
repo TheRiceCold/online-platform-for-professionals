@@ -13,15 +13,12 @@ import {
 } from '@chakra-ui/react'
 import {EmailIcon} from "@chakra-ui/icons"
 
-const AuthModal = props => {
+function AuthModal(props) {
   const {heading, isOpen, onClose} = props
 
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-      >
+      <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">
@@ -31,15 +28,15 @@ const AuthModal = props => {
           <ModalBody pb={6}>
             <form>
               <InputGroup mt={4}>
-                <InputLeftElement
-                  pointerEvents='none'
-                  children={<EmailIcon color="gray.500"/>}
-                />
+                <InputLeftElement pointerEvents="none">
+                  <EmailIcon color="gray.500"/>
+                </InputLeftElement>
                 <Input placeholder="Email" />
               </InputGroup>
               <Button 
+                mt={8} 
+                w="100%"
                 type="submit"
-                mt={8} w="100%"
                 colorScheme="teal"
               >Send
               </Button>

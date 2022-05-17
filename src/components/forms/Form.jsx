@@ -2,7 +2,7 @@ import MultiForm from "./MultiForm"
 import FormControl from "./FormControl"
 import {Button} from "@chakra-ui/react"
 
-const Form = props => {
+function Form(props) {
   const { 
     inputs,
     children,

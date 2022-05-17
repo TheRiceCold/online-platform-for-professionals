@@ -1,6 +1,6 @@
 import {isBrowser} from "@/utils/browserHelpers"
 
-const useStorage = () => {
+function useStorage() {
   const PREFIX = "_opfp_"
   const storageType = type => `${type ?? "local"}Storage`
 

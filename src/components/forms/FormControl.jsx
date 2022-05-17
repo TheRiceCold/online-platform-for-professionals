@@ -9,7 +9,7 @@ import RadioGroup from "./radios/RadioGroup"
 import SelectInput from "./selects/SelectInput"
 import PasswordInput from "./inputs/PasswordInput"
 
-const FormControl = props => {
+function FormControl(props) {
   const {input, register, error} = props
   const {id, label, required} = input
 

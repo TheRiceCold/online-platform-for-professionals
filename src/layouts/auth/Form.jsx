@@ -7,7 +7,7 @@ import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
 import {useAppState} from "@/context/state/Context"
 
-const AuthForm = props => {
+function AuthForm(props) {
   const {useAuth} = useAppState()
   const {mutation, inputs, isLoginPage} = props
   const {loginResolver, signupResolver} = useAuth()

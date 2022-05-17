@@ -3,7 +3,7 @@ import FormControl from "./FormControl"
 import {ChevronLeftIcon} from "@chakra-ui/icons"
 import {Box, Flex, Button, Heading} from "@chakra-ui/react"
 
-const MultiForm = props => {
+function MultiForm(props) {
   const [formStep, setFormStep] = useState(0)
   const {inputs, register, errors} = props
   const numOfSteps = inputs.length - 1

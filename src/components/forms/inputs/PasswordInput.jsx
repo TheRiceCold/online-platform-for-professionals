@@ -6,7 +6,7 @@ import {
   InputRightElement,
 } from "@chakra-ui/react"
 
-const PasswordInput = props => {
+function PasswordInput(props) {
   const [show, setShow] = useState(false)
   const type = (show ? "text" : "password")
   const {id, label, autoComplete} = props.input

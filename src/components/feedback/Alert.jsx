@@ -7,8 +7,9 @@ import {
   Alert as ChakraAlert, 
 } from '@chakra-ui/react'
 
-const Alert = ({message, status}) => {
+function Alert({message, status}) {
   const {isOpen, onClose} = useDisclosure({defaultIsOpen: true})
+
   return isOpen && (
     <ChakraAlert 
       mb={1}

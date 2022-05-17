@@ -1,7 +1,7 @@
 import {Text} from "@chakra-ui/react"
 import Link from "@/components/navigation/Link"
 
-const Links = ({isLoginPage}) => {
+function Links({isLoginPage}) {
   const href = isLoginPage ? "/signup" : "/login"
   const linkText = isLoginPage ? "Join now" : "Sign in"
   const labelText = isLoginPage ? 

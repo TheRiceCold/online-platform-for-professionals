@@ -8,7 +8,7 @@ import {Container, Button} from "@chakra-ui/react"
 import {useAppState} from "@/context/state/Context"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 
-const AuthLayout = props => {
+function AuthLayout(props) {
   const {useAuth} = useAppState()
   const {user} = useAuth()
 
