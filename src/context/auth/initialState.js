@@ -18,7 +18,7 @@ authData = authData && JSON.parse(authData)
 
 const initialState = {
   id: authData.id || "",
-  attributes: authData.attributes || "",
+  role: authData.role || "",
   token: authData.token || "",
   isAuth: authData.isAuth || false,
 }

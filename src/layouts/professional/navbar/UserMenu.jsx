@@ -11,9 +11,6 @@ import {useAppState} from "@/context/state/Context"
 
 const UserMenu = () => {
   const {useAuth} = useAppState()
-  const {logout, dispatch, user} = useAuth()
-  const {firstName, lastName} = user.attributes
-  const fullname = `${firstName} ${lastName}`
 
   const MENU_ITEMS = [
     {
@@ -31,7 +28,7 @@ const UserMenu = () => {
     "divider",
     {
       label: "Sign out",
-      handleOnClick: logout
+      handleOnClick: useAuth().logout
     }
   ]
 
@@ -54,7 +51,7 @@ const UserMenu = () => {
           <Stack ml={2} spacing={0}>
             <Heading size="3x1">
             </Heading>
-            <Text>{fullname}</Text>
+            <Text>fullname</Text>
           </Stack>
         </Flex>
         <MenuDivider />

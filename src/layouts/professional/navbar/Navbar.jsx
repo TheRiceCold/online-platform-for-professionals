@@ -1,3 +1,5 @@
+import styles from "@/styles/Professionals.module.sass"
+
 import {
   Image, Link,
   IconButton, Button,
@@ -9,32 +11,32 @@ import {
   HamburgerIcon, CloseIcon
 } from "@chakra-ui/icons"
 import UserMenu from "./UserMenu"
-import SearchBar from "../SearchBar"
+import SearchBar from "@/components/SearchBar"
 
 const Navbar = ({links, isAdmin}) => {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
+  const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
 
   return (
-    <Box px={4} ml={8}>
-      <Flex h={14} alignItems="center" justifyContent="space-between">
+    <nav className={styles.navbar}>
+      <div className={styles.nav_content}>
         <IconButton
           size="md"
+          icon={NavIcon}
           aria-label={'Open Menu'}
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
         />
-        <Flex alignItems="center">
-          <Flex>
-            <Image 
-              mr={8}
-              height="32px" alt="logo"
-              src="/workflow_logo.svg" 
-            />
-            {!isAdmin && <SearchBar/>}
-          </Flex>
-        </Flex>
+        <div className={styles.logo}>
+          <Image 
+            mr={8}
+            alt="logo"
+            height="32px" 
+            src="/workflow_logo.svg" 
+          />
+        </div>
+        {!isAdmin && <SearchBar/>}
         <Flex alignItems="center">
           <HStack
             mr={8}
@@ -54,7 +56,7 @@ const Navbar = ({links, isAdmin}) => {
             <UserMenu/>
           </Stack>
         </Flex>
-      </Flex>
+      </div>
       {
         isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
@@ -68,7 +70,7 @@ const Navbar = ({links, isAdmin}) => {
           </Box>
         ) : null
       }
-    </Box>
+    </nav>
   )
 }
 

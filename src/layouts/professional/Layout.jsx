@@ -1,81 +1,58 @@
+import styles from "@/styles/Professionals.module.sass"
+
 import {
-  Avatar, 
-  Box, Flex, 
-  Text, Link,
+  Avatar, Text, Link, 
   Skeleton, SkeletonCircle,
 } from "@chakra-ui/react"
-import Navbar from "@/components/navbars/Navbar"
-import {capitalize} from "@/utils/stringHelpers"
-import {useAppState} from "@/context/state/Context"
+import Navbar from "./navbar/Navbar"
 
-const ProfessionalLayout = () => {
-  const {useAuth} = useAppState()
-  const {user} = useAuth()
-
-  const preLink = to => `professionals/${user.id}/${to}`
-
-  const navbarLinks = [
-    { 
-      label: "Portfolio",
-      href: preLink("portfolio"), 
-    },
-    { 
-      label: "Services",
-      href: "services", 
-    }, 
-    { href: "connections", label: "Connections" }, 
-    { 
-      href: "bookings", 
-      label: "Bookings" 
-    }
-  ]
-
-  const {city, region, firstName, lastName} = user.attributes
-  const fullname = capitalize(`${firstName} ${lastName}`)
-  const location = `${city}, ${region}, Philippines`
-
+const ProfessionalLayout = props => {
+  const {
+    isLoading,
+    img, navLinks, 
+    fullname, location,
+  } = props
   return (
     <>
-      <Navbar links={navbarLinks}/>
-      <Flex direction="column" width="100%" height="300px">
-        <Box height="50%" bg="gray.400"/>
-        <Flex justify="center" flexGrow={1}>
-          <Flex w="95%">
-            {/* <SkeletonCircle size="116px"> */}
+      <Navbar links={navLinks}/>
+      <section className={styles.layout}>
+        <header className={styles.user_header}>
+          <div className={styles.header_content}>
+            <SkeletonCircle size="116px" isLoaded={!isLoading}>
               <Avatar 
+                top={-2}
+                src={img}
                 size="2xl" 
-                top={-3}
                 position="relative"
                 borderRadius="full"
-                border="6px solid white"
-                src="https://avatars.dicebear.com/api/male/username.svg" 
+                border="4px solid white"
               />
-            {/* </SkeletonCircle> */}
-            <Flex padding="10px 16px">
-              <Flex direction="column" mr={6}>
-                <Skeleton h="30px" mb={2} isLoaded={fullname}>
+            </SkeletonCircle>
+            <div className={styles.user_info}>
+              <div className={styles.user_info_content}>
+                <Skeleton h="30px" mb={2} isLoaded={!isLoading}>
                   <Text fontWeight={700} fontSize="26px">
                     {fullname}
                   </Text>
                 </Skeleton>
-                <Skeleton h="20px" mb={2}>
+                <Skeleton h="20px" mb={2} isLoaded={!isLoading}>
                   <Text fontSize="16px">
-                    Programmer
+                    Not registered yet
                   </Text>
                 </Skeleton>
-                <Skeleton h="18px" isLoaded={location}>
+                <Skeleton h="18px" isLoaded={!isLoading}>
                   <Text fontSize="14px" color="gray.600">
-                    {location}{" "}
+                    {location} {" "}
                     <Link color="blue.500" fontWeight={500}>
                       Contact Info
                     </Link>
                   </Text>
                 </Skeleton>
-              </Flex>
-            </Flex>
-          </Flex>
-        </Flex>
-      </Flex>
+              </div>
+            </div>
+          </div>
+        </header>
+      </section>
     </>
   )
 }

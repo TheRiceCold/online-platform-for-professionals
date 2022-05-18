@@ -10,12 +10,8 @@ import {motion, AnimatePresence} from "framer-motion"
 import {SearchIcon, CloseIcon} from "@chakra-ui/icons"
 
 const containerVariants = {
-  expanded: {
-    height: "20em"
-  },
-  collapsed: {
-    height: "2em"
-  }
+  expanded: { height: "16em" },
+  collapsed: { height: "2em" }
 }
 
 function SearchInput() {
@@ -96,7 +92,10 @@ function SearchInput() {
           )}
         </AnimatePresence>
       </div>
-      <span className={styles.lineSeparator}/>
+      <span 
+        className={styles.lineSeparator}
+        style={{ display: isExpanded ? "inherit" : "none" }}
+      />
       <div className={styles.searchContent}>
         {isLoading && (
           <div className={styles.loadingWrapper}>
@@ -109,3 +108,4 @@ function SearchInput() {
 }
 
 export default SearchInput
+

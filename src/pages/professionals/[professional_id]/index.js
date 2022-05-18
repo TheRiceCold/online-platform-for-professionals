@@ -1,78 +1,60 @@
 import Head from "next/head"
-import {useState} from "react"
-import {useRouter} from "next/router"
-import {Button, Heading} from "@chakra-ui/react"
-import {useMutation, useQuery} from "react-query"
+import {useQuery} from "react-query"
+import {capitalize} from "@/utils/stringHelpers"
+import Layout from "@/layouts/professional/Layout"
 import {useAppState} from "@/context/state/Context"
-import AlertDialog from "@/components/overlay/AlertDialog"
-import {useDisclosure as useAlert} from "@chakra-ui/react"
+import styles from "@/styles/Professionals.module.sass"
 
-const ProfessionalId = () => {
-  const deleteAlert = useAlert()
-  const {isReady, ...router} = useRouter()
+function Professional() {
   const {useProfessionals} = useAppState()
-  const {professional_id: id} = router.query
-  const [attributes, setAttributes] = useState()
-  const {getProfessional, deleteProfessional} = useProfessionals()
+  const {getProfessional} = useProfessionals()
+  const {useAuth} = useAppState()
+  const {user} = useAuth()
+  const {data, isLoading} = useQuery("professional", getProfessional, {retry: false})
 
-  const query = useQuery(
-    ["professional", id], 
-    getProfessional,
+  const preLink = to => `professionals/${user.id}/${to}`
+  const navLinks = [
     { 
-      enabled: isReady,
-      onSuccess: ({data})=> {
-        const {data: professional} = data
-        setAttributes(professional.attributes)
-      }
-    })
-
-  const _delete = useMutation(() => deleteProfessional(id), 
-    {
-      enabled: isReady,
-      onSuccess: () => {
-        router.push("/professionals")
-      },
-      onIdle: () => {
-        console.log("idle")
-      }
+      label: "Portfolio",
+      href: preLink("portfolio"), 
+    },
+    { 
+      label: "Services",
+      href: "services", 
+    }, 
+    { href: "connections", label: "Connections" }, 
+    { 
+      href: "bookings", 
+      label: "Bookings" 
     }
-  )
+  ]
+  const userData = data?.included[0]
+  const userAttributes = userData?.attributes
+  const {
+    firstName, 
+    lastName,
+    region,
+    city,
+  } = userAttributes ?? {}
+  const fullname = capitalize(`${firstName} ${lastName}`)
+  const location = `${city}, ${region}, Philippines`
+  const img = "https://avatars.dicebear.com/api/male/username.svg" 
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head>
-        <title>Professional {id}</title>
+        <title>{fullname} | Professional</title>
       </Head>
-      <Heading>
-        Field: {attributes?.field}
-      </Heading>
-      <Heading>
-        Headline: {attributes?.headline}
-      </Heading>
-      <Heading>
-        License Number: {attributes?.licenseNumber}
-      </Heading>
-      <Heading>
-        Office Address: {attributes?.officeAddress}
-      </Heading>
-      <Button 
-        isDisabled={!isReady}
-        isLoading={_delete.isLoading}
-        onClick={deleteAlert.onOpen}
-      >
-        Delete Professional
-      </Button>
-      <AlertDialog
-        // isCentered
-        buttonColor="red"
-        alert={deleteAlert}
-        buttonLabel="Delete"
-        header="Delete Professional"
-        buttonClick={_delete.mutate}
-        label="Are you sure? You can't undo this action afterwards."
+      <Layout 
+        img={img}
+        location={location} 
+        navLinks={navLinks}
+        fullname={fullname}
+        isLoading={isLoading}
       />
     </main>
   )
 }
 
-export default ProfessionalId
+export default Professional
+

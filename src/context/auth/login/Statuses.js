@@ -11,9 +11,9 @@ function Statuses(storage, dispatch, setAlerts) {
     const secret = process.env.NEXT_PUBLIC_SECRET
     const data = JSON.stringify({
       id: id,
-      attributes: attributes,
       token: token, 
       isAuth: true,
+      role: attributes.role,
     })
 
     this.storage.setItem({

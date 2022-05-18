@@ -1,24 +1,23 @@
 import Axios from "@/utils/axios"
 
 function Actions(user) {
-  const {token} = user
+  const {token, id} = user
   const path = "professionals/"
   const config = { headers: { Authorization: token } }
+  console.log(id)
 
   this.getAll = async () => 
     await Axios.get(path, config)
 
-  this.getById = async ({queryKey}) => { 
-    const [_, id] = queryKey
-    const res = await Axios.get(path+id, config)
-    return res
+  this.getById = async () => {
+    const {data} = await Axios.get(path+id, config)
+    return data
   }
 
   this.create = async data => 
     await Axios.post(path, { professional: {...data} }, config)
 
   this.update = async ({queryKey}, data) => {
-    console.log(queryKey)
     // await Axios.patch(path+id, data, config)
   }
 
