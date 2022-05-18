@@ -1,10 +1,13 @@
 import styles from "@/styles/Professionals.module.sass"
 
-import {SearchIcon, CloseIcon} from "@chakra-ui/icons"
-import {motion, AnimatePresence} from "framer-motion"
-import useClickOutside from "@/hooks/useClickOutside"
-import ClipLoader from "react-spinners/ClipLoader"
+import Axios from "axios"
+import {useQuery} from "react-query"
 import {useState, useRef} from "react"
+import useDebounce from "@/hooks/useDebounce"
+import ClipLoader from "react-spinners/ClipLoader"
+import useClickOutside from "@/hooks/useClickOutside"
+import {motion, AnimatePresence} from "framer-motion"
+import {SearchIcon, CloseIcon} from "@chakra-ui/icons"
 
 const containerVariants = {
   expanded: {
@@ -19,13 +22,45 @@ function SearchInput() {
   const ref = useRef()
   const inputRef = useRef()
   const [isExpanded, setExpanded] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
   const animate = isExpanded ? "expanded" : "collapsed"
+
+  const handleChange = e => {
+    e.preventDefault()
+    setSearchQuery(e.target.value)
+  }
+
+  const debouncedSearchQuery = useDebounce(searchQuery)
 
   const handleClose = () => {
     setExpanded(false)
     inputRef.current.value =""
   }
+
   useClickOutside(ref, () => setExpanded(false))
+
+  const prepSearchQuery = query => {
+    const uri = `http://api.tvmaze.com/search/shows?q=${query}`
+    return encodeURI(uri)
+  }
+
+  const getSomething = async() => {
+    if(!searchQuery || searchQuery.trim() === "")
+      return
+
+    const URL = prepSearchQuery(searchQuery)
+
+    const {data} = await Axios.get(URL)
+    return data
+  }
+
+  const {data, isLoading} = useQuery(
+    "something", getSomething, {
+      enabled: debouncedSearchQuery === searchQuery
+    }
+  )
+
+  console.log("Result: ", data)
 
   return (
     <motion.div
@@ -41,6 +76,7 @@ function SearchInput() {
         <input 
           ref={inputRef}
           placeholder="Search"
+          onChange={handleChange}
           className={styles.searchInput} 
           onFocus={() => setExpanded(true)}
         />
@@ -62,9 +98,11 @@ function SearchInput() {
       </div>
       <span className={styles.lineSeparator}/>
       <div className={styles.searchContent}>
-        <div className={styles.loadingWrapper}>
-          <ClipLoader/>
-        </div>
+        {isLoading && (
+          <div className={styles.loadingWrapper}>
+            <ClipLoader/>
+          </div>
+        )}
       </div>
     </motion.div>
   )

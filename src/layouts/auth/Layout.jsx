@@ -12,17 +12,11 @@ function AuthLayout(props) {
   const {useAuth} = useAppState()
   const {user} = useAuth()
 
-  const {alerts, isLoginPage} = props
   const router = useRouter()
-  const {
-    onOpen : openModal, 
-    ...modalProps
-  } = useModal()
+  const {alerts, isLoginPage} = props
+  const {onOpen : openModal, ...modalProps} = useModal()
 
-  useMount(() => {
-    if (user.isAuth) 
-      router.push("/")
-  })
+  useMount(() => { if (user.isAuth) router.push("/") })
 
   return (!user.isAuth && 
     <>
