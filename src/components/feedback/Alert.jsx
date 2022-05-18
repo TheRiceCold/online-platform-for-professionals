@@ -1,3 +1,5 @@
+import styles from "@/styles/Components.module.sass"
+
 import {
   Flex,
   AlertIcon,
@@ -11,15 +13,12 @@ function Alert({message, status}) {
   const {isOpen, onClose} = useDisclosure({defaultIsOpen: true})
 
   return isOpen && (
-    <ChakraAlert 
-      mb={1}
-      status={status} 
-      variant="left-accent"
-    >
-      <Flex 
-        w="100%"
-        alignItems="center" 
-        justifyContent="space-between" 
+    <Flex className={styles.alertContainer}>
+      <ChakraAlert 
+        mb={1}
+        status={status} 
+        variant="left-accent"
+        className={styles.alert}
       >
         <Flex>
           <AlertIcon />
@@ -32,8 +31,8 @@ function Alert({message, status}) {
           position='relative'
           alignSelf='flex-start'
         />
-      </Flex>
-    </ChakraAlert>
+      </ChakraAlert>
+    </Flex>
   )
 }
 

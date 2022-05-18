@@ -34,7 +34,7 @@ function Form(props) {
       ))}
       {!isGrouped &&
         <Button 
-          mt={4} 
+          mt={8} 
           w="100%" 
           bg="teal" 
           type="submit"

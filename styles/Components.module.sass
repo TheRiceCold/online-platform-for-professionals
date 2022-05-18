@@ -1,0 +1,84 @@
+// Alert
+.alertContainer
+  width: 100%  
+
+.alert
+  display: flex
+  justify-content: space-between
+
+// SearchBar
+.searchBarContainer 
+  z-index: 99
+  display: flex
+  left: 215px
+  width: 300px
+  background: #fff
+  position: absolute
+  border-radius: 6px
+  flex-direction: column
+  @media (width: 767px)
+    display:none
+
+  .searchInputContainer
+    width: 100%
+    min-height: 2em
+    display: flex
+    align-items: center
+    position: relative
+    padding: 2px 15px
+
+    input.searchInput 
+      width: 100%
+      height: 100%
+      outline: none
+      color: #12112e
+      font-size: 16px
+      background: none
+      border-radius: 6px
+
+      &:focus 
+        outline: none
+        &::placeholder 
+          opacity: 0
+        
+      &::placeholder 
+        color: #bebebe
+        transition: all 250ms ease-in-out
+      
+    .searchIcon
+      display: flex
+      color: #4d4d4d
+      font-size: 12px
+      margin-right: 10px
+
+    span.closeIcon
+      display: flex
+      color: #4d4d4d
+      font-size: 8px
+      transition: all 200ms ease-in-out
+      cursor: pointer
+
+      &:hover 
+        color: #bebebe
+
+  .searchContent
+    color: #000
+    width: 100%
+    height: 100%
+    padding: 1em
+    display: flex
+    flex-direction: column
+
+  span.lineSeparator
+    display: flex
+    min-width: 100%
+    min-height: 1px
+    background: #d8d8d878
+
+  .loadingWrapper
+    width: 100%
+    height: 100%
+    padding: 1em
+    display: flex
+    align-items: center
+    justify-content: center

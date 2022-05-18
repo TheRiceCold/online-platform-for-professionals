@@ -9,9 +9,26 @@ import {capitalize} from "@/utils/stringHelpers"
 import {useAppState} from "@/context/state/Context"
 
 const ProfessionalLayout = () => {
-  const navbarLinks = ["Portfolio", "Services", "Connections", "Messages"]
   const {useAuth} = useAppState()
   const {user} = useAuth()
+
+  const preLink = to => `professionals/${user.id}/${to}`
+
+  const navbarLinks = [
+    { 
+      label: "Portfolio",
+      href: preLink("portfolio"), 
+    },
+    { 
+      label: "Services",
+      href: "services", 
+    }, 
+    { href: "connections", label: "Connections" }, 
+    { 
+      href: "bookings", 
+      label: "Bookings" 
+    }
+  ]
 
   const {city, region, firstName, lastName} = user.attributes
   const fullname = capitalize(`${firstName} ${lastName}`)

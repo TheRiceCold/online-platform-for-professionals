@@ -5,19 +5,16 @@ const Inputs = [
     heading: "Create an account",
     inputs: [
       {
-        required: true,
         id: "role",
         type: "radio",
         label: "Select Role",
         options: ["client", "professional", "admin"]
       },
       {
-        required: true,
         id: "first_name",
         label: "First Name"
       },
       {
-        required: true,
         id: "last_name",
         label: "Last Name"
       },
@@ -48,20 +45,17 @@ const Inputs = [
     heading: "Credentials",
     inputs: [
       {
-        required: true,
         id: "email",
         label: "Email",
         autoComplete: "username"
       },
       {
-        required: true,
         id: "password",
         type: "password",
         label: "Password",
         autoComplete: "new-password"
       },
       {
-        required: true,
         id: "password_confirmation",
         type: "password",
         label: "Password Confirmation",

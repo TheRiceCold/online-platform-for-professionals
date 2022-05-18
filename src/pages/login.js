@@ -1,3 +1,5 @@
+import styles from "@/styles/Auth.module.sass"
+
 import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
@@ -23,7 +25,7 @@ function Login() {
   })
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head>
         <title>Login</title>
       </Head>

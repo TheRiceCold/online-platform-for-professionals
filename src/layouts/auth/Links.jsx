@@ -8,7 +8,7 @@ function Links({isLoginPage}) {
     "No Account?" : "Already have an account?"
 
   return (
-    <Text mt={8}>
+    <Text mt={4} mt={4}>
       {labelText} {" "}
       <Link to={href} color="teal">
         {linkText}

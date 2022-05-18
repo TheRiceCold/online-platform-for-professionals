@@ -1,10 +1,12 @@
+import styles from "@/styles/Auth.module.sass"
+
 import Links from "./Links"
 import Modal from "./Modal"
 import AuthForm from "./Form"
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount"
 import Alert from "@/components/feedback/Alert"
-import {Container, Button} from "@chakra-ui/react"
+import {Container, Link} from "@chakra-ui/react"
 import {useAppState} from "@/context/state/Context"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 
@@ -25,30 +27,19 @@ function AuthLayout(props) {
           <Alert key={i} {...alert}/>
         ))
       }
-      <Container 
-        display="flex" 
-        flexDir="column"
-        alignItems="center"
-        justifyContent="center" 
-      >
+      <Container className={styles.layout}>
         <AuthForm {...props}/>
         <Links isLoginPage={isLoginPage}/>
-        {isLoginPage && 
-          <Button 
-            mt={4}
-            bg="none"
-            color="teal" 
-            borderRadius={60}
+        {isLoginPage && (
+          <Link
             onClick={openModal}
+            className={styles.link}
           > 
             I have not received an email
-          </Button>
-        }
+          </Link>
+        )}
       </Container>
-      <Modal 
-        {...modalProps}
-        heading="Resend Confirmation"
-      />
+      <Modal {...modalProps} heading="Resend Confirmation"/>
     </>
   )
 }

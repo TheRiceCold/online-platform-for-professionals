@@ -1,4 +1,4 @@
-import styles from "@/styles/Professionals.module.sass"
+import styles from "@/styles/Components.module.sass"
 
 import Axios from "axios"
 import {useQuery} from "react-query"
@@ -14,7 +14,7 @@ const containerVariants = {
     height: "20em"
   },
   collapsed: {
-    height: "3.8em"
+    height: "2em"
   }
 }
 

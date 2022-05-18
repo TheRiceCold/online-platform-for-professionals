@@ -1,3 +1,5 @@
+import styles from "@/styles/Auth.module.sass"
+
 import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
@@ -20,7 +22,7 @@ function SignUp() {
   })
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head>
         <title>Create an Account</title>
       </Head>

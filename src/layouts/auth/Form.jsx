@@ -1,7 +1,9 @@
+import styles from "@/styles/Auth.module.sass"
+
 import {
   Heading, 
   Flex, Stack, 
-  Button, Checkbox, 
+  Link, Checkbox, 
 } from "@chakra-ui/react"
 import Modal from "./Modal"
 import {useForm} from "react-hook-form"
@@ -17,21 +19,18 @@ function AuthForm(props) {
 
   const submitValue = isLoginPage ? "Login" : "Join"
   const mode = isLoginPage ? "onSubmit" : "onChange"
-  const heading = isLoginPage ? "Sign in" : "Create an account"
+  const heading = isLoginPage ? "LOGIN" : "Create an account"
   const resolver = isLoginPage ? loginResolver : signupResolver
 
   const formHook = useForm({mode, resolver})
   const submitHandler = data => mutation.mutate({...data})
 
   return (
-    <Stack 
-      p="8" 
-      width="500px" 
-      boxShadow="xl" 
-      borderRadius="xl"
-    >
-      {isLoginPage && <Heading>{heading}</Heading>}
-      <Form 
+    <Stack className={styles.formContainer}>
+      {isLoginPage && (
+        <Heading>{heading}</Heading>
+      )}
+      <Form
         inputs={inputs}
         mutation={mutation}
         formHook={formHook}
@@ -39,19 +38,19 @@ function AuthForm(props) {
         submitHandler={submitHandler}
       >
         {isLoginPage &&
-          <Flex mt={4} justify="space-between" align="center">
+          <Flex 
+            mt={4} mb={4}
+            className={styles.formButtons}
+          >
             <Checkbox colorScheme="teal">
               Remember me
             </Checkbox>
-            <Button 
-              bg="none"
-              color="teal" 
-              type="button"
-              borderRadius={60}
+            <Link
               onClick={openModal}
+              className={styles.link}
             >
               Forgot Password?
-            </Button>
+            </Link>
           </Flex>
         }
         <pre> {/* DEVELOPMENT ONLY */}

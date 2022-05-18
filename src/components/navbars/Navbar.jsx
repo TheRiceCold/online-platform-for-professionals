@@ -9,9 +9,9 @@ import {
   HamburgerIcon, CloseIcon
 } from "@chakra-ui/icons"
 import UserMenu from "./UserMenu"
-import SearchInput from "./SearchInput"
+import SearchBar from "../SearchBar"
 
-const UserNavbar = ({links, isAdmin}) => {
+const Navbar = ({links, isAdmin}) => {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
 
@@ -32,7 +32,7 @@ const UserNavbar = ({links, isAdmin}) => {
               height="32px" alt="logo"
               src="/workflow_logo.svg" 
             />
-            {!isAdmin && <SearchInput/>}
+            {!isAdmin && <SearchBar/>}
           </Flex>
         </Flex>
         <Flex alignItems="center">
@@ -41,7 +41,11 @@ const UserNavbar = ({links, isAdmin}) => {
             as="nav" spacing={8}
             display={{ base: 'none', md: 'flex' }}
           >
-            {links.map(link => <Link key={link}>{link}</Link>)}
+            {links.map(({href, label}) => (
+              <Link key={href} href={href}>
+                {label}
+              </Link>
+            ))}
           </HStack>
           <Stack direction="row" spacing={6}>
             <Button onClick={toggleColorMode}>
@@ -68,4 +72,4 @@ const UserNavbar = ({links, isAdmin}) => {
   )
 }
 
-export default UserNavbar
+export default Navbar

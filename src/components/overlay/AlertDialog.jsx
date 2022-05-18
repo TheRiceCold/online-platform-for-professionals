@@ -19,8 +19,8 @@ const Alert = props => {
     buttonLabel,
     buttonClick,
   } = props
-  const {isOpen, onClose} = alert
   const cancelRef = useRef()
+  const {isOpen, onClose} = alert
 
   return (
     <AlertDialog
