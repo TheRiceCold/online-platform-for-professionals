@@ -51,7 +51,7 @@ function SearchInput({colorMode}) {
   }
 
   const {data, isLoading} = useQuery(
-    "something", getSomething, {
+    "search", getSomething, {
       enabled: debouncedSearchQuery === searchQuery
     }
   )

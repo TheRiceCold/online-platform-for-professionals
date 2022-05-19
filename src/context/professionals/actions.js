@@ -29,8 +29,7 @@ function Actions(user) {
   this.delete = async id => 
     await Axios.delete(path+id, config)
 
-
-  // Attributes
+  // User Attributes
   this.getAttributes = async() => {
     const {included} = await this.getById(user.professionalId)
     return included[0].attributes
@@ -43,6 +42,12 @@ function Actions(user) {
   this.getLocation = async () => {
     const {city, region} = await this.getAttributes()
     return `${city}, ${region}, Philippines`
+  }
+
+  // Professional Attributes
+  this.getField = async() => {
+    const {data: {attributes}} = await this.getById(user.professionalId)
+    return capitalize(attributes?.field)
   }
 }
 

@@ -8,8 +8,9 @@ import Link from "@/components/navigation/link"
 
 function Header(props) {
   const {
-    img, location,
-    fullname, isLoading,
+    isLoading,
+    img, field,
+    fullname, location, 
   } = props
 
   return (
@@ -34,13 +35,7 @@ function Header(props) {
             </Skeleton>
             <Skeleton h="20px" mb={2} isLoaded={!isLoading}>
               <Text fontSize="16px">
-                <Link 
-                  to="register"
-                  color="blue.500" 
-                  fontWeight={500}
-                >
-                  Register as professional
-                </Link>
+                {field}
               </Text>
             </Skeleton>
             <Skeleton h="18px" isLoaded={!isLoading}>

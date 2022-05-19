@@ -29,8 +29,11 @@ const ProfessionalsProvider = ({children}) => {
 
   return (
     <Provider value={{
-      userImg,
       navLinks: navLinks(user.id),
+
+      // User Details
+      userImg,
+      getField: call.getField,
       getFullname: call.getFullname,
       getLocation: call.getLocation,
 
