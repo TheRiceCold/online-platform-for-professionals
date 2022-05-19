@@ -32,6 +32,7 @@ const ProfessionalsProvider = ({children}) => {
       userImg,
       navLinks: navLinks(user.id),
       getFullname: call.getFullname,
+      getLocation: call.getLocation,
 
       // Professionals
       inputs: Inputs, 

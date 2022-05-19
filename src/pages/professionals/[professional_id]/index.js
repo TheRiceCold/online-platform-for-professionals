@@ -12,9 +12,11 @@ function Professional() {
   const {
     userImg,
     getFullname,
+    getLocation
   } = useProfessionals()
 
-  const {data: fullname} = useQuery("fullname", getFullname)
+  const {data: fullname, isLoading} = useQuery("fullname", getFullname)
+  const {data: location} = useQuery("location", getLocation)
 
   return (
     <main className={styles.main}>
@@ -24,9 +26,9 @@ function Professional() {
       {user.professionalId ? 
         <ProfileLayout
           img={userImg}
-          location={"location"} 
+          location={location} 
           fullname={fullname}
-          isLoading={true}
+          isLoading={isLoading}
         /> :
         <RegisterLayout/>
       }

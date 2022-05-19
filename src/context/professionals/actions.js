@@ -31,10 +31,18 @@ function Actions(user) {
 
 
   // Attributes
-  this.getFullname = async () => {
+  this.getAttributes = async() => {
     const {included} = await this.getById(user.professionalId)
-    const {firstName, lastName}= included[0].attributes
+    return included[0].attributes
+  }
+  this.getFullname = async () => {
+    const {firstName, lastName} = await this.getAttributes()
     return capitalize(`${firstName} ${lastName}`)
+  }
+
+  this.getLocation = async () => {
+    const {city, region} = await this.getAttributes()
+    return `${city}, ${region}, Philippines`
   }
 }
 
