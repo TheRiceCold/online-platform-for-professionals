@@ -1,7 +1,7 @@
 import Navbar from "@/layouts/navbar/Navbar"
 import {useAppState} from "@/context/state/Context"
 
-function PortfolioLayout(props) {
+function BookingsLayout(props) {
   const {useAuth, useProfessionals} = useAppState()
   const {navLinks} = useProfessionals()
   const {user} = useAuth()
@@ -17,5 +17,4 @@ function PortfolioLayout(props) {
   )
 }
 
-
-export default PortfolioLayout
+export default BookingsLayout

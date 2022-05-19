@@ -10,7 +10,8 @@ import {useRouter} from "next/router"
 import {TriangleDownIcon} from "@chakra-ui/icons"
 import {useAppState} from "@/context/state/Context"
 
-const UserMenu = ({user, fullname}) => {
+const UserMenu = props => {
+  const {user, fullname, img} = props
   const {useAuth} = useAppState()
   const {logout} = useAuth()
   const router = useRouter()
@@ -19,7 +20,11 @@ const UserMenu = ({user, fullname}) => {
     <Menu>
       <MenuButton>
         <Flex align="center" mr={2}>
-          <Avatar size="xs" mr={1}>
+          <Avatar 
+            mr={1} 
+            size="xs" 
+            src={img}
+          >
             <AvatarBadge boxSize='1.25em' bg='green.400' />
           </Avatar>
           <TriangleDownIcon 
@@ -30,7 +35,7 @@ const UserMenu = ({user, fullname}) => {
       </MenuButton>
       <MenuList>
         <Flex alignItems="center" ml={3}>
-          <Avatar size="md" src="https://avatars.dicebear.com/api/male/username.svg" />
+          <Avatar size="md" src={img}/>
           <Stack ml={2} spacing={0}>
             <Heading size="3x1">
             </Heading>

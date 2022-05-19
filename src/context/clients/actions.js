@@ -5,7 +5,10 @@ function Actions(user) {
   const path = "clients/"
   const config = { headers: { Authorization: token } }
 
-  this.getAll = async () => await Axios.get(path, config)
+  this.getAll = async () => {
+    const {data} = await Axios.get(path, config)
+    return data.data
+  }
 
   this.getById = async id =>  
     await Axios.get(path+id, config)

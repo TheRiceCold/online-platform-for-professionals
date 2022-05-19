@@ -1,5 +1,7 @@
+import {navLinks} from "./navLinks"
 import {createContext} from "react"
 import {useQuery} from "react-query"
+import {capitalize} from "@/utils/stringHelpers"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useAppState} from "@/context/state/Context"
 
@@ -27,10 +29,25 @@ const ProfessionalsProvider = ({children}) => {
   const callCalendlyToken = new CalendlyTokenActions(user)
 
   const getUserDetails = () => call.getById(user.id)
+  const userDetails = useQuery("user_details", getUserDetails)
+
+  const included = userDetails?.data?.included[0]
+  const {
+    firstName, lastName,
+    region, city,
+  } = included?.attributes || {}
+
+  const fullname = capitalize(`${firstName || ""} ${lastName || ""}`)
+  const location = `${city}, ${region}, Philippines`
+  const userImg = "https://avatars.dicebear.com/api/male/username.svg" 
 
   return (
     <Provider value={{
-      getUserDetails,
+      userImg,
+      location,
+      fullname,
+      userDetails,
+      navLinks: navLinks(user.id),
 
       // Professionals
       inputs: Inputs, 

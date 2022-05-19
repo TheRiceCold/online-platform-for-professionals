@@ -14,7 +14,7 @@ const containerVariants = {
   collapsed: { height: "2em" }
 }
 
-function SearchInput() {
+function SearchInput({colorMode}) {
   const ref = useRef()
   const inputRef = useRef()
   const [isExpanded, setExpanded] = useState(false)
@@ -64,6 +64,9 @@ function SearchInput() {
       animate={animate}
       variants={containerVariants}
       className={styles.searchBarContainer}
+      style={{ background: colorMode === "light" ? 
+        "#fafafa" : "#1e2837"
+      }}
     >
       <div className={styles.searchInputContainer}>
         <div className={styles.searchIcon}>
