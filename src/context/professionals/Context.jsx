@@ -1,4 +1,5 @@
 import {createContext} from "react"
+import {useQuery} from "react-query"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useAppState} from "@/context/state/Context"
 
@@ -25,8 +26,12 @@ const ProfessionalsProvider = ({children}) => {
   const callPortfolios = new PortfolioActions(user)
   const callCalendlyToken = new CalendlyTokenActions(user)
 
+  const getUserDetails = () => call.getById(user.id)
+
   return (
     <Provider value={{
+      getUserDetails,
+
       // Professionals
       inputs: Inputs, 
       resolver: zodResolver(Schema),

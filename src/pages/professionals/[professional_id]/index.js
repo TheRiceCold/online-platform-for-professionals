@@ -1,42 +1,24 @@
+import styles from "@/styles/Professionals.module.sass"
+
 import Head from "next/head"
 import {useQuery} from "react-query"
 import {capitalize} from "@/utils/stringHelpers"
 import Layout from "@/layouts/professional/Layout"
 import {useAppState} from "@/context/state/Context"
-import styles from "@/styles/Professionals.module.sass"
 
 function Professional() {
   const {useProfessionals} = useAppState()
-  const {getProfessional} = useProfessionals()
-  const {useAuth} = useAppState()
-  const {user} = useAuth()
-  const {data, isLoading} = useQuery("professional", getProfessional, {retry: false})
+  const {getUserDetails} = useProfessionals()
+  const userDetails = useQuery("user_details", getUserDetails)
 
-  const preLink = to => `professionals/${user.id}/${to}`
-  const navLinks = [
-    { 
-      label: "Portfolio",
-      href: preLink("portfolio"), 
-    },
-    { 
-      label: "Services",
-      href: "services", 
-    }, 
-    { href: "connections", label: "Connections" }, 
-    { 
-      href: "bookings", 
-      label: "Bookings" 
-    }
-  ]
-  const userData = data?.included[0]
-  const userAttributes = userData?.attributes
   const {
     firstName, 
     lastName,
     region,
     city,
-  } = userAttributes ?? {}
-  const fullname = capitalize(`${firstName} ${lastName}`)
+  } = userDetails?.data?.included[0].attributes || {}
+
+  const fullname = capitalize(`${firstName || ""} ${lastName || ""}`)
   const location = `${city}, ${region}, Philippines`
   const img = "https://avatars.dicebear.com/api/male/username.svg" 
 
@@ -48,9 +30,8 @@ function Professional() {
       <Layout 
         img={img}
         location={location} 
-        navLinks={navLinks}
         fullname={fullname}
-        isLoading={isLoading}
+        isLoading={userDetails.isLoading}
       />
     </main>
   )

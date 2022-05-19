@@ -9,7 +9,7 @@ import {
 import {
   AdminContext,
   AdminProvider,
-} from "../admins/Context"
+} from "../admin/Context"
 import {
   ClientsContext,
   ClientsProvider,

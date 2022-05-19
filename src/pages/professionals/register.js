@@ -8,10 +8,11 @@ import Alert from "@/components/feedback/Alert"
 import {Heading, Stack} from "@chakra-ui/react"
 import {useAppState} from "@/context/state/Context"
 
-const NewProfessional = () => {
-  const {useProfessionals} = useAppState()
+const Register = () => {
+  const {useAuth, useProfessionals} = useAppState()
   const [alerts, setAlerts] = useState()
   const router = useRouter()
+  const {user} = useAuth()
   const {
     inputs, resolver,
     createProfessional,
@@ -20,7 +21,8 @@ const NewProfessional = () => {
 
   const mutation = useMutation(createProfessional, {
     onSuccess: res => {
-      router.push("/professionals") 
+      // setRegistered(true)
+      // router.push(`/professionals/${user.id}`) 
     },
     onError: error => {
       const {status, data} = error?.response
@@ -34,10 +36,6 @@ const NewProfessional = () => {
       )
     }
   })
-
-  const submitHandler = data => {
-    mutation.mutate({...data})
-  }
 
   return (
     <main>
@@ -61,11 +59,11 @@ const NewProfessional = () => {
           formHook={formHook}
           mutation={mutation}
           submitValue="Register"
-          submitHandler={submitHandler}
+          submitHandler={data => mutation.mutate({...data})}
         />
       </Stack>
     </main>
   )
 }
 
-export default NewProfessional
+export default Register

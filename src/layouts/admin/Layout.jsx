@@ -1,14 +1,25 @@
+import Navbar from "./navbar/Navbar"
+import {useRouter} from "next/router"
 import Table from "@/components/table/Table"
-import Navbar from "@/components/navbars/Navbar"
-import {useAppState} from "@/context/state/context"
+import {useAppState} from "@/context/state/Context"
 import Alert from "@/components/overlay/AlertDialog"
 import {Box, useDisclosure as useAlert} from "@chakra-ui/react"
 
-const AdminLayout = () => {
-  const deleteAlert = useAlert()
-  const {useAdmin} = useAppState()
+function AdminLayout() {
+  const {useAdmin, useAuth} = useAppState()
   const {fakeUsers, userTable} = useAdmin()
-  const navbarLinks = ["Dashboard", "Professionals", "Clients", "Bookings"]
+  const deleteAlert = useAlert()
+  const {user} = useAuth()
+  const router = useRouter()
+  const navbarLinks = [
+    "Dashboard", 
+    "Professionals", 
+    "Clients", 
+    "Bookings"
+  ]
+
+  const role = user.role.toLowerCase()
+  if (role !== "admin") router.push("/")    
 
   return (
   <>

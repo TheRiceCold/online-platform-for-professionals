@@ -1,19 +1,22 @@
 import styles from "@/styles/Professionals.module.sass"
 
 import {
-  Image, Link,
-  IconButton, Button,
-  Box, Flex, Stack, HStack,
-  useColorMode, useDisclosure
-} from "@chakra-ui/react"
-import {
   SunIcon, MoonIcon,
   HamburgerIcon, CloseIcon
 } from "@chakra-ui/icons"
+import {
+  Box, Flex,
+  IconButton,
+  Image, Stack,
+  Link, Button,
+  useColorMode, useDisclosure,
+} from "@chakra-ui/react"
+import Links from "./Links"
 import UserMenu from "./UserMenu"
 import SearchBar from "@/components/SearchBar"
+import NextLink from "@/components/navigation/Link"
 
-const Navbar = ({links, isAdmin}) => {
+function Navbar({user, fullname}) {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
   const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
@@ -28,32 +31,28 @@ const Navbar = ({links, isAdmin}) => {
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
         />
-        <div className={styles.logo}>
+        <NextLink to="/" className={styles.logo}>
           <Image 
             mr={8}
             alt="logo"
             height="32px" 
-            src="/workflow_logo.svg" 
+            src={colorMode === "light" ? 
+              "/workflow_logo.svg" : 
+              "/workflow_logo_white.svg"
+            }
           />
-        </div>
-        {!isAdmin && <SearchBar/>}
+        </NextLink>
+        <SearchBar/>
         <Flex alignItems="center">
-          <HStack
-            mr={8}
-            as="nav" spacing={8}
-            display={{ base: 'none', md: 'flex' }}
-          >
-            {links.map(({href, label}) => (
-              <Link key={href} href={href}>
-                {label}
-              </Link>
-            ))}
-          </HStack>
+          <Links user={user}/>
           <Stack direction="row" spacing={6}>
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-            <UserMenu/>
+            <UserMenu 
+              user={user}
+              fullname={fullname}
+            />
           </Stack>
         </Flex>
       </div>

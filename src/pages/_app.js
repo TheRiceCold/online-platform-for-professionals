@@ -1,3 +1,5 @@
+import "@/styles/globals.sass"
+
 import {ChakraProvider} from "@chakra-ui/react"
 import RouteGuard from "@/components/RouteGuard"
 import AppStateProvider from "@/context/state/Context"
