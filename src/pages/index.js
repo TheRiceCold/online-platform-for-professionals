@@ -18,11 +18,11 @@ const Home = () => {
         router.push(`professionals/${user.id}`)
         break
       case "client":
-        Layout = dynamic(() => import("@/layouts/client/Layout"))
-        return <Layout/>
+        // Layout = dynamic(() => import("@/layouts/client/Layout"))
+        // return <Layout/>
       case "admin":
-        Layout = dynamic(() => import("@/layouts/admin/Layout"))
-        return <Layout/>
+        // Layout = dynamic(() => import("@/layouts/admin/Layout"))
+        // return <Layout/>
     }
   }
 

@@ -20,5 +20,8 @@ const initialState = {
   id: authData.id || "",
   role: authData.role || "",
   token: authData.token || "",
-  isAuth: authData.isAuth || false,
+  isAuth: authData.isAuth || false
 }
+
+if (authData?.role?.toLowerCase() === "professional")
+  initialState.registered = authData.registered

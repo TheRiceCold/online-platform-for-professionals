@@ -1,11 +1,13 @@
-import styles from "@/styles/Layouts.module.sass"
+import styles from "@/styles/Professionals.module.sass"
 
 import Head from "next/head"
-import Layout from "@/layouts/professional/Layout"
 import {useAppState} from "@/context/state/Context"
+import Profile from "@/layouts/professional/ProfileLayout"
+import Register from "@/layouts/professional/RegisterLayout"
 
 function Professional() {
-  const {useProfessionals} = useAppState()
+  const {useAuth, useProfessionals} = useAppState()
+  const {user} = useAuth()
   const {
     userImg,
     fullname, 
@@ -18,12 +20,15 @@ function Professional() {
       <Head>
         <title>{fullname} | Professional</title>
       </Head>
-      <Layout 
-        img={userImg}
-        location={location} 
-        fullname={fullname}
-        isLoading={userDetails.isLoading}
-      />
+      {user.registered ? 
+        <Profile
+          img={userImg}
+          location={location} 
+          fullname={fullname}
+          isLoading={userDetails.isLoading}
+        /> :
+        <Register/>
+      }
     </main>
   )
 }
