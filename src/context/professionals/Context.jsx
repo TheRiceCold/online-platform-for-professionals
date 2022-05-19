@@ -27,26 +27,11 @@ const ProfessionalsProvider = ({children}) => {
   const callServices = new ServiceActions(user) 
   const callPortfolios = new PortfolioActions(user)
   const callCalendlyToken = new CalendlyTokenActions(user)
-
-  const getUserDetails = () => call.getById(user.id)
-  const userDetails = useQuery("user_details", getUserDetails)
-
-  const included = userDetails?.data?.included[0]
-  const {
-    firstName, lastName,
-    region, city,
-  } = included?.attributes || {}
-
-  const fullname = capitalize(`${firstName || ""} ${lastName || ""}`)
-  const location = `${city}, ${region}, Philippines`
   const userImg = "https://avatars.dicebear.com/api/male/username.svg" 
 
   return (
     <Provider value={{
       userImg,
-      location,
-      fullname,
-      userDetails,
       navLinks: navLinks(user.id),
 
       // Professionals
@@ -54,7 +39,7 @@ const ProfessionalsProvider = ({children}) => {
       resolver: zodResolver(Schema),
       getProfessionals: call.getAll,
       getProfessional: call.getById,
-      createProfessional: call.create,
+      registerProfessional: call.create,
       updateProfessional: call.update,
       deleteProfessional: call.delete,
 

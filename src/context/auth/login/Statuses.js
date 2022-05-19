@@ -1,4 +1,5 @@
 import CryptoAES from "crypto-js/aes"
+import {objExist} from "@/utils/jsonHelpers"
 
 function Statuses(storage, dispatch, setAlerts) {
   this.storage = storage
@@ -14,15 +15,15 @@ function Statuses(storage, dispatch, setAlerts) {
     const token = res.headers.authorization
     const secret = process.env.NEXT_PUBLIC_SECRET
 
-    const registered = !Object.entries(relationships).length === 0
-
-    const authData = {
+    let authData = {
       isAuth: true,
       id, token, role,
     }
 
-    if (role.toLowerCase() === "professional")
-      authData.registered = registered
+    if (role.toLowerCase() === "professional"){
+      const registered = objExist(relationships.professional) 
+      authData = {registered, ...authData}
+    }
 
     this.storage.setItem({
       type: "session",
@@ -30,10 +31,9 @@ function Statuses(storage, dispatch, setAlerts) {
       value: CryptoAES.encrypt(JSON.stringify(authData), secret)
     })
 
-    // NOT_NECESSARY: page reloads after login and gets stored data
-    this.dispatch({type: "LOGIN", payload: data})
-
     location.reload()
+    // NOT_NECESSARY: page reloads after login and gets stored data
+    // this.dispatch({type: "LOGIN", payload: authData})
   }
 
   this.onError = error => {

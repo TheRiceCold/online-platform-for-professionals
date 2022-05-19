@@ -14,7 +14,12 @@ function Actions(user) {
   }
 
   this.create = async data => 
-    await Axios.post(path, { professional: {...data} }, config)
+    await Axios.post(path, { 
+      professional: {
+        user_id: user.id,
+        ...data
+      } 
+    }, config)
 
   this.update = async (id, data) => {
     // await Axios.patch(path+id, data, config)

@@ -25,3 +25,6 @@ export const renameKeys = (data, keys) =>
       delete item[oldKey]
     })
   })
+
+export const objExist = obj => 
+  typeof obj !== "undefined"

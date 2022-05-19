@@ -10,6 +10,11 @@ export const reducer = (state, action) => {
         role: payload.role,
         token: payload.token,
       }
+    case "REGISTER_PROFESSIONAL":
+      return {
+        ...state,
+        registered: true
+      }
     case "LOGOUT":
       return {
         ...state,

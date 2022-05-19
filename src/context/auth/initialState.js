@@ -16,7 +16,7 @@ const storedAuthData = CryptoAES.decrypt(
 let authData = storedAuthData.toString(CryptoENC)
 authData = authData && JSON.parse(authData)
 
-const initialState = {
+let initialState = {
   id: authData.id || "",
   role: authData.role || "",
   token: authData.token || "",

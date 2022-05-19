@@ -1,5 +1,4 @@
 import {useState} from "react"
-import {useRouter} from "next/router"
 import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
@@ -10,20 +9,19 @@ import {useAppState} from "@/context/state/Context"
 const RegisterLayout = () => {
   const {useAuth, useProfessionals} = useAppState()
   const [alerts, setAlerts] = useState()
-  const router = useRouter()
-  const {user} = useAuth()
+  const {dispatch} = useAuth()
   const {
     inputs, resolver,
-    createProfessional,
+    registerProfessional,
   } = useProfessionals()
   const formHook = useForm({resolver})
 
-  const mutation = useMutation(createProfessional, {
+  const mutation = useMutation(registerProfessional, {
     onSuccess: res => {
-      // setRegistered(true)
-      // router.push(`/professionals/${user.id}`) 
+      dispatch({type: "REGISTER_PROFESSIONAL"})
     },
     onError: error => {
+      console.log(error)
       const {status, data} = error?.response
       const messages = data?.errors.map(error => error.title)
 
