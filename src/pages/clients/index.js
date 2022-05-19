@@ -1,22 +1,17 @@
 import Head from "next/head"
-import {useQuery} from "react-query"
 import Layout from "@/layouts/clients/Layout"
-import {useAppState} from "@/context/state/Context"
+import styles from "@/styles/Layouts.module.sass"
 
 function Clients() {
-  const {useClients} = useAppState()
-  const {getClients} = useClients()
-  const clients = useQuery("clients", getClients)
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head>
         <title>Clients</title>
       </Head>
-      <Layout clients={clients}/>
+      <Layout/>
     </main>
   )
 }
 
 export default Clients
-

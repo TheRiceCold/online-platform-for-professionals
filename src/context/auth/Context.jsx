@@ -3,6 +3,8 @@ import {
   useReducer,
   createContext
 } from "react"
+import {useQuery} from "react-query"
+
 import Actions from "./Actions"
 // Login
 import LoginInputs from "./login/Inputs"
@@ -17,7 +19,7 @@ import {reducer} from "./reducer"
 import {initialState} from "./initialState"
 import {zodResolver} from "@hookform/resolvers/zod"
 
-export { AuthContext, AuthProvider }
+export {AuthContext, AuthProvider}
 
 const AuthContext = createContext()
 

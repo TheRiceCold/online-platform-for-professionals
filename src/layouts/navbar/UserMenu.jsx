@@ -65,9 +65,13 @@ export default UserMenu
 const menuItems = (user, router, logout) => [
   {
     label: "Profile", 
-    handleOnClick: () => { 
+    handleOnClick: () => 
       router.push(`/professionals/${user.id}`)
-    }
+  },
+  {
+    label: "Connections", 
+    handleOnClick: () => 
+      router.push(`/professionals/${user.id}/connections`)
   },
   {
     label: "Settings",

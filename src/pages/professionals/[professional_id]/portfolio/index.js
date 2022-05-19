@@ -1,4 +1,4 @@
-import styles from "@/styles/Professionals.module.sass"
+import styles from "@/styles/Layouts.module.sass"
 
 import Head from "next/head"
 import {useAppState} from "@/context/state/Context"

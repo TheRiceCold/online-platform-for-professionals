@@ -7,7 +7,7 @@ import AuthLayout from "@/layouts/auth/layout"
 import {useAppState} from "@/context/state/Context"
 
 function SignUp() {
-  const {useAuth} = useAppState() 
+  const {useAuth, cities, regions} = useAppState() 
   const [alerts, setAlerts] = useState([])
   const {
     signup, 
@@ -15,7 +15,8 @@ function SignUp() {
     SignupStatuses
   } = useAuth()
   const status = new SignupStatuses(setAlerts)
-
+  
+  console.log(cities, regions)
   const mutation = useMutation(signup, { 
     onSuccess: status.onSuccess,
     onError: status.onError

@@ -3,6 +3,10 @@ import {
   createContext,
 } from "react"
 import {
+  LocationsContext,
+  LocationsProvider
+} from "../locations/Context"
+import {
   AuthContext,
   AuthProvider,
 } from "../auth/Context"
@@ -23,6 +27,8 @@ const AppStateContext = createContext()
 
 const AppStateProvider = ({children}) => {
   const {Provider} = AppStateContext
+  const useLocations = () => useContext(LocationsContext)
+
   const useAuth = () => useContext(AuthContext)
   const useAdmin = () => useContext(AdminContext)
   const useClients = () => useContext(ClientsContext)
@@ -34,16 +40,19 @@ const AppStateProvider = ({children}) => {
       useAdmin,
       useClients,
       useProfessionals,
+      useLocations,
     }}>
-      <AuthProvider>
-        <AdminProvider>
-          <ClientsProvider>
-            <ProfessionalsProvider>
-              {children} 
-            </ProfessionalsProvider>
-          </ClientsProvider>
-        </AdminProvider>
-      </AuthProvider>
+      <LocationsProvider>
+        <AuthProvider>
+          <AdminProvider>
+            <ClientsProvider>
+              <ProfessionalsProvider>
+                {children} 
+              </ProfessionalsProvider>
+            </ClientsProvider>
+          </AdminProvider>
+        </AuthProvider>
+      </LocationsProvider>
     </Provider>
   )
 }
