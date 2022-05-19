@@ -1,5 +1,4 @@
 import CryptoAES from "crypto-js/aes"
-import {objExist} from "@/utils/jsonHelpers"
 
 function Statuses(storage, dispatch, setAlerts) {
   this.storage = storage
@@ -21,8 +20,8 @@ function Statuses(storage, dispatch, setAlerts) {
     }
 
     if (role.toLowerCase() === "professional"){
-      const registered = objExist(relationships.professional) 
-      authData = {registered, ...authData}
+      const professionalId = relationships?.professional?.data.id
+      authData = {professionalId, ...authData}
     }
 
     this.storage.setItem({

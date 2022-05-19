@@ -1,7 +1,5 @@
 import {navLinks} from "./navLinks"
 import {createContext} from "react"
-import {useQuery} from "react-query"
-import {capitalize} from "@/utils/stringHelpers"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useAppState} from "@/context/state/Context"
 
@@ -33,6 +31,7 @@ const ProfessionalsProvider = ({children}) => {
     <Provider value={{
       userImg,
       navLinks: navLinks(user.id),
+      getFullname: call.getFullname,
 
       // Professionals
       inputs: Inputs, 

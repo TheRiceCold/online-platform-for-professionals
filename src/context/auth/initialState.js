@@ -24,4 +24,4 @@ let initialState = {
 }
 
 if (authData?.role?.toLowerCase() === "professional")
-  initialState.registered = authData.registered
+  initialState.professionalId = authData.professionalId

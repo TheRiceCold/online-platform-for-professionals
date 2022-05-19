@@ -1,4 +1,5 @@
 import Axios from "@/utils/axios"
+import {capitalize} from "@/utils/stringHelpers"
 
 function Actions(user) {
   const {token} = user
@@ -27,6 +28,14 @@ function Actions(user) {
 
   this.delete = async id => 
     await Axios.delete(path+id, config)
+
+
+  // Attributes
+  this.getFullname = async () => {
+    const {included} = await this.getById(user.professionalId)
+    const {firstName, lastName}= included[0].attributes
+    return capitalize(`${firstName} ${lastName}`)
+  }
 }
 
 export default Actions
