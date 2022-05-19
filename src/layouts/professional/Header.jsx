@@ -1,10 +1,14 @@
 import styles from "@/styles/Professionals.module.sass"
 
 import {
-  Avatar, Text,
-  Skeleton, SkeletonCircle,
+  Text,
+  Link,
+  Avatar, 
+  Skeleton, 
+  useDisclosure,
+  SkeletonCircle,
 } from "@chakra-ui/react"
-import Link from "@/components/navigation/link"
+import ContactModal from "./ContactModal"
 
 function Header(props) {
   const {
@@ -12,6 +16,7 @@ function Header(props) {
     img, field,
     fullname, location, 
   } = props
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <header className={styles.user_header}>
@@ -42,9 +47,9 @@ function Header(props) {
               <Text fontSize="14px" color="gray.600">
                 {location} {" "}
                 <Link 
-                  to="/"
                   color="blue.500" 
                   fontWeight={500}
+                  onClick={onOpen}
                 >
                   Contact Info
                 </Link>
@@ -53,6 +58,10 @@ function Header(props) {
           </div>
         </div>
       </div>
+      <ContactModal 
+        isOpen={isOpen}
+        onClose={onClose}
+      />
     </header>
   )
 }
