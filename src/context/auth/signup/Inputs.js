@@ -1,4 +1,4 @@
-const Inputs = (regions) => [
+const Inputs = (regions, cities) => [
   {
     heading: "Create an account",
     inputs: [
@@ -29,13 +29,14 @@ const Inputs = (regions) => [
       { 
         id: "region", 
         type: "select",
-        label: "Region",
         label: "Select Region",
         options: regions
       },
       { 
         id: "city", 
-        label: "City"
+        type: "select",
+        label: "Select City",
+        options: cities
       },
     ]
   },

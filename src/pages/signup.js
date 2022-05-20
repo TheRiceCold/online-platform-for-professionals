@@ -33,6 +33,8 @@ function SignUp() {
     }
   ])
 
+  const inputs = signupInputs(regions, cities)
+
   const status = new SignupStatuses(setAlerts)
   
   const mutation = useMutation(signup, { 
@@ -47,8 +49,8 @@ function SignUp() {
       </Head>
       <AuthLayout 
         alerts={alerts}
+        inputs={inputs}
         mutation={mutation}
-        inputs={signupInputs(regions)}
       />
     </main>
   )

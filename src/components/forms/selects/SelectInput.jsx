@@ -6,7 +6,7 @@ const SelectInput = ({input, register})=> {
 
   return (
     <Select id={id} {...register(id)}>
-      {input?.options?.map(item => {
+      {input?.options?.map((item, idx) => {
         let label = item
         let value = item
 
@@ -16,7 +16,7 @@ const SelectInput = ({input, register})=> {
         }
 
         return (
-          <option key={value} value={value}>
+          <option key={idx} value={value}>
             {capitalize(label)}
           </option>
         )
