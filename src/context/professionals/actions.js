@@ -22,12 +22,17 @@ function Actions(user) {
       } 
     }, config)
 
-  this.update = async (id, data) => {
-    // await Axios.patch(path+id, data, config)
-  }
+  this.update = async (id, data) => 
+    await Axios.patch(path+id, {
+      professional: { ...data }
+    }, config)
 
   this.delete = async id => 
     await Axios.delete(path+id, config)
+
+  // User 
+  this.updateUser = async data => 
+    await this.update(user.professionalId, data)
 
   // User Attributes
   this.getAttributes = async() => {

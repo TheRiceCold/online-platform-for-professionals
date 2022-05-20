@@ -41,6 +41,9 @@ const ProfessionalsProvider = ({children}) => {
       getLocation: call.getLocation,
       getContactInfo: call.getContactInfo,
 
+      // User Professional
+      updateUserProfessional: call.updateUser,
+
       // Professionals
       getProfessionals: call.getAll,
       getProfessional: call.getById,

@@ -18,11 +18,21 @@ function SettingsModal({onClose, isOpen}) {
   const {
     inputs,
     resolver,
-    updateProfessional,
+    updateUserProfessional,
   } = useProfessionals()
 
   const formHook = useForm({resolver})
-  const mutation = useMutation(updateProfessional)
+  const mutation = useMutation(updateUserProfessional, {
+    onSuccess: res => {
+      console.log(res)
+    },
+    onError: res => {
+      console.log(res)
+    },
+    onSettled: res => {
+      console.log(res)
+    }
+  })
   const submitHandler = data => mutation.mutate({...data})
 
   return (
