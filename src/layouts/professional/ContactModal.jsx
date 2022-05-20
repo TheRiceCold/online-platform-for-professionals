@@ -1,8 +1,6 @@
 import {
   Modal, 
-  Button,
   ModalBody,
-  ModalFooter,
   ModalHeader,
   ModalContent,
   ModalOverlay,

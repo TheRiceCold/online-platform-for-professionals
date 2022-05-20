@@ -11,14 +11,14 @@ function Professional() {
   const {user} = useAuth()
   const {
     userImg,
-    getField,
     getFullname,
     getLocation,
+    getContactInfo,
   } = useProfessionals()
 
-  const {data: fullname, isLoading} = useQuery("fullname", getFullname)
+  const {data: contactInfo, isLoading} = useQuery("contact_info", getContactInfo)
+  const {data: fullname} = useQuery("fullname", getFullname)
   const {data: location} = useQuery("location", getLocation)
-  const {data: field} = useQuery("field", getField)
 
   return (
     <main className={styles.main}>
@@ -27,11 +27,11 @@ function Professional() {
       </Head>
       {user.professionalId ? 
         <ProfileLayout
-          field={field}
           img={userImg}
           location={location} 
           fullname={fullname}
           isLoading={isLoading}
+          contactInfo={contactInfo}
         /> :
         <RegisterLayout/>
       }

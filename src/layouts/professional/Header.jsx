@@ -9,11 +9,12 @@ import {
   SkeletonCircle,
 } from "@chakra-ui/react"
 import ContactModal from "./ContactModal"
+import {capitalize} from "@/utils/stringHelpers"
 
 function Header(props) {
   const {
     isLoading,
-    img, field,
+    img, contactInfo,
     fullname, location, 
   } = props
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -40,7 +41,7 @@ function Header(props) {
             </Skeleton>
             <Skeleton h="20px" mb={2} isLoaded={!isLoading}>
               <Text fontSize="16px">
-                {field}
+                {capitalize(contactInfo?.field)}
               </Text>
             </Skeleton>
             <Skeleton h="18px" isLoaded={!isLoading}>

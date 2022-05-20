@@ -45,9 +45,9 @@ function Actions(user) {
   }
 
   // Professional Attributes
-  this.getField = async() => {
-    const {data: {attributes}} = await this.getById(user.professionalId)
-    return capitalize(attributes?.field)
+  this.getContactInfo = async() => {
+    const {data} = await this.getById(user.professionalId)
+    return data?.attributes
   }
 }
 

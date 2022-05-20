@@ -33,9 +33,9 @@ const ProfessionalsProvider = ({children}) => {
 
       // User Details
       userImg,
-      getField: call.getField,
       getFullname: call.getFullname,
       getLocation: call.getLocation,
+      getContactInfo: call.getContactInfo,
 
       // Professionals
       inputs: Inputs, 
