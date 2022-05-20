@@ -16,8 +16,8 @@ function Actions(user) {
   }
 
   this.create = async data => { 
-    // const url = ``
-    // return await Axios.post(url, data, config)
+    const url = `professionals/${user.professionalId}/bookings?`
+    return await Axios.post(url, data, config)
   }
 
   this.update = async (id, data) => {
@@ -26,8 +26,8 @@ function Actions(user) {
   }
 
   this.delete = async id => {
-    // const url = path
-    // return await Axios.delete(url, config)
+    const url = `professionals/${user.professionalId}/bookings/${id}`
+    return await Axios.delete(url, config)
   }
 }
 

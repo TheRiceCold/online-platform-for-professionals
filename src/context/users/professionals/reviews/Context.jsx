@@ -1,7 +1,10 @@
+import Inputs from "./Inputs"
+import Schema from "./Schema"
 import Actions from "./Actions"
 
 import {createContext} from "react"
 import {useAuth} from "@/context/auth/Context"
+import {zodResolver} from "@hookform/resolvers/zod"
 
 const ReviewsContext = createContext()
 
@@ -13,6 +16,9 @@ const ReviewsProvider = ({children}) => {
 
   return (
     <Provider value={{
+      inputs: Inputs,
+      resolver: zodResolver(Schema),
+
       getReviews: call.getAll,
       getReview: call.getById,
       createReview: call.create,

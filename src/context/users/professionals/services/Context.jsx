@@ -1,7 +1,10 @@
+import Inputs from "./Inputs"
+import Schema from "./Schema"
 import Actions from "./Actions"
 
 import {createContext} from "react"
 import {useAuth} from "@/context/auth/Context"
+import {zodResolver} from "@hookform/resolvers/zod"
 
 const ServicesContext = createContext()
 
@@ -13,6 +16,9 @@ const ServicesProvider = ({children}) => {
 
   return (
     <Provider value={{
+      inputs: Inputs,
+      resolver: zodResolver(Schema),
+
       getServices: call.getAll,
       getService: call.getById,
       createService: call.create,
@@ -25,3 +31,4 @@ const ServicesProvider = ({children}) => {
 }
 
 export default ServicesProvider
+export const useServices = () => useContext(ServicesContext)
