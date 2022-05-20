@@ -11,6 +11,10 @@ import {
   AuthProvider,
 } from "../auth/Context"
 import {
+  UsersContext,
+  UsersProvider,
+} from "../users/Context"
+import {
   AdminContext,
   AdminProvider,
 } from "../admin/Context"
@@ -30,6 +34,7 @@ const AppStateProvider = ({children}) => {
   const useLocations = () => useContext(LocationsContext)
 
   const useAuth = () => useContext(AuthContext)
+  const useUsers = () => useContext(UsersContext)
   const useAdmin = () => useContext(AdminContext)
   const useClients = () => useContext(ClientsContext)
   const useProfessionals = () => useContext(ProfessionalsContext)
@@ -38,6 +43,7 @@ const AppStateProvider = ({children}) => {
     <Provider value={{
       useAuth,
       useAdmin,
+      useUsers,
       useClients,
       useProfessionals,
 
@@ -46,13 +52,15 @@ const AppStateProvider = ({children}) => {
     }}>
       <LocationsProvider>
         <AuthProvider>
-          <AdminProvider>
-            <ClientsProvider>
-              <ProfessionalsProvider>
-                {children} 
-              </ProfessionalsProvider>
-            </ClientsProvider>
-          </AdminProvider>
+          <UsersProvider>
+            <AdminProvider>
+              <ClientsProvider>
+                <ProfessionalsProvider>
+                  {children} 
+                </ProfessionalsProvider>
+              </ClientsProvider>
+            </AdminProvider>
+          </UsersProvider>
         </AuthProvider>
       </LocationsProvider>
     </Provider>

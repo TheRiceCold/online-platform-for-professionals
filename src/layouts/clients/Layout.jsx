@@ -4,19 +4,17 @@ import Navbar from "../navbar/Navbar"
 import {useAppState} from "@/context/state/Context"
 
 const ClientLayout = ({fullname}) => {
-  const {useAuth, useClients} = useAppState()
+  const {useClients} = useAppState()
   const {navLinks, userMenuItems} = useClients()
-  const {user} = useAuth()
 
   return (
     <>
-        <Navbar 
-          user={user}
-          styles={styles}
-          fullname={fullname}
-          userMenuItems={userMenuItems}
-          links={navLinks}
-        />
+      <Navbar 
+        styles={styles}
+        fullname={fullname}
+        userMenuItems={userMenuItems}
+        links={navLinks}
+      />
     </>
   )
 }

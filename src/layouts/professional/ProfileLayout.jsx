@@ -15,8 +15,8 @@ function ProfessionalLayout({fullname}) {
     getContactInfo,
   } = useProfessionals()
 
-  const {data: contactInfo, isLoading} = useQuery("contact_info", getContactInfo)
   const {data: location} = useQuery("location", getLocation)
+  const {data: contactInfo, isLoading} = useQuery("contact_info", getContactInfo)
 
   return (
     <>
