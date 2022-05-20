@@ -15,8 +15,8 @@ const Home = () => {
         router.push(`clients/${user.clientId}`)
         break
       case "admin":
-        // Layout = dynamic(() => import("@/layouts/admin/Layout"))
-        // return <Layout/>
+        router.push(`admin`)
+        break
     }
   }
 

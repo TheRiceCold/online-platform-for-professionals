@@ -32,4 +32,8 @@ switch(role) {
   case "client":
     initialState.clientId = authData.clientId
     break
+
+  case "admin":
+    initialState.adminId = authData.adminId
+    break
 }
