@@ -8,7 +8,7 @@ import RouteGuard from "@/components/RouteGuard"
 
 import AuthProvider from "@/context/auth/Context"
 import UsersProvider from "@/context/users/Context"
-import LocationsProvider from "@/context/locations/Context"
+import HelpersProvider from "@/context/helpers/Context"
 
 const MyApp = ({Component, pageProps}) => {
   const queryClient = new QueryClient()
@@ -17,7 +17,7 @@ const MyApp = ({Component, pageProps}) => {
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false}/>
-        <LocationsProvider>
+        <HelpersProvider>
           <AuthProvider>
             <UsersProvider>
               <RouteGuard>
@@ -25,7 +25,7 @@ const MyApp = ({Component, pageProps}) => {
               </RouteGuard>
             </UsersProvider>
           </AuthProvider>
-        </LocationsProvider>
+        </HelpersProvider>
       </QueryClientProvider>
     </ChakraProvider>
   )

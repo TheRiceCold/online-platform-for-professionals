@@ -6,14 +6,14 @@ import AuthLayout from "@/layouts/auth/layout"
 import {useState} from "react"
 import {useAuth} from "@/context/auth/Context"
 import {useMutation, useQueries} from "react-query"
-import {useLocations} from "@/context/locations/Context"
+import {useHelpers} from "@/context/helpers/Context"
 
 function SignUp() {
   const [alerts, setAlerts] = useState([])
   const {
     getCities,
     getRegions
-  } = useLocations()
+  } = useHelpers()
   const {
     signup, 
     signupInputs,
