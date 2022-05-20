@@ -39,6 +39,7 @@ function Actions(user) {
     const {included} = await this.getById(user.professionalId)
     return included[0].attributes
   }
+
   this.getFullname = async () => {
     const {firstName, lastName} = await this.getAttributes()
     return capitalize(`${firstName} ${lastName}`)

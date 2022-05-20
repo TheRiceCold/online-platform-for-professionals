@@ -1,4 +1,5 @@
 import Actions from "./actions"
+import {navLinks} from "./navLinks"
 import {createContext} from "react"
 import {useAppState} from "@/context/state/Context"
 
@@ -12,6 +13,8 @@ const ClientsProvider = ({children}) => {
 
   return (
     <Provider value={{
+      navLinks,
+
       getClients: call.getAll,
       getClient: call.getById,
       deleteClient: call.delete,

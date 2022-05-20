@@ -1,15 +1,22 @@
+import styles from "@/styles/Clients.module.sass"
+
 import Head from "next/head"
-import {useRouter} from "next/router"
+import Layout from "@/layouts/clients/Layout"
+import {capitalize} from "@/utils/stringHelpers"
+import { useAppState } from "@/context/state/Context"
 
 const ClientId = () => {
-  const router = useRouter()
-  const {client_id: id} = router.query
+  const {useAuth} = useAppState()
+  const {user} = useAuth()
+  const {firstName, lastName} = user.attributes
+  const fullname = capitalize(`${firstName} ${lastName}`)
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head>
-        <title>Client {id}</title>
+        <title>{fullname} | Client</title>
       </Head>
+      <Layout fullname={fullname}/>
     </main>
   )
 }

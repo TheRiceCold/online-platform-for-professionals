@@ -1,5 +1,4 @@
 import Head from "next/head"
-import dynamic from "next/dynamic"
 import {useRouter} from "next/router"
 import {useAppState} from "@/context/state/Context"
 
@@ -9,17 +8,14 @@ const Home = () => {
   const {user} = useAuth()
 
   const homeContent = () => {
-    let Layout = null
-    const role = user.role.toLowerCase()
+    const role = user.attributes.role.toLowerCase()
     switch(role) {
       case "professional": 
-        // Layout = dynamic(() => import("@/layouts/professional/Layout"))
-        // return <Layout/>
         router.push(`professionals/${user.professionalId}`)
         break
       case "client":
-        // Layout = dynamic(() => import("@/layouts/client/Layout"))
-        // return <Layout/>
+        router.push(`clients/${user.clientId}`)
+        break
       case "admin":
         // Layout = dynamic(() => import("@/layouts/admin/Layout"))
         // return <Layout/>

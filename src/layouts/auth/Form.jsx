@@ -19,7 +19,7 @@ function AuthForm(props) {
 
   const submitValue = isLoginPage ? "Login" : "Join"
   const mode = isLoginPage ? "onSubmit" : "onChange"
-  const heading = isLoginPage ? "LOGIN" : "Create an account"
+  const heading = isLoginPage ? "Login" : "Create an account"
   const resolver = isLoginPage ? loginResolver : signupResolver
 
   const formHook = useForm({mode, resolver})

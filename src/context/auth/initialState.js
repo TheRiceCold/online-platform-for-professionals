@@ -18,10 +18,18 @@ authData = authData && JSON.parse(authData)
 
 let initialState = {
   id: authData.id || "",
-  role: authData.role || "",
   token: authData.token || "",
-  isAuth: authData.isAuth || false
+  isAuth: authData.isAuth || false,
+  attributes: authData.attributes || {}
 }
 
-if (authData?.role?.toLowerCase() === "professional")
-  initialState.professionalId = authData.professionalId
+const role = authData?.attributes?.role.toLowerCase()
+switch(role) {
+  case "professional":
+    initialState.professionalId = authData.professionalId
+    break
+
+  case "client":
+    initialState.clientId = authData.clientId
+    break
+}
