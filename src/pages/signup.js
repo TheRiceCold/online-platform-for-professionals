@@ -7,7 +7,7 @@ import AuthLayout from "@/layouts/auth/layout"
 import {useAppState} from "@/context/state/Context"
 
 function SignUp() {
-  const {useAuth, cities, regions} = useAppState() 
+  const {useAuth} = useAppState() 
   const [alerts, setAlerts] = useState([])
   const {
     signup, 

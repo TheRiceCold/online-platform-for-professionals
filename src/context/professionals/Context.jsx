@@ -31,6 +31,10 @@ const ProfessionalsProvider = ({children}) => {
     <Provider value={{
       navLinks: navLinks(user.id),
 
+      // Form
+      inputs: Inputs, 
+      resolver: zodResolver(Schema),
+
       // User Details
       userImg,
       getFullname: call.getFullname,
@@ -38,8 +42,6 @@ const ProfessionalsProvider = ({children}) => {
       getContactInfo: call.getContactInfo,
 
       // Professionals
-      inputs: Inputs, 
-      resolver: zodResolver(Schema),
       getProfessionals: call.getAll,
       getProfessional: call.getById,
       registerProfessional: call.create,
