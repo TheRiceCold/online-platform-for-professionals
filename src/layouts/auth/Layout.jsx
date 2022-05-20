@@ -1,18 +1,18 @@
 import styles from "@/styles/Auth.module.sass"
 
+import Alert from "@/components/feedback/Alert"
+import {Container, Link} from "@chakra-ui/react"
+import {useDisclosure as useModal} from "@chakra-ui/react"
+
 import Links from "./Links"
 import Modal from "./Modal"
 import AuthForm from "./Form"
+
 import {useRouter} from "next/router"
-import Navbar from "../navbar/Navbar"
 import useMount from "@/hooks/useMount"
-import Alert from "@/components/feedback/Alert"
-import {Container, Link} from "@chakra-ui/react"
-import {useAppState} from "@/context/state/Context"
-import {useDisclosure as useModal} from "@chakra-ui/react"
+import {useAuth} from "@/context/auth/Context"
 
 function AuthLayout(props) {
-  const {useAuth} = useAppState()
   const {user} = useAuth()
 
   const router = useRouter()
@@ -23,7 +23,6 @@ function AuthLayout(props) {
 
   return (!user.isAuth && 
     <>
-      <Navbar styles={styles}/>
       {alerts && 
         alerts.map((alert, i) => (
           <Alert key={i} {...alert}/>

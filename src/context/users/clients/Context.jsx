@@ -3,13 +3,12 @@ import {navLinks} from "./navLinks"
 import {createContext} from "react"
 import {useRouter} from "next/router"
 import {userMenuItems} from "./userMenuItems"
-import {useAppState} from "@/context/state/Context"
+import {useAuth} from "@/context/auth/Context"
 
 const ClientsContext = createContext()
 
 const ClientsProvider = ({children}) => {
   const {Provider} = ClientsContext
-  const {useAuth} = useAppState()
   const {user, logout} = useAuth()
   const router = useRouter()
   const call = new Actions(user)

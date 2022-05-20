@@ -14,7 +14,6 @@ import {
   ProfessionalsContext,
   ProfessionalsProvider,
 } from "./professionals/Context"
-import {useAppState} from "../state/Context"
 
 const UsersContext = role => {
   switch(role) {
@@ -32,13 +31,9 @@ const UsersContext = role => {
 
 const UsersProvider = ({children}) => {
   const {Provider} = UsersContext()
-  const {useAuth} = useAppState()
-  const {user} = useAuth()
 
   return (
-    <Provider value={{
-      user
-    }}>
+    <Provider value={{ }}>
       <AdminProvider>
         <ClientsProvider>
           <ProfessionalsProvider>

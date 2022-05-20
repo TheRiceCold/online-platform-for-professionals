@@ -1,19 +1,20 @@
-import {useState} from "react"
-import {useForm} from "react-hook-form"
-import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
 import Alert from "@/components/feedback/Alert"
 import {Heading, Stack} from "@chakra-ui/react"
-import {useAppState} from "@/context/state/Context"
+
+import {useState} from "react"
+import {useForm} from "react-hook-form"
+import {useMutation} from "react-query"
+import {useAuth} from "@/context/auth/Context"
+import {useUsers} from "@/context/users/Context"
 
 const RegisterLayout = () => {
-  const {useAuth, useProfessionals} = useAppState()
   const [alerts, setAlerts] = useState()
   const {dispatch} = useAuth()
   const {
     inputs, resolver,
     registerProfessional,
-  } = useProfessionals()
+  } = useUsers("professional")
   const formHook = useForm({resolver})
 
   const mutation = useMutation(registerProfessional, {

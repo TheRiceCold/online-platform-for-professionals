@@ -2,8 +2,8 @@ import {navLinks} from "./navLinks"
 import {createContext} from "react"
 import {useRouter} from "next/router"
 import {userMenuItems} from "./userMenuItems"
+import {useAuth} from "@/context/auth/Context"
 import {zodResolver} from "@hookform/resolvers/zod"
-import {useAppState} from "@/context/state/Context"
 
 import Schema from "./Schema"
 import Inputs from "./Inputs"
@@ -19,7 +19,6 @@ const ProfessionalsContext = createContext()
 
 const ProfessionalsProvider = ({children}) => {
   const {Provider} = ProfessionalsContext
-  const {useAuth} = useAppState()
   const {user, logout} = useAuth()
   const router = useRouter()
 

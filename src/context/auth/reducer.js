@@ -1,4 +1,4 @@
-export const reducer = (state, action) => {
+function Reducer(state, action) {
   const {payload} = action
 
   switch (action.type) {
@@ -27,3 +27,5 @@ export const reducer = (state, action) => {
       return state
   }
 }
+
+export default Reducer

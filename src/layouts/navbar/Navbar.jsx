@@ -7,28 +7,26 @@ import {
   IconButton,
   Image, Stack,
   Link, Button,
-  useColorMode, useDisclosure,
+  useColorMode, 
+  useDisclosure,
 } from "@chakra-ui/react"
 import Links from "./Links"
 import UserMenu from "./UserMenu"
 import SearchBar from "@/components/SearchBar"
+import {useAuth} from "@/context/auth/Context"
+import {useUsers} from "@/context/users/Context"
 import NextLink from "@/components/navigation/Link"
-import {useAppState} from "@/context/state/Context"
 
-function Navbar(props) {
-  const {
-    links,
-    styles,
-    fullname,
-    userMenuItems,
-  } = props
-
-  const {useAuth} = useAppState()
+function Navbar({styles}) {
   const {user} = useAuth()
-  const {isOpen, onOpen, onClose} = useDisclosure()
+
+  const role = user?.attributes.role.toLowerCase()
+  const {links} = useUsers(role)
+
   const {colorMode, toggleColorMode} = useColorMode()
+  const {isOpen, onOpen, onClose} = useDisclosure()
+
   const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
-  const img = "https://avatars.dicebear.com/api/male/username.svg"
 
   return (
     <nav className={styles.navbar}>
@@ -58,14 +56,7 @@ function Navbar(props) {
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-              {user.isAuth && 
-                <UserMenu 
-                  img={img}
-                  user={user}
-                  fullname={fullname}
-                  items={userMenuItems}
-                />
-              }
+              {user.isAuth && <UserMenu/>}
           </Stack>
         </Flex>
       </div>
@@ -73,9 +64,9 @@ function Navbar(props) {
         isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as="nav" spacing={4}>
-              {links.map(link => (
-                <Link key={link}>
-                  {link}
+              {links.map(({href, label})=> (
+                <Link key={href} href={href}>
+                  {label}
                 </Link>
               ))}
             </Stack>

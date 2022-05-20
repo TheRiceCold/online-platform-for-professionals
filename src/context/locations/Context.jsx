@@ -1,5 +1,5 @@
 import Axios from "@/utils/axios"
-import {createContext} from "react"
+import {useContext, createContext} from "react"
 
 const LocationsContext = createContext()
 
@@ -37,7 +37,5 @@ const LocationsProvider = ({children}) => {
   )
 }
 
-export {
-  LocationsContext,
-  LocationsProvider,
-}
+export default LocationsProvider
+export const useLocations = () => useContext(LocationsContext)

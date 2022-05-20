@@ -8,11 +8,10 @@ import {
 import Modal from "./Modal"
 import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
-import {useAppState} from "@/context/state/Context"
+import {useAuth} from "@/context/auth/Context"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 
 function AuthForm(props) {
-  const {useAuth} = useAppState()
   const {mutation, inputs, isLoginPage} = props
   const {loginResolver, signupResolver} = useAuth()
   const {onOpen : openModal, ...modalProps} = useModal()

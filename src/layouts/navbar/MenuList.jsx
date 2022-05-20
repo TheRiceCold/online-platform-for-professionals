@@ -8,13 +8,15 @@ import {
 } from "@chakra-ui/react"
 import {Fragment} from "react"
 import dynamic from "next/dynamic"
+import {useAuth} from "@/context/auth/Context"
 
-function MenuList(props) {
+function MenuList() {
+  const {userRole} = useAuth()
   const {
     img, 
     items,
     fullname, 
-  } = props
+  } = useUsers(userRole)
   const useModal = useDisclosure()
 
   return (

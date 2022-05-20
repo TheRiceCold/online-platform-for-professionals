@@ -4,12 +4,11 @@ import Head from "next/head"
 import {useState} from "react"
 import {useMutation} from "react-query"
 import {useStorage} from "@/hooks/useStorage"
+import {useAuth} from "@/context/auth/Context"
 import AuthLayout from "@/layouts/auth/layout"
-import {useAppState} from "@/context/state/Context"
 
 function Login() {
   const storage = useStorage()
-  const {useAuth} = useAppState()
   const {
     login, 
     dispatch, 

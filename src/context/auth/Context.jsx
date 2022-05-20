@@ -1,8 +1,12 @@
 import {
-  useState,
   useReducer,
+  useContext,
   createContext
 } from "react"
+
+import {
+  LocationsProvider
+} from "@/context/locations/Context"
 
 import Actions from "./Actions"
 // Login
@@ -18,22 +22,22 @@ import {reducer} from "./reducer"
 import {initialState} from "./initialState"
 import {zodResolver} from "@hookform/resolvers/zod"
 
-export {AuthContext, AuthProvider}
-
 const AuthContext = createContext()
 
 const AuthProvider = ({children}) => {
   const [user, dispatch] = useReducer(reducer, initialState)
-  const [rememberUser, setRememberUser] = useState(false)
   const call = new Actions(dispatch, user?.token)
+
   const {Provider} = AuthContext
+
+  const userRole = user?.attributes?.role
 
   return (
     <Provider value={{
       user,
+      userRole,
       dispatch,
-      rememberUser, 
-      setRememberUser,
+
       // Statuses
       LoginStatuses,
       SignupStatuses,
@@ -52,3 +56,6 @@ const AuthProvider = ({children}) => {
     </Provider>
   )
 }
+
+export default AuthProvider
+export const useAuth = () => useContext(AuthContext)

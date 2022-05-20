@@ -1,11 +1,14 @@
 import "@/styles/globals.sass"
 
-import {ChakraProvider} from "@chakra-ui/react"
-import RouteGuard from "@/components/RouteGuard"
-import UsersProvider from "@/context/users/Context"
-import AppStateProvider from "@/context/state/Context"
 import {ReactQueryDevtools} from "react-query/devtools"
 import {QueryClientProvider, QueryClient} from "react-query"
+import {ChakraProvider} from "@chakra-ui/react"
+
+import RouteGuard from "@/components/RouteGuard"
+
+import AuthProvider from "@/context/auth/Context"
+import UsersProvider from "@/context/users/Context"
+import LocationsProvider from "@/context/locations/Context"
 
 const MyApp = ({Component, pageProps}) => {
   const queryClient = new QueryClient()
@@ -14,13 +17,15 @@ const MyApp = ({Component, pageProps}) => {
     <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false}/>
-        <AppStateProvider>
-          <UsersProvider>
-            <RouteGuard>
-              <Component {...pageProps}/>
-            </RouteGuard>
-          </UsersProvider>
-        </AppStateProvider>
+        <LocationsProvider>
+          <AuthProvider>
+            <UsersProvider>
+              <RouteGuard>
+                <Component {...pageProps}/>
+              </RouteGuard>
+            </UsersProvider>
+          </AuthProvider>
+        </LocationsProvider>
       </QueryClientProvider>
     </ChakraProvider>
   )

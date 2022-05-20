@@ -1,11 +1,10 @@
 import {useState} from "react"
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount" 
-import {useAppState} from "@/context/state/Context"
+import {useAuth} from "@/context/auth/Context"
 
 const RouteGuard = ({children}) => {
   const router = useRouter()
-  const {useAuth} = useAppState()
   const {user: {isAuth}} = useAuth()
   const [authorized, setAuthorized] = useState(false)
 
@@ -17,6 +16,12 @@ const RouteGuard = ({children}) => {
     router.events.on("routeChangeStart", hideContent)
     // on route change complete - run auth check 
     router.events.on("routeChangeComplete", authCheck)
+
+    // unsubscribe from events in useEffect return function
+    return () => {
+      router.events.off('routeChangeStart', hideContent)
+      router.events.off('routeChangeComplete', authCheck)
+    }
   })
 
   const authCheck = url => {

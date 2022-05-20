@@ -2,15 +2,12 @@ import styles from "@/styles/Professionals.module.sass"
 
 import Header from "./Header"
 import {useQuery} from "react-query"
-import Navbar from "../navbar/Navbar"
 import {useUsers} from "@/context/users/Context"
 
 function ProfessionalLayout({fullname}) {
   const {
     userImg,
-    navLinks,
     getLocation,
-    userMenuItems,
     getContactInfo,
   } = useUsers("professional")
 
@@ -19,12 +16,6 @@ function ProfessionalLayout({fullname}) {
 
   return (
     <>
-      <Navbar 
-        styles={styles}
-        links={navLinks}
-        fullname={fullname}
-        userMenuItems={userMenuItems}
-      />
       <section className={styles.layout}>
         <Header 
           img={userImg}

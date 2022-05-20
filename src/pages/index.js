@@ -1,15 +1,13 @@
 import Head from "next/head"
 import {useRouter} from "next/router"
-import {useAppState} from "@/context/state/Context"
+import {useAuth} from "@/context/auth/Context"
 
 const Home = () => {
-  const {useAuth} = useAppState()
   const router = useRouter()
-  const {user} = useAuth()
+  const {userRole} = useAuth()
 
   const homeContent = () => {
-    const role = user.attributes.role.toLowerCase()
-    switch(role) {
+    switch(userRole) {
       case "professional": 
         router.push(`professionals/${user.professionalId}`)
         break
