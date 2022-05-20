@@ -1,96 +1,95 @@
-import {navLinks} from "./navLinks"
-import {createContext} from "react"
-import {useRouter} from "next/router"
-import {userMenuItems} from "./userMenuItems"
-import {zodResolver} from "@hookform/resolvers/zod"
-import {useAppState} from "@/context/state/Context"
+import { navLinks } from './navLinks';
+import { createContext } from 'react';
+import { useRouter } from 'next/router';
+import { userMenuItems } from './userMenuItems';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useAppState } from '@/context/state/Context';
 
-import Schema from "./Schema"
-import Inputs from "./Inputs"
+import Schema from './schema';
+import Inputs from './inputs';
 
 // Actions
-import Actions from "./Actions"
-import ReviewActions from "./reviews/Actions"
-import ServiceActions from "./services/Actions"
-import PortfolioActions from "./portfolio/Actions"
-import CalendlyTokenActions from "./calendlyToken/Actions"
+import Actions from './Actions';
+import ReviewActions from './reviews/actions';
+import ServiceActions from './services/actions';
+import PortfolioActions from './portfolio/actions';
+import CalendlyTokenActions from './calendlyToken/actions';
 
-const ProfessionalsContext = createContext()
+const ProfessionalsContext = createContext();
 
-const ProfessionalsProvider = ({children}) => {
-  const {Provider} = ProfessionalsContext
-  const {useAuth} = useAppState()
-  const {user, logout} = useAuth()
-  const router = useRouter()
+const ProfessionalsProvider = ({ children }) => {
+	const { Provider } = ProfessionalsContext;
+	const { useAuth } = useAppState();
+	const { user, logout } = useAuth();
+	const router = useRouter();
 
-  const call = new Actions(user)
-  const callReviews = new ReviewActions(user)
-  const callServices = new ServiceActions(user) 
-  const callPortfolios = new PortfolioActions(user)
-  const callCalendlyToken = new CalendlyTokenActions(user)
-  const userImg = "https://avatars.dicebear.com/api/male/username.svg" 
+	const call = new Actions(user);
+	const callReviews = new ReviewActions(user);
+	const callServices = new ServiceActions(user);
+	const callPortfolios = new PortfolioActions(user);
+	const callCalendlyToken = new CalendlyTokenActions(user);
+	const userImg = 'https://avatars.dicebear.com/api/male/username.svg';
 
-  const menuItems = openSettings => 
-    userMenuItems(user, router, logout, openSettings)
+	const menuItems = (openSettings) =>
+		userMenuItems(user, router, logout, openSettings);
 
-  return (
-    <Provider value={{
-      userMenuItems: menuItems,
-      navLinks: navLinks(user.professionalId),
+	return (
+		<Provider
+			value={{
+				userMenuItems: menuItems,
+				navLinks: navLinks(user.professionalId),
 
-      // Form
-      inputs: Inputs, 
-      resolver: zodResolver(Schema),
+				// Form
+				inputs: Inputs,
+				resolver: zodResolver(Schema),
 
-      // User Details
-      userImg,
-      getFullname: call.getFullname,
-      getLocation: call.getLocation,
-      getContactInfo: call.getContactInfo,
+				// User Details
+				userImg,
+				getFullname: call.getFullname,
+				getLocation: call.getLocation,
+				getContactInfo: call.getContactInfo,
 
-      // User Professional
-      updateUserProfessional: call.updateUser,
+				// User Professional
+				updateUserProfessional: call.updateUser,
 
-      // Professionals
-      getProfessionals: call.getAll,
-      getProfessional: call.getById,
-      registerProfessional: call.create,
-      updateProfessional: call.update,
-      deleteProfessional: call.delete,
+				// Professionals
+				getProfessionals: call.getAll,
+				getProfessional: call.getById,
+				registerProfessional: call.create,
+				updateProfessional: call.update,
+				deleteProfessional: call.delete,
 
-      // Professional Services
-      getServices: callServices.getAll,
-      getService: callServices.getById,
-      createService: callServices.create,
-      updateService: callServices.update,
-      deleteService: callServices.delete,
+				// Professional Services
+				getServices: callServices.getAll,
+				getService: callServices.getById,
+				createService: callServices.create,
+				updateService: callServices.update,
+				deleteService: callServices.delete,
 
-      // Professional Work Portfolio
-      getWorkPortfolios: callPortfolios.getAll,
-      getWorkPortfolio: callPortfolios.getById,
-      createWorkPortfolio: callPortfolios.create,
-      updateWorkPortfolio: callPortfolios.update,
-      deleteWorkPortfolio: callPortfolios.delete,
+				// Professional Work Portfolio
+				getWorkPortfolios: callPortfolios.getAll,
+				getWorkPortfolio: callPortfolios.getById,
+				createWorkPortfolio: callPortfolios.create,
+				updateWorkPortfolio: callPortfolios.update,
+				deleteWorkPortfolio: callPortfolios.delete,
 
-      // Professional Calendly Tokens
-      getCalendlyToken: callCalendlyToken.getById,
-      createCalendlyToken: callCalendlyToken.create,
-      updateCalendlyToken: callCalendlyToken.update,
-      deleteCalendlyToken: callCalendlyToken.delete,
+				// Professional Calendly Tokens
+				getCalendlyToken: callCalendlyToken.getById,
+				createCalendlyToken: callCalendlyToken.create,
+				updateCalendlyToken: callCalendlyToken.update,
+				deleteCalendlyToken: callCalendlyToken.delete,
 
-      // Professional Reviews
-      getReviews: callReviews.getAll,
-      getReview: callReviews.getById,
-      createReview: callReviews.create,
-      updateReview: callReviews.update,
-      deleteReview: callReviews.delete,
-    }}>
-      {children}
-    </Provider>
-  )
-}
+				// Professional Reviews
+				getReviews: callReviews.getAll,
+				getReview: callReviews.getById,
+				createReview: callReviews.create,
+				updateReview: callReviews.update,
+				deleteReview: callReviews.delete,
+			}}
+		>
+			{children}
+		</Provider>
+	);
+};
 
-export {
-  ProfessionalsContext,
-  ProfessionalsProvider, 
-}
+export { ProfessionalsContext, ProfessionalsProvider };
