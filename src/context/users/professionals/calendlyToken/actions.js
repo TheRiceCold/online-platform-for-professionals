@@ -1,6 +1,6 @@
 import Axios from "@/utils/axios"
 
-function CalendlyTokenActions(user) {
+function Actions(user) {
   const {token} = user
   const path = id => `professionals/${id}/calendly_tokens`
   const config = { headers: { Authorization: token } }
@@ -26,5 +26,4 @@ function CalendlyTokenActions(user) {
   }
 }
 
-export default CalendlyTokenActions
-
+export default Actions

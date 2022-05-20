@@ -1,6 +1,6 @@
 import Axios from "@/utils/axios"
 
-function PortfolioActions(user) {
+function Actions(user) {
   const {token} = user
   const config = {headers: { Authorization: token }}
   const path = id => `professionals/${id}/work_portfolios`
@@ -31,4 +31,4 @@ function PortfolioActions(user) {
   }
 }
 
-export default PortfolioActions
+export default Actions

@@ -1,6 +1,6 @@
 import Axios from "@/utils/axios"
 
-function ServiceActions(user) {
+function Actions(user) {
   const {token} = user
   const path = id => `professionals/${id}/services/`
   const config = { headers: { Authorization: token } }
@@ -31,4 +31,4 @@ function ServiceActions(user) {
   }
 }
 
-export default ServiceActions
+export default Actions

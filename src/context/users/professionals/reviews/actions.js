@@ -1,6 +1,6 @@
 import Axios from "@/utils/axios"
 
-function ReviewActions(user) {
+function Actions(user) {
   const {token} = user
   const path = id => `professionals/${id}/reviews/`
   const config = { headers: { Authorization: token } }
@@ -31,4 +31,4 @@ function ReviewActions(user) {
   }
 }
 
-export default ReviewActions
+export default Actions

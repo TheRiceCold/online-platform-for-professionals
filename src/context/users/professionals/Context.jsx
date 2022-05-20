@@ -10,10 +10,10 @@ import Inputs from "./Inputs"
 
 // Actions
 import Actions from "./Actions"
-import ReviewActions from "./reviews/Actions"
-import ServiceActions from "./services/Actions"
-import PortfolioActions from "./portfolio/Actions"
-import CalendlyTokenActions from "./calendlyToken/Actions"
+import ReviewsProvider from "./reviews/Context"
+import ServicesProvider from "./services/Context"
+import WorkPortfolioProvider from "./services/Context"
+import CalendlyTokenProvider from "./calendlyToken/Context"
 
 const ProfessionalsContext = createContext()
 
@@ -23,10 +23,6 @@ const ProfessionalsProvider = ({children}) => {
   const router = useRouter()
 
   const call = new Actions(user)
-  const callReviews = new ReviewActions(user)
-  const callServices = new ServiceActions(user) 
-  const callPortfolios = new PortfolioActions(user)
-  const callCalendlyToken = new CalendlyTokenActions(user)
 
   const menuItems = openSettings => 
     userMenuItems(user, router, logout, openSettings)
@@ -53,35 +49,16 @@ const ProfessionalsProvider = ({children}) => {
       registerProfessional: call.create,
       updateProfessional: call.update,
       deleteProfessional: call.delete,
-
-      // Professional Services
-      getServices: callServices.getAll,
-      getService: callServices.getById,
-      createService: callServices.create,
-      updateService: callServices.update,
-      deleteService: callServices.delete,
-
-      // Professional Work Portfolio
-      getWorkPortfolios: callPortfolios.getAll,
-      getWorkPortfolio: callPortfolios.getById,
-      createWorkPortfolio: callPortfolios.create,
-      updateWorkPortfolio: callPortfolios.update,
-      deleteWorkPortfolio: callPortfolios.delete,
-
-      // Professional Calendly Tokens
-      getCalendlyToken: callCalendlyToken.getById,
-      createCalendlyToken: callCalendlyToken.create,
-      updateCalendlyToken: callCalendlyToken.update,
-      deleteCalendlyToken: callCalendlyToken.delete,
-
-      // Professional Reviews
-      getReviews: callReviews.getAll,
-      getReview: callReviews.getById,
-      createReview: callReviews.create,
-      updateReview: callReviews.update,
-      deleteReview: callReviews.delete,
     }}>
-      {children}
+      <CalendlyTokenProvider>
+        <ServicesProvider>
+          <WorkPortfolioProvider>
+            <ReviewsProvider>
+              {children}
+            </ReviewsProvider>
+          </WorkPortfolioProvider>
+        </ServicesProvider>
+      </CalendlyTokenProvider>
     </Provider>
   )
 }
