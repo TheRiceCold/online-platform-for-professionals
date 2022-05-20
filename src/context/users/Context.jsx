@@ -15,7 +15,7 @@ import {
   ProfessionalsProvider,
 } from "./professionals/Context"
 
-const UsersContext = role => {
+function UsersContext(role) {
   switch(role) {
     case "professional":
         // Layout = dynamic(() => import("@/layouts/admin/Layout"))
@@ -29,7 +29,7 @@ const UsersContext = role => {
   }
 }
 
-const UsersProvider = ({children}) => {
+function UsersProvider({children}) {
   const {Provider} = UsersContext()
 
   return (

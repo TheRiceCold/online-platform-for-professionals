@@ -17,7 +17,7 @@ import NextLink from "@/components/navigation/Link"
 
 import {useAuth} from "@/context/auth/Context"
 
-function Navbar({styles, links}) {
+function Navbar({styles, links, withSearch}) {
   const {user} = useAuth()
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
@@ -44,7 +44,7 @@ function Navbar({styles, links}) {
             }
           />
         </NextLink>
-        {user.isAuth && <SearchBar colorMode={colorMode}/>}
+        {withSearch && <SearchBar colorMode={colorMode}/>}
         <Flex alignItems="center">
           <Links links={links}/>
           <Stack direction="row" spacing={6}>

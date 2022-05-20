@@ -1,19 +1,20 @@
-import styles from "@/styles/Professional.module.sass"
+import styles from "@/styles/Professionals.module.sass"
 
 import Head from "next/head"
-import {useAppState} from "@/context/state/Context"
+import Navbar from "@/layouts/navbar/Navbar"
+import {useAuth} from "@/context/auth/Context"
 import Layout  from "@/layouts/professional/services/Layout"
 
 function Services() {
-  const {useProfessionals} = useAppState()
-  const {fullname} = useProfessionals()
+  const {userFullname} = useAuth()
 
   return (
     <main className={styles.main}>
       <Head>
-        <title>{fullname} | Services</title>
+        <title>{userFullname} | Services</title>
       </Head>
-      <Layout fullname={fullname}/>
+      <Navbar styles={styles}/>
+      <Layout />
     </main>
   )
 }

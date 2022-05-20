@@ -1,19 +1,7 @@
-import Navbar from "@/layouts/navbar/Navbar"
-import {useAppState} from "@/context/state/Context"
-
-function ServicesLayout(props) {
-  const {useAuth, useProfessionals} = useAppState()
-  const {navLinks} = useProfessionals()
-  const {user} = useAuth()
+function ServicesLayout() {
 
   return (
-    <>
-      <Navbar 
-        user={user} 
-        links={navLinks}
-        fullname={props.fullname}
-      />
-    </>
+    <h1>Services</h1>
   )
 }
 

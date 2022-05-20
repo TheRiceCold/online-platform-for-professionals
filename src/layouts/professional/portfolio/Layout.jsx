@@ -1,22 +1,31 @@
-import Navbar from "@/layouts/navbar/Navbar"
-import {useUsers} from "@/context/users/Context"
-import {useAppState} from "@/context/state/Context"
+import {
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react"
+import CreateModal from "./CreateModal"
 
-function PortfolioLayout(props) {
-  const {useAuth} = useAppState()
-  const {navLinks} = useUsers("professional")
-  const {user} = useAuth()
+import {useQuery} from "react-query"
+import {useWorkPortfolios} from "@/context/users/professionals/work_portfolios/Context"
+
+function PortfolioLayout() {
+  const useModal = useDisclosure()
+  const {getWorkPortfolios} = useWorkPortfolios()
+  const {data: portfolios, isLoading} = useQuery("work_portfolios", getWorkPortfolios)
 
   return (
     <>
-      <Navbar 
-        user={user} 
-        links={navLinks}
-        fullname={props.fullname}
-      />
+      <Button onClick={useModal.onOpen}>New</Button>
+      {isLoading ? 
+        <h1>Loading...</h1> :
+        portfolios.length ?
+          portfolios.map((portfolio, idx) => (
+            <h1 key={idx}>Portfolio</h1>
+          ))
+          : <h1>No work portfolios yet</h1>
+      }
+      <CreateModal {...useModal} />
     </>
   )
 }
-
 
 export default PortfolioLayout

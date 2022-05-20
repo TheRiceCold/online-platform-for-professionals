@@ -9,26 +9,26 @@ import {
 import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
-import {useUsers} from "@/context/users/Context"
+import { useWorkPortfolios } from "@/context/users/professionals/work_portfolios/Context"
 
-function SettingsModal({onClose, isOpen}) {
+function CreateModal({onClose, isOpen}) {
   const {
     inputs,
     resolver,
-    updateUserProfessional,
-  } = useUsers("professional")
+    createWorkPorfolio
+  } = useWorkPortfolios()
 
   const formHook = useForm({resolver})
-  const mutation = useMutation(updateUserProfessional, { })
+  const mutation = useMutation(createWorkPorfolio, { })
   const submitHandler = data => mutation.mutate({...data})
-
+ 
   return (
     <Modal onClose={onClose} size="lg" isOpen={isOpen}>
       <ModalOverlay/>
       <ModalContent>
-        <ModalCloseButton />
+        <ModalCloseButton/>
         <ModalHeader>
-          Account Settings
+          New Portfolio
         </ModalHeader>
         <ModalBody mb={4}>
           <Form
@@ -44,4 +44,4 @@ function SettingsModal({onClose, isOpen}) {
   )
 }
 
-export default SettingsModal
+export default CreateModal
