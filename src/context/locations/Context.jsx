@@ -1,27 +1,23 @@
 import Axios from "@/utils/axios"
 import {createContext} from "react"
-import {useQuery} from "react-query"
-// import {useAppState} from "@/context/state/Context"
 
 const LocationsContext = createContext()
 
 const LocationsProvider = ({children}) => {
-  // const {useAuth} = useAppState()
-  // const {user} = useAuth()
   const {Provider} = LocationsContext
 
-  const {data: cities} = useQuery("cities", async () => {
+  const getCities = async () => {
     const {data} = await Axios.get("cities")
-    return data.data
-  })
+    return data
+  }
 
-  const {data: regions} = useQuery("regions", async () => { 
+  const getRegions = async () => { 
     const {data} = await Axios.get("regions")
-    return data.data
-  })
+    return data
+  }
 
   return (
-    <Provider value={{cities, regions}}>
+    <Provider value={{getRegions, getCities}}>
       {children}
     </Provider>
   )

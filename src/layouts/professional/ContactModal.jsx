@@ -22,7 +22,7 @@ function ContactModal({onClose, isOpen, contactInfo}) {
         <ModalContent>
           <ModalHeader>Contact Info</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
+          <ModalBody mb={4}>
             <strong>
               Field: {field}
             </strong> <br/>
@@ -33,9 +33,6 @@ function ContactModal({onClose, isOpen, contactInfo}) {
               Office Address: {officeAddress}
             </strong>
           </ModalBody>
-          <ModalFooter>
-            <Button>Edit</Button> 
-          </ModalFooter>
         </ModalContent>
       </Modal>
   )

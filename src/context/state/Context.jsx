@@ -40,6 +40,8 @@ const AppStateProvider = ({children}) => {
       useAdmin,
       useClients,
       useProfessionals,
+
+      // Helpers
       useLocations,
     }}>
       <LocationsProvider>

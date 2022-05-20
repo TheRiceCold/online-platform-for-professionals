@@ -2,18 +2,34 @@ import styles from "@/styles/Auth.module.sass"
 
 import Head from "next/head"
 import {useState} from "react"
-import {useMutation} from "react-query"
 import AuthLayout from "@/layouts/auth/layout"
+import {useMutation, useQueries} from "react-query"
 import {useAppState} from "@/context/state/Context"
 
 function SignUp() {
-  const {useAuth} = useAppState() 
+  const {useAuth, useLocations} = useAppState() 
   const [alerts, setAlerts] = useState([])
+  const {
+    getCities,
+    getRegions
+  } = useLocations()
   const {
     signup, 
     signupInputs,
     SignupStatuses
   } = useAuth()
+
+  useQueries([
+    { 
+      queryKey: "cities", 
+      queryFn: getCities 
+    }, 
+    { 
+      queryKey: "regions", 
+      queryFn: getRegions
+    }
+  ])
+
   const status = new SignupStatuses(setAlerts)
   
   const mutation = useMutation(signup, { 
