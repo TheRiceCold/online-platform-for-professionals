@@ -19,7 +19,10 @@ function SignUp() {
     SignupStatuses
   } = useAuth()
 
-  useQueries([
+  const [
+    {data: cities}, 
+    {data: regions}
+  ] = useQueries([
     { 
       queryKey: "cities", 
       queryFn: getCities 
@@ -45,7 +48,7 @@ function SignUp() {
       <AuthLayout 
         alerts={alerts}
         mutation={mutation}
-        inputs={signupInputs}
+        inputs={signupInputs(regions)}
       />
     </main>
   )

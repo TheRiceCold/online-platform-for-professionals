@@ -1,6 +1,4 @@
-import regions from "@/data/regions"
-
-const Inputs = [
+const Inputs = (regions) => [
   {
     heading: "Create an account",
     inputs: [
