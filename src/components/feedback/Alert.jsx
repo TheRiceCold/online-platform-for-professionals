@@ -9,7 +9,7 @@ import {
   Alert as ChakraAlert, 
 } from '@chakra-ui/react'
 
-function Alert({message, status}) {
+function Alert({message, status, variant}) {
   const {isOpen, onClose} = useDisclosure({defaultIsOpen: true})
 
   return isOpen && (
@@ -17,7 +17,7 @@ function Alert({message, status}) {
       <ChakraAlert 
         mb={1}
         status={status} 
-        variant="left-accent"
+        variant={variant ? variant : "left-accent"}
         className={styles.alert}
       >
         <Flex>

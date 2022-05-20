@@ -9,17 +9,18 @@ import {
 import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
-import { useWorkPortfolios } from "@/context/users/professionals/work_portfolios/Context"
+import Alert from "@/components/feedback/Alert"
+import {useWorkPortfolios} from "@/context/users/professionals/work_portfolios/Context"
 
 function CreateModal({onClose, isOpen}) {
   const {
     inputs,
     resolver,
-    createWorkPorfolio
+    createWorkPortfolio
   } = useWorkPortfolios()
 
   const formHook = useForm({resolver})
-  const mutation = useMutation(createWorkPorfolio, { })
+  const mutation = useMutation(createWorkPortfolio)
   const submitHandler = data => mutation.mutate({...data})
  
   return (
@@ -30,6 +31,7 @@ function CreateModal({onClose, isOpen}) {
         <ModalHeader>
           New Portfolio
         </ModalHeader>
+        <Alert message="Success" status="success" variant="top-accent"/>
         <ModalBody mb={4}>
           <Form
             inputs={inputs}

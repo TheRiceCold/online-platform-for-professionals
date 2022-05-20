@@ -15,10 +15,8 @@ function Actions(user) {
     return await Axios.get(url, config)
   }
 
-  this.create = async (professionalId, data) => { 
-    const url = path(professionalId)
-    return await Axios.post(url, data, config)
-  }
+  this.create = async data => 
+    await Axios.post(path, data, config)
 
   this.update = async (professionalId, id, data) => {
     const url = path(professionalId)+id

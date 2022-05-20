@@ -10,6 +10,7 @@ import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
 import {useUsers} from "@/context/users/Context"
+import Alert from "@/components/feedback/Alert"
 
 function SettingsModal({onClose, isOpen}) {
   const {
@@ -30,6 +31,7 @@ function SettingsModal({onClose, isOpen}) {
         <ModalHeader>
           Account Settings
         </ModalHeader>
+        <Alert message="Error" status="error" variant="top-accent"/>
         <ModalBody mb={4}>
           <Form
             inputs={inputs}
