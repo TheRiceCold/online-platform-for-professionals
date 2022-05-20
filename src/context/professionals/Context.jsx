@@ -1,5 +1,7 @@
 import {navLinks} from "./navLinks"
 import {createContext} from "react"
+import {useRouter} from "next/router"
+import {userMenuItems} from "./userMenuItems"
 import {zodResolver} from "@hookform/resolvers/zod"
 import {useAppState} from "@/context/state/Context"
 
@@ -18,7 +20,8 @@ const ProfessionalsContext = createContext()
 const ProfessionalsProvider = ({children}) => {
   const {Provider} = ProfessionalsContext
   const {useAuth} = useAppState()
-  const {user} = useAuth()
+  const {user, logout} = useAuth()
+  const router = useRouter()
 
   const call = new Actions(user)
   const callReviews = new ReviewActions(user)
@@ -27,9 +30,13 @@ const ProfessionalsProvider = ({children}) => {
   const callCalendlyToken = new CalendlyTokenActions(user)
   const userImg = "https://avatars.dicebear.com/api/male/username.svg" 
 
+  const menuItems = openSettings => 
+    userMenuItems(user, router, logout, openSettings)
+
   return (
     <Provider value={{
-      navLinks: navLinks(user.id),
+      userMenuItems: menuItems,
+      navLinks: navLinks(user.professionalId),
 
       // Form
       inputs: Inputs, 

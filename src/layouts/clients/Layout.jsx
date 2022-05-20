@@ -5,7 +5,7 @@ import {useAppState} from "@/context/state/Context"
 
 const ClientLayout = ({fullname}) => {
   const {useAuth, useClients} = useAppState()
-  const {navLinks} = useClients()
+  const {navLinks, userMenuItems} = useClients()
   const {user} = useAuth()
 
   return (
@@ -13,8 +13,9 @@ const ClientLayout = ({fullname}) => {
         <Navbar 
           user={user}
           styles={styles}
-          links={navLinks(user.clientId)}
           fullname={fullname}
+          userMenuItems={userMenuItems}
+          links={navLinks}
         />
     </>
   )

@@ -11,6 +11,7 @@ function ProfessionalLayout({fullname}) {
     userImg,
     navLinks,
     getLocation,
+    userMenuItems,
     getContactInfo,
   } = useProfessionals()
 
@@ -23,6 +24,7 @@ function ProfessionalLayout({fullname}) {
         styles={styles}
         links={navLinks}
         fullname={fullname}
+        userMenuItems={userMenuItems}
       />
       <section className={styles.layout}>
         <Header 

@@ -8,5 +8,4 @@ const navLinks = id => {
   ]
 }
 
-
 export {navLinks}

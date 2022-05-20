@@ -3,8 +3,8 @@ const navLinks = id => {
   return [
     { label: "Professionals", href: "/professionals" },
     { label: "Connections", href: prefix("connections") },
+    { label: "Bookings", href: "/bookings" },
   ]
 }
-
 
 export {navLinks}

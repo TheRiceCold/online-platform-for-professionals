@@ -8,15 +8,14 @@ import {
 } from "@chakra-ui/react"
 import {Fragment} from "react"
 import dynamic from "next/dynamic"
-import {useRouter} from "next/router"
-import {useAppState} from "@/context/state/Context"
 
 function MenuList(props) {
-  const {user, img, fullname} = props
+  const {
+    img, 
+    items,
+    fullname, 
+  } = props
   const useModal = useDisclosure()
-  const {useAuth} = useAppState()
-  const {logout} = useAuth()
-  const router = useRouter()
 
   return (
     <>
@@ -30,7 +29,7 @@ function MenuList(props) {
           </Stack>
         </Flex>
         <MenuDivider/>
-        {menuItems(user, router, logout, useModal.onOpen)
+        {items(useModal.onOpen)
           .map((item, i) => ( 
             <Fragment key={i}> 
               {item === "divider" ?
@@ -51,25 +50,3 @@ function MenuList(props) {
 export default MenuList
 
 const SettingsModal = dynamic(() => import("./SettingsModal"))
-
-const menuItems = (user, router, logout, onOpen) => [
-  {
-    label: "Profile", 
-    handleOnClick: () => 
-      router.push(`/professionals/${user.id}`)
-  },
-  {
-    label: "Connections", 
-    handleOnClick: () => 
-      router.push(`/professionals/${user.id}/connections`)
-  },
-  {
-    label: "Settings",
-    handleOnClick: onOpen
-  },
-  "divider",
-  {
-    label: "Sign out",
-    handleOnClick: logout
-  }
-]

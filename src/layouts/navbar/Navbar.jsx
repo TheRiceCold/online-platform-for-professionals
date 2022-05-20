@@ -15,7 +15,14 @@ import SearchBar from "@/components/SearchBar"
 import NextLink from "@/components/navigation/Link"
 import {useAppState} from "@/context/state/Context"
 
-function Navbar({fullname, links, styles}) {
+function Navbar(props) {
+  const {
+    links,
+    styles,
+    fullname,
+    userMenuItems,
+  } = props
+
   const {useAuth} = useAppState()
   const {user} = useAuth()
   const {isOpen, onOpen, onClose} = useDisclosure()
@@ -56,6 +63,7 @@ function Navbar({fullname, links, styles}) {
                   img={img}
                   user={user}
                   fullname={fullname}
+                  items={userMenuItems}
                 />
               }
           </Stack>

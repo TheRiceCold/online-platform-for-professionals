@@ -1,9 +1,7 @@
 import {
   Modal, 
-  Button,
   ModalBody,
   ModalHeader,
-  ModalFooter,
   ModalContent,
   ModalOverlay,
   ModalCloseButton,
@@ -22,17 +20,7 @@ function SettingsModal({onClose, isOpen}) {
   } = useProfessionals()
 
   const formHook = useForm({resolver})
-  const mutation = useMutation(updateUserProfessional, {
-    onSuccess: res => {
-      console.log(res)
-    },
-    onError: res => {
-      console.log(res)
-    },
-    onSettled: res => {
-      console.log(res)
-    }
-  })
+  const mutation = useMutation(updateUserProfessional, { })
   const submitHandler = data => mutation.mutate({...data})
 
   return (

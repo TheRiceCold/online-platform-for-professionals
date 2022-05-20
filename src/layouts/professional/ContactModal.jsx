@@ -5,8 +5,6 @@ import {
   ModalContent,
   ModalOverlay,
   ModalCloseButton,
-  ModalFooter,
-  Button,
 } from "@chakra-ui/react"
 
 function ContactModal({onClose, isOpen, contactInfo}) {
