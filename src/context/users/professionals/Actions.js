@@ -6,7 +6,7 @@ function Actions(user) {
   const path = "professionals/"
   const config = { headers: { Authorization: token } }
 
-  this.getAll = async () => 
+  this.getAll = async() => 
     await Axios.get(path, config)
 
   this.getById = async id => {
@@ -22,7 +22,7 @@ function Actions(user) {
       } 
     }, config)
 
-  this.update = async (id, data) => 
+  this.update = async(id, data) => 
     await Axios.patch(path+id, {
       professional: { ...data }
     }, config)
@@ -40,12 +40,12 @@ function Actions(user) {
     return included[0].attributes
   }
 
-  this.getFullname = async () => {
+  this.getFullname = async() => {
     const {firstName, lastName} = await this.getAttributes()
     return capitalize(`${firstName} ${lastName}`)
   }
 
-  this.getLocation = async () => {
+  this.getLocation = async() => {
     const {city, region} = await this.getAttributes()
     return `${city}, ${region}, Philippines`
   }
