@@ -7,6 +7,7 @@ import {useDisclosure as useModal} from "@chakra-ui/react"
 import Links from "./Links"
 import Modal from "./Modal"
 import AuthForm from "./Form"
+import Navbar from "../navbar/Navbar"
 
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount"
@@ -23,6 +24,7 @@ function AuthLayout(props) {
 
   return (!user.isAuth && 
     <>
+      <Navbar styles={styles}/>
       {alerts && 
         alerts.map((alert, i) => (
           <Alert key={i} {...alert}/>

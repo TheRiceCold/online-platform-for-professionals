@@ -18,7 +18,7 @@ const ClientsProvider = ({children}) => {
 
   return (
     <Provider value={{
-      userMenuItems: menuItems,
+      menuItems,
       navLinks: navLinks(user.clientId),
 
       getClients: call.getAll,

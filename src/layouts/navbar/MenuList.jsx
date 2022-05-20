@@ -9,29 +9,30 @@ import {
 import {Fragment} from "react"
 import dynamic from "next/dynamic"
 import {useAuth} from "@/context/auth/Context"
+import {useUsers} from "@/context/users/Context"
 
 function MenuList() {
-  const {userRole} = useAuth()
-  const {
-    img, 
-    items,
-    fullname, 
-  } = useUsers(userRole)
   const useModal = useDisclosure()
+  const {
+    userRole,
+    userImage, 
+    userFullname, 
+  } = useAuth()
+  const {menuItems} = useUsers(userRole)
 
   return (
     <>
       <ChakraMenuList>
         <Flex alignItems="center" ml={3}>
-          <Avatar size="md" src={img}/>
+          <Avatar size="md" src={userImage}/>
           <Stack ml={2} spacing={0}>
             <Heading size="3x1">
             </Heading>
-            <Text>{fullname}</Text>
+            <Text>{userFullname}</Text>
           </Stack>
         </Flex>
         <MenuDivider/>
-        {items(useModal.onOpen)
+        {menuItems(useModal.onOpen)
           .map((item, i) => ( 
             <Fragment key={i}> 
               {item === "divider" ?

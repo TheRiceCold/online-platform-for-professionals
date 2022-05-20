@@ -13,21 +13,16 @@ import {
 import Links from "./Links"
 import UserMenu from "./UserMenu"
 import SearchBar from "@/components/SearchBar"
-import {useAuth} from "@/context/auth/Context"
-import {useUsers} from "@/context/users/Context"
 import NextLink from "@/components/navigation/Link"
 
-function Navbar({styles}) {
+import {useAuth} from "@/context/auth/Context"
+
+function Navbar({styles, links}) {
   const {user} = useAuth()
-
-  const role = user?.attributes.role.toLowerCase()
-  const {links} = useUsers(role)
-
-  const {colorMode, toggleColorMode} = useColorMode()
   const {isOpen, onOpen, onClose} = useDisclosure()
+  const {colorMode, toggleColorMode} = useColorMode()
 
   const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
-
   return (
     <nav className={styles.navbar}>
       <div className={styles.nav_content}>

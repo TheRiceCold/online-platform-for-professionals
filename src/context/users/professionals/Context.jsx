@@ -27,14 +27,13 @@ const ProfessionalsProvider = ({children}) => {
   const callServices = new ServiceActions(user) 
   const callPortfolios = new PortfolioActions(user)
   const callCalendlyToken = new CalendlyTokenActions(user)
-  const userImg = "https://avatars.dicebear.com/api/male/username.svg" 
 
   const menuItems = openSettings => 
     userMenuItems(user, router, logout, openSettings)
 
   return (
     <Provider value={{
-      userMenuItems: menuItems,
+      menuItems,
       navLinks: navLinks(user.professionalId),
 
       // Form
@@ -42,8 +41,6 @@ const ProfessionalsProvider = ({children}) => {
       resolver: zodResolver(Schema),
 
       // User Details
-      userImg,
-      getFullname: call.getFullname,
       getLocation: call.getLocation,
       getContactInfo: call.getContactInfo,
 

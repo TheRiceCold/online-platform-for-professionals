@@ -4,7 +4,7 @@ import {useAuth} from "@/context/auth/Context"
 
 const Home = () => {
   const router = useRouter()
-  const {userRole} = useAuth()
+  const {userRole, user} = useAuth()
 
   const homeContent = () => {
     switch(userRole) {
