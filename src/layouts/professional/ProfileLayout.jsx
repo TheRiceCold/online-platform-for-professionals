@@ -3,17 +3,16 @@ import styles from "@/styles/Professionals.module.sass"
 import Header from "./Header"
 import {useQuery} from "react-query"
 import Navbar from "../navbar/Navbar"
-import {useAppState} from "@/context/state/Context"
+import {useUsers} from "@/context/users/Context"
 
 function ProfessionalLayout({fullname}) {
-  const {useProfessionals} = useAppState()
   const {
     userImg,
     navLinks,
     getLocation,
     userMenuItems,
     getContactInfo,
-  } = useProfessionals()
+  } = useUsers("professional")
 
   const {data: location} = useQuery("location", getLocation)
   const {data: contactInfo, isLoading} = useQuery("contact_info", getContactInfo)

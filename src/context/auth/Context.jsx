@@ -3,7 +3,6 @@ import {
   useReducer,
   createContext
 } from "react"
-import {useQuery} from "react-query"
 
 import Actions from "./Actions"
 // Login

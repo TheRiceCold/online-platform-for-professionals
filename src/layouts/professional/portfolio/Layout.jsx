@@ -1,9 +1,10 @@
 import Navbar from "@/layouts/navbar/Navbar"
+import {useUsers} from "@/context/users/Context"
 import {useAppState} from "@/context/state/Context"
 
 function PortfolioLayout(props) {
-  const {useAuth, useProfessionals} = useAppState()
-  const {navLinks} = useProfessionals()
+  const {useAuth} = useAppState()
+  const {navLinks} = useUsers("professional")
   const {user} = useAuth()
 
   return (

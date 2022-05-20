@@ -9,15 +9,14 @@ import {
 import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
-import {useAppState} from "@/context/state/Context"
+import {useUsers} from "@/context/users/Context"
 
 function SettingsModal({onClose, isOpen}) {
-  const {useProfessionals} = useAppState() 
   const {
     inputs,
     resolver,
     updateUserProfessional,
-  } = useProfessionals()
+  } = useUsers("professional")
 
   const formHook = useForm({resolver})
   const mutation = useMutation(updateUserProfessional, { })

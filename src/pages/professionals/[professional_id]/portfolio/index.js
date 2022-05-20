@@ -1,15 +1,12 @@
-import styles from "@/styles/Layouts.module.sass"
-
 import Head from "next/head"
-import {useAppState} from "@/context/state/Context"
+import {useUsers} from "@/context/users/Context"
 import Layout  from "@/layouts/professional/portfolio/Layout"
 
 function Portfolio() {
-  const {useProfessionals} = useAppState()
-  const {fullname} = useProfessionals()
+  const {fullname} = useUsers("professional")
 
   return (
-    <main className={styles.main}>
+    <main>
       <Head>
         <title>{fullname} | Portfolio</title>
       </Head>

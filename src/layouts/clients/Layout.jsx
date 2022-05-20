@@ -1,11 +1,10 @@
 import styles from "@/styles/Clients.module.sass"
 
 import Navbar from "../navbar/Navbar"
-import {useAppState} from "@/context/state/Context"
+import {useUsers} from "@/context/users/Context"
 
 const ClientLayout = ({fullname}) => {
-  const {useClients} = useAppState()
-  const {navLinks, userMenuItems} = useClients()
+  const {navLinks, userMenuItems} = useUsers("client")
 
   return (
     <>
