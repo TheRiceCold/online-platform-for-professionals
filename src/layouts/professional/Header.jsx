@@ -17,7 +17,7 @@ function Header(props) {
     img, contactInfo,
     fullname, location, 
   } = props
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const useModal = useDisclosure()
 
   return (
     <header className={styles.user_header}>
@@ -41,7 +41,7 @@ function Header(props) {
             </Skeleton>
             <Skeleton h="20px" mb={2} isLoaded={!isLoading}>
               <Text fontSize="16px">
-                {capitalize(contactInfo?.field)}
+                {capitalize(contactInfo?.headline ?? "")}
               </Text>
             </Skeleton>
             <Skeleton h="18px" isLoaded={!isLoading}>
@@ -50,7 +50,7 @@ function Header(props) {
                 <Link 
                   color="blue.500" 
                   fontWeight={500}
-                  onClick={onOpen}
+                  onClick={useModal.onOpen}
                 >
                   Contact Info
                 </Link>
@@ -60,8 +60,8 @@ function Header(props) {
         </div>
       </div>
       <ContactModal 
-        isOpen={isOpen}
-        onClose={onClose}
+        {...useModal} 
+        contactInfo={contactInfo}
       />
     </header>
   )
