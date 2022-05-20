@@ -5,8 +5,8 @@ function Actions(user) {
   const path = id => `professionals/${id}/calendly_tokens`
   const config = { headers: { Authorization: token } }
 
-  this.getById = async (professionalId, id) => { 
-    const url = path(professionalId)+id
+  this.getById = async id => { 
+    const url = path(user.professionalId)+id
     return await Axios.get(url, config)
   }
 
