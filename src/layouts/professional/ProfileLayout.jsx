@@ -1,23 +1,37 @@
 import styles from "@/styles/Professionals.module.sass"
 
 import Header from "./Header"
+import {useQuery} from "react-query"
 import Navbar from "../navbar/Navbar"
 import {useAppState} from "@/context/state/Context"
 
-function ProfessionalLayout(props) {
-  const {useAuth, useProfessionals} = useAppState()
-  const {navLinks} = useProfessionals()
-  const {user} = useAuth()
+function ProfessionalLayout({fullname}) {
+  const {useProfessionals} = useAppState()
+  const {
+    userImg,
+    navLinks,
+    getLocation,
+    getContactInfo,
+  } = useProfessionals()
+
+  const {data: contactInfo, isLoading} = useQuery("contact_info", getContactInfo)
+  const {data: location} = useQuery("location", getLocation)
 
   return (
     <>
       <Navbar 
-        user={user}
+        styles={styles}
         links={navLinks}
-        fullname={props.fullname}
+        fullname={fullname}
       />
       <section className={styles.layout}>
-        <Header {...props}/>
+        <Header 
+          img={userImg}
+          fullname={fullname}
+          location={location} 
+          isLoading={isLoading}
+          contactInfo={contactInfo}
+        />
       </section>
     </>
   )

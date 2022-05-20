@@ -4,6 +4,7 @@ import Links from "./Links"
 import Modal from "./Modal"
 import AuthForm from "./Form"
 import {useRouter} from "next/router"
+import Navbar from "../navbar/Navbar"
 import useMount from "@/hooks/useMount"
 import Alert from "@/components/feedback/Alert"
 import {Container, Link} from "@chakra-ui/react"
@@ -22,6 +23,7 @@ function AuthLayout(props) {
 
   return (!user.isAuth && 
     <>
+      <Navbar styles={styles}/>
       {alerts && 
         alerts.map((alert, i) => (
           <Alert key={i} {...alert}/>

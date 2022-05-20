@@ -9,7 +9,7 @@ import {TriangleDownIcon} from "@chakra-ui/icons"
 const UserMenu = props => (
   <Menu>
     <MenuButton>
-      <Flex align="center" mr={2}>
+      <Flex align="center">
         <Avatar 
           mr={1} 
           size="xs" 

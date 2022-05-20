@@ -8,31 +8,18 @@ import RegisterLayout from "@/layouts/professional/RegisterLayout"
 
 function Professional() {
   const {useAuth, useProfessionals} = useAppState()
-  const {user} = useAuth()
-  const {
-    userImg,
-    getFullname,
-    getLocation,
-    getContactInfo,
-  } = useProfessionals()
-
-  const {data: contactInfo, isLoading} = useQuery("contact_info", getContactInfo)
+  const {getFullname} = useProfessionals()
   const {data: fullname} = useQuery("fullname", getFullname)
-  const {data: location} = useQuery("location", getLocation)
+  const {user} = useAuth()
 
   return (
     <main className={styles.main}>
       <Head>
         <title>{fullname} | Professional</title>
       </Head>
+      {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
       {user.professionalId ? 
-        <ProfileLayout
-          img={userImg}
-          location={location} 
-          fullname={fullname}
-          isLoading={isLoading}
-          contactInfo={contactInfo}
-        /> :
+        <ProfileLayout fullname={fullname}/> :
         <RegisterLayout/>
       }
     </main>

@@ -1,5 +1,3 @@
-import styles from "@/styles/Professionals.module.sass"
-
 import {
   SunIcon, MoonIcon,
   HamburgerIcon, CloseIcon
@@ -15,8 +13,11 @@ import Links from "./Links"
 import UserMenu from "./UserMenu"
 import SearchBar from "@/components/SearchBar"
 import NextLink from "@/components/navigation/Link"
+import {useAppState} from "@/context/state/Context"
 
-function Navbar({user, fullname, links}) {
+function Navbar({fullname, links, styles}) {
+  const {useAuth} = useAppState()
+  const {user} = useAuth()
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
   const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
@@ -32,10 +33,7 @@ function Navbar({user, fullname, links}) {
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
         />
-        <NextLink 
-          className={styles.logo}
-          to={`/professionals/${user.id}`}
-        >
+        <NextLink to="" className={styles.logo}>
           <Image 
             mr={8}
             alt="logo"
@@ -46,18 +44,20 @@ function Navbar({user, fullname, links}) {
             }
           />
         </NextLink>
-        <SearchBar colorMode={colorMode}/>
+        {user.isAuth && <SearchBar colorMode={colorMode}/>}
         <Flex alignItems="center">
           <Links links={links}/>
           <Stack direction="row" spacing={6}>
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-            <UserMenu 
-              img={img}
-              user={user}
-              fullname={fullname}
-            />
+              {user.isAuth && 
+                <UserMenu 
+                  img={img}
+                  user={user}
+                  fullname={fullname}
+                />
+              }
           </Stack>
         </Flex>
       </div>
