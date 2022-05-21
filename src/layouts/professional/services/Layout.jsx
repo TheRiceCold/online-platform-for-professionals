@@ -4,6 +4,8 @@ import {
   Heading,
   useDisclosure,
 } from "@chakra-ui/react"
+import CreateModal from "./CreateModal"
+
 import {useQuery} from "react-query"
 import {useServices} from "@/context/users/professionals/services/Context"
 
@@ -13,7 +15,29 @@ function ServicesLayout() {
   const {data: services, isLoading} = useQuery("services", getServices)
 
   return (
-    <h1>Services</h1>
+    <>
+      <Button onClick={useModal.onOpen}>New</Button>
+      {isLoading ?
+        <h1>Loading...</h1> :
+        services.length ?
+          services.map((service, idx) => {
+            const {
+              details, title,
+              minPrice, maxPrice
+            } = service.attributes
+
+            return (
+              <div key={idx}>
+                <Heading>{title}</Heading>
+                <Text>{details}</Text>
+                <Text>{minPrice} - {maxPrice}</Text>
+              </div>
+            )
+          })
+          : <h1>No work services yet</h1>
+      }
+      <CreateModal {...useModal} />
+    </>
   )
 }
 

@@ -8,10 +8,12 @@ const Inputs = [
     label: "Service Details"
   },
   {
+    type: "number",
     id: "min_price",
     label: "Minimum Price"
   },
   {
+    type: "number",
     id: "max_price",
     label: "Maximum Price"
   }
