@@ -1,90 +1,45 @@
-import {
-  Text,
-  Button,
-  Heading,
-  Flex,
-} from "@chakra-ui/react"
-import {
-  EditIcon, 
-  DeleteIcon
-} from "@chakra-ui/icons"
 import FormModal from "./FormModal"
-import MoonLoader from "react-spinners/MoonLoader"
+import PortfolioItems from "./Items"
+import {Button} from "@chakra-ui/react"
 import AlertDialog from "@/components/overlay/AlertDialog"
 
-import {useState} from "react"
-import {useDisclosure} from "@chakra-ui/react"
 import {
-  useQuery, 
   useMutation,
   useQueryClient
 } from "react-query"
-import {
-  useWorkPortfolios
-} from "@/contexts/users/professionals/work_portfolios/Context"
+import {useState} from "react"
+import {useDisclosure} from "@chakra-ui/react"
+import {useWorkPortfolios} from "@/work_portfolios_context"
 
 function PortfolioLayout() {
-  const {
-    getWorkPortfolios, 
-    deleteWorkPortfolio
-  } = useWorkPortfolios()
   const modal = useDisclosure()
   const queryClient = useQueryClient()
+  const [alerts, setAlerts] = useState()
   const deleteAlertDialog = useDisclosure()
+  const {deleteWorkPortfolio} = useWorkPortfolios()
 
   const [action, setAction] = useState("create")
   const [selectedId, setSelectedId] = useState()
 
-  const {isLoading, data: portfolios} = useQuery("work_portfolios", getWorkPortfolios)
+  const deleteMutation = useMutation(deleteWorkPortfolio, {
+    onSuccess: async() => {
+      deleteAlertDialog.onClose() 
+      queryClient.invalidateQueries("work_portfolios")
+    }
+  })
 
-  const deleteMutation = useMutation(deleteWorkPortfolio)
-
-  const handleUpdate = id => {
-    setAction("update")
-    setSelectedId(id)
-    modal.onOpen()
-  }
-
-  const handleDeleteAlert = id => {
-    setSelectedId(id)
-    deleteAlertDialog.onOpen()
-  }
-
-  const handleDelete = async () => {
-    deleteAlertDialog.onClose() 
+  const handleDelete = async () => 
     await deleteMutation.mutateAsync(selectedId)
-    queryClient.invalidateQueries("work_portfolios")
-  }
 
   return (
     <>
       <Button onClick={modal.onOpen}>New</Button>
-      {isLoading ? 
-        <Flex alignItems="center" h="50vh">
-        <MoonLoader color="white"/> 
-        </Flex>
-        :
-        portfolios?.length ?
-          portfolios.map((portfolio) => {
-            const {id} = portfolio
-            const {details, title} = portfolio?.attributes
-            return (
-              <div key={id}>
-                <Heading>{title}</Heading>
-                <Text>{details}</Text>
-                <EditIcon 
-                  cursor="pointer" 
-                  onClick={() => handleUpdate(id)}
-                />
-                <DeleteIcon 
-                  cursor="pointer" 
-                  onClick={() => handleDeleteAlert(id)}
-                />
-              </div>
-            )
-          })
-          : <h1>No work portfolios yet</h1>
-      }
+      <PortfolioItems
+        modal={modal}
+        setAction={setAction}
+        setSelectedId={setSelectedId}
+        deleteAlertDialog={deleteAlertDialog}
+      />
       <FormModal 
         {...modal}
         action={action}

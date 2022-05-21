@@ -1,20 +1,20 @@
 import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
 
-import {useState} from "react"
-import {useMutation} from "react-query"
-import {useForm} from "react-hook-form"
 import {
-  useWorkPortfolios
-} from "@/contexts/users/professionals/work_portfolios/Context"
+  useMutation,
+  useQueryClient
+} from "react-query"
+import {useForm} from "react-hook-form"
+import {useWorkPortfolios} from "@/work_portfolios_context"
 
 function FormModal(props) {
   const {action, selectedId} = props
-  const [alert, setAlert] = useState()
   const {
     createWorkPortfolio, 
     updateWorkPortfolio
   } = useWorkPortfolios()
+  const queryClient = useQueryClient()
   const {inputs, resolver} = useWorkPortfolios()
   const formHook = useForm({resolver})
 
@@ -23,8 +23,8 @@ function FormModal(props) {
       ? updateWorkPortfolio 
       : createWorkPortfolio, {
       onSuccess: () => {
-        console.log("success")
-        // setAlert({message}) 
+        props.onClose()
+        queryClient.invalidateQueries("work_portfolios")
       }
     })
 
