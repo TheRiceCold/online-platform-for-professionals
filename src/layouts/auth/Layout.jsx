@@ -1,14 +1,11 @@
 import styles from "@/styles/Auth.module.sass"
 
-import {
-  Link,
-  Container, 
-} from "@chakra-ui/react"
 import Links from "./Links"
 import Modal from "./Modal"
 import AuthForm from "./Form"
 import Navbar from "../navbar/Navbar"
 import Alert from "@/components/feedback/Alert"
+import {Link, Container} from "@chakra-ui/react"
 
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount"

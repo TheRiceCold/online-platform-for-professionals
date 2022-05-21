@@ -1,42 +1,26 @@
-main.main
+@import "includes/main_layout"
+
+section.layout
+  width: 100vw
   display: flex
+  margin-top: 16px
   align-items: center
   flex-direction: column
 
-  nav.navbar
-    width: 95%
-    .nav_content
-      height: 4em 
-      display: flex 
-      justify-content: space-between
-      .logo
-        display: flex
-        cursor: pointer
-        align-items: center
-        img 
-          height: 32px
-
-  section.layout
-    width: 100vw
+  header.user_header
+    width: 90%
+    flex-grow: 1
     display: flex
     margin-top: 16px
-    align-items: center
-    flex-direction: column
 
-    header.user_header
-      width: 90%
-      flex-grow: 1
+    .header_content
+      width: 95%
       display: flex
-      margin-top: 16px
 
-      .header_content
-        width: 95%
+      .user_info
         display: flex
-
-        .user_info
+        margin-left: 16px
+        padding: 10px 16px
+        .user_info_content
           display: flex
-          margin-left: 16px
-          padding: 10px 16px
-          .user_info_content
-            display: flex
-            flex-direction: column
+          flex-direction: column

@@ -1,6 +1,7 @@
 import FormModal from "./FormModal"
 import PortfolioItems from "./Items"
 import {Button} from "@chakra-ui/react"
+import Alert from "@/components/feedback/Alert"
 import AlertDialog from "@/components/overlay/AlertDialog"
 
 import {
@@ -33,6 +34,7 @@ function PortfolioLayout() {
 
   return (
     <>
+      <Alert message="message" status="success"/>
       <Button onClick={modal.onOpen}>New</Button>
       <PortfolioItems
         modal={modal}
