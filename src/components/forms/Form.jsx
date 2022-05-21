@@ -1,6 +1,6 @@
+import Button from "../Button"
 import MultiForm from "./MultiForm"
 import FormControl from "./FormControl"
-import {Button} from "@chakra-ui/react"
 
 function Form(props) {
   const { 
@@ -35,9 +35,9 @@ function Form(props) {
       {!isGrouped &&
         <Button 
           mt={8} 
-          w="100%" 
-          bg="teal" 
+          w="full"
           type="submit"
+          variant="primary"
           isLoading={mutation.isLoading}
         >
           {submitValue}

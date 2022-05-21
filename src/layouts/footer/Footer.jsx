@@ -31,10 +31,9 @@ const Logo = (props) => {
 const SocialButton = ({children, label, href}) => {
   return (
     <Button
+      w={8} h={8}
       bg={useColorModeValue('blackAlpha.100', 'whiteAlpha.100')}
       rounded={'full'}
-      w={8}
-      h={8}
       cursor={'pointer'}
       as={'a'}
       href={href}
@@ -48,8 +47,8 @@ const SocialButton = ({children, label, href}) => {
       <VisuallyHidden>{label}</VisuallyHidden>
       {children}
     </Button>
-  );
-};
+  )
+}
 
 function Footer() {
   return (
@@ -62,7 +61,7 @@ function Footer() {
         py={4}
         as={Stack}
         spacing={4}
-        maxW={'6xl'}
+        maxW={'7xl'}
         align={{ base: 'center', md: 'center' }}
         direction={{ base: 'column', md: 'row' }}
         justify={{ base: 'center', md: 'space-between' }}

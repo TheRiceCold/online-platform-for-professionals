@@ -1,11 +1,11 @@
 import styles from "@/styles/Home.module.sass"
 
 import {
-  Button, Icon,
   Text, Heading,
   Flex, Stack, Container,
 } from '@chakra-ui/react'
 import Navbar from "../navbar/Navbar"
+import Button from "@/components/Button"
 
 function HomeLayout() {
   const navLinks = [
@@ -44,12 +44,7 @@ function HomeLayout() {
             smart “Daily Agenda” every morning.
           </Text>
           <Stack spacing={6} direction={'row'}>
-            <Button
-              rounded={'full'}
-              px={6}
-              colorScheme={'orange'}
-              bg={'orange.400'}
-              _hover={{ bg: 'orange.500' }}>
+            <Button variant="primary">
               Get started
             </Button>
             <Button rounded={'full'} px={6}>
