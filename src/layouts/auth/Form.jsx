@@ -9,7 +9,7 @@ import Modal from "./Modal"
 import Form from "@/components/forms/Form"
 
 import {useForm} from "react-hook-form"
-import {useAuth} from "@/context/auth/Context"
+import {useAuth} from "@/contexts/auth/Context"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 
 function AuthForm(props) {

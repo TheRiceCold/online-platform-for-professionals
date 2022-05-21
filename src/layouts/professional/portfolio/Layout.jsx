@@ -13,19 +13,31 @@ import MoonLoader from "react-spinners/MoonLoader"
 import AlertDialog from "@/components/overlay/AlertDialog"
 
 import {useState} from "react"
-import {useQuery} from "react-query"
 import {useDisclosure} from "@chakra-ui/react"
+import {
+  useQuery, 
+  useMutation,
+  useQueryClient
+} from "react-query"
 import {
   useWorkPortfolios
 } from "@/contexts/users/professionals/work_portfolios/Context"
 
 function PortfolioLayout() {
+  const {
+    getWorkPortfolios, 
+    deleteWorkPortfolio
+  } = useWorkPortfolios()
   const modal = useDisclosure()
+  const queryClient = useQueryClient()
   const deleteAlertDialog = useDisclosure()
+
   const [action, setAction] = useState("create")
   const [selectedId, setSelectedId] = useState()
-  const {getWorkPortfolios, deleteWorkPortfolio} = useWorkPortfolios()
-  const {data: portfolios, isLoading} = useQuery("work_portfolios", getWorkPortfolios)
+
+  const {isLoading, data: portfolios} = useQuery("work_portfolios", getWorkPortfolios)
+
+  const deleteMutation = useMutation(deleteWorkPortfolio)
 
   const handleUpdate = id => {
     setAction("update")
@@ -36,6 +48,12 @@ function PortfolioLayout() {
   const handleDeleteAlert = id => {
     setSelectedId(id)
     deleteAlertDialog.onOpen()
+  }
+
+  const handleDelete = async () => {
+    deleteAlertDialog.onClose() 
+    await deleteMutation.mutateAsync(selectedId)
+    queryClient.invalidateQueries("work_portfolios")
   }
 
   return (
@@ -78,7 +96,7 @@ function PortfolioLayout() {
         buttonLabel="Delete"
         {...deleteAlertDialog}
         header="Delete Portfolio"
-        buttonClick={() => deleteWorkPortfolio(selectedId)}
+        buttonClick={handleDelete}
         label="Are you sure? You can't undo this action afterwards."
       />
     </>

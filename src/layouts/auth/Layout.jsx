@@ -12,7 +12,7 @@ import Alert from "@/components/feedback/Alert"
 
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount"
-import {useAuth} from "@/context/auth/Context"
+import {useAuth} from "@/contexts/auth/Context"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 
 function AuthLayout(props) {

@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react"
 
 import {useQuery} from "react-query"
-import {useUsers} from "@/context/users/Context"
+import {useUsers} from "@/contexts/users/Context"
 
 function ContactModal({onClose, isOpen}) {
   const {getContactInfo} = useUsers("professional")

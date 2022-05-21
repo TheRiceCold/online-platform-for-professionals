@@ -15,10 +15,9 @@ function Alert({message, status, variant}) {
   return isOpen && (
     <Flex className={styles.alertContainer}>
       <ChakraAlert 
-        mb={1}
         status={status} 
-        variant={variant ? variant : "left-accent"}
         className={styles.alert}
+        variant={variant ? variant : "left-accent"}
       >
         <Flex>
           <AlertIcon />
@@ -28,8 +27,7 @@ function Alert({message, status, variant}) {
         </Flex>
         <CloseButton
           onClick={onClose}
-          position='relative'
-          alignSelf='flex-start'
+          className={styles.alertCloseButton}
         />
       </ChakraAlert>
     </Flex>

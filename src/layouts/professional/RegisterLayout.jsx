@@ -5,8 +5,8 @@ import {Heading, Stack} from "@chakra-ui/react"
 import {useState} from "react"
 import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
-import {useAuth} from "@/context/auth/Context"
-import {useUsers} from "@/context/users/Context"
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
 
 const RegisterLayout = () => {
   const [alerts, setAlerts] = useState()
