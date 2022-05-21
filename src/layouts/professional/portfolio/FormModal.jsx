@@ -6,22 +6,33 @@ import {
   ModalOverlay,
   ModalCloseButton,
 } from "@chakra-ui/react"
-import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
+import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
 import Alert from "@/components/feedback/Alert"
 import {useWorkPortfolios} from "@/context/users/professionals/work_portfolios/Context"
 
-function CreateModal({onClose, isOpen}) {
+function FormModal({onClose, isOpen, action, selectedId}) {
+  const {inputs, resolver} = useWorkPortfolios()
+  console.log(action)
   const {
-    inputs,
-    resolver,
-    createWorkPortfolio
+    createWorkPortfolio,
+    updateWorkPortfolio,
+    deleteWorkPortfolio,
   } = useWorkPortfolios()
-
   const formHook = useForm({resolver})
-  const mutation = useMutation(createWorkPortfolio)
-  const submitHandler = data => mutation.mutate({...data})
+  const mutation = useMutation(
+    action === "create" ? 
+      createWorkPortfolio
+      : action === "update" ? 
+        updateWorkPortfolio 
+        : deleteWorkPortfolio
+  )
+  const submitHandler = data => {
+    const submittedData = action === "create" 
+      ? {...data} : {selectedId, ...data}
+    mutation.mutate(submittedData)
+  }
  
   return (
     <Modal onClose={onClose} size="lg" isOpen={isOpen}>
@@ -46,4 +57,4 @@ function CreateModal({onClose, isOpen}) {
   )
 }
 
-export default CreateModal
+export default FormModal
