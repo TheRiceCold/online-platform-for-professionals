@@ -6,10 +6,9 @@ import {
   ModalCloseButton,
   Modal as ChakraModal, 
 } from "@chakra-ui/react"
-import Alert from "../feedback/Alert"
 
 function Modal({children, ...props}) {
-  const {header, alert, isOpen, onClose} = props
+  const {header, isOpen, onClose} = props
 
   return (
     <ChakraModal 
@@ -21,7 +20,6 @@ function Modal({children, ...props}) {
       <ModalContent>
         <ModalCloseButton/>
         <ModalHeader>{header}</ModalHeader>
-        {alert && <Alert {...alert} variant="top-accent"/>}
         <ModalBody mb={4}>
           {children}
         </ModalBody>

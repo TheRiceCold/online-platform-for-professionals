@@ -6,8 +6,8 @@ import {
 import CreateModal from "./CreateModal"
 
 import {useQuery} from "react-query"
+import {useServices} from "@/services_context"
 import {useDisclosure} from "@chakra-ui/react"
-import {useServices} from "@/context/users/professionals/services/Context"
 
 function ServicesLayout() {
   const useModal = useDisclosure()

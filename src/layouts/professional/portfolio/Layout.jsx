@@ -15,7 +15,7 @@ import {useWorkPortfolios} from "@/work_portfolios_context"
 function PortfolioLayout() {
   const modal = useDisclosure()
   const queryClient = useQueryClient()
-  const [alerts, setAlerts] = useState()
+  const [alert, setAlert] = useState()
   const deleteAlertDialog = useDisclosure()
   const {deleteWorkPortfolio} = useWorkPortfolios()
 
@@ -26,16 +26,22 @@ function PortfolioLayout() {
     onSuccess: async() => {
       deleteAlertDialog.onClose() 
       queryClient.invalidateQueries("work_portfolios")
+      setAlert({message: "Portfolio deleted", status: "success"})
     }
   })
 
   const handleDelete = async () => 
     await deleteMutation.mutateAsync(selectedId)
 
+  const handleCreate = () => {
+    setAction("create")
+    modal.onOpen()
+  }
+
   return (
     <>
-      <Alert message="message" status="success"/>
-      <Button onClick={modal.onOpen}>New</Button>
+      {alert && <Alert {...alert}/>}
+      <Button onClick={handleCreate}>New</Button>
       <PortfolioItems
         modal={modal}
         setAction={setAction}
@@ -45,6 +51,7 @@ function PortfolioLayout() {
       <FormModal 
         {...modal}
         action={action}
+        setAlert={setAlert}
         selectedId={selectedId}
       />
       <AlertDialog 
