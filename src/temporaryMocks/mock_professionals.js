@@ -125,19 +125,19 @@ const userFive = {
 	},
 };
 
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 3; i++) {
 	mockUsers.push(userOne);
 }
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 3; i++) {
 	mockUsers.push(userTwo);
 }
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 3; i++) {
 	mockUsers.push(userThree);
 }
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 3; i++) {
 	mockUsers.push(userFour);
 }
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 3; i++) {
 	mockUsers.push(userFive);
 }
 mockUsers = mockUsers.sort(() => Math.random() - 0.5);
