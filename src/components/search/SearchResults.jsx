@@ -9,13 +9,19 @@ const SearchResults = ({ img, isLoading }) => {
 	return (
 		<Box className={styles.searchResultsContainer}>
 			<Box className={styles.descriptionContainer}>
-				{mockUsers.map((user) => {
+				{/*TODO Insert get /professionals/search here */}
+				{mockUsers.map((user, i) => {
 					return (
-						<ProfessionalDescription user={user} img={img} isLoading={isLoading} />
+						<ProfessionalDescription
+							key={i}
+							user={user}
+							img={img}
+							isLoading={isLoading}
+						/>
 					);
 				})}
 			</Box>
-			{/* Remove img and isloading when link route is available */}
+			{/*TODO Remove img and isloading when link route is available */}
 			<ProfessionalOverview img={img} isLoading={isLoading} />
 		</Box>
 	);
