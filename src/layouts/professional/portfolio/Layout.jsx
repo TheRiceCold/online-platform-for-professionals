@@ -2,15 +2,22 @@ import {
   Text,
   Button,
   Heading,
-  useDisclosure,
+  Flex,
 } from "@chakra-ui/react"
+import {
+  EditIcon, 
+  DeleteIcon
+} from "@chakra-ui/icons"
 import FormModal from "./FormModal"
-import {EditIcon, DeleteIcon} from "@chakra-ui/icons"
+import MoonLoader from "react-spinners/MoonLoader"
 import AlertDialog from "@/components/overlay/AlertDialog"
 
 import {useState} from "react"
 import {useQuery} from "react-query"
-import {useWorkPortfolios} from "@/context/users/professionals/work_portfolios/Context"
+import {useDisclosure} from "@chakra-ui/react"
+import {
+  useWorkPortfolios
+} from "@/contexts/users/professionals/work_portfolios/Context"
 
 function PortfolioLayout() {
   const modal = useDisclosure()
@@ -35,8 +42,11 @@ function PortfolioLayout() {
     <>
       <Button onClick={modal.onOpen}>New</Button>
       {isLoading ? 
-        <h1>Loading...</h1> :
-        portfolios.length ?
+        <Flex alignItems="center" h="50vh">
+        <MoonLoader color="white"/> 
+        </Flex>
+        :
+        portfolios?.length ?
           portfolios.map((portfolio) => {
             const {id} = portfolio
             const {details, title} = portfolio?.attributes

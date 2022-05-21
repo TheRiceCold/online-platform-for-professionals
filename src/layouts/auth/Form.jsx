@@ -6,8 +6,9 @@ import {
   Link, Checkbox, 
 } from "@chakra-ui/react"
 import Modal from "./Modal"
-import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
+
+import {useForm} from "react-hook-form"
 import {useAuth} from "@/context/auth/Context"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 

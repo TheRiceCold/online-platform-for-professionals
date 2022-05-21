@@ -3,8 +3,9 @@ import styles from "@/styles/Admin.module.sass"
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
 import AdminLayout from "@/layouts/admin/Layout"
-import {useAuth} from "@/context/auth/Context"
-import {useUsers} from "@/context/users/Context"
+
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
 
 const Admin = () => {
   const {userFullname} = useAuth()

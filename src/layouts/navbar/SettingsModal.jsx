@@ -1,8 +1,9 @@
-import {useForm} from "react-hook-form"
-import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
-import {useUsers} from "@/context/users/Context"
+
+import {useForm} from "react-hook-form"
+import {useMutation} from "react-query"
+import {useUsers} from "@/contexts/users/Context"
 
 function SettingsModal(props) {
   const {

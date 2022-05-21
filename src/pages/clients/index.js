@@ -3,8 +3,8 @@ import styles from "@/styles/Clients.module.sass"
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
 
-import {useAuth} from "@/context/auth/Context"
-import {useUsers} from "@/context/users/Context"
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
 
 function Clients() {
   const {userRole, userFullname} = useAuth()

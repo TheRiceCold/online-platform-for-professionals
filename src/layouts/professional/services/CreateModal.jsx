@@ -6,10 +6,11 @@ import {
   ModalOverlay,
   ModalCloseButton,
 } from "@chakra-ui/react"
-import {useForm} from "react-hook-form"
-import {useMutation} from "react-query"
 import Form from "@/components/forms/Form"
 import Alert from "@/components/feedback/Alert"
+
+import {useForm} from "react-hook-form"
+import {useMutation} from "react-query"
 import {useServices} from "@/context/users/professionals/services/Context"
 
 function CreateModal({onClose, isOpen}) {

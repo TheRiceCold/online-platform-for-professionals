@@ -1,7 +1,9 @@
+import {Box} from "@chakra-ui/react"
 import Table from "@/components/table/Table"
-import {useUsers} from "@/context/users/Context"
 import AlertDialog from "@/components/overlay/AlertDialog"
-import {Box, useDisclosure as useAlert} from "@chakra-ui/react"
+
+import {useUsers} from "@/contexts/users/Context"
+import {useDisclosure as useAlert} from "@chakra-ui/react"
 
 function AdminLayout() {
   const {fakeUsers, userTable} = useUsers("admin")

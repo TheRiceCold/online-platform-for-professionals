@@ -117,6 +117,7 @@ Dale Walter - []
 * [Axios]
 * [Chakra UI]
 * [React Query]
+* [React Spinners]
 * [React Hook Form]
 
 <!-- links & images -->
@@ -130,4 +131,5 @@ Dale Walter - []
 [Axios]: https://github.com/axios/axios
 [Chakra UI]: https://github.com/chakra-ui/chakra-ui
 [React Query]: https://github.com/tannerlinsley/react-query 
+[React Spinners]: https://github.com/davidhu2000/react-spinners
 [React Hook Form]: https://github.com/react-hook-form/react-hook-form

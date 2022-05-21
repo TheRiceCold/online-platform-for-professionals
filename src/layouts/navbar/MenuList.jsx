@@ -1,15 +1,16 @@
 import {
   MenuItem,
   Flex, Stack,
-  useDisclosure,
   Heading, Text,
   Avatar, MenuDivider, 
   MenuList as ChakraMenuList, 
 } from "@chakra-ui/react"
 import {Fragment} from "react"
-import dynamic from "next/dynamic"
-import {useAuth} from "@/context/auth/Context"
-import {useUsers} from "@/context/users/Context"
+import Dynamic from "next/dynamic"
+
+import {useDisclosure} from "@chakra-ui/react"
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
 
 function MenuList() {
   const modal = useDisclosure()
@@ -52,4 +53,4 @@ function MenuList() {
 
 export default MenuList
 
-const SettingsModal = dynamic(() => import("./SettingsModal"))
+const SettingsModal = Dynamic(() => import("./SettingsModal"))

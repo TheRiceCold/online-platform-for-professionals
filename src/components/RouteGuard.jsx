@@ -1,7 +1,7 @@
 import {useState} from "react"
 import {useRouter} from "next/router"
 import useMount from "@/hooks/useMount" 
-import {useAuth} from "@/context/auth/Context"
+import {useAuth} from "@/contexts/auth/Context"
 
 const RouteGuard = ({children}) => {
   const router = useRouter()

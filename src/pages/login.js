@@ -1,11 +1,12 @@
 import styles from "@/styles/Auth.module.sass"
 
 import Head from "next/head"
+import AuthLayout from "@/layouts/auth/layout"
+
 import {useState} from "react"
 import {useMutation} from "react-query"
 import {useStorage} from "@/hooks/useStorage"
-import {useAuth} from "@/context/auth/Context"
-import AuthLayout from "@/layouts/auth/layout"
+import {useAuth} from "@/contexts/auth/Context"
 
 function Login() {
   const storage = useStorage()

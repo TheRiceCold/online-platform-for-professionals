@@ -2,7 +2,7 @@ import Inputs from "./Inputs"
 import Schema from "./Schema"
 import Actions from "./Actions"
 
-import {useAuth} from "@/context/auth/Context"
+import {useAuth} from "@/contexts/auth/Context"
 import {createContext, useContext} from "react"
 import {zodResolver} from "@hookform/resolvers/zod"
 

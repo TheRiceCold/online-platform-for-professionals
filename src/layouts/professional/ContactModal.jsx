@@ -6,6 +6,7 @@ import {
   ModalOverlay,
   ModalCloseButton,
 } from "@chakra-ui/react"
+
 import {useQuery} from "react-query"
 import {useUsers} from "@/context/users/Context"
 

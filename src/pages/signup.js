@@ -4,9 +4,9 @@ import Head from "next/head"
 import AuthLayout from "@/layouts/auth/layout"
 
 import {useState} from "react"
-import {useAuth} from "@/context/auth/Context"
+import {useAuth} from "@/contexts/auth/Context"
 import {useMutation, useQueries} from "react-query"
-import {useHelpers} from "@/context/helpers/Context"
+import {useHelpers} from "@/contexts/helpers/Context"
 
 function SignUp() {
   const [alerts, setAlerts] = useState([])

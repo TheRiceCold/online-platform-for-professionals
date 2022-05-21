@@ -1,15 +1,10 @@
 import styles from "@/styles/Professionals.module.sass"
 
-import {
-  Text,
-  Link,
-  Avatar, 
-  Skeleton, 
-  useDisclosure,
-  SkeletonCircle,
-} from "@chakra-ui/react"
 import ContactModal from "./ContactModal"
+import {Text, Link, Avatar} from "@chakra-ui/react"
+
 import {useAuth} from "@/context/auth/Context"
+import {useDisclosure} from "@chakra-ui/react"
 import {capitalize} from "@/utils/stringHelpers"
 
 function Header(props) {

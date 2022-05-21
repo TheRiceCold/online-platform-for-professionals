@@ -1,10 +1,11 @@
+import UserTable from "./userTable"
+
 import {createContext} from "react"
 import {navLinks} from "./navLinks"
-import UserTable from "./userTable"
 import {useRouter} from "next/router"
 import fakeUsers from "./fakeUsers.json"
 import {userMenuItems} from "./menuItems"
-import {useAuth} from "@/context/auth/Context"
+import {useAuth} from "../../auth/Context"
 
 const AdminContext = createContext()
 

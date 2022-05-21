@@ -1,6 +1,7 @@
 import Head from "next/head"
+
 import {useRouter} from "next/router"
-import {useAuth} from "@/context/auth/Context"
+import {useAuth} from "@/contexts/auth/Context"
 
 const Home = () => {
   const router = useRouter()

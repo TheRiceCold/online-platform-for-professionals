@@ -1,21 +1,22 @@
 import {
-  SunIcon, MoonIcon,
-  HamburgerIcon, CloseIcon
+  SunIcon, 
+  MoonIcon,
+  CloseIcon,
+  HamburgerIcon, 
 } from "@chakra-ui/icons"
 import {
   Box, Flex,
   IconButton,
   Image, Stack,
   Link, Button,
-  useColorMode, 
-  useDisclosure,
 } from "@chakra-ui/react"
 import Links from "./Links"
 import UserMenu from "./UserMenu"
 import SearchBar from "@/components/SearchBar"
 import NextLink from "@/components/navigation/Link"
 
-import {useAuth} from "@/context/auth/Context"
+import {useAuth} from "@/contexts/auth/Context"
+import {useColorMode, useDisclosure} from "@chakra-ui/react"
 
 function Navbar({styles, links, withSearch}) {
   const {user} = useAuth()
