@@ -3,7 +3,6 @@ import styles from "@/styles/Home.module.sass"
 import Head from "next/head"
 
 import {useRouter} from "next/router"
-import Navbar from "@/layouts/navbar/Navbar"
 import HomeLayout from "@/layouts/home/Layout"
 import {useAuth} from "@/contexts/auth/Context"
 
@@ -24,11 +23,10 @@ const Home = () => {
   }
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head>
         <title>Home</title>
       </Head> 
-      <Navbar styles={styles}/>
       <HomeLayout/>
     </main>
   )
