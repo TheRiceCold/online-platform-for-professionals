@@ -12,7 +12,7 @@ import {useAuth} from "@/context/auth/Context"
 import {useUsers} from "@/context/users/Context"
 
 function MenuList() {
-  const useModal = useDisclosure()
+  const modal = useDisclosure()
   const {
     userRole,
     userImage, 
@@ -32,7 +32,7 @@ function MenuList() {
           </Stack>
         </Flex>
         <MenuDivider/>
-        {menuItems(useModal.onOpen)
+        {menuItems(modal.onOpen)
           .map((item, i) => ( 
             <Fragment key={i}> 
               {item === "divider" ?
@@ -45,7 +45,7 @@ function MenuList() {
           )
         )}
       </ChakraMenuList>
-      {useModal.isOpen && <SettingsModal {...useModal}/>}
+      {modal.isOpen && <SettingsModal {...modal}/>}
     </>
   )
 }

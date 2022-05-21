@@ -1,58 +1,49 @@
-import {
-  Modal, 
-  ModalBody,
-  ModalHeader,
-  ModalContent,
-  ModalOverlay,
-  ModalCloseButton,
-} from "@chakra-ui/react"
+import {useState} from "react"
 import {useMutation} from "react-query"
 import {useForm} from "react-hook-form"
 import Form from "@/components/forms/Form"
-import Alert from "@/components/feedback/Alert"
+import Modal from "@/components/overlay/Modal"
 import {useWorkPortfolios} from "@/context/users/professionals/work_portfolios/Context"
 
-function FormModal({onClose, isOpen, action, selectedId}) {
-  const {inputs, resolver} = useWorkPortfolios()
-  console.log(action)
+function FormModal(props) {
+  const {action, selectedId} = props
+  const [alert, setAlert] = useState()
   const {
-    createWorkPortfolio,
-    updateWorkPortfolio,
-    deleteWorkPortfolio,
+    createWorkPortfolio, 
+    updateWorkPortfolio
   } = useWorkPortfolios()
+  const {inputs, resolver} = useWorkPortfolios()
   const formHook = useForm({resolver})
+
   const mutation = useMutation(
-    action === "create" ? 
-      createWorkPortfolio
-      : action === "update" ? 
-        updateWorkPortfolio 
-        : deleteWorkPortfolio
-  )
+    (action === "update")
+      ? updateWorkPortfolio 
+      : createWorkPortfolio, {
+      onSuccess: () => {
+        console.log("success")
+        // setAlert({message}) 
+      }
+    })
+
   const submitHandler = data => {
-    const submittedData = action === "create" 
-      ? {...data} : {selectedId, ...data}
+    const submittedData = (action === "update") 
+      ? {selectedId, ...data} : {...data}
     mutation.mutate(submittedData)
   }
  
   return (
-    <Modal onClose={onClose} size="lg" isOpen={isOpen}>
-      <ModalOverlay/>
-      <ModalContent>
-        <ModalCloseButton/>
-        <ModalHeader>
-          New Portfolio
-        </ModalHeader>
-        <Alert message="Success" status="success" variant="top-accent"/>
-        <ModalBody mb={4}>
-          <Form
-            inputs={inputs}
-            submitValue="Save"
-            mutation={mutation}
-            formHook={formHook}
-            submitHandler={submitHandler}
-          />
-        </ModalBody>
-      </ModalContent>
+    <Modal 
+      {...props}
+      alert={alert} 
+      header="Portfolio" 
+    >
+      <Form
+        inputs={inputs}
+        submitValue="Save"
+        mutation={mutation}
+        formHook={formHook}
+        submitHandler={submitHandler}
+      />
     </Modal>
   )
 }
