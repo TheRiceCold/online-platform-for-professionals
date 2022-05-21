@@ -1,9 +1,10 @@
 import styles from "@/styles/Home.module.sass"
 
 import Head from "next/head"
+import Footer from "@/layouts/footer/Footer"
+import HomeLayout from "@/layouts/home/Layout"
 
 import {useRouter} from "next/router"
-import HomeLayout from "@/layouts/home/Layout"
 import {useAuth} from "@/contexts/auth/Context"
 
 const Home = () => {
@@ -28,6 +29,7 @@ const Home = () => {
         <title>Home</title>
       </Head> 
       <HomeLayout/>
+      <Footer/>
     </main>
   )
 }
