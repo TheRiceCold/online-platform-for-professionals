@@ -5,10 +5,8 @@ import {
   useDisclosure,
 } from "@chakra-ui/react"
 import FormModal from "./FormModal"
-import {
-  EditIcon,
-  DeleteIcon,
-} from "@chakra-ui/icons"
+import {EditIcon, DeleteIcon} from "@chakra-ui/icons"
+import AlertDialog from "@/components/overlay/AlertDialog"
 
 import {useState} from "react"
 import {useQuery} from "react-query"
@@ -16,9 +14,10 @@ import {useWorkPortfolios} from "@/context/users/professionals/work_portfolios/C
 
 function PortfolioLayout() {
   const modal = useDisclosure()
-  const {getWorkPortfolios} = useWorkPortfolios()
+  const deleteAlertDialog = useDisclosure()
   const [action, setAction] = useState("create")
   const [selectedId, setSelectedId] = useState()
+  const {getWorkPortfolios, deleteWorkPortfolio} = useWorkPortfolios()
   const {data: portfolios, isLoading} = useQuery("work_portfolios", getWorkPortfolios)
 
   const handleUpdate = id => {
@@ -27,8 +26,9 @@ function PortfolioLayout() {
     modal.onOpen()
   }
 
-  const handleDelete = id => {
-    console.log(id) 
+  const handleDeleteAlert = id => {
+    setSelectedId(id)
+    deleteAlertDialog.onOpen()
   }
 
   return (
@@ -50,7 +50,7 @@ function PortfolioLayout() {
                 />
                 <DeleteIcon 
                   cursor="pointer" 
-                  onClick={() => handleDelete(id)}
+                  onClick={() => handleDeleteAlert(id)}
                 />
               </div>
             )
@@ -61,6 +61,15 @@ function PortfolioLayout() {
         {...modal}
         action={action}
         selectedId={selectedId}
+      />
+      <AlertDialog 
+        // isCentered
+        buttonColor="red"
+        buttonLabel="Delete"
+        {...deleteAlertDialog}
+        header="Delete Portfolio"
+        buttonClick={() => deleteWorkPortfolio(selectedId)}
+        label="Are you sure? You can't undo this action afterwards."
       />
     </>
   )

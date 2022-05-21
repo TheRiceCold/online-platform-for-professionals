@@ -1,11 +1,11 @@
 import Table from "@/components/table/Table"
 import {useUsers} from "@/context/users/Context"
-import Alert from "@/components/overlay/AlertDialog"
+import AlertDialog from "@/components/overlay/AlertDialog"
 import {Box, useDisclosure as useAlert} from "@chakra-ui/react"
 
 function AdminLayout() {
   const {fakeUsers, userTable} = useUsers("admin")
-  const deleteAlert = useAlert()
+  const deleteAlertDialog = useAlert()
 
   return (
   <>
@@ -20,12 +20,12 @@ function AdminLayout() {
         searchLabel="Search user"
         columns={userTable(deleteAlert)}
       />
-      <Alert 
+      <AlertDialog
         // isCentered
         buttonColor="red"
-        alert={deleteAlert}
         header="Delete User"
         buttonLabel="Delete"
+        {...deleteAlertDialog}
         label="Are you sure? You can't undo this action afterwards."
       />
     </Box>

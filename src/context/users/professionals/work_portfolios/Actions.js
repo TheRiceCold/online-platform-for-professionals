@@ -26,7 +26,8 @@ function Actions(user) {
   }
 
   this.delete = async id => {
-    console.log(id)
+    const url = path+"/"+id
+    await Axios.delete(url, config)
   }
 }
 
