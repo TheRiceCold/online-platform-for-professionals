@@ -1,6 +1,7 @@
 let mockUsers = [];
 
 const userOne = {
+	id: '1',
 	email: 'juan@email.com',
 	name: 'Juan Daw',
 	contactNumber: '09151234567',
@@ -25,6 +26,7 @@ const userOne = {
 };
 
 const userTwo = {
+	id: '2',
 	email: 'zoro@email.com',
 	name: 'Roronoa Zoro',
 	contactNumber: '09151654567',
@@ -49,6 +51,7 @@ const userTwo = {
 };
 
 const userThree = {
+	id: '3',
 	email: 'sanji@email.com',
 	name: 'Roronoa Zoro',
 	contactNumber: '09151651567',
@@ -73,6 +76,7 @@ const userThree = {
 };
 
 const userFour = {
+	id: '4',
 	email: 'nami@email.com',
 	name: 'Nami Swan',
 	contactNumber: '09143851567',
@@ -97,6 +101,7 @@ const userFour = {
 };
 
 const userFive = {
+	id: '5',
 	email: 'sanji@email.com',
 	name: 'Roronoa Zoro',
 	contactNumber: '09151651567',
@@ -120,11 +125,20 @@ const userFive = {
 	},
 };
 
-for (let i = 0; i < 20; i++) mockUsers.push(userOne);
-for (let i = 0; i < 20; i++) mockUsers.push(userTwo);
-for (let i = 0; i < 20; i++) mockUsers.push(userThree);
-for (let i = 0; i < 20; i++) mockUsers.push(userFour);
-for (let i = 0; i < 20; i++) mockUsers.push(userFive);
-
+for (let i = 0; i < 20; i++) {
+	mockUsers.push(userOne);
+}
+for (let i = 0; i < 20; i++) {
+	mockUsers.push(userTwo);
+}
+for (let i = 0; i < 20; i++) {
+	mockUsers.push(userThree);
+}
+for (let i = 0; i < 20; i++) {
+	mockUsers.push(userFour);
+}
+for (let i = 0; i < 20; i++) {
+	mockUsers.push(userFive);
+}
 mockUsers = mockUsers.sort(() => Math.random() - 0.5);
 export { mockUsers };
