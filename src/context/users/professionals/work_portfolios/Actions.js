@@ -7,7 +7,7 @@ function Actions(user) {
 
   this.getAll = async () => {
     const {data} = await Axios.get(path, config)
-    return data
+    return data.data
   }
 
   this.getById = async (professionalId, id) => { 

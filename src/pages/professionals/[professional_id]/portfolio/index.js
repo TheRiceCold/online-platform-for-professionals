@@ -2,8 +2,9 @@ import styles from "@/styles/Professionals.module.sass"
 
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
+import Layout from "@/layouts/professional/portfolio/Layout"
+
 import {useAuth} from "@/context/auth/Context"
-import Layout  from "@/layouts/professional/portfolio/Layout"
 import {useUsers} from "@/context/users/Context"
 
 function Portfolio() {

@@ -1,5 +1,7 @@
 import {
+  Text,
   Button,
+  Heading,
   useDisclosure,
 } from "@chakra-ui/react"
 import CreateModal from "./CreateModal"
@@ -18,9 +20,15 @@ function PortfolioLayout() {
       {isLoading ? 
         <h1>Loading...</h1> :
         portfolios.length ?
-          portfolios.map((portfolio, idx) => (
-            <h1 key={idx}>Portfolio</h1>
-          ))
+          portfolios.map((portfolio, idx) => {
+            const {details, title} = portfolio.attributes
+            return (
+              <div key={idx}>
+                <Heading>{title}</Heading>
+                <Text>{details}</Text>
+              </div>
+            )
+          })
           : <h1>No work portfolios yet</h1>
       }
       <CreateModal {...useModal} />

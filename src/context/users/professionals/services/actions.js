@@ -2,12 +2,12 @@ import Axios from "@/utils/axios"
 
 function Actions(user) {
   const {token} = user
-  const path = id => `professionals/${id}/services/`
+  const path = `professionals/${user.professionalId}/services/`
   const config = { headers: { Authorization: token } }
 
-  this.getAll = async professionalId => { 
-    const url = path(professionalId)
-    return await Axios.get(url, config)
+  this.getAll = async () => { 
+    const {data} = await Axios.get(path, config)
+    return data.data
   }
 
   this.getById = async (professionalId, id) => { 

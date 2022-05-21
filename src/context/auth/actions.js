@@ -3,6 +3,7 @@ import {useStorage} from "@/hooks/useStorage"
 
 function Actions(dispatch, token) {
   const storage = useStorage()
+  const config = { headers: { Authorization: token } }
 
   this.signup = async data => 
     await Axios.post("signup", this.signupData(data))
@@ -11,9 +12,7 @@ function Actions(dispatch, token) {
     await Axios.post("login", { user: {...data} })
 
   this.logout = async () => {
-    await Axios.delete("logout", {
-      headers: { Authorization: token }
-    })
+    await Axios.delete("logout", config)
     dispatch({type: "LOGOUT"})
     storage.removeItem({ 
       type: "session", 

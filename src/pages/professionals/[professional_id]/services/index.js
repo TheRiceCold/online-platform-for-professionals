@@ -2,18 +2,21 @@ import styles from "@/styles/Professionals.module.sass"
 
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
-import {useAuth} from "@/context/auth/Context"
 import Layout  from "@/layouts/professional/services/Layout"
+
+import {useAuth} from "@/context/auth/Context"
+import {useUsers} from "@/context/users/Context"
 
 function Services() {
   const {userFullname} = useAuth()
+  const {navLinks} = useUsers("professional")
 
   return (
     <main className={styles.main}>
       <Head>
         <title>{userFullname} | Services</title>
       </Head>
-      <Navbar styles={styles}/>
+      <Navbar styles={styles} links={navLinks}/>
       <Layout />
     </main>
   )

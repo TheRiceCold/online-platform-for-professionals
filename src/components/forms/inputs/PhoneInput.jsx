@@ -1,4 +1,8 @@
-import {InputLeftAddon, Input, InputGroup} from "@chakra-ui/react"
+import {
+  Input, 
+  InputGroup,
+  InputLeftAddon, 
+} from "@chakra-ui/react"
 
 const PhoneInput = ({register, input}) => (
   <InputGroup>

@@ -4,7 +4,7 @@ const navLinks = id => {
     { label: "Clients", href: "/clients" }, 
     { label: "Portfolio", href: prefix("portfolio") },
     { label: "Services", href: prefix("services") }, 
-    { label: "Bookings", href: prefix("bookings") }
+    { label: "Bookings", href: "/bookings" }
   ]
 }
 

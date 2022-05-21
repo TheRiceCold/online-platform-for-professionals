@@ -15,10 +15,7 @@ const Admin = () => {
       <Head>
         <title>{userFullname} | Admin</title>
       </Head>
-      <Navbar 
-        styles={styles}
-        links={navLinks}
-      />
+      <Navbar styles={styles} links={navLinks}/>
       <AdminLayout/>
     </main>
   )

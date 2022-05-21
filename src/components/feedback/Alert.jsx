@@ -4,10 +4,10 @@ import {
   Flex,
   AlertIcon,
   CloseButton,
-  useDisclosure,
   AlertDescription,
   Alert as ChakraAlert, 
 } from '@chakra-ui/react'
+import {useDisclosure} from '@chakra-ui/react'
 
 function Alert({message, status, variant}) {
   const {isOpen, onClose} = useDisclosure({defaultIsOpen: true})

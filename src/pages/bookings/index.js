@@ -1,19 +1,23 @@
-import styles from "@/styles/Layouts.module.sass"
+import styles from "@/styles/Bookings.module.sass"
 
 import Head from "next/head"
-import {useAppState} from "@/context/state/Context"
-import Layout  from "@/layouts/professional/bookings/Layout"
+import Navbar from "@/layouts/navbar/Navbar"
+import Layout from "@/layouts/bookings/Layout"
+
+import {useAuth} from "@/context/auth/Context"
+import {useUsers} from "@/context/users/Context"
 
 function Bookings() {
-  const {useProfessionals} = useAppState()
-  const {fullname} = useProfessionals()
+  const {userRole, userFullname} = useAuth()
+  const {navLinks} = useUsers(userRole)
 
   return (
     <main className={styles.main}>
       <Head>
-        <title>{fullname} | Bookings</title>
+        <title>{userFullname} | Bookings</title>
       </Head>
-      <Layout fullname={fullname}/>
+      <Navbar styles={styles} links={navLinks}/>
+      <Layout/>
     </main>
   )
 }
