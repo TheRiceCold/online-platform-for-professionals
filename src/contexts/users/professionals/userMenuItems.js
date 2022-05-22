@@ -5,12 +5,12 @@ const userMenuItems = (user, router, logout, onOpen) => [
       router.push(`/professionals/${user.professionalId}`)
   },
   {
-    label: "Connections", 
+    label: "Subscribers", 
     handleOnClick: () => 
       router.push(`/professionals/${user.professionalId}/connections`)
   },
   {
-    label: "Settings",
+    label: "Account Settings",
     handleOnClick: onOpen
   },
   "divider",

@@ -14,25 +14,12 @@ import {useUsers} from "@/contexts/users/Context"
 
 function MenuList() {
   const modal = useDisclosure()
-  const {
-    userRole,
-    userImage, 
-    userFullname, 
-  } = useAuth()
+  const {userRole} = useAuth()
   const {menuItems} = useUsers(userRole)
 
   return (
     <>
       <ChakraMenuList>
-        <Flex alignItems="center" ml={3}>
-          <Avatar size="md" src={userImage}/>
-          <Stack ml={2} spacing={0}>
-            <Heading size="3x1">
-            </Heading>
-            <Text>{userFullname}</Text>
-          </Stack>
-        </Flex>
-        <MenuDivider/>
         {menuItems(modal.onOpen)
           .map((item, i) => ( 
             <Fragment key={i}> 

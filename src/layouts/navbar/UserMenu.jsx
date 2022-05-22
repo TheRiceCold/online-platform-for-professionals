@@ -1,32 +1,35 @@
 import {
-  Menu, Flex,
-  MenuButton, 
-  Avatar, AvatarBadge,
+  Text, Avatar,
+  Menu, MenuButton, 
+  Box, HStack, VStack, 
 } from "@chakra-ui/react"
 import MenuList from "./MenuList"
-import {TriangleDownIcon} from "@chakra-ui/icons"
+import {ChevronDownIcon} from "@chakra-ui/icons"
 
 import {useAuth} from "@/contexts/auth/Context"
 
 const UserMenu = () => {
-  const {userImage} = useAuth()
+  const {userImage, userFullname, userRole} = useAuth()
 
   return (
     <Menu>
       <MenuButton>
-        <Flex align="center">
-          <Avatar 
-            mr={1} 
-            size="xs" 
-            src={userImage}
-          >
-            <AvatarBadge boxSize='1.25em' bg='green.400' />
-          </Avatar>
-          <TriangleDownIcon 
-            boxSize={2.5} 
-            color="gray.600"
-          />
-        </Flex>
+        <HStack>
+          <Avatar size="sm" src={userImage}/>
+          <VStack
+            display={{ base: 'none', md: 'flex' }}
+            alignItems="flex-start"
+            spacing="1px"
+            ml="2">
+            <Text fontSize="sm">{userFullname}</Text>
+            <Text fontSize="xs" color="gray.600">
+              {userRole} 
+            </Text>
+          </VStack>
+          <Box display={{ base: 'none', md: 'flex' }}>
+            <ChevronDownIcon />
+          </Box>
+        </HStack>
       </MenuButton>
       <MenuList />
     </Menu>
