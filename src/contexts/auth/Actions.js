@@ -11,6 +11,9 @@ function Actions(dispatch, token) {
   this.login = async data => 
     await Axios.post("login", { user: {...data} })
 
+  this.update = async data => 
+    await Axios.patch("signup", this.signupData(data))
+
   this.logout = async () => {
     await Axios.delete("logout", config)
     dispatch({type: "LOGOUT"})

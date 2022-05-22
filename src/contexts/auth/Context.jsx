@@ -45,10 +45,13 @@ const AuthProvider = ({children}) => {
       // Statuses
       LoginStatuses,
       SignupStatuses,
+
       // Actions
       login: call.login,
       signup: call.signup,
       logout: call.logout,
+      updateAccount: call.update,
+
       // Inputs
       loginInputs: LoginInputs,
       signupInputs: SignupInputs,
