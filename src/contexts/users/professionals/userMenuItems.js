@@ -10,6 +10,14 @@ const userMenuItems = (user, router, logout, onOpen) => [
       router.push(`/professionals/${user.professionalId}/connections`)
   },
   {
+    label: "Field Settings",
+    handleOnClick: onOpen
+  },
+  {
+    label: "Calendly Token",
+    handleOnClick: onOpen
+  },
+  {
     label: "Account Settings",
     handleOnClick: onOpen
   },

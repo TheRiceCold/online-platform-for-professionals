@@ -1,26 +1,33 @@
 import {
-  MenuItem,
-  Flex, Stack,
-  Heading, Text,
-  Avatar, MenuDivider, 
+  MenuItem, MenuDivider, 
   MenuList as ChakraMenuList, 
 } from "@chakra-ui/react"
 import {Fragment} from "react"
-import SettingsModal from "./SettingsModal"
+
+import AccountSettingsModal from "./AccountSettingsModal"
+import CalendlyTokenModal from "./CalendlyTokenModal"
+import FieldSettingsModal from "./FieldSettingsModal"
 
 import {useDisclosure} from "@chakra-ui/react"
 import {useAuth} from "@/contexts/auth/Context"
 import {useUsers} from "@/contexts/users/Context"
 
 function MenuList() {
-  const modal = useDisclosure()
   const {userRole} = useAuth()
   const {menuItems} = useUsers(userRole)
+
+  const accountSettingsModal = useDisclosure()
+  const calendlyTokenModal = useDisclosure()
+  const fieldSettingsModal = useDisclosure()
 
   return (
     <>
       <ChakraMenuList>
-        {menuItems(modal.onOpen)
+        {menuItems({
+          openAccountSettings: accountSettingsModal.onOpen,
+          openCalendlyToken: calendlyTokenModal.onOpen,
+          openFieldSettings: fieldSettingsModal.onOpen,
+        })
           .map((item, i) => ( 
             <Fragment key={i}> 
               {item === "divider" ?
@@ -33,7 +40,15 @@ function MenuList() {
           )
         )}
       </ChakraMenuList>
-      {modal.isOpen && <SettingsModal {...modal}/>}
+      {accountSettingsModal.isOpen && 
+        <AccountSettingsModal {...accountSettingsModal}/>
+      }
+      {calendlyTokenModal.isOpen && 
+        <CalendlyTokenModal {...calendlyTokenModal}/>
+      }
+      {fieldSettingsModal.isOpen && 
+        <FieldSettingsModal {...fieldSettingsModal}/>
+      }
     </>
   )
 }
