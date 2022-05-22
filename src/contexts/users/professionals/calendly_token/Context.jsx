@@ -1,7 +1,7 @@
 import Actions from "./Actions"
 
-import {createContext} from "react"
 import {useAuth} from "@/contexts/auth/Context"
+import {createContext, useContext} from "react"
 
 const CalendlyTokenContext = createContext()
 
@@ -13,6 +13,8 @@ const CalendlyTokenProvider = ({children}) => {
 
   return (
     <Provider value={{
+      inputs: [{ id: "authorization" }],
+
       getCalendlyToken: call.getById,
       createCalendlyToken: call.create,
       updateCalendlyToken: call.update,
@@ -24,3 +26,5 @@ const CalendlyTokenProvider = ({children}) => {
 }
 
 export default CalendlyTokenProvider
+
+export const useCalendlyToken = () => useContext(CalendlyTokenContext)

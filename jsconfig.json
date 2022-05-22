@@ -24,6 +24,9 @@
       "@/reviews_context": [
         "src/contexts/users/professionals/reviews/Context"
       ],
+      "@/calendly_token_context": [
+        "src/contexts/users/professionals/calendly_token/Context"
+      ],
     }
   }
 }

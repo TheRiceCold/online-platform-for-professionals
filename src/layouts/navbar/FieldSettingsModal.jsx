@@ -6,7 +6,7 @@ import {useUsers} from "@/contexts/users/Context"
 import {useMutation, useQuery} from "react-query"
 import {useHelpers} from "@/contexts/helpers/Context"
 
-function SettingsModal(props) {
+function FieldSettingsModal(props) {
   const {
     inputs,
     resolver,
@@ -36,4 +36,4 @@ function SettingsModal(props) {
   )
 }
 
-export default SettingsModal
+export default FieldSettingsModal

@@ -22,7 +22,6 @@ function Button({children, ...props}) {
       px={6}
       d="flex"
       {...props}
-      rounded={'full'}
       {...primaryProps}
     >
       {children}

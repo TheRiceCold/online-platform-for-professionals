@@ -12,7 +12,7 @@ import Inputs from "./Inputs"
 import Actions from "./Actions"
 import ReviewsProvider from "./reviews/Context"
 import ServicesProvider from "./services/Context"
-import CalendlyTokenProvider from "./calendlyToken/Context"
+import CalendlyTokenProvider from "./calendly_token/Context"
 import WorkPortfoliosProvider from "./work_portfolios/Context"
 
 const ProfessionalsContext = createContext()
@@ -24,8 +24,8 @@ const ProfessionalsProvider = ({children}) => {
 
   const call = new Actions(user)
 
-  const menuItems = openSettings => 
-    userMenuItems(user, router, logout, openSettings)
+  const menuItems = modals => 
+    userMenuItems(user, router, logout, modals)
 
   return (
     <Provider value={{
