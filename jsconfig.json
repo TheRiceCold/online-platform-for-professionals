@@ -10,6 +10,7 @@
       "@/data/*": ["src/lib/data/*"],
       "@/hooks/*": ["src/lib/hooks/*"],
       "@/utils/*": ["src/lib/utils/*"],
+      "@/services/*": ["src/services/*"],
 
       "_comment": "Context shortcuts",
       "@/work_portfolios_context": [

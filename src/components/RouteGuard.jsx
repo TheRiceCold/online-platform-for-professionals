@@ -26,7 +26,7 @@ const RouteGuard = ({children}) => {
 
   const authCheck = url => {
     // redirect to login page if accessing a private page and not logged in 
-    const publicPaths = ["/login", "/signup", "/"]
+    const publicPaths = ["/login", "/signup", "/", "/image"]
     const path = url.split("?")[0]
 
     if (!isAuth && !publicPaths.includes(path)) {
