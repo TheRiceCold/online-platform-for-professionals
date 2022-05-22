@@ -1,32 +1,34 @@
 import styles from "@/styles/professionals/Profile.module.sass"
 
-import Header from "./Header"
 import Navbar from "@/layouts/navbar/Navbar"
 import RegisterModal from "../RegisterModal"
-import {Flex, Avatar, Heading, Text} from "@chakra-ui/react"
+import {Flex, Avatar} from "@chakra-ui/react"
 
+import {useQuery} from "react-query"
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"
+import {useWorkPortfolios} from "@/work_portfolios_context"
 
 function ProfessionalLayout() {
   const {user} = useAuth()
   const {navLinks} = useUsers("professional")
+  const {getWorkPortfolios} = useWorkPortfolios()
   const {
     userImage,
+    userEmail,
     userFullname,
-    userLocation
+    userLocation,
+    userContactNumber,
   } = useAuth()
+
+  const {data: workPortfolios, isLoading} = useQuery("work_portfolio", getWorkPortfolios)
+  const lastPortfolio = !isLoading && workPortfolios[workPortfolios.length - 1].attributes.title
 
   {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
   return (user.professionalId ? 
     <>
       <Navbar styles={styles} links={navLinks}/>
-      <Flex 
-        as="section" 
-        boxShadow="lg"
-        className={styles.layout}
-      >
-        {/* <Header/> */}
+      <Flex as="section" className={styles.layout}>
         <article className={styles.left}>
           <Avatar 
             top={-2}
@@ -48,25 +50,25 @@ function ProfessionalLayout() {
             <div className={styles.user_data}>
               <div className={styles.data}>
                 <h4>Email</h4>
-                <p>email@email.com</p>
+                <p>{userEmail}</p>
               </div>
               <div className={styles.data}>
-                <h4>Phone</h4>
-                <p>09897901212</p>
+                <h4>Contact Number</h4>
+                <p>{userContactNumber}</p>
               </div>
             </div>
           </div>
 
           <div className={styles.work_portfolio}>
-            <h3>Work Portfolios</h3>
+            <h3>Work</h3>
             <div className={styles.portfolio_data}>
               <div className={styles.data}>
-                <h4>Recent</h4> 
-                <p>Lorem ipsum dolor sit amet.</p> 
+                <h4>Recent Portfolio</h4> 
+                <p>{lastPortfolio}</p> 
               </div>
               <div className={styles.data}>
-                <h4>Recent</h4> 
-                <p>Lorem ipsum dolor sit amet.</p> 
+                <h4>Recent Service</h4> 
+                <p></p> 
               </div>
             </div>
           </div>

@@ -10,8 +10,8 @@ function Actions(user) {
     return data.data
   }
 
-  this.getById = async (professionalId, id) => { 
-    const url = path(professionalId)+id
+  this.getById = async (id) => { 
+    const url = path+id
     return await Axios.get(url, config)
   }
 

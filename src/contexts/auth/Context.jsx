@@ -27,7 +27,13 @@ const AuthProvider = ({children}) => {
   const call = new Actions(dispatch, user?.token)
 
   const userRole = user?.attributes?.role
-  const {city, region, firstName, lastName} = user?.attributes || {}
+  const {
+    city, region, 
+    firstName, lastName,
+    email, contactNumber,
+  } = user?.attributes || {}
+
+  console.log(user.attributes)
 
   const userFullname = capitalize(`${firstName} ${lastName}`)
   const userLocation = capitalize(`${city}, ${region}, Philippines`)
@@ -45,6 +51,8 @@ const AuthProvider = ({children}) => {
       userImage,
       userFullname,
       userLocation,
+      userEmail: email,
+      userContactNumber: contactNumber,
 
       // Statuses
       LoginStatuses,
