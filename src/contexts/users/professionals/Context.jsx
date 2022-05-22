@@ -46,7 +46,7 @@ const ProfessionalsProvider = ({children}) => {
       // Professionals
       getProfessionals: call.getAll,
       getProfessional: call.getById,
-      registerProfessional: call.create,
+      createProfessional: call.create,
       updateProfessional: call.update,
       deleteProfessional: call.delete,
     }}>

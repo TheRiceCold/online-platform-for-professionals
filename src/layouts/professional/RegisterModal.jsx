@@ -1,27 +1,34 @@
+import Button from "@/components/Button"
 import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
+import {Flex, Heading} from "@chakra-ui/react"
+import Alert from "@/components/feedback/Alert"
 
+import {useState} from "react"
+import {useRouter} from "next/router"
 import {useForm} from "react-hook-form"
+import {useDisclosure} from "@chakra-ui/react"
 import {useAuth} from "@/contexts/auth/Context"
 import {useUsers} from "@/contexts/users/Context"
 import {useQuery, useMutation} from "react-query"
 import {useHelpers} from "@/contexts/helpers/Context"
 
-const RegisterModal = ({setAlerts}) => {
-  const {user} = useAuth()
-  const {dispatch} = useAuth()
-  const {
-    inputs, resolver,
-    registerProfessional,
-  } = useUsers("professional")
+const RegisterModal = () => {
+  const modal = useDisclosure()
   const {getFields} = useHelpers()
-  const formHook = useForm({resolver})
+  const [alerts, setAlerts] = useState()
+  const {user, dispatch, logout} = useAuth()
+
+  const {inputs, resolver, createProfessional} = useUsers("professional")
+  const formHook = useForm({mode: "onChange", resolver})
 
   const {data: fields} = useQuery("fields", getFields)
 
-  const mutation = useMutation(registerProfessional, {
+  const mutation = useMutation(createProfessional, {
     onSuccess: res => {
       dispatch({type: "REGISTER_PROFESSIONAL"})
+      modal.onClose()
+      // router.push("/")
     },
     onError: error => {
       const {status, data} = error?.response
@@ -36,12 +43,27 @@ const RegisterModal = ({setAlerts}) => {
     }
   })
 
+  const header = (
+    <Flex justifyContent="space-between">
+      <Heading size="lg">
+        Register Professional
+      </Heading>
+      <Button variant="delete" onClick={logout}>
+        Sign Out
+      </Button>
+    </Flex>
+  )
+
   return ( 
     <Modal 
       noCloseButton
-      header="Register"
+      header={header}
       isOpen={!user.professionalId}
     >
+      {alerts && 
+        alerts.map((alert, i) => (
+          <Alert key={i} {...alert}/>
+      ))}
       <Form
         inputs={inputs(fields)}
         formHook={formHook}

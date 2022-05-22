@@ -12,6 +12,8 @@ import {useDisclosure} from "@chakra-ui/react"
 import {useAuth} from "@/contexts/auth/Context"
 import {useUsers} from "@/contexts/users/Context"
 
+const SettingsModal = Dynamic(() => import("./SettingsModal"))
+
 function MenuList() {
   const modal = useDisclosure()
   const {
@@ -52,5 +54,3 @@ function MenuList() {
 }
 
 export default MenuList
-
-const SettingsModal = Dynamic(() => import("./SettingsModal"))

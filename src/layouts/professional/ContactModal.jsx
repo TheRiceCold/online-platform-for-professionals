@@ -9,11 +9,15 @@ import {
 
 import {useQuery} from "react-query"
 import {useUsers} from "@/contexts/users/Context"
+import {useHelpers} from "@/contexts/helpers/Context"
 
 function ContactModal({onClose, isOpen}) {
   const {getContactInfo} = useUsers("professional")
   const {data: contactInfo} = useQuery("contact_info", getContactInfo)
   const {field, licenseNumber, officeAddress} = contactInfo || {}
+
+  const {getFields} = useHelpers()
+  const {data: fields} = useQuery("fields", getFields)
 
   return (
       <Modal onClose={onClose} size="sm" isOpen={isOpen}>
@@ -23,7 +27,7 @@ function ContactModal({onClose, isOpen}) {
           <ModalCloseButton />
           <ModalBody mb={4}>
             <strong>
-              Field: {field}
+              Field: {fields && fields[field].label}
             </strong> <br/>
             <strong>
               License Number: {licenseNumber}

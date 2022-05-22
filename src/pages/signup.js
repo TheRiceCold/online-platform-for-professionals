@@ -7,6 +7,7 @@ import {useState} from "react"
 import {useAuth} from "@/contexts/auth/Context"
 import {useMutation, useQueries} from "react-query"
 import {useHelpers} from "@/contexts/helpers/Context"
+import { capitalize } from "@/utils/stringHelpers"
 
 function SignUp() {
   const [alerts, setAlerts] = useState([])
