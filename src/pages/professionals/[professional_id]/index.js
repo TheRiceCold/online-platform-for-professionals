@@ -1,4 +1,4 @@
-import styles from "@/styles/Professionals.module.sass"
+import styles from "@/styles/professionals/Profile.module.sass"
 
 import Head from "next/head"
 import ProfileLayout from "@/layouts/professional/ProfileLayout"

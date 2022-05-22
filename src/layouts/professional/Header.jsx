@@ -1,7 +1,10 @@
-import styles from "@/styles/Professionals.module.sass"
+import styles from "@/styles/professionals/Profile.module.sass"
 
 import ContactModal from "./ContactModal"
-import {Text, Link, Avatar} from "@chakra-ui/react"
+import {
+  Text, Link, 
+  Flex, Avatar,
+} from "@chakra-ui/react"
 
 import {useDisclosure} from "@chakra-ui/react"
 import {useAuth} from "@/contexts/auth/Context"

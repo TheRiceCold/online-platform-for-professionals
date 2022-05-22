@@ -1,4 +1,4 @@
-import styles from "@/styles/Professionals.module.sass"
+import styles from "@/styles/professionals/Profile.module.sass"
 
 import Header from "./Header"
 import Navbar from "../navbar/Navbar"
