@@ -1,10 +1,22 @@
 const navLinks = id => {
-  const prefix = to => `/professionals/${id}/${to}`
+  const prefixPath = to => `/professionals/${id}/${to}`
   return [
-    { label: "Clients", href: "/clients" }, 
-    { label: "Portfolio", href: prefix("portfolio") },
-    { label: "Services", href: prefix("services") }, 
-    { label: "Bookings", href: "/bookings" }
+    { label: "Profile", href: prefixPath("") }, 
+    { label: "Clients", children: [
+      { 
+        label: "Clientele",
+        subLabel: "service clients",
+        href: ""
+      },
+      { 
+        label: "Subscribers",
+        subLabel: "clients who follows you",
+        href: ""
+      },
+    ]}, 
+    { label: "Professionals", href: "/professionals" }, 
+    { label: "Portfolio", href: prefixPath("portfolio") },
+    { label: "Services", href: prefixPath("services") }, 
   ]
 }
 

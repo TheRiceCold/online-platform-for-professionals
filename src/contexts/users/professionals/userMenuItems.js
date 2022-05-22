@@ -5,16 +5,24 @@ const userMenuItems = (user, router, logout, modals) => {
     openFieldSettings,
   } = modals
 
+  const prefixPath = (to = "") => 
+    `/professionals/${user.professionalId}/${to}`
+
   return [
     {
-      label: "Profile", 
+      label: "Bookings", 
       handleOnClick: () => 
-        router.push(`/professionals/${user.professionalId}`)
+        router.push(prefixPath("bookings"))
+    },
+    {
+      label: "Clientele", 
+      handleOnClick: () => 
+        router.push(prefixPath("clientele"))
     },
     {
       label: "Subscribers", 
       handleOnClick: () => 
-        router.push(`/professionals/${user.professionalId}/connections`)
+        router.push(prefixPath("subscribers"))
     },
     {
       label: "Field Settings",

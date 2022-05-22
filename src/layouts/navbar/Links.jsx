@@ -1,4 +1,11 @@
-import {Link, HStack} from "@chakra-ui/react"
+import {
+  Link, 
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Box, HStack, Stack,
+} from "@chakra-ui/react"
+import SubLink from "./SubLink"
 
 const Links = ({links}) => (
   <HStack
@@ -6,11 +13,29 @@ const Links = ({links}) => (
     as="nav" spacing={8}
     display={{ base: 'none', md: 'flex' }}
   >
-  {links?.map(
-    ({href, label}) => (
-      <Link key={href} href={href}>
-        {label}
-      </Link>
+  {links?.map((item, idx) => (
+    <Box key={idx}>
+      <Popover trigger="hover" placement="bottom-start">
+        <PopoverTrigger>
+          <Link key={item.href} href={item.href}>
+            {item.label}
+          </Link>
+        </PopoverTrigger>
+        {item.children && (
+          <PopoverContent
+            p={4}
+            w="8em"
+            bg="none"
+          >
+            <Stack>
+              {item.children.map((child, idx) => (
+                <SubLink key={idx} {...child}/>
+              ))}
+            </Stack>
+          </PopoverContent>
+        )}
+      </Popover>
+    </Box>
   ))}
   </HStack>
 )
