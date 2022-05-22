@@ -1,4 +1,4 @@
-import Axios from "@/utils/axios"
+import Axios from "@/axios"
 import {capitalize} from "@/utils/stringHelpers"
 
 function Actions(user) {

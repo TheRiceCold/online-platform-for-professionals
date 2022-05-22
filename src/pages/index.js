@@ -13,7 +13,8 @@ const Home = () => {
 
   switch(userRole) {
     case "professional": 
-      router.push(`professionals/${user.professionalId}`)
+      const id = user.professionalId ? user.professionalId : "0"
+      router.push(`professionals/${id}`)
       break
     case "client":
       router.push(`clients/${user.clientId}`)

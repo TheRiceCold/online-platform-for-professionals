@@ -1,4 +1,4 @@
-import Axios from "@/utils/axios"
+import Axios from "@/axios"
 import {useStorage} from "@/hooks/useStorage"
 
 function Actions(dispatch, token) {

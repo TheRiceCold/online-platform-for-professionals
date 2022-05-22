@@ -2,10 +2,8 @@ import styles from '@/styles/Clients.module.sass';
 
 import {
 	Text,
-	Link,
 	Avatar,
 	Skeleton,
-	useDisclosure,
 	SkeletonCircle,
 } from '@chakra-ui/react';
 

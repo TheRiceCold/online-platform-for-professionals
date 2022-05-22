@@ -7,20 +7,39 @@
   <h3 align="center">Online Platform for Professionals</h3>
   <p align="center">
     <a href="https://www.avionschool.com/">Avion School</a>
-    <span>Final web application group project.</span>
-    <a href="https://www.github.com/gdperalta/online-platform-for-professionals-api">Backend Repo</a>
+    <span>Final web application group project. Check out </span>
+    <a href="">here</a>
     <br/>
-    <a href="https://github.com/dwghdev/slack-clone-react">View Website</a>
+    ·
+    <a href="https://github.com/dwghdev/slack-clone-react">Backend Repository</a>
     ·
     <a href="https://github.com/dwghdev/slack-clone-react">Report Bug</a>
-    ·
-    <a href="https://github.com/dwghdev/slack-clone-react">Request Feature</a>
 
-  ![React Badge] ![NextJs Badge] ![Yarn Badge] ![NPM Badge]
+  ![NextJs Badge] ![React Badge] ![Yarn Badge] ![NPM Badge]
   </p>
 </div>
 <br/>
 
+<details>
+  <summary>Contents</summary>
+    <ul>
+      <li>
+        <a href="#getting-started">Getting Started</a>
+      </li>
+      <li>
+        <a href="#features">Features</a>
+      </li>
+      <li>
+        <a href="#project-structure">Project Structure</a>
+      </li>
+      <li>
+        <a href="#contact">Contact</a>
+      </li>
+      <li>
+        <a href="#acknowledgements">Acknowledgements</a>
+      </li>
+    </ul>
+</details>
 
 ## Getting Started
 - clone the project and then start the project
@@ -57,10 +76,10 @@
 
 ## Project Structure
 ```
-public
+public (assets/images)
 ├── icon.ico
 ├── logo.svg
-├── log_white.svg
+├── logo_white.svg
 src
 ├── components
 │   ├── feedback
@@ -104,7 +123,6 @@ styles
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 ## Contact
 
 Dale Walter - []
@@ -113,12 +131,13 @@ Dale Walter - []
 
 ## Acknowledgements
 
-* [Zod]
-* [Axios]
-* [Chakra UI]
-* [React Query]
-* [React Spinners]
-* [React Hook Form]
+* [Zod]: TypeScript-first schema validation with static type inference (Works with JavaScript too!)
+* [Axios]: Promise based HTTP client for the browser and node.js
+* [Chakra UI]: Simple, Modular & Accessible UI Components for your React Applications
+* [React Query]: Hooks for fetching, caching and updating asynchronous data in React
+* [React Spinners]: A collection of loading spinner components for react
+* [React Calendly]: Calendly integration for React apps
+* [React Hook Form]: React Hooks for form state management and validation (Web + React Native)
 
 <!-- links & images -->
 [React Badge]: https://img.shields.io/badge/React-v17.0.2-%2361DAFB?style=flat-square&logo=React
@@ -133,3 +152,4 @@ Dale Walter - []
 [React Query]: https://github.com/tannerlinsley/react-query 
 [React Spinners]: https://github.com/davidhu2000/react-spinners
 [React Hook Form]: https://github.com/react-hook-form/react-hook-form
+[React Calendly]: https://github.com/tcampb/react-calendly

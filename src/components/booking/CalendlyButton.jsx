@@ -1,9 +1,10 @@
-import styles from '@/styles/Components.module.sass';
+import styles from '@/styles/Components.module.sass'
 
-import { Button } from '@chakra-ui/react';
-import { useState } from 'react';
-import { PopupModal } from 'react-calendly';
-import { CalendarIcon } from '@chakra-ui/icons';
+import {Button} from "@chakra-ui/react"
+import {PopupModal} from "react-calendly"
+import {CalendarIcon} from "@chakra-ui/icons"
+
+import {useState} from "react"
 
 const CalendlyButton = (props) => {
 	// TODO Replace with how to get client details if useContext will be used

@@ -13,7 +13,7 @@ const storedAuthData = CryptoAES.decrypt(
     key: "auth_data"
   }) ?? "", secret)
 
-let authData = storedAuthData.toString(CryptoENC)
+let authData = storedAuthData && storedAuthData.toString(CryptoENC)
 authData = authData && JSON.parse(authData)
 
 let initialState = {

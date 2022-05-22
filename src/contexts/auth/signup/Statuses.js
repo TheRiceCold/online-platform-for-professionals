@@ -16,7 +16,7 @@ function Statuses(setAlerts) {
 
   this.onSuccess = res => {
     this.setAlerts(
-      res?.data.meta.map(({message})=> {
+      res?.data.meta.map(({message}) => {
         return { status: "success", message }
       })
     )

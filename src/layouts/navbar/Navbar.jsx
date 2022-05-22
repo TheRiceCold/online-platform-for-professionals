@@ -49,7 +49,7 @@ function Navbar({styles, links, withSearch}) {
         <Flex alignItems="center">
           <Links links={links}/>
           <Stack direction="row" spacing={6}>
-            <Button onClick={toggleColorMode}>
+            <Button onClick={toggleColorMode} bg="none">
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
               {user.isAuth && <UserMenu/>}

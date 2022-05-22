@@ -1,4 +1,4 @@
-import Axios from "@/utils/axios"
+import Axios from "@/axios"
 import {useContext, createContext} from "react"
 
 const HelpersContext = createContext()

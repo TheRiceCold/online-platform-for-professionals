@@ -1,4 +1,4 @@
-import Axios from "@/utils/axios"
+import Axios from "@/axios"
 
 function Actions(user) {
   const {token} = user

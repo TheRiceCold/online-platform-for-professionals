@@ -17,10 +17,12 @@ function Professional() {
       <Head>
         <title>{userFullname} | Professional</title>
       </Head>
-      <Navbar styles={styles} links={navLinks}/>
       {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
       {user.professionalId ? 
-        <ProfileLayout/> :
+        <>
+          <Navbar styles={styles} links={navLinks}/>
+          <ProfileLayout/> 
+        </>:
         <RegisterLayout/>
       }
     </main>

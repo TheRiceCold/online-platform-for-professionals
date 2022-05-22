@@ -1,11 +1,11 @@
-import styles from '@/styles/Clients.module.sass';
+import styles from "@/styles/Clients.module.sass"
 
-import Header from './Header';
-import { useUsers } from '@/contexts/users/Context';
+import Header from './Header'
+import {useUsers} from '@/contexts/users/Context'
 // import { useQuery } from 'react-query';
 
 const ClientLayout = () => {
-	const { userImg } = useUsers('client');
+	const {userImg} = useUsers("client")
 
 	// No method in context yet
 	// Temporary waiting for api/context
@@ -16,11 +16,15 @@ const ClientLayout = () => {
 			city: 'Manila',
 		},
 		isLoading: false,
-	};
+	}
 	return (
 		<>
 			<section className={styles.layout}>
-				<Header isLoading={isLoading} img={userImg} contactInfo={contactInfo} />
+				<Header 
+          isLoading={isLoading} 
+          img={userImg} 
+          contactInfo={contactInfo} 
+        />
 			</section>
 		</>
 	);

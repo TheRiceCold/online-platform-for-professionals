@@ -1,29 +1,17 @@
-import Axios from "@/utils/axios"
+import Axios from "@/axios"
 
 function Actions(user) {
   const {token} = user
-  const path = id => `professionals/${id}/calendly_tokens`
+  const path = `professionals/${user.professionalId}/calendly_tokens`
   const config = { headers: { Authorization: token } }
 
-  this.getById = async id => { 
-    const url = path(user.professionalId)+id
-    return await Axios.get(url, config)
-  }
+  this.getById = async id => await Axios.get(path+id, config)
 
-  this.create = async (professionalId, data) => { 
-    const url = path(professionalId)
-    return await Axios.post(url, data, config)
-  }
+  this.create = async token => await Axios.post(path, data, config)
 
-  this.update = async (professionalId, id, data) => {
-    const url = path(professionalId)+id
-    return await Axios.patch(url, data, config)
-  }
-
-  this.delete = async (professionalId, id) => {
-    const url = path(professionalId)+id
-    return await Axios.delete(url, config)
-  }
+  this.update = async (id, data) => await Axios.patch(path+id, data, config)
+  
+  this.delete = async id => await Axios.delete(path+id, config)
 }
 
 export default Actions

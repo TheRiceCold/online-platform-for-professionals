@@ -1,4 +1,4 @@
-import styles from '@/styles/Professionals.module.sass';
+import styles from '@/styles/Professionals.module.sass'
 import {
 	Box,
 	SkeletonCircle,
@@ -8,8 +8,8 @@ import {
 	ButtonGroup,
 	UnorderedList,
 	ListItem,
-} from '@chakra-ui/react';
-import { StarIcon, AddIcon } from '@chakra-ui/icons';
+} from "@chakra-ui/react"
+import {StarIcon, AddIcon} from "@chakra-ui/icons"
 
 // TODO Insert selected professional data
 // TODO REMOVE after adding context
@@ -17,8 +17,8 @@ import {
 	services,
 	workPortfolios,
 	reviews,
-} from '../../temporaryMocks/mock_professional_data';
-import CalendlyButton from '../../components/booking/CalendlyButton';
+} from "../../temporaryMocks/mock_professional_data"
+import CalendlyButton from "../../components/booking/CalendlyButton"
 
 const ProfessionalOverview = ({ img, isLoading }) => {
 	return (
@@ -69,9 +69,8 @@ const ProfessionalOverview = ({ img, isLoading }) => {
 					Services
 				</Text>
 				<UnorderedList spacing={3}>
-					{services.map((service) => {
-						return (
-							<ListItem>
+					{services.map((service, idx) => (
+							<ListItem key={idx}>
 								<Text>{service.title}</Text>
 								<Text>{service.details}</Text>
 								{service.minPrice ? (
@@ -82,38 +81,37 @@ const ProfessionalOverview = ({ img, isLoading }) => {
 									''
 								)}
 							</ListItem>
-						);
-					})}
+          ))}
 				</UnorderedList>
 				<Text color="#14a76c" fontSize="2xl">
 					Work Portfolio
 				</Text>
 				<UnorderedList>
-					{workPortfolios.map((workPortfolio) => {
+					{workPortfolios.map((portfolio, idx) => {
 						return (
-							<ListItem>
-								<Text>{workPortfolio.title}</Text>
-								<Text>{workPortfolio.details}</Text>
+							<ListItem key={idx}>
+								<Text>{portfolio.title}</Text>
+								<Text>{portfolio.details}</Text>
 							</ListItem>
-						);
+						)
 					})}
 				</UnorderedList>
 				<Text color="#14a76c" fontSize="2xl">
 					Reviews
 				</Text>
-				{reviews.map((review) => {
+				{reviews.map((review, idx) => {
 					return (
-						<Box>
-							{[...Array(5)].map((n, i) => {
-								return <StarIcon color={i + 1 < review.rating ? '#ff652f' : 'gray'} />;
-							})}
+						<Box key={idx}>
+							{[...Array(5)].map((n, i) => (
+								<StarIcon key={i} color={i + 1 < review.rating ? '#ff652f' : 'gray'} />
+							))}
 							<Text>{review.body}</Text>
 						</Box>
-					);
+					)
 				})}
 			</Box>
 		</Box>
-	);
-};
+	)
+}
 
-export default ProfessionalOverview;
+export default ProfessionalOverview

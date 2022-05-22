@@ -1,12 +1,13 @@
-import styles from '@/styles/Professionals.module.sass';
+import styles from "@/styles/Professionals.module.sass"
 
-import Head from 'next/head';
-import Layout from '@/layouts/searchPage/Layout';
-import { useUsers } from '@/contexts/users/Context';
-import Navbar from '@/layouts/navbar/Navbar';
+import Head from "next/head"
+import Layout from "@/layouts/searchPage/Layout"
+import Navbar from "@/layouts/navbar/Navbar"
+
+import {useUsers} from "@/contexts/users/Context"
 
 const ProfessionalsSearch = () => {
-	const { navLinks } = useUsers('professional');
+	const { navLinks } = useUsers('professional')
 
 	return (
 		<main className={styles.main}>
@@ -19,4 +20,4 @@ const ProfessionalsSearch = () => {
 	);
 };
 
-export default ProfessionalsSearch;
+export default ProfessionalsSearch
