@@ -17,7 +17,8 @@
     ·
     <a href="https://github.com/dwghdev/online-platform-for-professionals-frontend/issues">Request Feature</a>
 
-  ![NextJs Badge] ![React Badge] ![Yarn Badge] ![NPM Badge]
+  ![NextJs Badge] ![React Badge] ![Firebase Badge] \
+  ![Yarn Badge] ![NPM Badge]
   </p>
 </div>
 <br/>
@@ -146,6 +147,7 @@ Dale Walter - []
 [NextJs Badge]: https://img.shields.io/badge/NextJs-v12.1.0-000000?style=flat-square&logo=Next.js
 [Yarn Badge]: https://img.shields.io/badge/Yarn-v1.22.17-2c8ebb?style=flat-square&logo=Yarn
 [NPM Badge]: https://img.shields.io/badge/NPM-v8.3.1-cb3837?style=flat-square&logo=npm
+[Firebase Badge]: https://img.shields.io/badge/Firebase-v9.8.1-ffca28?style=flat-square&logo=firebase
 
 <!-- Acknowledgements -->
 [Zod]: https://github.com/colinhacks/zod
