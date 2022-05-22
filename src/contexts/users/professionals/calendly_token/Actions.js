@@ -7,7 +7,10 @@ function Actions(user) {
 
   this.getById = async id => await Axios.get(path+id, config)
 
-  this.create = async token => await Axios.post(path, data, config)
+  this.create = async data => 
+    await Axios.post(path, { 
+      calendly_token: { ...data } 
+    }, config)
 
   this.update = async (id, data) => await Axios.patch(path+id, data, config)
   

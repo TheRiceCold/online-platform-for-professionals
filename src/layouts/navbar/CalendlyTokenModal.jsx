@@ -12,7 +12,9 @@ function CalendlyTokenModal(props) {
   } = useCalendlyToken()
 
   const formHook = useForm()
-  const mutation = useMutation(createCalendlyToken, { })
+  const mutation = useMutation(createCalendlyToken, {
+    onSettled: res => console.log(res)
+  })
   const submitHandler = data => mutation.mutate({...data})
 
   return (
