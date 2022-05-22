@@ -1,4 +1,4 @@
-import styles from "@/styles/professionals/Professionals.module.sass"
+import styles from "@/styles/users/Professionals.module.sass"
 
 import {
 	Box, Text,
