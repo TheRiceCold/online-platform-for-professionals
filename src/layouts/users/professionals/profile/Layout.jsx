@@ -1,4 +1,4 @@
-import styles from "@/styles/professionals/Profile.module.sass"
+import styles from "@/styles/users/Profile.module.sass"
 
 import Navbar from "@/layouts/navbar/Navbar"
 import RegisterModal from "../RegisterModal"
