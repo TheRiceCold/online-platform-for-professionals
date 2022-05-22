@@ -6,30 +6,32 @@ import {
   useQueryClient
 } from "react-query"
 import {useForm} from "react-hook-form"
+import {useServices} from "@/services_context"
 import {capitalize} from "@/utils/stringHelpers"
-import {useWorkPortfolios} from "@/work_portfolios_context"
 
 function FormModal(props) {
   const {action, selectedId, setAlert} = props
-  const header = capitalize(`${action} Portfolio`)
+  const header = capitalize(`${action} Service`)
 
   const {
-    inputs, resolver,
-    createWorkPortfolio, 
-    updateWorkPortfolio,
-  } = useWorkPortfolios()
+    inputs, 
+    resolver,
+    createService, 
+    updateService,
+  } = useServices()
+
   const queryClient = useQueryClient()
   const formHook = useForm({resolver})
 
   const mutation = useMutation(
     (action === "update")
-      ? updateWorkPortfolio 
-      : createWorkPortfolio, {
+      ? updateService
+      : createService, {
       onSuccess: () => {
         props.onClose()
-        queryClient.invalidateQueries("work_portfolios")
+        queryClient.invalidateQueries("services")
         const message = action === "update" ? 
-          "Update Successful" : "New portfolio has been added"
+          "Update Successful" : "New service has been added"
         setAlert({ message, status: "success" })
       }
     })
@@ -39,7 +41,7 @@ function FormModal(props) {
       ? {selectedId, ...data} : {...data}
     mutation.mutate(submittedData)
   }
-
+ 
   return (
     <Modal {...props} header={header}>
       <Form

@@ -1,6 +1,7 @@
 import FormModal from "./FormModal"
 import PortfolioItems from "./Items"
-import {Button} from "@chakra-ui/react"
+import {Heading} from "@chakra-ui/react"
+import Button from "@/components/Button"
 import Alert from "@/components/feedback/Alert"
 import AlertDialog from "@/components/overlay/AlertDialog"
 
@@ -41,7 +42,12 @@ function PortfolioLayout() {
   return (
     <>
       {alert && <Alert {...alert}/>}
-      <Button onClick={handleCreate}>New</Button>
+      <Heading my={4}>
+        Work Portfolios
+      </Heading>
+      <Button onClick={handleCreate} variant="primary">
+        Add New
+      </Button>
       <PortfolioItems
         modal={modal}
         setAction={setAction}

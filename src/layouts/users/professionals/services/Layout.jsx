@@ -1,42 +1,74 @@
-import {
-  Text,
-  Button,
-  Heading,
-} from "@chakra-ui/react"
-import CreateModal from "./CreateModal"
+import ServiceItems from "./Items"
+import FormModal from "./FormModal"
+import {Heading} from "@chakra-ui/react"
+import Button from "@/components/Button"
+import Alert from "@/components/feedback/Alert"
+import AlertDialog from "@/components/overlay/AlertDialog"
 
-import {useQuery} from "react-query"
+import {
+  useMutation,
+  useQueryClient
+} from "react-query"
+import {useState} from "react"
 import {useServices} from "@/services_context"
 import {useDisclosure} from "@chakra-ui/react"
 
 function ServicesLayout() {
-  const useModal = useDisclosure()
-  const {getServices} = useServices()
-  const {data: services, isLoading} = useQuery("services", getServices)
+  const modal = useDisclosure()
+  const queryClient = useQueryClient()
+  const [alert, setAlert] = useState()
+  const {deleteService} = useServices()
+  const deleteAlertDialog = useDisclosure()
+
+  const [action, setAction] = useState("create")
+  const [selectedId, setSelectedId] = useState()
+
+  const deleteMutation = useMutation(deleteService, {
+    onSuccess: async() => {
+      deleteAlertDialog.onClose() 
+      queryClient.invalidateQueries("services")
+      setAlert({message: "Service deleted", status: "success"})
+    }
+  })
+
+  const handleDelete = async () => 
+    await deleteMutation.mutateAsync(selectedId)
+
+  const handleCreate = () => {
+    setAction("create")
+    modal.onOpen()
+  }
 
   return (
     <>
-      <Button onClick={useModal.onOpen}>New</Button>
-      {isLoading ?
-        <h1>Loading...</h1> :
-        services.length ?
-          services.map((service, idx) => {
-            const {
-              details, title,
-              minPrice, maxPrice
-            } = service.attributes
-
-            return (
-              <div key={idx}>
-                <Heading>{title}</Heading>
-                <Text>{details}</Text>
-                <Text>{minPrice} - {maxPrice}</Text>
-              </div>
-            )
-          })
-          : <h1>No work services yet</h1>
-      }
-      <CreateModal {...useModal} />
+      {alert && <Alert {...alert}/>}
+      <Heading my={4}>
+        Services
+      </Heading>
+      <Button onClick={handleCreate} variant="primary">
+        Add New
+      </Button>
+      <ServiceItems
+        modal={modal}
+        setAction={setAction}
+        setSelectedId={setSelectedId}
+        deleteAlertDialog={deleteAlertDialog}
+      />
+      <FormModal 
+        {...modal}
+        action={action}
+        setAlert={setAlert}
+        selectedId={selectedId}
+      />
+      <AlertDialog 
+        // isCentered
+        buttonColor="red"
+        buttonLabel="Delete"
+        {...deleteAlertDialog}
+        header="Delete Service"
+        buttonClick={handleDelete}
+        label="Are you sure? You can't undo this action afterwards."
+      />
     </>
   )
 }
