@@ -1,19 +1,25 @@
 import styles from "@/styles/Professionals.module.sass"
 
 import Header from "./Header"
-import Dynamic from "next/dynamic"
+import Navbar from "../navbar/Navbar"
+import RegisterModal from "./RegisterModal"
 
-const RegisterModal = Dynamic(() => import("./RegisterModal"))
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
 
 function ProfessionalLayout() {
+  const {user} = useAuth()
+  const {navLinks} = useUsers("professional")
 
-  return (
+  {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
+  return (user.professionalId ? 
     <>
+      <Navbar styles={styles} links={navLinks}/>
       <section className={styles.layout}>
         <Header/>
-        <RegisterModal/>
-      </section>
-    </>
+      </section> 
+    </> :
+    <RegisterModal/>
   )
 }
 

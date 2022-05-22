@@ -6,13 +6,11 @@ import {
   MenuList as ChakraMenuList, 
 } from "@chakra-ui/react"
 import {Fragment} from "react"
-import Dynamic from "next/dynamic"
+import SettingsModal from "./SettingsModal"
 
 import {useDisclosure} from "@chakra-ui/react"
 import {useAuth} from "@/contexts/auth/Context"
 import {useUsers} from "@/contexts/users/Context"
-
-const SettingsModal = Dynamic(() => import("./SettingsModal"))
 
 function MenuList() {
   const modal = useDisclosure()

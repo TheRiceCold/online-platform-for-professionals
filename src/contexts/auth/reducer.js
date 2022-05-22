@@ -7,21 +7,25 @@ export function reducer(state, action) {
         ...state,
         isAuth: true,
         id: payload.id,
-        role: payload.role,
         token: payload.token,
+        attributes: payload.attributes,
       }
+
     case "REGISTER_PROFESSIONAL":
-      return {
-        ...state,
-        registered: true
+      const professionalId = payload?.included[0]?.relationships?.professional?.data.id
+      console.log(professionalId)
+      return { 
+        ...state, 
+        professionalId 
       }
+
     case "LOGOUT":
       return {
         ...state,
-        isAuth: false,
         id: "",
-        role: "",
         token: "",
+        isAuth: false,
+        attributes: "",
       }
     default:
       return state

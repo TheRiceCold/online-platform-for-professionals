@@ -6,9 +6,13 @@ import {
   ModalCloseButton,
   Modal as ChakraModal, 
 } from "@chakra-ui/react"
+import Alert from "../feedback/Alert"
 
 function Modal({children, ...props}) {
-  const {header, isOpen, onClose, noCloseButton} = props
+  const {
+    onClose, noCloseButton,
+    header, isOpen, alerts,
+  } = props
 
   return (
     <ChakraModal 
@@ -20,6 +24,10 @@ function Modal({children, ...props}) {
       <ModalContent>
         {!noCloseButton && <ModalCloseButton/>}
         <ModalHeader>{header}</ModalHeader>
+        {alerts && 
+          alerts.map((alert, i) => (
+            <Alert key={i} {...alert}/>
+        ))}
         <ModalBody mb={4}>
           {children}
         </ModalBody>

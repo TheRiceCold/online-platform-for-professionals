@@ -27,7 +27,7 @@ function ContactModal({onClose, isOpen}) {
           <ModalCloseButton />
           <ModalBody mb={4}>
             <strong>
-              Field: {fields && fields[field].label}
+              Field: {fields && fields[field]?.label}
             </strong> <br/>
             <strong>
               License Number: {licenseNumber}

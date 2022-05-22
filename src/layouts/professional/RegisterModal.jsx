@@ -2,7 +2,6 @@ import Button from "@/components/Button"
 import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
 import {Flex, Heading} from "@chakra-ui/react"
-import Alert from "@/components/feedback/Alert"
 
 import {useState} from "react"
 import {useRouter} from "next/router"
@@ -25,9 +24,9 @@ const RegisterModal = () => {
   const {data: fields} = useQuery("fields", getFields)
 
   const mutation = useMutation(createProfessional, {
-    onSuccess: res => {
-      dispatch({type: "REGISTER_PROFESSIONAL"})
-      modal.onClose()
+    onSuccess: ({data})=> {
+      dispatch({type: "REGISTER_PROFESSIONAL", payload: data})
+      console.log(data)
       // router.push("/")
     },
     onError: error => {
@@ -57,13 +56,10 @@ const RegisterModal = () => {
   return ( 
     <Modal 
       noCloseButton
+      alerts={alerts}
       header={header}
       isOpen={!user.professionalId}
     >
-      {alerts && 
-        alerts.map((alert, i) => (
-          <Alert key={i} {...alert}/>
-      ))}
       <Form
         inputs={inputs(fields)}
         formHook={formHook}
