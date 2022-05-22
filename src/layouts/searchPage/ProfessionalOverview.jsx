@@ -107,7 +107,6 @@ const ProfessionalOverview = ({ img, isLoading }) => {
 							{[...Array(5)].map((n, i) => {
 								return <StarIcon color={i + 1 < review.rating ? '#ff652f' : 'gray'} />;
 							})}
-							<Text>{review.rating}</Text>
 							<Text>{review.body}</Text>
 						</Box>
 					);
