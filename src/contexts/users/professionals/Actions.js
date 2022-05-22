@@ -1,4 +1,7 @@
 import Axios from "@/axios"
+import CryptoAES from "crypto-js/aes"
+import CryptoENC from "crypto-js/enc-utf8"
+import {useStorage} from "@/hooks/useStorage"
 import {capitalize} from "@/utils/stringHelpers"
 
 function Actions(user) {
@@ -14,13 +17,39 @@ function Actions(user) {
     return data
   }
 
-  this.create = async data => 
-    await Axios.post(path, { 
+  this.create = async data => {
+    const res = await Axios.post(path, { 
       professional: {
         user_id: user.id,
         ...data
       } 
     }, config)
+
+    if (res.status === 201) {
+      const storage = useStorage()
+      const professionalId = res?.data?.included[0]?.relationships?.professional?.data.id
+
+      const secret = process.env.NEXT_PUBLIC_SECRET
+      const storedAuthData = CryptoAES.decrypt(
+        storage.getItem({
+          type: "session",
+          key: "auth_data"
+        }) ?? "", secret)
+
+
+      let authData = storedAuthData && storedAuthData.toString(CryptoENC)
+      authData = authData && JSON.parse(authData)
+      authData.professionalId = professionalId
+
+      storage.setItem({
+        type: "session",
+        key: "auth_data",
+        value: CryptoAES.encrypt(JSON.stringify(authData), secret)
+      })
+    }
+    
+    return res
+  }
 
   this.update = async(id, data) => 
     await Axios.patch(path+id, {
