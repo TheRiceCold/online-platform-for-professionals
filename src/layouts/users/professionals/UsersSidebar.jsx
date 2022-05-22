@@ -4,22 +4,29 @@ import {Box} from "@chakra-ui/react"
 import Pagination from "./Pagination"
 import ProfileDescription from "./ProfileDescription"
 
-import {mockUsers} from "@/data/mock_professionals"
+import {useQuery} from "react-query"
+import {useUsers} from "@/users_context"
 
-const UsersSidebar = ({ img, isLoading }) => {
+const UsersSidebar = () => {
+  const {getProfessionals} = useUsers("professional")
+  const {data: professionals, isLoading} = useQuery("professionals", getProfessionals)
+
 	return (
 		<Box className={styles.resultNavigationContainer}>
 			{/*TODO Insert get /professionals/search here */}
-			{mockUsers.map((user, i) => {
-				return (
-					<ProfileDescription
-						key={i}
-						user={user}
-						img={img}
-						isLoading={isLoading}
-					/>
-				)
-			})}
+      {!isLoading && 
+        professionals?.data?.map((user, idx) => {
+          console.log(user)
+          return (
+            <ProfileDescription
+              key={idx}
+              user={user}
+              img={""}
+              isLoading={isLoading}
+            />
+          )
+        })
+      }
 			<Pagination />
 		</Box>
 	)

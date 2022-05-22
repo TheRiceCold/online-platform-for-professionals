@@ -10,6 +10,7 @@ import NextLink from "next/link"
 import {StarIcon} from "@chakra-ui/icons"
 
 function ProfileDescription({user, img, isLoading}) {
+
 	return (
 		<LinkBox className={styles.description}>
 			<Box className={styles.userInfo}>
@@ -25,12 +26,12 @@ function ProfileDescription({user, img, isLoading}) {
 					/>
 				</SkeletonCircle>
 				<Box>
-					<Text className={styles.field}>{user.professional.field}</Text>
+					<Text className={styles.field}>{user.attributes.field}</Text>
 					<NextLink href="#" passHref>
 						<LinkOverlay className={styles.name}>{user.name}</LinkOverlay>
 					</NextLink>
-					<Text>{user.professional.headline}</Text>
-					<Text>{user.professional.officeAddress}</Text>
+					<Text>{user.attributes.headline}</Text>
+					<Text>{user.attributes.officeAddress}</Text>
 				</Box>
 			</Box>
 			<Box className={styles.metrics} color="gray.500">

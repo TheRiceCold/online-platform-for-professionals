@@ -7,15 +7,15 @@ import Layout from "@/professionals_layout/Layout"
 import {useUsers} from "@/contexts/users/Context"
 
 const Professionals = () => {
-	const { navLinks } = useUsers('professional')
+  const {navLinks} = useUsers("professional")
 
 	return (
 		<main className={styles.main}>
 			<Head>
-				<title>Professionals Search</title>
+				<title>Professionals</title>
 			</Head>
-			<Navbar styles={styles} links={navLinks} />
-			<Layout />
+			<Navbar styles={styles} links={navLinks}/>
+			<Layout/>
 		</main>
 	)
 }

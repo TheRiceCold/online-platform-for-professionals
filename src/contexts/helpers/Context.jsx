@@ -31,7 +31,7 @@ const HelpersProvider = ({children}) => {
     const {data: fields} = await Axios("fields")
     return fields.map(field => {
       return {
-        value: field.id,
+        value: field.name,
         label: field.name
       }
     })
