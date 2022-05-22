@@ -1,3 +1,7 @@
+$primary: #14a76c
+$secondary: #ff652f
+$tertiary: #ffe400
+
 main.main
   display: flex
   align-items: center
@@ -40,7 +44,7 @@ main.main
           .user_info_content
             display: flex
             flex-direction: column
-  section.searchResultsLayout
+  section.searchResultsLayout        
     width: 100vw
     height: calc(100vh - 9vh)
     margin-top: 16px
@@ -48,17 +52,15 @@ main.main
     justify-content: center
     overflow: auto
     .field
-      color: #14a76c
+      color: $primary
     .name
-      color: #ff652f
+      color: $secondary
       font-weight: bold
 
     .resultNavigationContainer
       overflow: auto
       width: 30vw
       border: darken(#14a76c, 10%) solid 1px
-
-  
 
     .overviewContainer
       height: calc(100vh - 9vh)
