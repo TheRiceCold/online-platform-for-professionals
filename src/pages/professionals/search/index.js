@@ -2,21 +2,19 @@ import styles from '@/styles/Professionals.module.sass';
 
 import Head from 'next/head';
 import Layout from '@/layouts/searchPage/Layout';
-import { capitalize } from '@/utils/stringHelpers';
-import { useAppState } from '@/context/state/Context';
+import { useUsers } from '@/contexts/users/Context';
+import Navbar from '@/layouts/navbar/Navbar';
 
 const ProfessionalsSearch = () => {
-	const { useAuth } = useAppState();
-	const { user } = useAuth();
-	const { firstName, lastName } = user.attributes;
-	const fullname = capitalize(`${firstName} ${lastName}`);
+	const { navLinks } = useUsers('professional');
 
 	return (
 		<main className={styles.main}>
 			<Head>
 				<title>Professionals Search</title>
 			</Head>
-			<Layout fullname={fullname} />
+			<Navbar styles={styles} links={navLinks} />
+			<Layout />
 		</main>
 	);
 };
