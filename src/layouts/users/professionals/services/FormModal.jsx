@@ -21,7 +21,7 @@ function FormModal(props) {
   } = useServices()
 
   const queryClient = useQueryClient()
-  const formHook = useForm({resolver})
+  const formHook = useForm({mode: "onChange", resolver})
 
   const mutation = useMutation(
     (action === "update")

@@ -11,5 +11,9 @@ const Schema = z.object({
   max_price: z.string()
     .min(1, { message: "Maximum required"}),
 })
+.refine((data) => Number(min_price) < Number(max_price), {
+  message: "Max price should be higher than minimun price",
+  path: ["max_price"], // path of error
+})
 
 export default Schema

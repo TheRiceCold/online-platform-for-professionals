@@ -1,8 +1,8 @@
-import styles from "@/styles/Clients.module.sass"
+import styles from "@/styles/users/Profile.module.sass"
 
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
-import Layout from "@/layouts/clients/Layout"
+import Layout from "@/clients_layout/profile/Layout"
 
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"

@@ -1,24 +1,12 @@
-import {
-  useContext,
-  createContext
-} from "react"
-import {
-  AdminContext,
-  AdminProvider,
-} from "./admin/Context"
-import {
-  ClientsContext,
-  ClientsProvider,
-} from "./clients/Context"
-import {
-  ProfessionalsContext,
-  ProfessionalsProvider,
-} from "./professionals/Context"
+import {AdminContext, AdminProvider} from "./admin/Context"
+import {ClientsContext, ClientsProvider} from "./clients/Context"
+import {ProfessionalsContext, ProfessionalsProvider} from "./professionals/Context"
+
+import {useContext, createContext} from "react"
 
 function UsersContext(role) {
   switch(role) {
     case "professional":
-        // Layout = dynamic(() => import("@/layouts/admin/Layout"))
       return ProfessionalsContext
     case "client":
       return ClientsContext
