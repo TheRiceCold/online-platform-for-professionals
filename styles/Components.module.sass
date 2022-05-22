@@ -1,3 +1,8 @@
+
+$primary: #14a76c
+$secondary: #ff652f
+$tertiary: #ffe400
+
 // Alert
 .alertContainer
   width: 100%  
@@ -87,3 +92,42 @@
     align-items: center
     justify-content: center
 
+// ProfessionalDescription
+.description 
+  width: 100%
+  display: flex
+  padding: 0.2rem 0.8rem
+  display: flex
+  border: darken($primary, 10%) solid 1px
+  justify-content: space-between
+  align-items: center
+  .userInfo
+    display: flex
+    width: 75%
+    align-items: center
+  .metrics
+    width: 20%
+    .rating
+      display: flex
+.field
+      color: $primary
+.name
+  color: $secondary
+  font-weight: bold
+//Bookings
+.bookEvent  
+  background-color: $primary !important
+  font-weight: bold
+
+// Pagination
+
+.paginationContainer
+  height: 10vh
+  display: flex
+  justify-content: center
+  .paginationGroup
+    position: relative
+    margin-top: 1rem
+    .pagination
+      border: none
+      color: $primary

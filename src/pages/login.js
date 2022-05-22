@@ -1,4 +1,4 @@
-import styles from "@/styles/Auth.module.sass"
+import styles from '@/styles/Auth.module.sass';
 
 import Head from "next/head"
 import AuthLayout from "@/layouts/auth/layout"
@@ -19,24 +19,24 @@ function Login() {
   const [alerts, setAlerts] = useState()
   const status = new LoginStatuses(storage, dispatch, setAlerts)
 
-  const mutation = useMutation(login, { 
-    onSuccess: status.onSuccess,
-    onError: status.onError
-  })
+	const mutation = useMutation(login, {
+		onSuccess: status.onSuccess,
+		onError: status.onError,
+	});
 
-  return (
-    <main className={styles.main}>
-      <Head>
-        <title>Login</title>
-      </Head>
-      <AuthLayout 
-        isLoginPage
-        alerts={alerts}
-        mutation={mutation}
-        inputs={loginInputs}
-      />
-    </main>
-  )
+	return (
+		<main className={styles.main}>
+			<Head>
+				<title>Login</title>
+			</Head>
+			<AuthLayout
+				isLoginPage
+				alerts={alerts}
+				mutation={mutation}
+				inputs={loginInputs}
+			/>
+		</main>
+	);
 }
 
-export default Login 
+export default Login;

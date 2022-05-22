@@ -1,3 +1,7 @@
+$primary: #14a76c
+$secondary: #ff652f
+$tertiary: #ffe400
+
 @import "includes/main_layout"
 
 section.layout
@@ -23,4 +27,51 @@ section.layout
         padding: 10px 16px
         .user_info_content
           display: flex
-          flex-direction: column
+          margin-left: 16px
+          padding: 10px 16px
+          .user_info_content
+            display: flex
+            flex-direction: column
+  section.searchResultsLayout        
+    width: 100vw
+    height: calc(100vh - 9vh)
+    margin-top: 16px
+    display: flex
+    justify-content: center
+    overflow: auto
+    .field
+      color: $primary
+    .name
+      color: $secondary
+      font-weight: bold
+
+    .resultNavigationContainer
+      overflow: auto
+      width: 30vw
+      border: darken(#14a76c, 10%) solid 1px
+
+    .overviewContainer
+      height: calc(100vh - 9vh)
+      width: 50vw
+      padding: 0.8rem
+      border: darken(#14a76c, 10%) solid 1px    
+      overflow: auto
+      .subscribe
+        background-color: #ff652f !important  
+      .headline
+        display: flex
+        justify-content: space-between
+        width: 100%
+        height: 18vh
+        .info
+          display: flex
+          align-items: center
+          .displayPhoto
+            padding: 0rem 2rem 0 1rem
+        .actions
+          position: relative
+          top: 2.5rem
+          right: 1.5rem
+      .overview
+        padding: 2rem
+
