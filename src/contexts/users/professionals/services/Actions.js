@@ -25,8 +25,8 @@ function Actions(user) {
     return await Axios.patch(url, data, config)
   }
 
-  this.delete = async (professionalId, id) => {
-    const url = path(professionalId)+id
+  this.delete = async id => {
+    const url = path+"/"+id
     return await Axios.delete(url, config)
   }
 }
