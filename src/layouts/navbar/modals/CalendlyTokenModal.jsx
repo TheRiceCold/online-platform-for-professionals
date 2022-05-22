@@ -20,6 +20,7 @@ function CalendlyTokenModal(props) {
   return (
     <Modal
       {...props}
+      isCentered
       alert={alert}
       header="Enter Calendly Token"
     >

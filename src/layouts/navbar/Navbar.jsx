@@ -11,7 +11,7 @@ import {
   Link, Button,
 } from "@chakra-ui/react"
 import Links from "./Links"
-import UserMenu from "./UserMenu"
+import UserMenu from "./userMenu/UserMenu"
 import SearchBar from "@/components/SearchBar"
 import NextLink from "@/components/navigation/Link"
 

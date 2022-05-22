@@ -1,16 +1,13 @@
 import {Box, useRadio} from "@chakra-ui/react"
 
 function RadioCard(props) {
-  const {
-    getInputProps, 
-    getCheckboxProps
-  } = useRadio(props)
+  const { getInputProps, getCheckboxProps } = useRadio(props)
   const input = getInputProps()
   const checkbox = getCheckboxProps()
 
   return (
     <Box as='label'>
-      <input {...input}/>
+      <input {...input} />
       <Box
         {...checkbox}
         cursor='pointer'
@@ -22,9 +19,7 @@ function RadioCard(props) {
           color: 'white',
           borderColor: 'teal.600',
         }}
-        _focus={{
-          boxShadow: 'outline',
-        }}
+        _focus={{ boxShadow: 'outline' }}
         px={5}
         py={3}
       >
@@ -33,5 +28,3 @@ function RadioCard(props) {
     </Box>
   )
 }
-
-export default RadioCard

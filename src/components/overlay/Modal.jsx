@@ -10,8 +10,12 @@ import Alert from "../feedback/Alert"
 
 function Modal({children, ...props}) {
   const {
-    onClose, noCloseButton,
-    header, isOpen, alerts,
+    alerts,
+    header, 
+    isOpen, 
+    onClose, 
+    isCentered,
+    noCloseButton,
   } = props
 
   return (
@@ -19,6 +23,7 @@ function Modal({children, ...props}) {
       size="lg" 
       isOpen={isOpen}
       onClose={onClose} 
+      isCentered={isCentered}
     >
       <ModalOverlay/>
       <ModalContent>

@@ -15,16 +15,6 @@ const userMenuItems = (user, router, logout, modals) => {
         router.push(prefixPath("bookings"))
     },
     {
-      label: "Clientele", 
-      handleOnClick: () => 
-        router.push(prefixPath("clientele"))
-    },
-    {
-      label: "Subscribers", 
-      handleOnClick: () => 
-        router.push(prefixPath("subscribers"))
-    },
-    {
       label: "Field Settings",
       handleOnClick: openFieldSettings
     },

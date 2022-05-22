@@ -4,9 +4,9 @@ import {
 } from "@chakra-ui/react"
 import {Fragment} from "react"
 
-import AccountSettingsModal from "./AccountSettingsModal"
-import CalendlyTokenModal from "./CalendlyTokenModal"
-import FieldSettingsModal from "./FieldSettingsModal"
+import AccountSettingsModal from "../modals/AccountSettingsModal"
+import CalendlyTokenModal from "../modals/CalendlyTokenModal"
+import FieldSettingsModal from "../modals/FieldSettingsModal"
 
 import {useDisclosure} from "@chakra-ui/react"
 import {useAuth} from "@/contexts/auth/Context"
