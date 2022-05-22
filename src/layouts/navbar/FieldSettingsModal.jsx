@@ -27,9 +27,9 @@ function FieldSettingsModal(props) {
     >
       <Form
         inputs={inputs(fields)}
-        submitValue="Save"
         mutation={mutation}
         formHook={formHook}
+        submitValue="Update"
         submitHandler={submitHandler}
       />
     </Modal>

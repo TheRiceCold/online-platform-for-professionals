@@ -38,9 +38,9 @@ function AccountSettingsModal(props) {
     >
       <Form
         inputs={inputs}
-        submitValue="Save"
         mutation={mutation}
         formHook={formHook}
+        submitValue="Update"
         submitHandler={submitHandler}
       />
     </Modal>

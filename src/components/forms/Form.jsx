@@ -5,11 +5,12 @@ import FormControl from "./FormControl"
 function Form(props) {
   const { 
     inputs,
+    noLabel,
     children,
     formHook,
     mutation,
     submitValue,
-    submitHandler
+    submitHandler,
   } = props
 
   const {register, formState, handleSubmit} = formHook
@@ -28,6 +29,7 @@ function Form(props) {
         <FormControl 
           input={input}
           key={input.id}
+          noLabel={noLabel}
           register={register}
           error={formState.errors[input.id]}
         /> 

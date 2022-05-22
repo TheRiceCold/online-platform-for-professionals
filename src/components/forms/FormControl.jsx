@@ -10,25 +10,25 @@ import SelectInput from "./selects/SelectInput"
 import PasswordInput from "./inputs/PasswordInput"
 
 function FormControl(props) {
-  const {input, register, error} = props
+  const {input, error, noLabel} = props
   const {id, label, required} = input
 
   const inputType = () => {
     switch (input.type) {
       case "tel":
-        return <PhoneInput input={input} register={register}/>
+        return <PhoneInput {...props}/>
 
       case "password": 
-        return <PasswordInput input={input} register={register}/>
+        return <PasswordInput {...props}/>
 
       case "select": 
-        return <SelectInput input={input} register={register}/>
+        return <SelectInput {...props}/>
 
       case "radio":
-        return <RadioGroup input={input} register={register}/>
+        return <RadioGroup {...props}/>
 
       default:
-        return <Input input={input} register={register}/>
+        return <Input {...props}/>
     }
   }
 
@@ -38,9 +38,11 @@ function FormControl(props) {
       isInvalid={error}
       isRequired={required}
     >
-      <FormLabel mt={4} htmlFor={id}>
-        {label}
-      </FormLabel>
+      {!noLabel &&
+        <FormLabel mt={4} htmlFor={id}>
+          {label}
+        </FormLabel>
+      }
       {inputType()}
       <FormErrorMessage>
         {error && error?.message}

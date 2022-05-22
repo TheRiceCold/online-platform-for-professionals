@@ -13,7 +13,10 @@ const CalendlyTokenProvider = ({children}) => {
 
   return (
     <Provider value={{
-      inputs: [{ id: "authorization" }],
+      inputs: [{ 
+        id: "authorization",
+        label: "Calendly Token",
+      }],
 
       getCalendlyToken: call.getById,
       createCalendlyToken: call.create,

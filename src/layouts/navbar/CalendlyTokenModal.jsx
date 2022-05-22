@@ -21,11 +21,12 @@ function CalendlyTokenModal(props) {
     <Modal
       {...props}
       alert={alert}
-      header="Calendly Token"
+      header="Enter Calendly Token"
     >
       <Form
+        noLabel
         inputs={inputs}
-        submitValue="Save"
+        submitValue="Save Token"
         mutation={mutation}
         formHook={formHook}
         submitHandler={submitHandler}
