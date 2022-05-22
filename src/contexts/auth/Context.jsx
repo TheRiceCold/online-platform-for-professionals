@@ -1,12 +1,16 @@
 import Actions from "./Actions"
+
 // Login
 import LoginInputs from "./login/Inputs"
 import LoginSchema from "./login/Schema"
 import LoginStatuses from "./login/Statuses"
+
 // Signup
 import SignupInputs from "./signup/Inputs"
 import SignupSchema from "./signup/Schema"
 import SignupStatuses from "./signup/Statuses"
+
+import UpdateInputs from "./update/Inputs"
 
 import {reducer} from "./reducer"
 import {initialState} from "./initialState"
@@ -55,6 +59,8 @@ const AuthProvider = ({children}) => {
       // Inputs
       loginInputs: LoginInputs,
       signupInputs: SignupInputs,
+      updateInputs: UpdateInputs,
+
       // Resolvers (validations)
       loginResolver: zodResolver(LoginSchema),
       signupResolver: zodResolver(SignupSchema),
