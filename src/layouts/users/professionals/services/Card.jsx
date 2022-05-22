@@ -17,7 +17,10 @@ function Card(props) {
   } = props
 
   const {id, attributes} = service
-  const {title, details} = attributes
+  const {
+    title, details, 
+    minPrice, maxPrice
+  } = attributes
 
   const handleUpdate = () => {
     setAction("update")
@@ -49,6 +52,9 @@ function Card(props) {
           </Heading>
           <Text color={'gray.500'}>
             {details}
+          </Text>
+          <Text color={'gray.500'}>
+            {minPrice} - {maxPrice}
           </Text>
         </Stack>
         <Stack

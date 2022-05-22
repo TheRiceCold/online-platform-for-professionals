@@ -15,10 +15,13 @@ function Actions(user) {
     return await Axios.get(url, config)
   }
 
-  this.create = async data => await Axios.post(path, data, config)
+  this.create = async data => 
+    await Axios.post(path, data, config)
 
-  this.update = async (professionalId, id, data) => {
-    const url = path(professionalId)+id
+  this.update = async data => {
+    const id = data.selectedId
+    const url = path+"/"+id
+    delete data.selectedId
     return await Axios.patch(url, data, config)
   }
 
