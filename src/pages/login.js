@@ -1,23 +1,23 @@
 import styles from '@/styles/Auth.module.sass';
 
-import Head from 'next/head';
-import AuthLayout from '@/layouts/auth/Layout';
+import Head from 'next/head'
+import AuthLayout from '@/layouts/auth/Layout'
 
-import { useState } from 'react';
-import { useMutation } from 'react-query';
-import { useStorage } from '@/hooks/useStorage';
-import { useAuth } from '@/contexts/auth/Context';
+import {useState} from 'react'
+import {useAuth} from '@/auth_context'
+import {useMutation} from 'react-query'
+import {useStorage} from '@/hooks/useStorage'
 
 function Login() {
 	const storage = useStorage();
-	const { login, dispatch, loginInputs, LoginStatuses } = useAuth();
+	const { login, dispatch, loginInputs, LoginStatuses } = useAuth()
 	const [alerts, setAlerts] = useState();
-	const status = new LoginStatuses(storage, dispatch, setAlerts);
+	const status = new LoginStatuses(storage, dispatch, setAlerts)
 
 	const mutation = useMutation(login, {
 		onSuccess: status.onSuccess,
 		onError: status.onError,
-	});
+	})
 
 	return (
 		<main className={styles.main}>
@@ -31,7 +31,7 @@ function Login() {
 				inputs={loginInputs}
 			/>
 		</main>
-	);
+	)
 }
 
-export default Login;
+export default Login

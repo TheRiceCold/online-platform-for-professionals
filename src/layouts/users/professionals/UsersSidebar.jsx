@@ -1,18 +1,18 @@
 import styles from "@/styles/professionals/Professionals.module.sass"
 
 import {Box} from "@chakra-ui/react"
-import Pagination from "@/components/search/Pagination"
-import ProfessionalDescription from "@/components/search/ProfessionalDescription"
+import Pagination from "./Pagination"
+import ProfileDescription from "./ProfileDescription"
 
-import {mockUsers} from "../../temporaryMocks/mock_professionals"
+import {mockUsers} from "@/data/mock_professionals"
 
-const SearchResultNavigation = ({ img, isLoading }) => {
+const UsersSidebar = ({ img, isLoading }) => {
 	return (
 		<Box className={styles.resultNavigationContainer}>
 			{/*TODO Insert get /professionals/search here */}
 			{mockUsers.map((user, i) => {
 				return (
-					<ProfessionalDescription
+					<ProfileDescription
 						key={i}
 						user={user}
 						img={img}
@@ -25,4 +25,4 @@ const SearchResultNavigation = ({ img, isLoading }) => {
 	)
 }
 
-export default SearchResultNavigation
+export default UsersSidebar

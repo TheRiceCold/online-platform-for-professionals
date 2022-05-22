@@ -13,11 +13,13 @@ export function reducer(state, action) {
 
     case "REGISTER_PROFESSIONAL":
       const professionalId = payload?.included[0]?.relationships?.professional?.data.id
-      console.log(professionalId)
       return { 
         ...state, 
         professionalId 
       }
+
+    case "REGISTER_CALENDLY_TOKEN":
+      return { ...state }
 
     case "LOGOUT":
       return {

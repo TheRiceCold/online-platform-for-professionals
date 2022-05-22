@@ -5,7 +5,7 @@ import Footer from "@/layouts/footer/Footer"
 import HomeLayout from "@/layouts/home/Layout"
 
 import {useRouter} from "next/router"
-import {useAuth} from "@/contexts/auth/Context"
+import {useAuth} from "@/auth_context"
 
 const Home = () => {
   const router = useRouter()

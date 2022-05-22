@@ -1,11 +1,11 @@
 import styles from "@/styles/professionals/Profile.module.sass"
 
 import Header from "./Header"
-import Navbar from "../navbar/Navbar"
-import RegisterModal from "./RegisterModal"
+import Navbar from "@/layouts/navbar/Navbar"
+import RegisterModal from "../RegisterModal"
 
-import {useAuth} from "@/contexts/auth/Context"
-import {useUsers} from "@/contexts/users/Context"
+import {useAuth} from "@/auth_context"
+import {useUsers} from "@/users_context"
 
 function ProfessionalLayout() {
   const {user} = useAuth()

@@ -5,7 +5,7 @@ import {
 } from "@chakra-ui/react"
 import {ChevronRightIcon} from "@chakra-ui/icons"
 
-const SubLink = ({label, href, subLabel}) => (
+const SubLink = ({label, href}) => (
   <Link
     href={href}
     role="group"

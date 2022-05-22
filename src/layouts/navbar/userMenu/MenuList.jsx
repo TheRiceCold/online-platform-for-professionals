@@ -8,9 +8,9 @@ import AccountSettingsModal from "../modals/AccountSettingsModal"
 import CalendlyTokenModal from "../modals/CalendlyTokenModal"
 import FieldSettingsModal from "../modals/FieldSettingsModal"
 
+import {useAuth} from "@/auth_context"
+import {useUsers} from "@/users_context"
 import {useDisclosure} from "@chakra-ui/react"
-import {useAuth} from "@/contexts/auth/Context"
-import {useUsers} from "@/contexts/users/Context"
 
 function MenuList() {
   const {userRole} = useAuth()

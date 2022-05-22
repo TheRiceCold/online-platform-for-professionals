@@ -3,7 +3,7 @@ import Schema from "./Schema"
 import Actions from "./Actions"
 
 import {createContext} from "react"
-import {useAuth} from "@/contexts/auth/Context"
+import {useAuth} from "@/auth_context"
 import {zodResolver} from "@hookform/resolvers/zod"
 
 const ReviewsContext = createContext()

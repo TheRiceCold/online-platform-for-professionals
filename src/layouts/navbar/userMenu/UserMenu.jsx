@@ -6,7 +6,7 @@ import {
 import MenuList from "./MenuList"
 import {ChevronDownIcon} from "@chakra-ui/icons"
 
-import {useAuth} from "@/contexts/auth/Context"
+import {useAuth} from "@/auth_context"
 
 const UserMenu = () => {
   const {userImage, userFullname, userRole} = useAuth()

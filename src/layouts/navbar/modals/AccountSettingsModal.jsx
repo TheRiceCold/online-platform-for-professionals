@@ -1,10 +1,10 @@
 import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
 
+import {useAuth} from "@/auth_context"
 import {useForm} from "react-hook-form"
-import {useAuth} from "@/contexts/auth/Context"
+import {useHelpers} from "@/helpers_context"
 import {useMutation, useQueries} from "react-query"
-import {useHelpers} from "@/contexts/helpers/Context"
 
 function AccountSettingsModal(props) {
   const {getCities, getRegions} = useHelpers()

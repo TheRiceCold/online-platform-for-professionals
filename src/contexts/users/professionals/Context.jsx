@@ -1,7 +1,7 @@
 import {navLinks} from "./navLinks"
 import {createContext} from "react"
 import {useRouter} from "next/router"
-import {useAuth} from "../../auth/Context"
+import {useAuth} from "@/auth_context"
 import {userMenuItems} from "./userMenuItems"
 import {zodResolver} from "@hookform/resolvers/zod"
 

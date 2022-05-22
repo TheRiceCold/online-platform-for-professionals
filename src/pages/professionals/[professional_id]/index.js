@@ -1,9 +1,9 @@
 import styles from "@/styles/professionals/Profile.module.sass"
 
 import Head from "next/head"
-import ProfileLayout from "@/layouts/professional/ProfileLayout"
+import ProfileLayout from "@/professionals_layout/profile/Layout"
 
-import {useAuth} from "@/contexts/auth/Context"
+import {useAuth} from "@/auth_context"
 
 function Professional() {
   const {userFullname} = useAuth()

@@ -1,17 +1,15 @@
-import styles from '@/styles/Components.module.sass';
+import styles from "@/styles/Components.module.sass"
 
 import {
 	Avatar,
+	Box, Text,
 	SkeletonCircle,
-	LinkBox,
-	LinkOverlay,
-	Box,
-	Text,
-} from '@chakra-ui/react';
-import { StarIcon } from '@chakra-ui/icons';
-import NextLink from 'next/link';
+	LinkBox, LinkOverlay,
+} from "@chakra-ui/react"
+import NextLink from "next/link"
+import {StarIcon} from "@chakra-ui/icons"
 
-const ProfessionalDescription = ({ user, img, isLoading }) => {
+function ProfileDescription({user, img, isLoading}) {
 	return (
 		<LinkBox className={styles.description}>
 			<Box className={styles.userInfo}>
@@ -46,7 +44,7 @@ const ProfessionalDescription = ({ user, img, isLoading }) => {
 				<Text>{user.relationships.clientele.data.length} clients</Text>
 			</Box>
 		</LinkBox>
-	);
-};
+	)
+}
 
-export default ProfessionalDescription;
+export default ProfileDescription

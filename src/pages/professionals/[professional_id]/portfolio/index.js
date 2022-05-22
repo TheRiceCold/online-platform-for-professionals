@@ -2,10 +2,10 @@ import styles from "@/styles/professionals/Professionals.module.sass"
 
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
-import Layout from "@/layouts/professional/portfolio/Layout"
+import Layout from "@/professionals_layout/portfolio/Layout"
 
-import {useAuth} from "@/contexts/auth/Context"
-import {useUsers} from "@/contexts/users/Context"
+import {useAuth} from "@/auth_context"
+import {useUsers} from "@/users_context"
 
 function Portfolio() {
   const {userFullname} = useAuth()

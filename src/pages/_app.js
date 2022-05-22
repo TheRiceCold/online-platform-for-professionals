@@ -6,9 +6,9 @@ import {ChakraProvider} from "@chakra-ui/react"
 
 import RouteGuard from "@/components/RouteGuard"
 
-import AuthProvider from "@/contexts/auth/Context"
-import UsersProvider from "@/contexts/users/Context"
-import HelpersProvider from "@/contexts/helpers/Context"
+import AuthProvider from "@/auth_context"
+import UsersProvider from "@/users_context"
+import HelpersProvider from "@/helpers_context"
 
 const MyApp = ({Component, pageProps}) => {
   const queryClient = new QueryClient()

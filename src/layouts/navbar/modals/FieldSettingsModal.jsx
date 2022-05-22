@@ -2,9 +2,9 @@ import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
 
 import {useForm} from "react-hook-form"
-import {useUsers} from "@/contexts/users/Context"
+import {useUsers} from "@/users_context"
+import {useHelpers} from "@/helpers_context"
 import {useMutation, useQuery} from "react-query"
-import {useHelpers} from "@/contexts/helpers/Context"
 
 function FieldSettingsModal(props) {
   const {

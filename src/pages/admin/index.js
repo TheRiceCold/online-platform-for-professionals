@@ -4,8 +4,8 @@ import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
 import AdminLayout from "@/layouts/admin/Layout"
 
-import {useAuth} from "@/contexts/auth/Context"
-import {useUsers} from "@/contexts/users/Context"
+import {useAuth} from "@/auth_context"
+import {useUsers} from "@/users_context"
 
 const Admin = () => {
   const {userFullname} = useAuth()

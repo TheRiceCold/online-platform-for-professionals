@@ -15,7 +15,7 @@ import UserMenu from "./userMenu/UserMenu"
 import SearchBar from "@/components/SearchBar"
 import NextLink from "@/components/navigation/Link"
 
-import {useAuth} from "@/contexts/auth/Context"
+import {useAuth} from "@/auth_context"
 import {useColorMode, useDisclosure} from "@chakra-ui/react"
 
 function Navbar({styles, links, withSearch}) {

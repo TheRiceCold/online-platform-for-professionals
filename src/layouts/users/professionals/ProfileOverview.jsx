@@ -1,4 +1,5 @@
 import styles from "@/styles/professionals/Professionals.module.sass"
+
 import {
 	Box, Text,
 	Button, ButtonGroup,
@@ -6,18 +7,19 @@ import {
 	UnorderedList, ListItem,
 } from "@chakra-ui/react"
 import {StarIcon, AddIcon} from "@chakra-ui/icons"
-import CalendlyButton from "../../components/booking/CalendlyButton"
-import {useAuth} from "@/contexts/auth/Context"
+import CalendlyButton from "@/components/booking/CalendlyButton"
+
+import {useAuth} from "@/auth_context"
+import {
+	reviews,
+	services,
+	workPortfolios,
+} from "@/data/mock_professional_data"
 
 // TODO Insert selected professional data
 // TODO REMOVE after adding context
-import {
-	services,
-	workPortfolios,
-	reviews,
-} from "../../temporaryMocks/mock_professional_data"
 
-function ProfessionalOverview({ img, isLoading }) {
+function ProfileOverview({ img, isLoading }) {
   const {userRole} = useAuth()
 
 	return (
@@ -115,4 +117,4 @@ function ProfessionalOverview({ img, isLoading }) {
 	)
 }
 
-export default ProfessionalOverview
+export default ProfileOverview

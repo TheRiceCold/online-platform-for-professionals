@@ -1,10 +1,10 @@
-import Actions from './Actions';
+import Actions from "./Actions"
 
-import { navLinks } from './navLinks';
-import { createContext } from 'react';
-import { useRouter } from 'next/router';
-import { useAuth } from '../../auth/Context';
-import { userMenuItems } from './userMenuItems';
+import {navLinks} from "./navLinks"
+import {createContext} from "react"
+import {useRouter} from "next/router"
+import {useAuth} from "@/auth_context"
+import {userMenuItems} from "./userMenuItems"
 
 const ClientsContext = createContext();
 

@@ -2,7 +2,7 @@ import styles from "@/styles/professionals/Professionals.module.sass"
 
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
-import Layout from "@/layouts/professionals/Layout"
+import Layout from "@/professionals_layout/Layout"
 
 import {useUsers} from "@/contexts/users/Context"
 
