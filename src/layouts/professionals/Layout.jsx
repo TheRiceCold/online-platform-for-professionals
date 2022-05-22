@@ -1,11 +1,11 @@
 import styles from '@/styles/professionals/Professionals.module.sass'
 
-import { useUsers } from '@/contexts/users/Context'
+import {useUsers} from '@/contexts/users/Context'
 import ProfessionalOverview from './ProfessionalOverview'
 import SearchResultNavigation from './SearchResultNavigation'
 
-const SearchLayout = () => {
-	const { userImg, isLoading } = useUsers('client');
+const ProfessionalsLayout = () => {
+	const { userImg, isLoading } = useUsers('client')
 
 	return (
 		<>
@@ -15,7 +15,7 @@ const SearchLayout = () => {
 				<ProfessionalOverview img={userImg} isLoading={isLoading} />
 			</section>
 		</>
-	);
-};
+	)
+}
 
-export default SearchLayout;
+export default ProfessionalsLayout

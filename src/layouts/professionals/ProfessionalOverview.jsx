@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react"
 import {StarIcon, AddIcon} from "@chakra-ui/icons"
 import CalendlyButton from "../../components/booking/CalendlyButton"
+import {useAuth} from "@/contexts/auth/Context"
 
 // TODO Insert selected professional data
 // TODO REMOVE after adding context
@@ -16,7 +17,9 @@ import {
 	reviews,
 } from "../../temporaryMocks/mock_professional_data"
 
-const ProfessionalOverview = ({ img, isLoading }) => {
+function ProfessionalOverview({ img, isLoading }) {
+  const {userRole} = useAuth()
+
 	return (
 		<Box className={styles.overviewContainer}>
 			<Box className={styles.headline}>
@@ -42,19 +45,21 @@ const ProfessionalOverview = ({ img, isLoading }) => {
 					</Box>
 				</Box>
 				<Box className={styles.actions}>
-					<ButtonGroup spacing={3}>
-						{/*TODO Call post /connections */}
-						<Button leftIcon={<AddIcon />} className={styles.subscribe}>
-							Subscribe
-						</Button>
-						{/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
-						{/* TODO Replace with client details or remove props if useContext will be used */}
-						<CalendlyButton
-							firstName={'Luffy'}
-							lastName={'Monkey'}
-							email={'client2@email.com'}
-						/>
-					</ButtonGroup>
+          {userRole === "client" &&
+            <ButtonGroup spacing={3}>
+              {/*TODO Call post /connections */}
+              <Button leftIcon={<AddIcon />} className={styles.subscribe}>
+                Subscribe
+              </Button>
+              {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
+              {/* TODO Replace with client details or remove props if useContext will be used */}
+              <CalendlyButton
+                firstName={'Luffy'}
+                lastName={'Monkey'}
+                email={'client2@email.com'}
+              />
+            </ButtonGroup>
+          }
 				</Box>
 			</Box>
 			<Box className={styles.overview}>

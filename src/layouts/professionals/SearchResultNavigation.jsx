@@ -18,11 +18,11 @@ const SearchResultNavigation = ({ img, isLoading }) => {
 						img={img}
 						isLoading={isLoading}
 					/>
-				);
+				)
 			})}
 			<Pagination />
 		</Box>
-	);
-};
+	)
+}
 
-export default SearchResultNavigation;
+export default SearchResultNavigation
