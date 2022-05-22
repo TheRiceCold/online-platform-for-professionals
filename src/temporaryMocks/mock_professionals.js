@@ -127,18 +127,19 @@ const userFive = {
 
 for (let i = 0; i < 3; i++) {
 	mockUsers.push(userOne);
-}
-for (let i = 0; i < 3; i++) {
 	mockUsers.push(userTwo);
-}
-for (let i = 0; i < 3; i++) {
 	mockUsers.push(userThree);
-}
-for (let i = 0; i < 3; i++) {
 	mockUsers.push(userFour);
-}
-for (let i = 0; i < 3; i++) {
 	mockUsers.push(userFive);
 }
+
+let links = {
+	self: 'http://localhost:3001/professionals?page=1',
+	first: 'http://localhost:3001/professionals?page=1',
+	next: 'http://localhost:3001/professionals?page=2',
+	// prev: 'http://localhost:3001/professionals?page=7',
+	last: 'http://localhost:3001/professionals?page=8',
+};
+
 mockUsers = mockUsers.sort(() => Math.random() - 0.5);
-export { mockUsers };
+export { mockUsers, links };
