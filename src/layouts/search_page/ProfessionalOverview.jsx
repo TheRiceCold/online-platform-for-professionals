@@ -1,15 +1,12 @@
-import styles from '@/styles/Professionals.module.sass'
+import styles from "@/styles/professionals/Professionals.module.sass"
 import {
-	Box,
-	SkeletonCircle,
-	Avatar,
-	Text,
-	Button,
-	ButtonGroup,
-	UnorderedList,
-	ListItem,
+	Box, Text,
+	Button, ButtonGroup,
+	SkeletonCircle, Avatar,
+	UnorderedList, ListItem,
 } from "@chakra-ui/react"
 import {StarIcon, AddIcon} from "@chakra-ui/icons"
+import CalendlyButton from "../../components/booking/CalendlyButton"
 
 // TODO Insert selected professional data
 // TODO REMOVE after adding context
@@ -18,7 +15,6 @@ import {
 	workPortfolios,
 	reviews,
 } from "../../temporaryMocks/mock_professional_data"
-import CalendlyButton from "../../components/booking/CalendlyButton"
 
 const ProfessionalOverview = ({ img, isLoading }) => {
 	return (

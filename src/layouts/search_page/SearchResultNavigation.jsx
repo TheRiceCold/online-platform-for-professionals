@@ -1,9 +1,10 @@
-import styles from '@/styles/Professionals.module.sass';
+import styles from "@/styles/professionals/Professionals.module.sass"
 
-import { mockUsers } from '../../temporaryMocks/mock_professionals';
-import ProfessionalDescription from '../../components/search/ProfessionalDescription';
-import { Box } from '@chakra-ui/react';
-import Pagination from '@/components/search/Pagination';
+import {Box} from "@chakra-ui/react"
+import Pagination from "@/components/search/Pagination"
+import ProfessionalDescription from "@/components/search/ProfessionalDescription"
+
+import {mockUsers} from "../../temporaryMocks/mock_professionals"
 
 const SearchResultNavigation = ({ img, isLoading }) => {
 	return (

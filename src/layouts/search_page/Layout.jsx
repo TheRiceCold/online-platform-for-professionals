@@ -1,8 +1,8 @@
-import styles from '@/styles/Professionals.module.sass';
+import styles from '@/styles/professionals/Professionals.module.sass'
 
-import { useUsers } from '@/contexts/users/Context';
-import ProfessionalOverview from './ProfessionalOverview';
-import SearchResultNavigation from './SearchResultNavigation';
+import { useUsers } from '@/contexts/users/Context'
+import ProfessionalOverview from './ProfessionalOverview'
+import SearchResultNavigation from './SearchResultNavigation'
 
 const SearchLayout = () => {
 	const { userImg, isLoading } = useUsers('client');

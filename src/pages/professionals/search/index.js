@@ -1,7 +1,7 @@
-import styles from "@/styles/Professionals.module.sass"
+import styles from "@/styles/professionals/Professionals.module.sass"
 
 import Head from "next/head"
-import Layout from "@/layouts/searchPage/Layout"
+import Layout from "@/layouts/search_page/Layout"
 import Navbar from "@/layouts/navbar/Navbar"
 
 import {useUsers} from "@/contexts/users/Context"
