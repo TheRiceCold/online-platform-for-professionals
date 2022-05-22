@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react"
 
 function Modal({children, ...props}) {
-  const {header, isOpen, onClose} = props
+  const {header, isOpen, onClose, noCloseButton} = props
 
   return (
     <ChakraModal 
@@ -18,7 +18,7 @@ function Modal({children, ...props}) {
     >
       <ModalOverlay/>
       <ModalContent>
-        <ModalCloseButton/>
+        {!noCloseButton && <ModalCloseButton/>}
         <ModalHeader>{header}</ModalHeader>
         <ModalBody mb={4}>
           {children}

@@ -1,7 +1,9 @@
-const Inputs = [
+const Inputs = fields => [
   {
     id: "field",
-    label: "Field"
+    type: "select",
+    label: "Select Field",
+    options: fields
   },
   {
     id: "headline",

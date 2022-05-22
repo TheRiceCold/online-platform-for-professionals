@@ -10,10 +10,8 @@ import {useHelpers} from "@/contexts/helpers/Context"
 
 function SignUp() {
   const [alerts, setAlerts] = useState([])
-  const {
-    getCities,
-    getRegions
-  } = useHelpers()
+  const {getCities, getRegions} = useHelpers()
+
   const {
     signup, 
     signupInputs,
