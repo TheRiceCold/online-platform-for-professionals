@@ -1,7 +1,9 @@
-import {useState} from "react"
+import Button from "../Button"
 import FormControl from "./FormControl"
 import {ChevronLeftIcon} from "@chakra-ui/icons"
-import {Box, Flex, Button, Heading} from "@chakra-ui/react"
+import {Box, Flex, Heading} from "@chakra-ui/react"
+
+import {useState} from "react"
 
 function MultiForm(props) {
   const [formStep, setFormStep] = useState(0)
@@ -30,10 +32,15 @@ function MultiForm(props) {
           <Button 
             w={1} 
             mr={8}
+            bg="none"
+            _hover={{bg: "none"}}
             type="button"
             onClick={() => gotoStep("back")}
           >
-            <ChevronLeftIcon/>
+            <ChevronLeftIcon 
+              w={25} h={25}
+              mr={1}
+            />
           </Button>
         }
         <Heading>
@@ -52,8 +59,8 @@ function MultiForm(props) {
         {formStep !== numOfSteps &&
           <Button 
             w="8em" 
-            bg="teal" 
             type="button"
+            variant="primary"
             onClick={() => gotoStep("next")}
           >
             Next
@@ -62,8 +69,8 @@ function MultiForm(props) {
         {formStep === numOfSteps &&
           <Button 
             w="8em" 
-            bg="teal" 
             type="submit"
+            variant="primary"
             isLoading={props.isLoading}
           >
             Submit

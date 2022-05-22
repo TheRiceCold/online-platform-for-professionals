@@ -1,18 +1,42 @@
-import Navbar from "@/layouts/navbar/Navbar"
-import {useAppState} from "@/context/state/Context"
+import {
+  Text,
+  Button,
+  Heading,
+} from "@chakra-ui/react"
+import CreateModal from "./CreateModal"
 
-function ServicesLayout(props) {
-  const {useAuth, useProfessionals} = useAppState()
-  const {navLinks} = useProfessionals()
-  const {user} = useAuth()
+import {useQuery} from "react-query"
+import {useServices} from "@/services_context"
+import {useDisclosure} from "@chakra-ui/react"
+
+function ServicesLayout() {
+  const useModal = useDisclosure()
+  const {getServices} = useServices()
+  const {data: services, isLoading} = useQuery("services", getServices)
 
   return (
     <>
-      <Navbar 
-        user={user} 
-        links={navLinks}
-        fullname={props.fullname}
-      />
+      <Button onClick={useModal.onOpen}>New</Button>
+      {isLoading ?
+        <h1>Loading...</h1> :
+        services.length ?
+          services.map((service, idx) => {
+            const {
+              details, title,
+              minPrice, maxPrice
+            } = service.attributes
+
+            return (
+              <div key={idx}>
+                <Heading>{title}</Heading>
+                <Text>{details}</Text>
+                <Text>{minPrice} - {maxPrice}</Text>
+              </div>
+            )
+          })
+          : <h1>No work services yet</h1>
+      }
+      <CreateModal {...useModal} />
     </>
   )
 }

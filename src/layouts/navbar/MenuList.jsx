@@ -1,35 +1,39 @@
 import {
   MenuItem,
   Flex, Stack,
-  useDisclosure,
   Heading, Text,
   Avatar, MenuDivider, 
   MenuList as ChakraMenuList, 
 } from "@chakra-ui/react"
 import {Fragment} from "react"
-import dynamic from "next/dynamic"
+import Dynamic from "next/dynamic"
 
-function MenuList(props) {
+import {useDisclosure} from "@chakra-ui/react"
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
+
+function MenuList() {
+  const modal = useDisclosure()
   const {
-    img, 
-    items,
-    fullname, 
-  } = props
-  const useModal = useDisclosure()
+    userRole,
+    userImage, 
+    userFullname, 
+  } = useAuth()
+  const {menuItems} = useUsers(userRole)
 
   return (
     <>
       <ChakraMenuList>
         <Flex alignItems="center" ml={3}>
-          <Avatar size="md" src={img}/>
+          <Avatar size="md" src={userImage}/>
           <Stack ml={2} spacing={0}>
             <Heading size="3x1">
             </Heading>
-            <Text>{fullname}</Text>
+            <Text>{userFullname}</Text>
           </Stack>
         </Flex>
         <MenuDivider/>
-        {items(useModal.onOpen)
+        {menuItems(modal.onOpen)
           .map((item, i) => ( 
             <Fragment key={i}> 
               {item === "divider" ?
@@ -42,11 +46,11 @@ function MenuList(props) {
           )
         )}
       </ChakraMenuList>
-      {useModal.isOpen && <SettingsModal {...useModal}/>}
+      {modal.isOpen && <SettingsModal {...modal}/>}
     </>
   )
 }
 
 export default MenuList
 
-const SettingsModal = dynamic(() => import("./SettingsModal"))
+const SettingsModal = Dynamic(() => import("./SettingsModal"))

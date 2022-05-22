@@ -1,10 +1,14 @@
-import {useState} from "react"
-import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons"
+import {
+  ViewIcon, 
+  ViewOffIcon
+} from "@chakra-ui/icons"
 import {
   Button, Tooltip,
   Input, InputGroup, 
   InputRightElement,
 } from "@chakra-ui/react"
+
+import {useState} from "react"
 
 function PasswordInput(props) {
   const [show, setShow] = useState(false)

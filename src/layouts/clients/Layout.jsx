@@ -3,7 +3,7 @@ import styles from '@/styles/Clients.module.sass';
 import Header from './Header';
 import Navbar from '../navbar/Navbar';
 import { useUsers } from '@/context/users/Context';
-import { useQuery } from 'react-query';
+// import { useQuery } from 'react-query';
 
 const ClientLayout = ({ fullname }) => {
 	const { navLinks, userMenuItems, userImg } = useUsers('client');

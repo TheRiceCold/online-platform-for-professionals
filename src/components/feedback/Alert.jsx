@@ -4,21 +4,20 @@ import {
   Flex,
   AlertIcon,
   CloseButton,
-  useDisclosure,
   AlertDescription,
   Alert as ChakraAlert, 
 } from '@chakra-ui/react'
+import {useDisclosure} from '@chakra-ui/react'
 
-function Alert({message, status}) {
+function Alert({message, status, variant}) {
   const {isOpen, onClose} = useDisclosure({defaultIsOpen: true})
 
   return isOpen && (
     <Flex className={styles.alertContainer}>
       <ChakraAlert 
-        mb={1}
         status={status} 
-        variant="left-accent"
         className={styles.alert}
+        variant={variant ? variant : "left-accent"}
       >
         <Flex>
           <AlertIcon />
@@ -28,8 +27,7 @@ function Alert({message, status}) {
         </Flex>
         <CloseButton
           onClick={onClose}
-          position='relative'
-          alignSelf='flex-start'
+          className={styles.alertCloseButton}
         />
       </ChakraAlert>
     </Flex>

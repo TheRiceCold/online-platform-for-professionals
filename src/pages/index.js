@@ -1,33 +1,35 @@
+import styles from "@/styles/Home.module.sass"
+
 import Head from "next/head"
+import Footer from "@/layouts/footer/Footer"
+import HomeLayout from "@/layouts/home/Layout"
+
 import {useRouter} from "next/router"
-import {useAppState} from "@/context/state/Context"
+import {useAuth} from "@/contexts/auth/Context"
 
 const Home = () => {
-  const {useAuth} = useAppState()
   const router = useRouter()
-  const {user} = useAuth()
+  const {userRole, user} = useAuth()
 
-  const homeContent = () => {
-    const role = user.attributes.role.toLowerCase()
-    switch(role) {
-      case "professional": 
-        router.push(`professionals/${user.professionalId}`)
-        break
-      case "client":
-        router.push(`clients/${user.clientId}`)
-        break
-      case "admin":
-        // Layout = dynamic(() => import("@/layouts/admin/Layout"))
-        // return <Layout/>
-    }
+  switch(userRole) {
+    case "professional": 
+      router.push(`professionals/${user.professionalId}`)
+      break
+    case "client":
+      router.push(`clients/${user.clientId}`)
+      break
+    case "admin":
+      router.push(`admin`)
+      break
   }
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head>
         <title>Home</title>
       </Head> 
-      {homeContent()}
+      <HomeLayout/>
+      <Footer/>
     </main>
   )
 }

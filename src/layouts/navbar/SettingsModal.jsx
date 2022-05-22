@@ -1,17 +1,11 @@
-import {
-  Modal, 
-  ModalBody,
-  ModalHeader,
-  ModalContent,
-  ModalOverlay,
-  ModalCloseButton,
-} from "@chakra-ui/react"
+import Form from "@/components/forms/Form"
+import Modal from "@/components/overlay/Modal"
+
 import {useForm} from "react-hook-form"
 import {useMutation} from "react-query"
-import Form from "@/components/forms/Form"
-import {useUsers} from "@/context/users/Context"
+import {useUsers} from "@/contexts/users/Context"
 
-function SettingsModal({onClose, isOpen}) {
+function SettingsModal(props) {
   const {
     inputs,
     resolver,
@@ -23,23 +17,18 @@ function SettingsModal({onClose, isOpen}) {
   const submitHandler = data => mutation.mutate({...data})
 
   return (
-    <Modal onClose={onClose} size="lg" isOpen={isOpen}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalCloseButton />
-        <ModalHeader>
-          Account Settings
-        </ModalHeader>
-        <ModalBody mb={4}>
-          <Form
-            inputs={inputs}
-            submitValue="Save"
-            mutation={mutation}
-            formHook={formHook}
-            submitHandler={submitHandler}
-          />
-        </ModalBody>
-      </ModalContent>
+    <Modal
+      {...props}
+      alert={alert}
+      header="Account Settings"
+    >
+      <Form
+        inputs={inputs}
+        submitValue="Save"
+        mutation={mutation}
+        formHook={formHook}
+        submitHandler={submitHandler}
+      />
     </Modal>
   )
 }

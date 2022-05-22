@@ -1,16 +1,23 @@
+import styles from "@/styles/Professionals.module.sass"
+
 import Head from "next/head"
-import {useUsers} from "@/context/users/Context"
-import Layout  from "@/layouts/professional/portfolio/Layout"
+import Navbar from "@/layouts/navbar/Navbar"
+import Layout from "@/layouts/professional/portfolio/Layout"
+
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
 
 function Portfolio() {
-  const {fullname} = useUsers("professional")
+  const {userFullname} = useAuth()
+  const {navLinks} = useUsers("professional")
 
   return (
-    <main>
+    <main className={styles.main}>
       <Head>
-        <title>{fullname} | Portfolio</title>
+        <title>{userFullname} | Work Portfolio</title>
       </Head>
-      <Layout fullname={fullname}/>
+      <Navbar styles={styles} links={navLinks}/>
+      <Layout/>
     </main>
   )
 }

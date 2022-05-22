@@ -2,14 +2,25 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/context/*": ["src/context/*"],
       "@/layouts/*": ["src/layouts/*"],
+      "@/contexts/*": ["src/contexts/*"],
       "@/components/*": ["src/components/*"],
       
       "@/styles/*": ["styles/*"],
       "@/data/*": ["src/lib/data/*"],
       "@/hooks/*": ["src/lib/hooks/*"],
-      "@/utils/*": ["src/lib/utils/*"]
+      "@/utils/*": ["src/lib/utils/*"],
+
+      "_comment": "Context shortcuts",
+      "@/work_portfolios_context": [
+        "src/contexts/users/professionals/work_portfolios/Context"
+      ],
+      "@/services_context": [
+        "src/contexts/users/professionals/services/Context"
+      ],
+      "@/reviews_context": [
+        "src/contexts/users/professionals/reviews/Context"
+      ],
     }
   }
 }

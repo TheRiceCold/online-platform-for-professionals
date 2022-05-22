@@ -3,16 +3,16 @@ import styles from "@/styles/Auth.module.sass"
 import Links from "./Links"
 import Modal from "./Modal"
 import AuthForm from "./Form"
-import {useRouter} from "next/router"
 import Navbar from "../navbar/Navbar"
-import useMount from "@/hooks/useMount"
 import Alert from "@/components/feedback/Alert"
-import {Container, Link} from "@chakra-ui/react"
-import {useAppState} from "@/context/state/Context"
+import {Link, Container} from "@chakra-ui/react"
+
+import {useRouter} from "next/router"
+import useMount from "@/hooks/useMount"
+import {useAuth} from "@/contexts/auth/Context"
 import {useDisclosure as useModal} from "@chakra-ui/react"
 
 function AuthLayout(props) {
-  const {useAuth} = useAppState()
   const {user} = useAuth()
 
   const router = useRouter()

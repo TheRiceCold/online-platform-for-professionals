@@ -1,25 +1,21 @@
 import styles from "@/styles/Clients.module.sass"
 
 import Head from "next/head"
-import {useAppState} from "@/context/state/Context"
+import Navbar from "@/layouts/navbar/Navbar"
+
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
 
 function Clients() {
-  const {useAuth} = useAppState()
-  const {user} = useAuth()
-
-  const role = user?.attributes.role
-
-  switch(role) {
-    case "professional": 
-      
-      break
-  }
+  const {userRole, userFullname} = useAuth()
+  const {navLinks} = useUsers(userRole)
 
   return (
     <main className={styles.main}>
       <Head>
-        <title>Clients</title>
+        <title>{userFullname} | Clients</title>
       </Head>
+      <Navbar styles={styles} links={navLinks}/>
     </main>
   )
 }

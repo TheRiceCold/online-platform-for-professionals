@@ -1,35 +1,29 @@
 import {
-  SunIcon, MoonIcon,
-  HamburgerIcon, CloseIcon
+  SunIcon, 
+  MoonIcon,
+  CloseIcon,
+  HamburgerIcon, 
 } from "@chakra-ui/icons"
 import {
   Box, Flex,
   IconButton,
   Image, Stack,
   Link, Button,
-  useColorMode, useDisclosure,
 } from "@chakra-ui/react"
 import Links from "./Links"
 import UserMenu from "./UserMenu"
 import SearchBar from "@/components/SearchBar"
 import NextLink from "@/components/navigation/Link"
-import {useAppState} from "@/context/state/Context"
 
-function Navbar(props) {
-  const {
-    links,
-    styles,
-    fullname,
-    userMenuItems,
-  } = props
+import {useAuth} from "@/contexts/auth/Context"
+import {useColorMode, useDisclosure} from "@chakra-ui/react"
 
-  const {useAuth} = useAppState()
+function Navbar({styles, links, withSearch}) {
   const {user} = useAuth()
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
-  const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
-  const img = "https://avatars.dicebear.com/api/male/username.svg"
 
+  const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
   return (
     <nav className={styles.navbar}>
       <div className={styles.nav_content}>
@@ -51,21 +45,14 @@ function Navbar(props) {
             }
           />
         </NextLink>
-        {user.isAuth && <SearchBar colorMode={colorMode}/>}
+        {withSearch && <SearchBar colorMode={colorMode}/>}
         <Flex alignItems="center">
           <Links links={links}/>
           <Stack direction="row" spacing={6}>
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-              {user.isAuth && 
-                <UserMenu 
-                  img={img}
-                  user={user}
-                  fullname={fullname}
-                  items={userMenuItems}
-                />
-              }
+              {user.isAuth && <UserMenu/>}
           </Stack>
         </Flex>
       </div>
@@ -73,9 +60,9 @@ function Navbar(props) {
         isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as="nav" spacing={4}>
-              {links.map(link => (
-                <Link key={link}>
-                  {link}
+              {links.map(({href, label})=> (
+                <Link key={href} href={href}>
+                  {label}
                 </Link>
               ))}
             </Stack>

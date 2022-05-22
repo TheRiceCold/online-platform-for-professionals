@@ -1,26 +1,26 @@
 import styles from "@/styles/Professionals.module.sass"
 
 import Head from "next/head"
-import {useQuery} from "react-query"
-import {useUsers} from "@/context/users/Context"
-import {useAppState} from "@/context/state/Context"
+import Navbar from "@/layouts/navbar/Navbar"
 import ProfileLayout from "@/layouts/professional/ProfileLayout"
 import RegisterLayout from "@/layouts/professional/RegisterLayout"
 
+import {useAuth} from "@/contexts/auth/Context"
+import {useUsers} from "@/contexts/users/Context"
+
 function Professional() {
-  const {getFullname} = useUsers("professional")
-  const {data: fullname} = useQuery("fullname", getFullname)
-  const {useAuth} = useAppState()
-  const {user} = useAuth()
+  const {userFullname, user} = useAuth()
+  const {navLinks} = useUsers("professional")
 
   return (
     <main className={styles.main}>
       <Head>
-        <title>{fullname} | Professional</title>
+        <title>{userFullname} | Professional</title>
       </Head>
+      <Navbar styles={styles} links={navLinks}/>
       {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
       {user.professionalId ? 
-        <ProfileLayout fullname={fullname}/> :
+        <ProfileLayout/> :
         <RegisterLayout/>
       }
     </main>

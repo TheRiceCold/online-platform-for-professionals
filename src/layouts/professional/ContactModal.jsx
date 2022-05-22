@@ -7,12 +7,13 @@ import {
   ModalCloseButton,
 } from "@chakra-ui/react"
 
-function ContactModal({onClose, isOpen, contactInfo}) {
-  const {
-    field,
-    licenseNumber,
-    officeAddress,
-  } = contactInfo || {}
+import {useQuery} from "react-query"
+import {useUsers} from "@/contexts/users/Context"
+
+function ContactModal({onClose, isOpen}) {
+  const {getContactInfo} = useUsers("professional")
+  const {data: contactInfo} = useQuery("contact_info", getContactInfo)
+  const {field, licenseNumber, officeAddress} = contactInfo || {}
 
   return (
       <Modal onClose={onClose} size="sm" isOpen={isOpen}>

@@ -1,29 +1,27 @@
 import {
   Button,
-  AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogContent,
   AlertDialogOverlay,
+  AlertDialog as ChakraAlertDialog,
 } from "@chakra-ui/react"
 import {useRef} from "react"
 
-const Alert = props => {
+const AlertDialog = props => {
   const {
-    alert, 
-    label,
-    header, 
     isCentered, 
     buttonColor, 
     buttonLabel,
     buttonClick,
+    label, header, 
+    isOpen, onClose,
   } = props
   const cancelRef = useRef()
-  const {isOpen, onClose} = alert
 
   return (
-    <AlertDialog
+    <ChakraAlertDialog
       isOpen={isOpen}
       onClose={onClose}
       isCentered={isCentered}
@@ -50,8 +48,8 @@ const Alert = props => {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialogOverlay>
-    </AlertDialog>
+    </ChakraAlertDialog>
   )
 }
 
-export default Alert
+export default AlertDialog
