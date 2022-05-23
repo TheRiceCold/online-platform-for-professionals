@@ -20,14 +20,17 @@ function MenuList() {
   const calendlyTokenModal = useDisclosure()
   const fieldSettingsModal = useDisclosure()
 
+  const menuItemsArgs = (userRole === "client") ? 
+    accountSettingsModal : {
+      openAccountSettings: accountSettingsModal.onOpen,
+      openCalendlyToken: calendlyTokenModal.onOpen,
+      openFieldSettings: fieldSettingsModal.onOpen,
+    }
+
   return (
     <>
       <ChakraMenuList>
-        {menuItems({
-          openAccountSettings: accountSettingsModal.onOpen,
-          openCalendlyToken: calendlyTokenModal.onOpen,
-          openFieldSettings: fieldSettingsModal.onOpen,
-        })
+        {menuItems(menuItemsArgs)
           .map((item, idx) => ( 
             <Fragment key={idx}> 
               {item === "divider" ?

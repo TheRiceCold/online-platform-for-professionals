@@ -1,12 +1,7 @@
-const userMenuItems = (user, router, logout, onOpen) => [
-  {
-    label: "Profile", 
-    handleOnClick: () => 
-      router.push(`/clients/${user.clientId}`)
-  },
+const userMenuItems = (settingsModal, logout) => [
   {
     label: "Settings",
-    handleOnClick: onOpen
+    handleOnClick: settingsModal.onOpen
   },
   "divider",
   {
