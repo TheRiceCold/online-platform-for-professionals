@@ -17,7 +17,12 @@ const RegisterModal = () => {
   const [alerts, setAlerts] = useState()
   const {user, dispatch, logout} = useAuth()
 
-  const {inputs, resolver, createProfessional} = useUsers("professional")
+  const {
+    inputs, 
+    resolver, 
+    createProfessional
+  } = useUsers("professional")
+
   const formHook = useForm({mode: "onChange", resolver})
 
   const {data: fields} = useQuery("fields", getFields)

@@ -18,7 +18,7 @@ const CalendlyTokenProvider = ({children}) => {
         label: "Calendly Token",
       }],
 
-      getCalendlyToken: call.getById,
+      getCalendlyToken: call.get,
       createCalendlyToken: call.create,
       updateCalendlyToken: call.update,
       deleteCalendlyToken: call.delete,
