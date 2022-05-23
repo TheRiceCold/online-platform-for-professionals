@@ -18,11 +18,12 @@
       "@/auth_context": ["src/contexts/auth/Context"],
       "@/users_context": ["src/contexts/users/Context"],
       "@/helpers_context": ["src/contexts/helpers/Context"],
+      "@/reviews_context": ["src/contexts/reviews/Context"],
+      "@/bookings_context": ["src/contexts/bookings/Context"],
       "@/connections_context": ["src/contexts/connections/Context"],
 
       "@/work_portfolios_context": ["src/contexts/users/professionals/work_portfolios/Context"],
       "@/services_context": ["src/contexts/users/professionals/services/Context"],
-      "@/reviews_context": ["src/contexts/users/professionals/reviews/Context"],
       "@/calendly_token_context": ["src/contexts/users/professionals/calendly_token/Context"],
 
       "_comment": "LAYOUT SHORTCUTS",

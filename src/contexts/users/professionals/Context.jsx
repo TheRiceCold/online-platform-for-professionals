@@ -10,7 +10,6 @@ import Inputs from "./Inputs"
 
 // Actions
 import Actions from "./Actions"
-import ReviewsProvider from "./reviews/Context"
 import ServicesProvider from "./services/Context"
 import CalendlyTokenProvider from "./calendly_token/Context"
 import WorkPortfoliosProvider from "./work_portfolios/Context"
@@ -55,9 +54,7 @@ const ProfessionalsProvider = ({children}) => {
       <CalendlyTokenProvider>
         <ServicesProvider>
           <WorkPortfoliosProvider>
-            <ReviewsProvider>
-              {children}
-            </ReviewsProvider>
+            {children}
           </WorkPortfoliosProvider>
         </ServicesProvider>
       </CalendlyTokenProvider>
