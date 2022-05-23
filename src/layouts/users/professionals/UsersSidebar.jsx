@@ -1,20 +1,22 @@
 import styles from "@/styles/users/Professionals.module.sass"
 
-import {Box} from "@chakra-ui/react"
 import Pagination from "./Pagination"
+import {Box, Flex} from "@chakra-ui/react"
+import MoonLoader from "react-spinners/ClipLoader"
 import ProfileDescription from "./ProfileDescription"
 
 import {useQuery} from "react-query"
 import {useUsers} from "@/users_context"
 
-const UsersSidebar = ({setSelectedProfile}) => {
+const UsersSidebar = props => {
+  const {setSelectedProfile} = props
   const {getProfessionals} = useUsers("professional")
   const {data: professionals, isLoading} = useQuery("professionals", getProfessionals)
 
 	return (
-		<Box className={styles.resultNavigationContainer}>
+    <Box className={styles.users_sidebar}>
 			{/*TODO Insert get /professionals/search here */}
-      {!isLoading && 
+      {!isLoading ?
         professionals?.data?.map((user, idx) => {
           return (
             <ProfileDescription
@@ -25,7 +27,11 @@ const UsersSidebar = ({setSelectedProfile}) => {
               setSelectedProfile={setSelectedProfile}
             />
           )
-        })
+        }) : (
+          <Flex justify="center" mt={4}>
+            <MoonLoader color="white" size={50}/> 
+          </Flex>
+        )
       }
 			<Pagination />
 		</Box>

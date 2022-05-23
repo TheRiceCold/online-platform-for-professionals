@@ -33,8 +33,6 @@ const AuthProvider = ({children}) => {
     email, contactNumber,
   } = user?.attributes || {}
 
-  console.log(user.attributes)
-
   const userFullname = capitalize(`${firstName} ${lastName}`)
   const userLocation = capitalize(`${city}, ${region}, Philippines`)
 

@@ -46,6 +46,8 @@ const ProfessionalsProvider = ({children}) => {
       // Professionals
       getProfessionals: call.getAll,
       getProfessional: call.getById,
+      getProfessionalUser: call.getUser,
+
       createProfessional: call.create,
       updateProfessional: call.update,
       deleteProfessional: call.delete,

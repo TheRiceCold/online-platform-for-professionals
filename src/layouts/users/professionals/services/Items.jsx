@@ -1,6 +1,6 @@
 import Card from "./Card"
-import {Flex, Grid} from "@chakra-ui/react"
 import MoonLoader from "react-spinners/MoonLoader"
+import {Flex, Grid, Heading} from "@chakra-ui/react"
 
 import {useQuery} from "react-query"
 import {useServices} from "@/services_context"
@@ -22,8 +22,13 @@ function Items(props) {
               {...props}
               service={service}
             />
-        )})
-      : <h1>No services yet</h1>
+        )}) : (
+          <Flex justify="center" w="100vw" mt={16}>
+            <Heading size="md" ml={10}>
+              No work portfolios yet
+            </Heading>
+          </Flex>
+        )
       }
     </Grid>
   )

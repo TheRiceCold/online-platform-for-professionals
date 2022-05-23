@@ -51,17 +51,21 @@ function ProfileOverview({selectedProfile}) {
 					</Box>
 				</Box>
         <Stack spacing={3} className={styles.actions}>
-          {/*TODO Call post /connections */}
-          <Button className={styles.subscribe}>
-            Subscribe
-          </Button>
-          {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
-          {/* TODO Replace with client details or remove props if useContext will be used */}
-          <CalendlyButton
-            firstName={'Luffy'}
-            lastName={'Monkey'}
-            email={'client2@email.com'}
-          />
+          {userRole === "client" && (
+            <>
+              {/*TODO Call post /connections */}
+              <Button className={styles.subscribe}>
+                Subscribe
+              </Button>
+              {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
+              {/* TODO Replace with client details or remove props if useContext will be used */}
+              <CalendlyButton
+                firstName={'Luffy'}
+                lastName={'Monkey'}
+                email={'client2@email.com'}
+              />
+            </>
+          )}
         </Stack>
 			</Flex>
 			<Box className={styles.overview}>

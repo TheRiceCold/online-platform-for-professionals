@@ -10,7 +10,9 @@ const ProfessionalsLayout = () => {
 
 	return (
     <section className={styles.searchResultsLayout}>
-      <UsersSidebar setSelectedProfile={setSelectedProfile}/>
+      <UsersSidebar 
+        setSelectedProfile={setSelectedProfile}
+      />
       <ProfileOverview selectedProfile={selectedProfile}/>
     </section>
 	)
