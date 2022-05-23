@@ -5,7 +5,11 @@ function Actions(user) {
   const path = `professionals/${user.professionalId}/calendly_tokens/`
   const config = { headers: { Authorization: token } }
 
-  this.get = async () => await Axios.get(path+"1", config)
+  this.get = async ({queryKey}) => {
+    const [_, id] = queryKey
+    const {data} = await Axios.get(path+id, config)
+    return data.data
+  }
 
   this.create = async data => 
     await Axios.post(path, { 

@@ -12,7 +12,7 @@ function BookingsLayout() {
   const options = ["all", "active", "canceled"]
   const {getFilterBookings} = useBookings()
 
-  const {data, isLoading, error} = useQuery(
+  const {data, isLoading, status} = useQuery(
     [`${filter}_bookings`, filter], 
     getFilterBookings, { retry: false }
   )
@@ -29,7 +29,7 @@ function BookingsLayout() {
 
   return (isLoading ? 
     <MoonLoader color="white"/> 
-    : error.response.status === 401 ? 
+    : status === 401 ? 
       <Heading mt={8}>
         Unauthorized, please register your calendly token
       </Heading> 

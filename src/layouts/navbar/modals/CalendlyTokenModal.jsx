@@ -3,9 +3,10 @@ import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
 
 import {useForm} from "react-hook-form"
-import {useMutation} from "react-query"
+import {useUsers} from "@/users_context"
 import {useToast} from "@chakra-ui/react"
 import {useEffect, useState} from "react"
+import {useMutation, useQuery} from "react-query"
 import {useCalendlyToken} from "@/calendly_token_context"
 
 function CalendlyTokenModal(props) {
@@ -14,12 +15,31 @@ function CalendlyTokenModal(props) {
   const [toasts, setToasts] = useState()
   const {
     inputs, 
+    getCalendlyToken,
     deleteCalendlyToken,
     createCalendlyToken, 
     updateCalendlyToken
   } = useCalendlyToken()
+  const {
+    getUserProfessional
+  } = useUsers("professional")
 
   const formHook = useForm()
+  const {data: calendlyTokenId} = useQuery(
+    "calendly_token_id", 
+    getUserProfessional, {
+      select: data => data.data.relationships.calendlyToken.data.id
+    }
+  )
+
+  const {data: calendlyToken} = useQuery(
+    ["calendly_token", calendlyTokenId],
+    getCalendlyToken, {
+      enabled: !!calendlyTokenId,
+      select: data => data.attributes.authorization
+    }
+  )
+
   const mutation = useMutation(
     action === "update" ? 
       updateCalendlyToken :
@@ -66,9 +86,8 @@ function CalendlyTokenModal(props) {
         variant: "solid",
         isClosable: true,
       }])
-    } catch(error) {
-      console.log(error) 
-    }
+    } 
+    catch(error) { console.log(error) }
   }
 
   return (
