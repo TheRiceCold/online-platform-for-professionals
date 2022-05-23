@@ -68,7 +68,7 @@ function ProfileOverview({selectedId}) {
             </Text>
 					</Box>
 				</Box>
-        <ActionButtons/>
+        <ActionButtons selectedId={selectedId}/>
 			</Flex>
 			<Box className={styles.overview}>
 				<Text color="#14a76c" fontSize="2xl" mb={4}>

@@ -9,7 +9,6 @@ import {useState} from "react"
 const ProfessionalsLayout = () => {
   const [selectedId, setSelectedId] = useState(null)
 
-  console.log(selectedId)
 	return (
     <Box 
       my={4} as="section" 

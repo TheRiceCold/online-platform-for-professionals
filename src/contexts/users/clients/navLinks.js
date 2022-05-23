@@ -1,9 +1,8 @@
 const navLinks = id => {
-  const prefix = to => `/clients/${id}/${to}`
+  const prefixPath = to => `/clients/${id}/${to}`
   return [
+    { label: "Profile", href: prefixPath("") },
     { label: "Professionals", href: "/professionals" },
-    { label: "Connections", href: prefix("connections") },
-    { label: "Bookings", href: "/bookings" },
   ]
 }
 
