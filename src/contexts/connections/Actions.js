@@ -10,12 +10,15 @@ function Actions(user) {
       connection: {...data}
     }, config)
 
-  this.getSubscribers = async() => 
-    await Axios.get("subscribers", config)
+  this.getSubscribers = async() => {
+    const {data} = await Axios.get("subscribers", config)
+    return data.data
+  }
 
-  this.getClientele = async() => 
-    await Axios.get("clientele", config)
-
+  this.getClientele = async() => {
+    const {data} = await Axios.get("clientele", config)
+    return data.data
+  }
 
   // Client User
   this.getSubscriptions = async() => {

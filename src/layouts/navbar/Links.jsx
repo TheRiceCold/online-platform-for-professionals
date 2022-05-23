@@ -9,13 +9,7 @@ import SubLink from "./SubLink"
 import ClienteleModal from "./modals/ClienteleModal"
 import SubscribersModal from "./modals/SubscribersModal"
 
-import {useDisclosure} from "@chakra-ui/react"
-
-function Links({links}) {
-  const modals = {
-    clienteleModal: useDisclosure(),
-    subscribersModal: useDisclosure()
-  }
+function Links({links, modals}) {
 
   return (
     <> 

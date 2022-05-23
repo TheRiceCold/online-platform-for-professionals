@@ -2,10 +2,15 @@ import Modal from "@/components/overlay/Modal"
 import UserConnectionList from "../UserConnectionList"
 import AlertDialog from "@/components/overlay/AlertDialog"
 
+import {useQuery} from "react-query"
 import {useDisclosure} from "@chakra-ui/react"
+import {useConnections} from "@/connections_context"
 
 function ClienteleModal({...props}) {
   const deleteAlertDialog = useDisclosure()
+  const {getClientele} = useConnections()
+
+  useQuery("clientele", getClientele)
 
   const handleDelete = () => {
     console.log("delete connection")
