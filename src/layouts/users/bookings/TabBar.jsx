@@ -1,6 +1,7 @@
 import styles from '@/styles/Bookings.module.sass';
+import { InfoIcon } from '@chakra-ui/icons';
 
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button, Tooltip, Text } from '@chakra-ui/react';
 
 const TabBar = ({ tabStatus, setTabStatus }) => {
 	const isCurrentPage = (status) => {
@@ -22,7 +23,13 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 				className={isCurrentPage('pending')}
 				onClick={() => setTabStatus('pending')}
 			>
-				Pending
+				<Tooltip
+					label="Mark an appointment as finished so your clients can add a review for you!"
+					fontSize="md"
+				>
+					<InfoIcon />
+				</Tooltip>
+				<Text mx={2}>Pending</Text>
 			</Button>
 			<Button
 				variant="ghost"
