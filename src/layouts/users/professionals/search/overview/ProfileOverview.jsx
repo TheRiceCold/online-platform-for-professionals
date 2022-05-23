@@ -3,21 +3,18 @@ import styles from "@/styles/users/Professionals.module.sass"
 import {
   Text, 
   Avatar,
+  Flex, Box,
   SkeletonCircle, 
-  Flex, Box, Stack,
 	UnorderedList, ListItem,
 } from "@chakra-ui/react"
-import Button from "@/components/Button"
+import ActionButtons from "./ActionButtons"
 import {StarIcon} from "@chakra-ui/icons"
-import CalendlyButton from "@/components/booking/CalendlyButton"
 
 import {useQuery} from "react-query"
-import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"
 import {capitalize} from "@/utils/stringHelpers"
 
 function ProfileOverview({selectedId}) {
-  const {userRole} = useAuth()
   const {getProfessional} = useUsers("professional")
   const {data, isLoading} = useQuery(["professional", selectedId], getProfessional)
 
@@ -28,21 +25,17 @@ function ProfileOverview({selectedId}) {
   const workPortfolios = !!selectedId && data?.data.relationships.workPortfolios.data
   const reviews = !!selectedId && data?.data.relationships.reviews.data
 
-  console.log()
-
 	return (
 		<Box className={styles.overview_content}>
 			<Flex className={styles.headline}>
 				<Box className={styles.info}>
 					<Box className={styles.displayPhoto}>
-						<SkeletonCircle size="116px" isLoaded={true}>
-							<Avatar
-								src=""
-								size="2xl"
-								borderRadius="full"
-								border="4px solid white"
-							/>
-						</SkeletonCircle>
+            <Avatar
+              src=""
+              size="2xl"
+              borderRadius="full"
+              border="4px solid white"
+            />
 					</Box>
 					<Box>
 						<Text className={styles.name} fontSize="xl">
@@ -54,23 +47,7 @@ function ProfileOverview({selectedId}) {
 						<Text color="gray.500">0{userDetails.contactNumber} | {userDetails.email}</Text>
 					</Box>
 				</Box>
-        <Stack spacing={3} className={styles.actions}>
-          {userRole === "client" && (
-            <>
-              {/*TODO Call post /connections */}
-              <Button className={styles.subscribe}>
-                Subscribe
-              </Button>
-              {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
-              {/* TODO Replace with client details or remove props if useContext will be used */}
-              <CalendlyButton
-                firstName={'Luffy'}
-                lastName={'Monkey'}
-                email={'client2@email.com'}
-              />
-            </>
-          )}
-        </Stack>
+        <ActionButtons/>
 			</Flex>
 			<Box className={styles.overview}>
 				<Text color="#14a76c" fontSize="2xl" mb={4}>
