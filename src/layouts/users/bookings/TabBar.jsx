@@ -24,6 +24,10 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 				onClick={() => setTabStatus('pending')}
 			>
 				<Tooltip
+					// TODO Change label based on if the current user is a professional or client
+					// Client label:
+					// label='Wait for the professional to mark your appointment as finished before you can add a review'
+					// Professional label:
 					label="Mark an appointment as finished so your clients can add a review for you!"
 					fontSize="md"
 				>
@@ -36,7 +40,16 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 				className={isCurrentPage('finished')}
 				onClick={() => setTabStatus('finished')}
 			>
-				Finished
+				{/* TODO Add condition to render Tooltip if current user is a client
+					Client label:
+					*/}
+				{/* <Tooltip
+					label="Add a review to professionals with finished appointments"
+					fontSize="md"
+				>
+					<InfoIcon />
+				</Tooltip> */}
+				<Text mx={2}>Finished</Text>
 			</Button>
 			<Button
 				variant="ghost"
