@@ -32,7 +32,11 @@ const CancelModal = () => {
 		// payload: { "reason": cancellation_reason }.to_json)
 	};
 
-	console.log(reason);
+	const resetState = () => {
+		setReason('');
+		onClose();
+	};
+
 	return (
 		<>
 			<Button
@@ -42,7 +46,7 @@ const CancelModal = () => {
 			>
 				<Text fontSize="sm">Cancel Appointment</Text>
 			</Button>
-			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+			<Modal isOpen={isOpen} onClose={resetState} isCentered>
 				<ModalOverlay />
 				<ModalContent>
 					<ModalHeader>Cancel Appointment</ModalHeader>
@@ -58,7 +62,7 @@ const CancelModal = () => {
 					</ModalBody>
 
 					<ModalFooter justifyContent="center">
-						<Button colorScheme="teal" mr={3} onClick={onClose}>
+						<Button colorScheme="teal" mr={3} onClick={resetState}>
 							Cancel
 						</Button>
 						<Button onClick={cancelEvent} className={styles.submitBtn}>
