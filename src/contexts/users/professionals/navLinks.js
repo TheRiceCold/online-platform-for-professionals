@@ -6,7 +6,7 @@ const navLinks = id => {
       { 
         label: "Clientele",
         subLabel: "service clients",
-        href: ""
+        href: prefixPath("cliente")
       },
       { 
         label: "Subscribers",

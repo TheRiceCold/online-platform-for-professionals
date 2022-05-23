@@ -1,21 +1,22 @@
-import styles from '@/styles/Bookings.module.sass';
-import { CheckIcon, EditIcon } from '@chakra-ui/icons';
+import styles from "@/styles/Bookings.module.sass"
+import {CheckIcon, EditIcon} from "@chakra-ui/icons"
 import {
-	Button,
 	Text,
 	Modal,
+	Stack,
+	Radio,
+	Button,
 	ModalOverlay,
 	ModalContent,
 	ModalHeader,
 	ModalFooter,
 	ModalBody,
 	ModalCloseButton,
-	useDisclosure,
 	RadioGroup,
-	Stack,
-	Radio,
-} from '@chakra-ui/react';
-import { useState } from 'react';
+} from "@chakra-ui/react"
+
+import {useState} from "react"
+import {useDisclosure} from "@chakra-ui/react"
 
 const FinishModal = ({ tabStatus }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
