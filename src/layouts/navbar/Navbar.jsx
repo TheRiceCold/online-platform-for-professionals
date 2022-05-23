@@ -28,6 +28,7 @@ function Navbar({styles, links, withSearch}) {
     <nav className={styles.navbar}>
       <div className={styles.nav_content}>
         <IconButton
+          mt={4}
           size="md"
           icon={NavIcon}
           aria-label={'Open Menu'}
@@ -60,8 +61,8 @@ function Navbar({styles, links, withSearch}) {
         isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as="nav" spacing={4}>
-              {links.map(({href, label})=> (
-                <Link key={href} href={href}>
+              {links.map(({href, label}, idx)=> (
+                <Link key={idx} href={href}>
                   {label}
                 </Link>
               ))}

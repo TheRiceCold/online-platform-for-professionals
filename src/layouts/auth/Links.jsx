@@ -10,7 +10,7 @@ function Links({isLoginPage}) {
   return (
     <Text mt={4} mt={4}>
       {labelText} {" "}
-      <Link to={href} color="teal">
+      <Link to={href}>
         {linkText}
       </Link>
     </Text>

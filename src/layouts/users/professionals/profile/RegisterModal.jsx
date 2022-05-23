@@ -6,14 +6,13 @@ import {Flex, Heading} from "@chakra-ui/react"
 import {useState} from "react"
 import {useRouter} from "next/router"
 import {useForm} from "react-hook-form"
-import {useDisclosure} from "@chakra-ui/react"
 import {useAuth} from "@/contexts/auth/Context"
 import {useUsers} from "@/contexts/users/Context"
 import {useQuery, useMutation} from "react-query"
 import {useHelpers} from "@/contexts/helpers/Context"
 
 const RegisterModal = () => {
-  const modal = useDisclosure()
+  const router = useRouter()
   const {getFields} = useHelpers()
   const [alerts, setAlerts] = useState()
   const {user, dispatch, logout} = useAuth()
@@ -26,12 +25,13 @@ const RegisterModal = () => {
   const mutation = useMutation(createProfessional, {
     onSuccess: ({data})=> {
       dispatch({type: "REGISTER_PROFESSIONAL", payload: data})
-      console.log(data)
-      // router.push("/")
+      router.push("/")
     },
     onError: error => {
       const {status, data} = error?.response
       const messages = data?.errors.map(error => error.title)
+
+      console.log(error)
 
       if (status === 422)
         setAlerts(messages.map(

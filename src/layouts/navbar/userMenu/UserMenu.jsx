@@ -7,6 +7,7 @@ import MenuList from "./MenuList"
 import {ChevronDownIcon} from "@chakra-ui/icons"
 
 import {useAuth} from "@/auth_context"
+import {capitalize} from "@/utils/stringHelpers"
 
 const UserMenu = () => {
   const {userImage, userFullname, userRole} = useAuth()
@@ -22,8 +23,8 @@ const UserMenu = () => {
             spacing="1px"
             ml="2">
             <Text fontSize="sm">{userFullname}</Text>
-            <Text fontSize="xs" color="gray.600">
-              {userRole} 
+            <Text fontSize="xs" color="gray.500">
+              {capitalize(userRole)}
             </Text>
           </VStack>
           <Box display={{ base: 'none', md: 'flex' }}>

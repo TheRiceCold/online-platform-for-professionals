@@ -17,6 +17,7 @@ const navLinks = id => {
     { label: "Professionals", href: "/professionals" }, 
     { label: "Portfolio", href: prefixPath("portfolio") },
     { label: "Services", href: prefixPath("services") }, 
+    { label: "Bookings", href: prefixPath("bookings") }, 
   ]
 }
 

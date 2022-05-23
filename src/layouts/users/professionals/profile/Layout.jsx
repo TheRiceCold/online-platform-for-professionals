@@ -1,18 +1,16 @@
 import styles from "@/styles/users/Profile.module.sass"
 
+import RegisterModal from "./RegisterModal"
 import Navbar from "@/layouts/navbar/Navbar"
-import RegisterModal from "../RegisterModal"
 import {Flex, Avatar} from "@chakra-ui/react"
 
 import {useQuery} from "react-query"
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"
-import {useWorkPortfolios} from "@/work_portfolios_context"
 
 function ProfessionalLayout() {
   const {user} = useAuth()
-  const {navLinks} = useUsers("professional")
-  const {getWorkPortfolios} = useWorkPortfolios()
+  const {navLinks, getUserProfessional} = useUsers("professional")
   const {
     userImage,
     userEmail,
@@ -21,8 +19,17 @@ function ProfessionalLayout() {
     userContactNumber,
   } = useAuth()
 
-  const {data: workPortfolios, isLoading} = useQuery("work_portfolio", getWorkPortfolios)
-  const lastPortfolio = !isLoading && workPortfolios[workPortfolios.length - 1].attributes.title
+  const {isLoading, data} = useQuery(
+    "user_professional",
+    getUserProfessional, {
+      enabled: !!user.professionalId
+    })
+
+  const field = data?.data.attributes.field
+
+  const workPortfolios = data?.data.relationships.workPortfolios.data
+  const workPortfolioSize = workPortfolios?.length
+  const recentPortfolio = !!workPortfolioSize && workPortfolios[workPortfolioSize]
 
   {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
   return (user.professionalId ? 
@@ -39,7 +46,7 @@ function ProfessionalLayout() {
             border="4px solid white"
           />
           <h4>{userFullname}</h4>
-          <h4>Professional</h4>
+          <h4>{field}</h4>
           <p>{userLocation}</p>
         </article>
 
@@ -54,7 +61,7 @@ function ProfessionalLayout() {
               </div>
               <div className={styles.data}>
                 <h4>Contact Number</h4>
-                <p>{userContactNumber}</p>
+                <p>0{userContactNumber}</p>
               </div>
             </div>
           </div>
@@ -64,7 +71,7 @@ function ProfessionalLayout() {
             <div className={styles.portfolio_data}>
               <div className={styles.data}>
                 <h4>Recent Portfolio</h4> 
-                <p>{lastPortfolio}</p> 
+                <p>{!!workPortfolioSize ? recentPortfolio : "No Work Portfolios"}</p> 
               </div>
               <div className={styles.data}>
                 <h4>Recent Service</h4> 

@@ -1,19 +1,11 @@
-const userMenuItems = (user, router, logout, modals) => {
+const userMenuItems = (modals, logout) => {
   const {
     openAccountSettings,
     openCalendlyToken,
     openFieldSettings,
   } = modals
 
-  const prefixPath = (to = "") => 
-    `/professionals/${user.professionalId}/${to}`
-
   return [
-    {
-      label: "Bookings", 
-      handleOnClick: () => 
-        router.push(prefixPath("bookings"))
-    },
     {
       label: "Field Settings",
       handleOnClick: openFieldSettings

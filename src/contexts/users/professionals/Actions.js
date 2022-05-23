@@ -14,7 +14,13 @@ function Actions(user) {
     return data
   }
 
-  this.getById = async() => {
+  this.getById = async({queryKey}) => {
+    const [_, id] = queryKey
+    const {data} = await Axios.get(path+id, config)
+    return data
+  }
+
+  this.getUser = async() => {
     const {data} = await Axios.get(path+user.professionalId, config)
     return data
   }

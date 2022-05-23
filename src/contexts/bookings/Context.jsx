@@ -14,7 +14,9 @@ const BookingsProvider = ({children}) => {
   return (
     <Provider value={{ 
       getBookings: call.getAll,
+      getFilterBookings: call.getByFilter,
       getBooking: call.getById,
+
       createBooking: call.create,
       updateBooking: call.update,
       deleteBooking: call.delete

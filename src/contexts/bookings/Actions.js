@@ -5,9 +5,15 @@ function Actions(user) {
   const path = "bookings"
   const config = { headers: { Authorization: token } }
 
-  this.getAll = async status => { 
-    const url = `${path}${status && `?status=`+status}`
-    return await Axios.get(url, config)
+  this.getAll = async () => {
+    const {data} = await Axios.get(path, config)
+    return data
+  }
+
+  this.getByFilter = async ({queryKey})=> {
+    const [_, status] = queryKey
+    const {data} = await Axios.get(path+`?status=${status}`)
+    return data
   }
 
   this.getById = async id => { 

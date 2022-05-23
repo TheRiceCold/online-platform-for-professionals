@@ -53,11 +53,12 @@ function AuthForm(props) {
             </Link>
           </Flex>
         }
-        <pre> {/* DEVELOPMENT ONLY */}
-          {process.env.NODE_ENV &&
-            JSON.stringify(formHook.watch(), null, 2)
-          }
-        </pre>
+        {/* DEVELOPMENT ONLY */}
+        {/* <pre>  */}
+        {/*   {process.env.NODE_ENV && */}
+        {/*     JSON.stringify(formHook.watch(), null, 2) */}
+        {/*   } */}
+        {/* </pre> */}
       </Form>
       <Modal {...modalProps} heading="Reset Password"/>
     </Stack>
