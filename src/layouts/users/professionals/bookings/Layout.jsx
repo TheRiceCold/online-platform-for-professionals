@@ -1,14 +1,21 @@
+import {HStack} from '@chakra-ui/react'
 import RadioCard from "@/components/forms/radios/RadioCard"
-import {useRadioGroup, HStack} from '@chakra-ui/react'
+
+import {useQuery} from "react-query"
+import {useBookings} from "@/bookings_context"
+import {useRadioGroup} from "@chakra-ui/react"
 
 function BookingsLayout() {
-  const options = ["active", "canceled"]
+  const options = ["all", "active", "canceled"]
+  const {getBookings} = useBookings()
+
+  const {data} = useQuery("bookings", getBookings)
 
   const {getRootProps, getRadioProps} = useRadioGroup({
     name: "status",
     defaultValue: "active",
     onChange: status => {
-      console.log(status)
+
     },
   })
 
