@@ -1,18 +1,9 @@
-import styles from "@/styles/Components.module.sass"
+import styles from '@/styles/Components.module.sass';
 
-import { 
-  Box, 
-  IconButton, 
-  Button, ButtonGroup
-} from "@chakra-ui/react"
-import { 
-  ArrowLeftIcon, 
-  ArrowRightIcon 
-} from "@chakra-ui/icons"
+import { Box, IconButton, Button, ButtonGroup } from '@chakra-ui/react';
+import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 
-import {links} from "@/data/mock_professionals"
-
-const Pagination = () => {
+const Pagination = ({ links }) => {
 	const pageNumber = (link) => {
 		let Y = 'page=';
 		let Z = link.slice(link.indexOf(Y) + Y.length);
