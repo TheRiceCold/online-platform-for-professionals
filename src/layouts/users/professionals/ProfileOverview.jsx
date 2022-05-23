@@ -14,20 +14,21 @@ import CalendlyButton from "@/components/booking/CalendlyButton"
 import {useQuery} from "react-query"
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"
-import {
-	reviews,
-	services,
-	workPortfolios,
-} from "@/data/mock_professional_data"
 import {capitalize} from "@/utils/stringHelpers"
-
-// TODO Insert selected professional data
-// TODO REMOVE after adding context
 
 function ProfileOverview({selectedId}) {
   const {userRole} = useAuth()
   const {getProfessional} = useUsers("professional")
-  const {data} = useQuery(["professional", selectedId], getProfessional)
+  const {data, isLoading} = useQuery(["professional", selectedId], getProfessional)
+
+  const userDetails = !isLoading && data?.included[0].attributes
+  const field = data?.data.attributes.field
+  const headline = data?.data.attributes.headline
+  const services = !!selectedId && data?.data.relationships.services.data
+  const workPortfolios = !!selectedId && data?.data.relationships.workPortfolios.data
+  const reviews = !!selectedId && data?.data.relationships.reviews.data
+
+  console.log()
 
 	return (
 		<Box className={styles.overview_content}>
@@ -45,12 +46,12 @@ function ProfileOverview({selectedId}) {
 					</Box>
 					<Box>
 						<Text className={styles.name} fontSize="xl">
-              {/* {capitalize(`${firstName} ${lastName}`)} */}
+              {capitalize(`${userDetails?.firstName} ${userDetails?.lastName}`)}
 						</Text>
 						<Text className={styles.field} fontSize="xl">
-							Professional Field
+							{field}
 						</Text>
-						<Text color="gray.500">Contact Number | Email</Text>
+						<Text color="gray.500">0{userDetails.contactNumber} | {userDetails.email}</Text>
 					</Box>
 				</Box>
         <Stack spacing={3} className={styles.actions}>
@@ -73,31 +74,25 @@ function ProfileOverview({selectedId}) {
 			</Flex>
 			<Box className={styles.overview}>
 				<Text color="#14a76c" fontSize="2xl" mb={4}>
-					Headline text here
+					{headline}
 				</Text>
 				<Text color="#14a76c" fontSize="2xl">
-					Services
+          {!isLoading && !!services?.length ? "Services" : "No services available"}
 				</Text>
-				<UnorderedList spacing={3}>
-					{services.map((service, idx) => (
+        <UnorderedList spacing={3}>
+          {!isLoading && services.map((service, idx) => (
             <ListItem key={idx}>
               <Text>{service.title}</Text>
               <Text>{service.details}</Text>
-              {service.minPrice ? (
-                <Text as="i">
-                  Php {service.minPrice}-{service.maxPrice}
-                </Text>
-              ) : (
-                ''
-              )}
+              <Text as="i"> Php {service.minPrice}-{service.maxPrice}</Text>
             </ListItem>
           ))}
-				</UnorderedList>
+        </UnorderedList>
 				<Text color="#14a76c" fontSize="2xl" mt={4}>
-					Work Portfolio
+          {!isLoading && !!workPortfolios?.length ? "Work Portfolio" : "No work portflio"}
 				</Text>
 				<UnorderedList>
-					{workPortfolios.map((portfolio, idx) => (
+					{!isLoading && workPortfolios.map((portfolio, idx) => (
             <ListItem key={idx}>
               <Text>{portfolio.title}</Text>
               <Text>{portfolio.details}</Text>
@@ -105,18 +100,16 @@ function ProfileOverview({selectedId}) {
           ))}
 				</UnorderedList>
 				<Text color="#14a76c" fontSize="2xl" mt={4}>
-					Reviews
+          {!isLoading && !!reviews?.length ? "Reviews" : "No reviews yet"}
 				</Text>
-				{reviews.map((review, idx) => {
-					return (
-						<Box key={idx}>
-							{[...Array(5)].map((n, i) => (
-								<StarIcon key={i} color={i + 1 < review.rating ? '#ff652f' : 'gray'} />
-							))}
-							<Text>{review.body}</Text>
-						</Box>
-					)
-				})}
+				{!isLoading && reviews.map((review, idx) => (
+          <Box key={idx}>
+            {[...Array(5)].map((n, i) => (
+              <StarIcon key={i} color={i + 1 < review.rating ? "#ff652f" : "gray"} />
+            ))}
+            <Text>{review.body}</Text>
+          </Box>
+        ))}
 			</Box>
 		</Box>
 	)
