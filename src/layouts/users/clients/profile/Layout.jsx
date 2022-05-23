@@ -2,7 +2,7 @@ import styles from "@/styles/users/Profile.module.sass"
 
 import {Flex, Avatar} from "@chakra-ui/react"
 
-import {useQuery} from "react-query"
+import {useQueries} from "react-query"
 import {useAuth} from "@/auth_context"
 import {useConnections} from "@/connections_context"
 
@@ -15,8 +15,24 @@ const ClientLayout = () => {
     userContactNumber,
   } = useAuth()
 
-  const {getSubscriptions} = useConnections()
-  const {data: subscriptions} = useQuery("subscriptions", getSubscriptions)
+  const {
+    getSubscriptions, 
+    getMyProfessionals
+  } = useConnections()
+
+  const [
+    {data: subscriptions},
+    {data: myProfessionals}
+  ] = useQueries([ 
+    {
+      queryKey: "subscriptions", 
+      queryFn: getSubscriptions
+    }, 
+    {
+      queryKey: "my_professionals", 
+      queryFn: getMyProfessionals
+    } 
+  ])
 
 	return (
 		<>
@@ -59,8 +75,8 @@ const ClientLayout = () => {
                 <p>{subscriptions?.length}</p> 
               </div>
               <div className={styles.data}>
-                <h4>My Professionals</h4> 
-                <p>0</p> 
+                <h4>My professionals</h4> 
+                <p>{myProfessionals?.length}</p> 
               </div>
             </div>
           </div>

@@ -18,9 +18,6 @@ export function reducer(state, action) {
         professionalId 
       }
 
-    case "REGISTER_CALENDLY_TOKEN":
-      return { ...state }
-
     case "LOGOUT":
       return {
         ...state,

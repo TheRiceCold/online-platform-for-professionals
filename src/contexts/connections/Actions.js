@@ -23,8 +23,10 @@ function Actions(user) {
     return data.data
   }
 
-  this.getMyProfessionals = async() =>
-    await Axios.get("my_professionals")
+  this.getMyProfessionals = async() => {
+    const {data} = await Axios.get("my_professionals", config)
+    return data.data
+  }
 
   this.delete = async id =>
     await Axios.delete(`connections/${id}`, config)
