@@ -7,23 +7,17 @@ import {
 } from "@chakra-ui/react"
 import {StarIcon} from "@chakra-ui/icons"
 
-import {useQuery} from "react-query"
-import {useUsers} from "@/users_context"
-
 function ProfileDescription(props) {
   const {
     user, img, 
     isLoading, 
-    setSelectedProfile,
+    setSelectedId,
   } = props
-
-  const {getProfessional} = useUsers("professional")
-  const {data: professional} = useQuery("professional", getProfessional)
 
 	return (
     <Box 
       className={styles.description}
-      onClick={() => setSelectedProfile(user)}
+      onClick={() => setSelectedId(user.id)}
     >
 			<Box className={styles.userInfo}>
 				<SkeletonCircle size="116px" isLoaded={!isLoading}>

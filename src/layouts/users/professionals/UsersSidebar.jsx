@@ -9,7 +9,7 @@ import {useQuery} from "react-query"
 import {useUsers} from "@/users_context"
 
 const UsersSidebar = props => {
-  const {setSelectedProfile} = props
+  const {setSelectedId} = props
   const {getProfessionals} = useUsers("professional")
   const {data: professionals, isLoading} = useQuery("professionals", getProfessionals)
 
@@ -24,7 +24,7 @@ const UsersSidebar = props => {
               key={idx}
               user={user}
               isLoading={isLoading}
-              setSelectedProfile={setSelectedProfile}
+              setSelectedId={setSelectedId}
             />
           )
         }) : (

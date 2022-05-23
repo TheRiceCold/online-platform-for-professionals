@@ -1,20 +1,23 @@
 import styles from "@/styles/users/Professionals.module.sass"
 
+import {Box} from "@chakra-ui/react"
 import UsersSidebar from "./UsersSidebar"
 import ProfileOverview from "./ProfileOverview"
 
 import {useState} from "react"
 
 const ProfessionalsLayout = () => {
-  const [selectedProfile, setSelectedProfile] = useState(null)
+  const [selectedId, setSelectedId] = useState(null)
 
+  console.log(selectedId)
 	return (
-    <section className={styles.searchResultsLayout}>
-      <UsersSidebar 
-        setSelectedProfile={setSelectedProfile}
-      />
-      <ProfileOverview selectedProfile={selectedProfile}/>
-    </section>
+    <Box 
+      my={4} as="section" 
+      className={styles.layout}
+    >
+      <UsersSidebar setSelectedId={setSelectedId}/>
+      {selectedId && <ProfileOverview selectedId={selectedId}/>}
+    </Box>
 	)
 }
 

@@ -11,7 +11,9 @@ import Button from "@/components/Button"
 import {StarIcon} from "@chakra-ui/icons"
 import CalendlyButton from "@/components/booking/CalendlyButton"
 
+import {useQuery} from "react-query"
 import {useAuth} from "@/auth_context"
+import {useUsers} from "@/users_context"
 import {
 	reviews,
 	services,
@@ -22,12 +24,13 @@ import {capitalize} from "@/utils/stringHelpers"
 // TODO Insert selected professional data
 // TODO REMOVE after adding context
 
-function ProfileOverview({selectedProfile}) {
+function ProfileOverview({selectedId}) {
   const {userRole} = useAuth()
-  console.log(selectedProfile)
+  const {getProfessional} = useUsers("professional")
+  const {data} = useQuery(["professional", selectedId], getProfessional)
 
-	return (selectedProfile &&
-		<Box className={styles.overviewContainer}>
+	return (
+		<Box className={styles.overview_content}>
 			<Flex className={styles.headline}>
 				<Box className={styles.info}>
 					<Box className={styles.displayPhoto}>
