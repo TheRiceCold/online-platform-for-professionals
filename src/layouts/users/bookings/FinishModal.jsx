@@ -25,7 +25,12 @@ const FinishModal = ({ tabStatus }) => {
 	const setBookingStatus = () => {
 		// TODO post /bookings to create client as show or no show
 	};
-	console.log(showedUp);
+
+	const resetState = () => {
+		setShowedUp('true');
+		onClose();
+	};
+
 	return (
 		<>
 			<Button
@@ -37,7 +42,7 @@ const FinishModal = ({ tabStatus }) => {
 					{tabStatus === 'pending' ? 'Mark as finished' : 'Edit client attendance'}
 				</Text>
 			</Button>
-			<Modal isOpen={isOpen} onClose={onClose} isCentered>
+			<Modal isOpen={isOpen} onClose={resetState} isCentered>
 				<ModalOverlay />
 				<ModalContent>
 					<ModalHeader>
@@ -57,7 +62,7 @@ const FinishModal = ({ tabStatus }) => {
 					</ModalBody>
 
 					<ModalFooter justifyContent="center">
-						<Button colorScheme="teal" mr={3} onClick={onClose}>
+						<Button colorScheme="teal" mr={3} onClick={resetState}>
 							Cancel
 						</Button>
 						<Button onClick={setBookingStatus} className={styles.submitBtn}>

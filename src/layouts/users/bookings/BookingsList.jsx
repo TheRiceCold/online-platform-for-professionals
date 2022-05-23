@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import Booking from './Booking';
 import CancelModal from './CancelModal';
 import FinishModal from './FinishModal';
+import ReviewModal from './ReviewModal';
 
 const BookingsList = ({ tabStatus }) => {
 	const [bookingsList, setBookingsList] = useState(upcomingBookings);
@@ -32,7 +33,15 @@ const BookingsList = ({ tabStatus }) => {
 				break;
 			case 'finished':
 				setBookingsList(finishedBookings);
-				setActionBtn(<FinishModal tabStatus={tabStatus} />);
+
+				// TODO For change to actual user role
+				let currentUser = { role: 'professional' };
+				// let currentUser = { role: 'client' };
+				if (currentUser.role === 'professional') {
+					setActionBtn(<FinishModal tabStatus={tabStatus} />);
+				} else if (currentUser.role === 'client') {
+					setActionBtn(<ReviewModal tabStatus={tabStatus} />);
+				}
 				break;
 			case 'canceled':
 				setBookingsList(canceledBookings);
