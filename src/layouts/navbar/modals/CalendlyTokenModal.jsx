@@ -29,7 +29,11 @@ function CalendlyTokenModal(props) {
   const {data: calendlyTokenId} = useQuery(
     "calendly_token_id", 
     getUserProfessional, {
-      select: data => data.data.relationships.calendlyToken.data.id
+      select: data => data.data.relationships.calendlyToken.data.id,
+      onSuccess: token_id => {
+        if (!!token_id) 
+          setAction("update")
+      }
     }
   )
 
@@ -43,8 +47,11 @@ function CalendlyTokenModal(props) {
 
   const mutation = useMutation(
     action === "update" ? 
-      updateCalendlyToken :
-      createCalendlyToken, {
+      data => {
+        const submittedData = {calendlyTokenId, ...data}
+        updateCalendlyToken(submittedData)
+      }
+      : createCalendlyToken, {
       onSuccess: () => {
         setToasts([{
           title: "Token Saved",
@@ -78,17 +85,17 @@ function CalendlyTokenModal(props) {
       toasts.forEach(message => toast(message))
   }, [JSON.stringify(toasts)])
 
-  const handleDelete = async () => {
+  const handleDelete = async() => {
     try {
-      await deleteCalendlyToken()
+      await deleteCalendlyToken(calendlyTokenId)
       setToasts([{
-        title: "Token deleted",
+        title: "Token has been deleted",
         duraion: 3000,
         variant: "solid",
         isClosable: true,
       }])
-    } 
-    catch(error) { console.log(error) }
+      onClose()
+    } catch(error) { console.log(error) }
   }
 
   return (
@@ -96,29 +103,34 @@ function CalendlyTokenModal(props) {
       {...props}
       isCentered
       alert={alert}
-      header="Enter Calendly Token"
+      header="Calendly Token"
     >
       <Form
         noLabel
         inputs={inputs}
-        submitValue="Authorize"
+        submitValue={action === "update" ? "Update" : "Authorize"}
         mutation={mutation}
         formHook={formHook}
         submitHandler={submitHandler}
       />
-      <MaskedInput 
-        readOnly 
-        label="Current Token:"
-        value={calendlyToken} 
-      />
-      <Button
-        mt={4}
-        w="full"
-        variant="delete"
-        onClick={handleDelete}
-      >
-        Delete existing token
-      </Button>
+      {/* USER CALENDLY TOKEN EXIST */}
+      {!!calendlyTokenId &&
+        <> 
+          <MaskedInput 
+            readOnly 
+            label="Current Token:"
+            value={calendlyToken} 
+          />
+          <Button
+            mt={4}
+            w="full"
+            variant="delete"
+            onClick={handleDelete}
+          >
+            Delete existing token
+          </Button>
+        </>
+      }
     </Modal>
   )
 }

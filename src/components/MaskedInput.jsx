@@ -18,7 +18,7 @@ function MaskedInput (props) {
   const Icon = (show ? <ViewOffIcon/> : <ViewIcon/>)
 
   return (
-    <FormControl mt={4}>
+    <FormControl mt={16}>
       <FormLabel>{props.label}</FormLabel>
       <InputGroup>
         <Input {...props} type={type}/>

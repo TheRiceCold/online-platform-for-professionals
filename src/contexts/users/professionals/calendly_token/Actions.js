@@ -16,9 +16,13 @@ function Actions(user) {
       calendly_token: { ...data } 
     }, config)
 
-  this.update = async (id, data) => await Axios.patch(path+id, data, config)
+  this.update = async data => {
+    const id = data.calendlyTokenId
+    delete data.calendlyTokenId
+    return await Axios.patch(path+id, data, config)
+  }
   
-  this.delete = async () => await Axios.delete(path+"1", config)
+  this.delete = async id => await Axios.delete(path+id, config)
 }
 
 export default Actions
