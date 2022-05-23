@@ -7,7 +7,11 @@ import {
 import Navbar from "../navbar/Navbar"
 import Button from "@/components/Button"
 
+import {useRouter} from "next/router"
+
 function HomeLayout() {
+  const router = useRouter()
+
   const navLinks = [
     { 
       type: "button",
@@ -20,6 +24,7 @@ function HomeLayout() {
       href: "/signup"
     },
   ]
+
   return (
     <>
       <Navbar styles={styles} links={navLinks}/>
@@ -44,14 +49,12 @@ function HomeLayout() {
             meetings and receive smart reminders in appropriate times. Read your
             smart “Daily Agenda” every morning.
           </Text>
-          <Stack spacing={6} direction={'row'}>
-            <Button variant="primary">
-              Get started
-            </Button>
-            <Button rounded={'full'} px={6}>
-              Learn more
-            </Button>
-          </Stack>
+          <Button 
+            variant="primary"
+            onClick={() => router.push("login")}
+          >
+            Get started
+          </Button>
           <Flex w={'full'}>
           </Flex>
         </Stack>

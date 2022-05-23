@@ -8,7 +8,7 @@ const Schema = z.object({
     .min(1, { message: "Lastname can't be empty" }),
 
   contact_number: z.string().regex(/^(09|\+639)\d{9}$/, 
-    {message: "Contact no. must be a valid 09, 639 format"}),
+    {message: "Contact no. must start with 09"}),
   city: z.string()
     .min(1, { message: "City can't be empty" }),
   region: z.string()

@@ -4,6 +4,7 @@ function Actions(user) {
   const {token} = user
   const config = { headers: { Authorization: token } }
 
+  // Professional User
   this.create = async data => 
     await Axios.post("connections", {
       connection: {...data}
@@ -15,8 +16,12 @@ function Actions(user) {
   this.getClientele = async() => 
     await Axios.get("clientele", config)
 
-  this.getSubscriptions = async() =>
-    await Axios.get("subscribed_to", config)
+
+  // Client User
+  this.getSubscriptions = async() => {
+    const {data} = await Axios.get("subscribed_to", config)
+    return data.data
+  }
 
   this.getMyProfessionals = async() =>
     await Axios.get("my_professionals")

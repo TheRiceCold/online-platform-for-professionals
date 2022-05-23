@@ -2,7 +2,9 @@ import styles from "@/styles/users/Profile.module.sass"
 
 import {Flex, Avatar} from "@chakra-ui/react"
 
+import {useQuery} from "react-query"
 import {useAuth} from "@/auth_context"
+import {useConnections} from "@/connections_context"
 
 const ClientLayout = () => {
   const {
@@ -13,16 +15,9 @@ const ClientLayout = () => {
     userContactNumber,
   } = useAuth()
 
-	// No method in context yet
-	// Temporary waiting for api/context
-	const { contactInfo, isLoading } = {
-		contactInfo: {
-			contactNumber: '12345',
-			email: 'client@email.com',
-			city: 'Manila',
-		},
-		isLoading: false,
-	}
+  const {getSubscriptions} = useConnections()
+  const {data: subscriptions} = useQuery("subscriptions", getSubscriptions)
+
 	return (
 		<>
 			<Flex as="section" className={styles.layout}>
@@ -57,15 +52,15 @@ const ClientLayout = () => {
           </div>
 
           <div className={styles.work_portfolio}>
-            <h3>Work</h3>
+            <h3>Connections</h3>
             <div className={styles.portfolio_data}>
               <div className={styles.data}>
-                <h4>Recent Portfolio</h4> 
-                <p>something</p> 
+                <h4>Subscriptions</h4> 
+                <p>{subscriptions?.length}</p> 
               </div>
               <div className={styles.data}>
-                <h4>Recent Service</h4> 
-                <p></p> 
+                <h4>My Professionals</h4> 
+                <p>0</p> 
               </div>
             </div>
           </div>
