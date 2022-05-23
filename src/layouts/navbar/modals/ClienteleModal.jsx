@@ -1,13 +1,29 @@
 import Modal from "@/components/overlay/Modal"
+import UserConnectionList from "../UserConnectionList"
+import AlertDialog from "@/components/overlay/AlertDialog"
+
+import {useDisclosure} from "@chakra-ui/react"
 
 function ClienteleModal({...props}) {
+  const deleteAlertDialog = useDisclosure()
+
+  const handleDelete = () => {
+    console.log("delete connection")
+  }
 
   return (
-    <Modal
-      {...props}
-      header="Clietele"
-    >
-      
+    <Modal {...props} header="Clietele">
+    <UserConnectionList deleteAlertDialog={deleteAlertDialog}/>
+    {/* Delete Connection Alert */}
+    <AlertDialog 
+      // isCentered
+      buttonColor="red"
+      buttonLabel="Delete"
+      {...deleteAlertDialog}
+      header="Delete Connection?"
+      buttonClick={handleDelete}
+      label="Are you sure? You can't undo this action afterwards."
+    />
     </Modal>
   )
 }
