@@ -18,17 +18,18 @@ function ClienteleModal({...props}) {
 
   return (
     <Modal {...props} header="Clietele">
-    <UserConnectionList deleteAlertDialog={deleteAlertDialog}/>
-    {/* Delete Connection Alert */}
-    <AlertDialog 
-      // isCentered
-      buttonColor="red"
-      buttonLabel="Delete"
-      {...deleteAlertDialog}
-      header="Delete Connection?"
-      buttonClick={handleDelete}
-      label="Are you sure? You can't undo this action afterwards."
-    />
+      <UserConnectionList deleteAlertDialog={deleteAlertDialog}/>
+
+      {/* Delete Connection Alert */}
+      <AlertDialog 
+        isCentered
+        buttonColor="red"
+        buttonLabel="Delete"
+        {...deleteAlertDialog}
+        header="Delete Clientele?"
+        buttonClick={handleDelete}
+        label="Are you sure? You can't undo this action afterwards."
+      />
     </Modal>
   )
 }

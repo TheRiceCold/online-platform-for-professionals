@@ -12,23 +12,23 @@ function Actions(user) {
 
   this.getSubscribers = async() => {
     const {data} = await Axios.get("subscribers", config)
-    return data.data
+    return data.included
   }
 
   this.getClientele = async() => {
     const {data} = await Axios.get("clientele", config)
-    return data.data
+    return data.included
   }
 
   // Client User
   this.getSubscriptions = async() => {
     const {data} = await Axios.get("subscribed_to", config)
-    return data.data
+    return data.included
   }
 
   this.getMyProfessionals = async() => {
     const {data} = await Axios.get("my_professionals", config)
-    return data.data
+    return data.included
   }
 
   this.delete = async id =>
