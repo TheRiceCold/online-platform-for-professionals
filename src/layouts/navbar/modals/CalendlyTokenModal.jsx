@@ -1,6 +1,7 @@
 import Button from "@/components/Button"
 import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
+import MaskedInput from "@/components/MaskedInput"
 
 import {useForm} from "react-hook-form"
 import {useUsers} from "@/users_context"
@@ -104,6 +105,11 @@ function CalendlyTokenModal(props) {
         mutation={mutation}
         formHook={formHook}
         submitHandler={submitHandler}
+      />
+      <MaskedInput 
+        readOnly 
+        label="Current Token:"
+        value={calendlyToken} 
       />
       <Button
         mt={4}

@@ -3,6 +3,8 @@ import {
   ViewOffIcon
 } from "@chakra-ui/icons"
 import {
+  FormLabel,
+  FormControl,
   Button, Tooltip,
   Input, InputGroup, 
   InputRightElement,
@@ -12,24 +14,28 @@ import {useState} from "react"
 
 function MaskedInput (props) {
   const [show, setShow] = useState(false)
+  const type = (show ? "text" : "password")
   const Icon = (show ? <ViewOffIcon/> : <ViewIcon/>)
 
   return (
-    <InputGroup>
-      <Input {...props}/>
-      <InputRightElement width="4em">
-        <Button 
-          h="2em" 
-          bg="none" 
-          size="sm"
-          onClick={() => setShow(!show)}
-        > 
-          <Tooltip label={show ? "Hide token" : "Reveal token"}>
-            {Icon}
-          </Tooltip>
-        </Button>
-      </InputRightElement>
-    </InputGroup>
+    <FormControl mt={4}>
+      <FormLabel>{props.label}</FormLabel>
+      <InputGroup>
+        <Input {...props} type={type}/>
+        <InputRightElement width="4em">
+          <Button 
+            h="2em" 
+            bg="none" 
+            size="sm"
+            onClick={() => setShow(!show)}
+          > 
+            <Tooltip label={show ? "Reveal token" : "Hide token"}>
+              {Icon}
+            </Tooltip>
+          </Button>
+        </InputRightElement>
+      </InputGroup>
+    </FormControl>
   )
 }
 
