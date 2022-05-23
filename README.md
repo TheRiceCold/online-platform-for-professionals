@@ -11,11 +11,11 @@
     <a href="">here</a>
     <br/>
     ·
-    <a href="https://github.com/gdperalta/online-platform-for-professionals-api">Backend Repository</a>
-    ·
     <a href="https://github.com/dwghdev/online-platform-for-professionals-frontend/issues">Report Bug</a>
     ·
     <a href="https://github.com/dwghdev/online-platform-for-professionals-frontend/issues">Request Feature</a>
+    ·
+    <a href="https://github.com/gdperalta/online-platform-for-professionals-api">Backend Repo</a>
 
   ![NextJs Badge] ![React Badge] ![Yarn Badge] ![NPM Badge]
   </p>

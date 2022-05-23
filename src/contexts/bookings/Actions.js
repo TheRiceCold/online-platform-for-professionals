@@ -10,7 +10,8 @@ function Actions(user) {
     return data
   }
 
-  this.getByFilter = async status => {
+  this.getByFilter = async ({queryKey})=> {
+    const [_, status] = queryKey
     const {data} = await Axios.get(path+`?status=${status}`)
     return data
   }
