@@ -11,13 +11,18 @@ import {useUsers} from "@/users_context"
 const UsersSidebar = props => {
   const {setSelectedId} = props
   const {getProfessionals} = useUsers("professional")
-  const {data: professionals, isLoading} = useQuery("professionals", getProfessionals)
+  const {data: professionals, isLoading} = useQuery(
+    "professionals", 
+    getProfessionals, {
+      select: data => data.data
+    }
+  )
 
 	return (
     <Box className={styles.users_sidebar}>
 			{/*TODO Insert get /professionals/search here */}
       {!isLoading ?
-        professionals?.data?.map((user, idx) => {
+        professionals?.map((user, idx) => {
           return (
             <ProfileDescription
               img={""}

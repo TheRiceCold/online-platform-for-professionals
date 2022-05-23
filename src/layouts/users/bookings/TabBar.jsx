@@ -59,7 +59,7 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 				Canceled
 			</Button>
 		</Box>
-	);
-};
+	)
+}
 
-export default TabBar;
+export default TabBar

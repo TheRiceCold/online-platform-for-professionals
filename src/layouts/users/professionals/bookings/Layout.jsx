@@ -1,4 +1,5 @@
-import {HStack} from '@chakra-ui/react'
+import {HStack} from "@chakra-ui/react"
+import MoonLoader from "react-spinners/MoonLoader"
 import RadioCard from "@/components/forms/radios/RadioCard"
 
 import {useState} from "react"
@@ -11,7 +12,10 @@ function BookingsLayout() {
   const options = ["all", "active", "canceled"]
   const {getFilterBookings} = useBookings()
 
-  const {data} = useQuery([`${filter}_bookings`, filter], getFilterBookings)
+  const {data, isLoading} = useQuery(
+    [`${filter}_bookings`, filter], 
+    getFilterBookings, { }
+  )
 
   const {getRootProps, getRadioProps} = useRadioGroup({
     name: "status",
@@ -23,7 +27,8 @@ function BookingsLayout() {
 
   const group = getRootProps()
 
-  return (
+  return (isLoading ? 
+    <MoonLoader color="white"/> :
     <HStack {...group} mt={8}>
       {options.map((value) => {
         const radio = getRadioProps({ value })

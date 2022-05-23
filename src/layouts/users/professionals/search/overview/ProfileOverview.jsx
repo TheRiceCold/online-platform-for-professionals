@@ -4,26 +4,44 @@ import {
   Text, 
   Avatar,
   Flex, Box,
-  SkeletonCircle, 
 	UnorderedList, ListItem,
 } from "@chakra-ui/react"
 import ActionButtons from "./ActionButtons"
 import {StarIcon} from "@chakra-ui/icons"
 
-import {useQuery} from "react-query"
+import {useQueries} from "react-query"
 import {useUsers} from "@/users_context"
 import {capitalize} from "@/utils/stringHelpers"
 
 function ProfileOverview({selectedId}) {
   const {getProfessional} = useUsers("professional")
-  const {data, isLoading} = useQuery(["professional", selectedId], getProfessional)
+  const [
+    {data: userDetails, isLoading},
+    {data: attributes},
+    {data: relationships},
+  ] = useQueries([
+    {
+      queryKey: ["included", selectedId],
+      queryFn: getProfessional, 
+      select: data => data.included[0].attributes
+    },
+    {
+      queryKey: ["attributes", selectedId],
+      queryFn: getProfessional,
+      select: data => data.data.attributes
+    },
+    {
+      queryKey: ["relationships", selectedId],
+      queryFn: getProfessional,
+      select: data => data.data.relationsships
+    }
+  ])
 
-  const userDetails = !isLoading && data?.included[0].attributes
-  const field = data?.data.attributes.field
-  const headline = data?.data.attributes.headline
-  const services = !!selectedId && data?.data.relationships.services.data
-  const workPortfolios = !!selectedId && data?.data.relationships.workPortfolios.data
-  const reviews = !!selectedId && data?.data.relationships.reviews.data
+  const field = attributes?.field
+  const headline = attributes?.headline
+  const services = relationships?.services.data
+  const workPortfolios = relationships?.workPortfolios.data
+  const reviews = relationships?.reviews.data
 
 	return (
 		<Box className={styles.overview_content}>
@@ -44,7 +62,10 @@ function ProfileOverview({selectedId}) {
 						<Text className={styles.field} fontSize="xl">
 							{field}
 						</Text>
-						<Text color="gray.500">0{userDetails.contactNumber} | {userDetails.email}</Text>
+						<Text color="gray.500">
+              0{userDetails?.contactNumber} 
+              {" "} | {userDetails?.email}
+            </Text>
 					</Box>
 				</Box>
         <ActionButtons/>
@@ -57,7 +78,7 @@ function ProfileOverview({selectedId}) {
           {!isLoading && !!services?.length ? "Services" : "No services available"}
 				</Text>
         <UnorderedList spacing={3}>
-          {!isLoading && services.map((service, idx) => (
+          {!isLoading && services?.map((service, idx) => (
             <ListItem key={idx}>
               <Text>{service.title}</Text>
               <Text>{service.details}</Text>
@@ -69,7 +90,7 @@ function ProfileOverview({selectedId}) {
           {!isLoading && !!workPortfolios?.length ? "Work Portfolio" : "No work portflio"}
 				</Text>
 				<UnorderedList>
-					{!isLoading && workPortfolios.map((portfolio, idx) => (
+					{!isLoading && workPortfolios?.map((portfolio, idx) => (
             <ListItem key={idx}>
               <Text>{portfolio.title}</Text>
               <Text>{portfolio.details}</Text>
@@ -79,7 +100,7 @@ function ProfileOverview({selectedId}) {
 				<Text color="#14a76c" fontSize="2xl" mt={4}>
           {!isLoading && !!reviews?.length ? "Reviews" : "No reviews yet"}
 				</Text>
-				{!isLoading && reviews.map((review, idx) => (
+				{!isLoading && reviews?.map((review, idx) => (
           <Box key={idx}>
             {[...Array(5)].map((n, i) => (
               <StarIcon key={i} color={i + 1 < review.rating ? "#ff652f" : "gray"} />

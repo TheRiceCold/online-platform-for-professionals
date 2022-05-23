@@ -1,20 +1,19 @@
-import styles from '@/styles/Bookings.module.sass';
-import { PlusSquareIcon, StarIcon } from '@chakra-ui/icons';
+import styles from "@/styles/Bookings.module.sass"
+import {PlusSquareIcon, StarIcon} from "@chakra-ui/icons"
 import {
-	Button,
-	Text,
 	Modal,
-	ModalOverlay,
-	ModalContent,
+	ModalBody,
 	ModalHeader,
 	ModalFooter,
-	ModalBody,
+	ModalContent,
+	ModalOverlay,
 	ModalCloseButton,
-	useDisclosure,
-	Textarea,
-	IconButton,
-} from '@chakra-ui/react';
-import { useState } from 'react';
+	Text, Textarea,
+	Button, IconButton,
+} from "@chakra-ui/react"
+
+import {useState} from "react"
+import {useDisclosure} from "@chakra-ui/react"
 
 const ReviewModal = ({ tabStatus }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
