@@ -1,5 +1,5 @@
 import styles from '@/styles/Bookings.module.sass';
-import { CheckIcon } from '@chakra-ui/icons';
+import { CheckIcon, EditIcon } from '@chakra-ui/icons';
 import {
 	Button,
 	Text,
@@ -31,7 +31,7 @@ const FinishModal = ({ tabStatus }) => {
 			<Button
 				onClick={onOpen}
 				className={styles.finishBtn}
-				leftIcon={<CheckIcon />}
+				leftIcon={tabStatus === 'pending' ? <CheckIcon /> : <EditIcon />}
 			>
 				<Text fontSize="sm">
 					{tabStatus === 'pending' ? 'Mark as finished' : 'Edit client attendance'}
