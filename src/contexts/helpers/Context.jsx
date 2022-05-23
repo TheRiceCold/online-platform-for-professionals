@@ -10,9 +10,8 @@ const HelpersProvider = ({children}) => {
     const {data: cities} = await Axios("cities")
     return cities.map(city => {
       return {
-        id: city.id,
         label: city.name,
-        regionId: city.region_code
+        value: city.name
       }
     }) 
   }
@@ -21,7 +20,7 @@ const HelpersProvider = ({children}) => {
     const {data: regions} = await Axios("regions")
     return regions.map(region => {
       return { 
-        value: region.id, 
+        value: region.name, 
         label: region.name 
       }
     })

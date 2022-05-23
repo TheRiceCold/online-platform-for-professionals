@@ -21,8 +21,10 @@ function ProfessionalLayout() {
     userContactNumber,
   } = useAuth()
 
-  const {data: workPortfolios, isLoading} = useQuery("work_portfolio", getWorkPortfolios)
-  const lastPortfolio = !isLoading && workPortfolios[workPortfolios.length - 1].attributes.title
+  const {data: workPortfolios, isLoading} = useQuery("work_portfolio", getWorkPortfolios, {
+    enabled: !!user.professionalId
+  })
+  const lastPortfolio = !!user.professionalId || !isLoading && workPortfolios[workPortfolios.length - 1].attributes.title
 
   {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
   return (user.professionalId ? 

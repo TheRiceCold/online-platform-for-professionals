@@ -1,12 +1,14 @@
 import styles from "@/styles/users/Professionals.module.sass"
 
 import {
-	Box, Text,
-	Button, ButtonGroup,
-	SkeletonCircle, Avatar,
+  Text, 
+  Avatar,
+  SkeletonCircle, 
+  Flex, Box, Stack,
 	UnorderedList, ListItem,
 } from "@chakra-ui/react"
-import {StarIcon, AddIcon} from "@chakra-ui/icons"
+import Button from "@/components/Button"
+import {StarIcon} from "@chakra-ui/icons"
 import CalendlyButton from "@/components/booking/CalendlyButton"
 
 import {useAuth} from "@/auth_context"
@@ -15,21 +17,23 @@ import {
 	services,
 	workPortfolios,
 } from "@/data/mock_professional_data"
+import {capitalize} from "@/utils/stringHelpers"
 
 // TODO Insert selected professional data
 // TODO REMOVE after adding context
 
-function ProfileOverview({ img, isLoading }) {
+function ProfileOverview({selectedProfile}) {
   const {userRole} = useAuth()
+  console.log(selectedProfile)
 
-	return (
+	return (selectedProfile &&
 		<Box className={styles.overviewContainer}>
-			<Box className={styles.headline}>
+			<Flex className={styles.headline}>
 				<Box className={styles.info}>
 					<Box className={styles.displayPhoto}>
-						<SkeletonCircle size="116px" isLoaded={!isLoading}>
+						<SkeletonCircle size="116px" isLoaded={true}>
 							<Avatar
-								src={img}
+								src=""
 								size="2xl"
 								borderRadius="full"
 								border="4px solid white"
@@ -38,7 +42,7 @@ function ProfileOverview({ img, isLoading }) {
 					</Box>
 					<Box>
 						<Text className={styles.name} fontSize="xl">
-							Professional Name
+              {/* {capitalize(`${firstName} ${lastName}`)} */}
 						</Text>
 						<Text className={styles.field} fontSize="xl">
 							Professional Field
@@ -46,26 +50,22 @@ function ProfileOverview({ img, isLoading }) {
 						<Text color="gray.500">Contact Number | Email</Text>
 					</Box>
 				</Box>
-				<Box className={styles.actions}>
-          {userRole === "client" &&
-            <ButtonGroup spacing={3}>
-              {/*TODO Call post /connections */}
-              <Button leftIcon={<AddIcon />} className={styles.subscribe}>
-                Subscribe
-              </Button>
-              {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
-              {/* TODO Replace with client details or remove props if useContext will be used */}
-              <CalendlyButton
-                firstName={'Luffy'}
-                lastName={'Monkey'}
-                email={'client2@email.com'}
-              />
-            </ButtonGroup>
-          }
-				</Box>
-			</Box>
+        <Stack spacing={3} className={styles.actions}>
+          {/*TODO Call post /connections */}
+          <Button className={styles.subscribe}>
+            Subscribe
+          </Button>
+          {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
+          {/* TODO Replace with client details or remove props if useContext will be used */}
+          <CalendlyButton
+            firstName={'Luffy'}
+            lastName={'Monkey'}
+            email={'client2@email.com'}
+          />
+        </Stack>
+			</Flex>
 			<Box className={styles.overview}>
-				<Text color="#14a76c" fontSize="2xl">
+				<Text color="#14a76c" fontSize="2xl" mb={4}>
 					Headline text here
 				</Text>
 				<Text color="#14a76c" fontSize="2xl">
@@ -73,33 +73,31 @@ function ProfileOverview({ img, isLoading }) {
 				</Text>
 				<UnorderedList spacing={3}>
 					{services.map((service, idx) => (
-							<ListItem key={idx}>
-								<Text>{service.title}</Text>
-								<Text>{service.details}</Text>
-								{service.minPrice ? (
-									<Text as="i">
-										Php {service.minPrice}-{service.maxPrice}
-									</Text>
-								) : (
-									''
-								)}
-							</ListItem>
+            <ListItem key={idx}>
+              <Text>{service.title}</Text>
+              <Text>{service.details}</Text>
+              {service.minPrice ? (
+                <Text as="i">
+                  Php {service.minPrice}-{service.maxPrice}
+                </Text>
+              ) : (
+                ''
+              )}
+            </ListItem>
           ))}
 				</UnorderedList>
-				<Text color="#14a76c" fontSize="2xl">
+				<Text color="#14a76c" fontSize="2xl" mt={4}>
 					Work Portfolio
 				</Text>
 				<UnorderedList>
-					{workPortfolios.map((portfolio, idx) => {
-						return (
-							<ListItem key={idx}>
-								<Text>{portfolio.title}</Text>
-								<Text>{portfolio.details}</Text>
-							</ListItem>
-						)
-					})}
+					{workPortfolios.map((portfolio, idx) => (
+            <ListItem key={idx}>
+              <Text>{portfolio.title}</Text>
+              <Text>{portfolio.details}</Text>
+            </ListItem>
+          ))}
 				</UnorderedList>
-				<Text color="#14a76c" fontSize="2xl">
+				<Text color="#14a76c" fontSize="2xl" mt={4}>
 					Reviews
 				</Text>
 				{reviews.map((review, idx) => {

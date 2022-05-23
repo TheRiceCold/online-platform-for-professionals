@@ -3,6 +3,7 @@ import styles from "@/styles/Auth.module.sass"
 import Links from "./Links"
 import Modal from "./Modal"
 import AuthForm from "./Form"
+import Footer from "../footer/Footer"
 import Navbar from "../navbar/Navbar"
 import Alert from "@/components/feedback/Alert"
 import {Link, Container} from "@chakra-ui/react"
@@ -18,12 +19,17 @@ function AuthLayout(props) {
   const router = useRouter()
   const {alerts, isLoginPage} = props
   const {onOpen : openModal, ...modalProps} = useModal()
+  const navLinks = [
+    { label: "Home", href: "/" },
+    { label: "Login", href: "/login" },
+    { label: "Signup", href: "/signup" },
+  ]
 
   useMount(() => { if (user.isAuth) router.push("/") })
 
   return (!user.isAuth && 
     <>
-      <Navbar styles={styles}/>
+      <Navbar styles={styles} links={navLinks}/>
       {alerts && 
         alerts.map((alert, i) => (
           <Alert key={i} {...alert}/>
@@ -42,6 +48,7 @@ function AuthLayout(props) {
         )}
       </Container>
       <Modal {...modalProps} heading="Resend Confirmation"/>
+      <Footer/>
     </>
   )
 }

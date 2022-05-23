@@ -7,7 +7,7 @@ import ProfileDescription from "./ProfileDescription"
 import {useQuery} from "react-query"
 import {useUsers} from "@/users_context"
 
-const UsersSidebar = () => {
+const UsersSidebar = ({setSelectedProfile}) => {
   const {getProfessionals} = useUsers("professional")
   const {data: professionals, isLoading} = useQuery("professionals", getProfessionals)
 
@@ -16,13 +16,13 @@ const UsersSidebar = () => {
 			{/*TODO Insert get /professionals/search here */}
       {!isLoading && 
         professionals?.data?.map((user, idx) => {
-          console.log(user)
           return (
             <ProfileDescription
+              img={""}
               key={idx}
               user={user}
-              img={""}
               isLoading={isLoading}
+              setSelectedProfile={setSelectedProfile}
             />
           )
         })

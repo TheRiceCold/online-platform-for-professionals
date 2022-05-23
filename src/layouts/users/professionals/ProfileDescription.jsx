@@ -4,15 +4,21 @@ import {
 	Avatar,
 	Box, Text,
 	SkeletonCircle,
-	LinkBox, LinkOverlay,
 } from "@chakra-ui/react"
-import NextLink from "next/link"
 import {StarIcon} from "@chakra-ui/icons"
 
-function ProfileDescription({user, img, isLoading}) {
+function ProfileDescription(props) {
+  const {
+    user, img, 
+    isLoading, 
+    setSelectedProfile,
+  } = props
 
 	return (
-		<LinkBox className={styles.description}>
+    <Box 
+      className={styles.description}
+      onClick={() => setSelectedProfile(user)}
+    >
 			<Box className={styles.userInfo}>
 				<SkeletonCircle size="116px" isLoaded={!isLoading}>
 					<Avatar
@@ -27,9 +33,7 @@ function ProfileDescription({user, img, isLoading}) {
 				</SkeletonCircle>
 				<Box>
 					<Text className={styles.field}>{user.attributes.field}</Text>
-					<NextLink href="#" passHref>
-						<LinkOverlay className={styles.name}>{user.name}</LinkOverlay>
-					</NextLink>
+          <Text className={styles.name}>{user.name}</Text>
 					<Text>{user.attributes.headline}</Text>
 					<Text>{user.attributes.officeAddress}</Text>
 				</Box>
@@ -44,7 +48,7 @@ function ProfileDescription({user, img, isLoading}) {
 				<Text>{user.relationships.subscribers.data.length} subscribers</Text>
 				<Text>{user.relationships.clientele.data.length} clients</Text>
 			</Box>
-		</LinkBox>
+		</Box>
 	)
 }
 
