@@ -22,7 +22,7 @@ const Links = ({links}) => (
           </Link>
         </PopoverTrigger>
         {item.children && (
-          <PopoverContent p={4} w="8em">
+          <PopoverContent p={4} w="12em">
             <Stack>
               {item.children.map((child, idx) => (
                 <SubLink key={idx} {...child}/>

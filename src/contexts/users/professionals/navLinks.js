@@ -5,12 +5,10 @@ const navLinks = id => {
     { label: "Clients", children: [
       { 
         label: "Clientele",
-        subLabel: "service clients",
         href: prefixPath("cliente")
       },
       { 
         label: "Subscribers",
-        subLabel: "clients who follows you",
         href: ""
       },
     ]}, 

@@ -21,7 +21,7 @@ const SubLink = ({label, href}) => (
         _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
         justify={'flex-start'}
         align={'center'}
-        flex={1}>
+      >
         <Icon w={5} h={5} as={ChevronRightIcon} />
       </Flex>
     </Flex>

@@ -6,17 +6,35 @@ import CalendlyButton from "@/components/booking/CalendlyButton"
 
 import {useAuth} from "@/auth_context"
 import {useMutation} from "react-query"
+import {useToast} from "@chakra-ui/react"
+import {useState, useEffect} from "react"
 import {useConnections} from "@/connections_context"
 
 function ActionButtons({selectedId}) {
+  const toast = useToast()
   const {userRole, user} = useAuth()
+  const [toasts, setToasts] = useState()
   const {createConnection} = useConnections()
 
   const mutation = useMutation(createConnection, {
-    onSetted: res => {
-      console.log(res)
-    }
+    onError: error => {
+      const messages = error.response.data.errors?.map(error => error.title)
+      setToasts(messages.map(title => {
+        return {
+          title,
+          duraion: 3000,
+          status: "error",
+          variant: "solid",
+          isClosable: true,
+        }
+      }))
+    },
   })
+
+  useEffect(() => {
+    if (toasts) 
+      toasts.forEach(message => toast(message))
+  }, [JSON.stringify(toasts)])
 
   const handleSubscribe = () => {
     console.log("subscribe")
