@@ -4,16 +4,23 @@ import Button from "@/components/Button"
 import {MoonLoader} from "react-spinners"
 import {CloseIcon} from "@chakra-ui/icons"
 import {Avatar, Box, Flex} from "@chakra-ui/react"
-import { capitalize } from "@/utils/stringHelpers"
+import AlertDialog from "@/components/overlay/AlertDialog"
+
+import {useMutation} from "react-query"
+import {useDisclosure} from "@chakra-ui/react"
+import {capitalize} from "@/utils/stringHelpers"
+import {useConnections} from "@/connections_context"
 
 function UserConnectionList(props) {
-  const {
-    isLoading,
-    connections,
-    deleteAlertDialog, 
-  } = props
+  const {isLoading, connections} = props
+  const deleteAlertDialog = useDisclosure()
 
-  console.log(connections)
+  const {deleteConnection} = useConnections()
+  const deleteMutation = useMutation(deleteConnection)
+
+  const handleDelete = () => {
+    console.log("delete connection")    
+  }
 
   return (
     <Box className={styles.list_wrapper}>
@@ -47,6 +54,17 @@ function UserConnectionList(props) {
           })}
         </ul> 
       }
+
+      {/* Delete Connection Alert */}
+      <AlertDialog 
+        isCentered
+        buttonColor="red"
+        buttonLabel="Delete"
+        {...deleteAlertDialog}
+        header="Remove Subscriber?"
+        buttonClick={handleDelete}
+        label="Are you sure? You can't undo this action afterwards."
+      />
     </Box> 
   )
 }
