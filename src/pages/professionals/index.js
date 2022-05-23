@@ -4,17 +4,22 @@ import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
 import Layout from "@/professionals_layout/search/Layout"
 
-import {useUsers} from "@/contexts/users/Context"
+import {useAuth} from "@/auth_context"
+import {useUsers} from "@/users_context"
 
 const Professionals = () => {
-  const {navLinks} = useUsers("professional")
+  const {userRole} = useAuth()
+  const {navLinks: professional} = useUsers("professional")
+  const {navLinks: client} = useUsers("client")
+
+  const links = userRole === "client" ? client : professional
 
 	return (
 		<main className={styles.main}>
 			<Head>
 				<title>Professionals</title>
 			</Head>
-			<Navbar styles={styles} links={navLinks}/>
+			<Navbar styles={styles} links={links}/>
 			<Layout/>
 		</main>
 	)
