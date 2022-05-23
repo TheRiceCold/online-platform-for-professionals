@@ -23,6 +23,11 @@ function Navbar({styles, links, withSearch}) {
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
 
+  const connectionModals = {
+    clienteleModal: useDisclosure(),
+    subscribersModal: useDisclosure()
+  }
+
   const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
   return (
     <nav className={styles.navbar}>
@@ -48,7 +53,7 @@ function Navbar({styles, links, withSearch}) {
         </NextLink>
         {withSearch && <SearchBar colorMode={colorMode}/>}
         <Flex alignItems="center">
-          <Links links={links}/>
+          <Links links={links} modals={connectionModals}/>
           <Stack direction="row" spacing={6}>
             <Button onClick={toggleColorMode} bg="none">
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}

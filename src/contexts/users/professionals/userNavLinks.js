@@ -1,5 +1,6 @@
-const navLinks = id => {
+function userNavLinks(id, modals) {
   const prefixPath = to => `/professionals/${id}/${to}`
+
   return [
     { label: "Profile", href: prefixPath("") }, 
     { label: "Clients", children: [
@@ -19,4 +20,4 @@ const navLinks = id => {
   ]
 }
 
-export {navLinks}
+export {userNavLinks}

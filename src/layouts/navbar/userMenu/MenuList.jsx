@@ -16,9 +16,9 @@ function MenuList() {
   const {userRole} = useAuth()
   const {menuItems} = useUsers(userRole)
 
-  const accountSettingsModal = useDisclosure()
   const calendlyTokenModal = useDisclosure()
   const fieldSettingsModal = useDisclosure()
+  const accountSettingsModal = useDisclosure()
 
   const menuItemsArgs = (userRole === "client") ? 
     accountSettingsModal : {

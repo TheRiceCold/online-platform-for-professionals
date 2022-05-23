@@ -1,6 +1,6 @@
-import {navLinks} from "./navLinks"
 import {createContext} from "react"
 import {useAuth} from "@/auth_context"
+import {userNavLinks} from "./userNavLinks"
 import {userMenuItems} from "./userMenuItems"
 import {zodResolver} from "@hookform/resolvers/zod"
 
@@ -23,10 +23,13 @@ const ProfessionalsProvider = ({children}) => {
   const menuItems = modals => 
     userMenuItems(modals, logout)
 
+  const navLinks = modals => 
+    userNavLinks(user.professionalId, modals) 
+
   return (
     <Provider value={{
+      navLinks,
       menuItems,
-      navLinks: navLinks(user.professionalId),
 
       // Form
       inputs: Inputs, 

@@ -1,4 +1,4 @@
-const navLinks = id => {
+const userNavLinks = id => {
   const prefixPath = to => `/clients/${id}/${to}`
   return [
     { label: "Profile", href: prefixPath("") },
@@ -16,4 +16,4 @@ const navLinks = id => {
   ]
 }
 
-export {navLinks}
+export {userNavLinks}
