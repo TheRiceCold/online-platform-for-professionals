@@ -55,7 +55,7 @@ function CalendlyTokenModal(props) {
       onSuccess: () => {
         setToasts([{
           title: "Token Saved",
-          duraion: 3000,
+          duration: 3000,
           variant: "solid",
           isClosable: true,
           status: "success",
@@ -68,7 +68,7 @@ function CalendlyTokenModal(props) {
           errors.map(error => {
             return {
               title: error.title,
-              duraion: 3000,
+              duration: 3000,
               status: "error",
               variant: "solid",
               isClosable: true,
@@ -90,7 +90,7 @@ function CalendlyTokenModal(props) {
       await deleteCalendlyToken(calendlyTokenId)
       setToasts([{
         title: "Token has been deleted",
-        duraion: 3000,
+        duration: 3000,
         variant: "solid",
         isClosable: true,
       }])

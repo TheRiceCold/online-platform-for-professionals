@@ -12,23 +12,39 @@ import {useConnections} from "@/connections_context"
 
 function ActionButtons({selectedId}) {
   const toast = useToast()
-  const {userRole, user} = useAuth()
+  const {
+    user, 
+    userRole, 
+    userAttributes
+  } = useAuth()
   const [toasts, setToasts] = useState()
   const {createConnection} = useConnections()
 
-  const mutation = useMutation(createConnection, {
-    onError: error => {
-      const messages = error.response.data.errors?.map(error => error.title)
-      setToasts(messages.map(title => {
-        return {
-          title,
-          duraion: 3000,
-          status: "error",
+  const mutation = useMutation(
+    createConnection, {
+      onSuccess: () => {
+        setToasts([{
+          title: "Subscribe successfully",
+          duration: 3000,
+          status: "success",
           variant: "solid",
           isClosable: true,
-        }
-      }))
-    },
+        }])
+      },
+      onError: error => {
+        const messages = error.response.data.errors?.map(error => error.title)
+        setToasts(
+          messages.map(title => {
+            return {
+              title,
+              duration: 3000,
+              status: "error",
+              variant: "solid",
+              isClosable: true,
+            }
+          })
+        )
+      },
   })
 
   useEffect(() => {
@@ -37,7 +53,6 @@ function ActionButtons({selectedId}) {
   }, [JSON.stringify(toasts)])
 
   const handleSubscribe = () => {
-    console.log("subscribe")
     mutation.mutate({
       client_id: user.clientId,
       professional_id: selectedId
@@ -48,16 +63,14 @@ function ActionButtons({selectedId}) {
     <Stack spacing={3} className={styles.actions}>
       {userRole === "client" && (
         <>
-          {/*TODO Call post /connections */}
           <Button className={styles.subscribe} onClick={handleSubscribe}>
             Subscribe
           </Button>
           {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
-          {/* TODO Replace with client details or remove props if useContext will be used */}
           <CalendlyButton
-            firstName={'Luffy'}
-            lastName={'Monkey'}
-            email={'client2@email.com'}
+            firstName={userAttributes.firstName}
+            lastName={userAttributes.lastName}
+            email={userAttributes.email}
           />
         </>
       )}

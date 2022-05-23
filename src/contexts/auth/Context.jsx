@@ -26,12 +26,13 @@ const AuthProvider = ({children}) => {
   const [user, dispatch] = useReducer(reducer, initialState)
   const call = new Actions(dispatch, user?.token)
 
-  const userRole = user?.attributes?.role
+  const userAttributes = user?.attributes
+  const userRole = userAttributes?.role
   const {
     city, region, 
     firstName, lastName,
     email, contactNumber,
-  } = user?.attributes || {}
+  } = userAttributes || {}
 
   const userFullname = capitalize(`${firstName} ${lastName}`)
   const userLocation = capitalize(`${city}, ${region}, Philippines`)
@@ -49,6 +50,7 @@ const AuthProvider = ({children}) => {
       userImage,
       userFullname,
       userLocation,
+      userAttributes,
       userEmail: email,
       userContactNumber: contactNumber,
 
