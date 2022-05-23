@@ -35,7 +35,7 @@ const UsersSidebar = props => {
       }
 			<Pagination />
 		</Box>
-	)
-}
+	);
+};
 
-export default UsersSidebar
+export default UsersSidebar;

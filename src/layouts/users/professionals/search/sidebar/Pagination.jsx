@@ -1,28 +1,20 @@
-import styles from "@/styles/Components.module.sass"
+import styles from '@/styles/Components.module.sass'
 
-import { 
-  Box, 
-  IconButton, 
-  Button, ButtonGroup
-} from "@chakra-ui/react"
-import { 
-  ArrowLeftIcon, 
-  ArrowRightIcon 
-} from "@chakra-ui/icons"
+import {Box, IconButton, Button, ButtonGroup} from '@chakra-ui/react'
+import {ArrowLeftIcon, ArrowRightIcon} from '@chakra-ui/icons'
 
-import {links} from "@/data/mock_professionals"
-
-const Pagination = () => {
+const Pagination = ({ links }) => {
+  links = links || []
 	const pageNumber = (link) => {
-		let Y = 'page=';
-		let Z = link.slice(link.indexOf(Y) + Y.length);
-		return Z;
-	};
+		// let Y = 'page=';
+		// // let Z = link.slice(link.indexOf(Y) + Y.length)
+		// return Z
+	}
 
 	const checkPage = (link) => {
-		let currentPage = pageNumber(links.self) === pageNumber(link) ? true : false;
-		return currentPage;
-	};
+		let currentPage = pageNumber(links.self) === pageNumber(link) ? true : false
+		return currentPage
+	}
 
 	{
 		/* TODO */
@@ -54,7 +46,7 @@ const Pagination = () => {
 					''
 				)}
 				<IconButton
-					className={styles.pagination}
+					className={styles.paginatiojjj}
 					variant="outline"
 					isRound={true}
 					icon={<ArrowRightIcon />}
@@ -62,7 +54,7 @@ const Pagination = () => {
 				/>
 			</ButtonGroup>
 		</Box>
-	);
-};
+	)
+}
 
-export default Pagination;
+export default Pagination

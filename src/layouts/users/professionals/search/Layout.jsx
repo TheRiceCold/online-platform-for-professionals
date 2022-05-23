@@ -1,8 +1,8 @@
 import styles from "@/styles/users/Professionals.module.sass"
 
 import {Box} from "@chakra-ui/react"
-import UsersSidebar from "./UsersSidebar"
-import ProfileOverview from "./ProfileOverview"
+import UsersSidebar from "./sidebar/UsersSidebar"
+import ProfileOverview from "./overview/ProfileOverview"
 
 import {useState} from "react"
 

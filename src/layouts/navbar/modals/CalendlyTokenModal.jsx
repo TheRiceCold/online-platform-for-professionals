@@ -16,15 +16,17 @@ function CalendlyTokenModal(props) {
   const mutation = useMutation(createCalendlyToken, {
     onError: error => {
       const {errors} = error?.response?.data
-      setToastErrors(errors.map(error => {
-        return {
-          title: error.title,
-          duraion: 3000,
-          status: "error",
-          variant: "solid",
-          isClosable: true,
-        }
-      }))
+      setToastErrors(
+        errors.map(error => {
+          return {
+            title: error.title,
+            duraion: 3000,
+            status: "error",
+            variant: "solid",
+            isClosable: true,
+          }
+        })
+      )
     },
   })
   const submitHandler = data => mutation.mutate({...data})
