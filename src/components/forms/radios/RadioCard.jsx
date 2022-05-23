@@ -28,3 +28,5 @@ function RadioCard(props) {
     </Box>
   )
 }
+
+export default RadioCard

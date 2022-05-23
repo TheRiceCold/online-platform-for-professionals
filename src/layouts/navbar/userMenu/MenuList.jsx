@@ -28,8 +28,8 @@ function MenuList() {
           openCalendlyToken: calendlyTokenModal.onOpen,
           openFieldSettings: fieldSettingsModal.onOpen,
         })
-          .map((item, i) => ( 
-            <Fragment key={i}> 
+          .map((item, idx) => ( 
+            <Fragment key={idx}> 
               {item === "divider" ?
                 <MenuDivider/> :
                 <MenuItem onClick={item.handleOnClick}>

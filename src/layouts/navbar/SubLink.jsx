@@ -1,7 +1,5 @@
 import {
-  Icon,
-  Flex,
-  Link, Text,
+  Icon, Flex, Link, Text,
 } from "@chakra-ui/react"
 import {ChevronRightIcon} from "@chakra-ui/icons"
 

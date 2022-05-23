@@ -2,7 +2,7 @@ import styles from "@/styles/Bookings.module.sass"
 
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
-import Layout from "@/layouts/bookings/Layout"
+import Layout from "@/professionals_layout/bookings/Layout"
 
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"

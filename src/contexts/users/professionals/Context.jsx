@@ -1,6 +1,5 @@
 import {navLinks} from "./navLinks"
 import {createContext} from "react"
-import {useRouter} from "next/router"
 import {useAuth} from "@/auth_context"
 import {userMenuItems} from "./userMenuItems"
 import {zodResolver} from "@hookform/resolvers/zod"
@@ -19,12 +18,10 @@ const ProfessionalsContext = createContext()
 const ProfessionalsProvider = ({children}) => {
   const {Provider} = ProfessionalsContext
   const {user, logout} = useAuth()
-  const router = useRouter()
-
   const call = new Actions(user)
 
   const menuItems = modals => 
-    userMenuItems(user, router, logout, modals)
+    userMenuItems(modals, logout)
 
   return (
     <Provider value={{
