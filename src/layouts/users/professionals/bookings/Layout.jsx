@@ -1,4 +1,4 @@
-import {HStack} from "@chakra-ui/react"
+import {HStack, Heading} from "@chakra-ui/react"
 import MoonLoader from "react-spinners/MoonLoader"
 import RadioCard from "@/components/forms/radios/RadioCard"
 
@@ -12,9 +12,9 @@ function BookingsLayout() {
   const options = ["all", "active", "canceled"]
   const {getFilterBookings} = useBookings()
 
-  const {data, isLoading} = useQuery(
+  const {data, isLoading, error} = useQuery(
     [`${filter}_bookings`, filter], 
-    getFilterBookings, { }
+    getFilterBookings, { retry: false }
   )
 
   const {getRootProps, getRadioProps} = useRadioGroup({
@@ -28,16 +28,20 @@ function BookingsLayout() {
   const group = getRootProps()
 
   return (isLoading ? 
-    <MoonLoader color="white"/> :
-    <HStack {...group} mt={8}>
-      {options.map((value) => {
-        const radio = getRadioProps({ value })
-        return (
-          <RadioCard key={value} {...radio}>
-            {value}
-          </RadioCard>
-        )
-      })}
+    <MoonLoader color="white"/> 
+    : error.response.status === 401 ? 
+      <Heading mt={8}>
+        Unauthorized, please register your calendly token
+      </Heading> 
+      : <HStack {...group} mt={8}>
+        {options.map(value => {
+          const radio = getRadioProps({ value })
+          return (
+            <RadioCard key={value} {...radio}>
+              {value}
+            </RadioCard>
+          )
+        })}
     </HStack>
   )}
 
