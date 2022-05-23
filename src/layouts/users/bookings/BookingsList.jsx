@@ -1,18 +1,9 @@
-import styles from '@/styles/Bookings.module.sass';
 import {
 	upcomingBookings,
 	finishedBookings,
 	canceledBookings,
 } from '@/data/mock_bookings';
-import {
-	TableContainer,
-	Table,
-	Thead,
-	Tr,
-	Th,
-	Tbody,
-	Tfoot,
-} from '@chakra-ui/react';
+import { TableContainer, Table, Thead, Tr, Th, Tbody } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import Booking from './Booking';
 import CancelModal from './CancelModal';
@@ -50,9 +41,6 @@ const BookingsList = ({ tabStatus }) => {
 		}
 	}, [tabStatus]);
 
-	// const bookingStatus = () => {
-	// 	switch(tabStatus)
-	// }
 	return (
 		<TableContainer>
 			<Table variant="simple" size="lg">
