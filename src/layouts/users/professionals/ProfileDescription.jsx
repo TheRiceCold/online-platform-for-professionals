@@ -1,4 +1,4 @@
-import styles from "@/styles/Components.module.sass"
+import styles from "@/styles/users/Professionals.module.sass"
 
 import {
 	Avatar,

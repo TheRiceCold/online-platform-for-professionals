@@ -20,6 +20,30 @@ section.layout
     overflow: auto
     border: darken(#14a76c, 10%) solid 1px
 
+    // ProfessionalDescription
+    .description 
+      cursor: pointer
+      width: 100%
+      display: flex
+      padding: 0.2rem 0.8rem
+      display: flex
+      border: darken($primary, 10%) solid 1px
+      justify-content: space-between
+      align-items: center
+      .userInfo
+        display: flex
+        width: 75%
+        align-items: center
+      .metrics
+        width: 20%
+        .rating
+          display: flex
+    .field
+          color: $primary
+    .name
+      color: $secondary
+      font-weight: bold
+
   .overview_content
     width: 50%
     padding: 1em
