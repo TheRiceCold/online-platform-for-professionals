@@ -1,4 +1,4 @@
-import Modal from "@/components/over/Modal"
+import Modal from "@/components/overlay/Modal"
 
 function SubscribersModal({...props}) {
 

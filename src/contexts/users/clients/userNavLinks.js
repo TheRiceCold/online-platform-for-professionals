@@ -1,4 +1,6 @@
-const userNavLinks = id => {
+const userNavLinks = (id, modals)=> {
+  console.log(modals)
+
   const prefixPath = to => `/clients/${id}/${to}`
   return [
     { label: "Profile", href: prefixPath("") },

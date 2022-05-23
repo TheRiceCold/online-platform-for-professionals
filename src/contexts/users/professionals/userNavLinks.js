@@ -1,16 +1,18 @@
 function userNavLinks(id, modals) {
   const prefixPath = to => `/professionals/${id}/${to}`
+  
+  const {clienteleModal, subscribersModal} = modals
 
   return [
     { label: "Profile", href: prefixPath("") }, 
     { label: "Clients", children: [
       { 
         label: "Clientele",
-        href: prefixPath("cliente")
+        onClick: clienteleModal.onOpen,
       },
       { 
         label: "Subscribers",
-        href: ""
+        onClick: subscribersModal.onOpen
       },
     ]}, 
     { label: "Professionals", href: "/professionals" }, 
