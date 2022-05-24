@@ -1,68 +1,66 @@
-import {createContext} from "react"
-import {useAuth} from "@/auth_context"
-import {userNavLinks} from "./userNavLinks"
-import {userMenuItems} from "./userMenuItems"
-import {zodResolver} from "@hookform/resolvers/zod"
+import { createContext } from 'react';
+import { useAuth } from '@/auth_context';
+import { userNavLinks } from './userNavLinks';
+import { userMenuItems } from './userMenuItems';
+import { zodResolver } from '@hookform/resolvers/zod';
 
-import Schema from "./Schema"
-import Inputs from "./Inputs"
+import Schema from './Schema';
+import Inputs from './Inputs';
 
 // Actions
-import Actions from "./Actions"
-import ServicesProvider from "./services/Context"
-import CalendlyTokenProvider from "./calendly_token/Context"
-import WorkPortfoliosProvider from "./work_portfolios/Context"
+import Actions from './Actions';
+import ServicesProvider from './services/Context';
+import CalendlyTokenProvider from './calendly_token/Context';
+import WorkPortfoliosProvider from './work_portfolios/Context';
 
-const ProfessionalsContext = createContext()
+const ProfessionalsContext = createContext();
 
-const ProfessionalsProvider = ({children}) => {
-  const {Provider} = ProfessionalsContext
-  const {user, logout} = useAuth()
-  const call = new Actions(user)
+const ProfessionalsProvider = ({ children }) => {
+	const { Provider } = ProfessionalsContext;
+	const { user, logout } = useAuth();
+	const call = new Actions(user);
 
-  const menuItems = modals => 
-    userMenuItems(modals, logout)
+	const menuItems = (modals) => userMenuItems(modals, logout);
 
-  const navLinks = modals => 
-    userNavLinks(user.professionalId, modals) 
+	const navLinks = (modals) => userNavLinks(user.professionalId, modals);
 
-  return (
-    <Provider value={{
-      navLinks,
-      menuItems,
+	return (
+		<Provider
+			value={{
+				navLinks,
+				menuItems,
 
-      // Form
-      inputs: Inputs, 
-      resolver: zodResolver(Schema),
+				// Form
+				inputs: Inputs,
+				resolver: zodResolver(Schema),
 
-      // User Details
-      getLocation: call.getLocation,
-      getContactInfo: call.getContactInfo,
+				// User Details
+				getLocation: call.getLocation,
+				getContactInfo: call.getContactInfo,
 
-      // User Professional
-      updateUserProfessional: call.updateUser,
+				// User Professional
+				updateUserProfessional: call.updateUser,
 
-      // Professionals
-      getProfessionals: call.getAll,
-      getProfessional: call.getById,
-      getUserProfessional: call.getUser,
+				// Professionals
+				getProfessionals: call.getAll,
+				getProfessional: call.getById,
+				getUserProfessional: call.getUser,
 
-      createProfessional: call.create,
-      updateProfessional: call.update,
-      deleteProfessional: call.delete,
-    }}>
-      <CalendlyTokenProvider>
-        <ServicesProvider>
-          <WorkPortfoliosProvider>
-            {children}
-          </WorkPortfoliosProvider>
-        </ServicesProvider>
-      </CalendlyTokenProvider>
-    </Provider>
-  )
-}
+				// Search
+				// getSearchedProfessional: call.search,
 
-export {
-  ProfessionalsContext,
-  ProfessionalsProvider, 
-}
+				createProfessional: call.create,
+				updateProfessional: call.update,
+				deleteProfessional: call.delete,
+			}}
+		>
+			<CalendlyTokenProvider>
+				<ServicesProvider>
+					<WorkPortfoliosProvider>{children}</WorkPortfoliosProvider>
+				</ServicesProvider>
+			</CalendlyTokenProvider>
+		</Provider>
+	);
+};
+
+export { ProfessionalsContext, ProfessionalsProvider };
