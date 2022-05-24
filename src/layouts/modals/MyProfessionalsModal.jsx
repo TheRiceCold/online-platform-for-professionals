@@ -1,5 +1,4 @@
 import Modal from "@/components/overlay/Modal"
-import AlertDialog from "@/components/overlay/AlertDialog"
 import UserConnectionList from "../connections/UserConnectionList"
 
 import {useQuery} from "react-query"
@@ -10,25 +9,21 @@ function MyProfessionalsModal({...props}) {
   const deleteAlertDialog = useDisclosure()
   const {getMyProfessionals} = useConnections()
 
-  useQuery("my_professionals", getMyProfessionals)
-
-  const handleDelete = () => {
-    console.log("delete connection")
-  }
+  const {
+    data, 
+    isLoading
+  } = useQuery(
+    "my_professionals", 
+    getMyProfessionals
+  )
 
   return (
     <Modal {...props} header="My Professionals">
-      <UserConnectionList deleteAlertDialog={deleteAlertDialog}/>
-
-      {/* Delete Connection Alert */}
-      <AlertDialog 
-        isCentered
-        buttonColor="red"
-        buttonLabel="Delete"
-        {...deleteAlertDialog}
-        header="Delete Clientele?"
-        buttonClick={handleDelete}
-        label="Are you sure? You can't undo this action afterwards."
+      <UserConnectionList 
+        query="professional"
+        connections={data}
+        deleteAlertDialog={deleteAlertDialog}
+        isLoading={isLoading}
       />
     </Modal>
   )

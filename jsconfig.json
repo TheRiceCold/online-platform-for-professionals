@@ -33,7 +33,7 @@
       "@/users_layout/*": ["src/layouts/users/*"],
 
       "_comment": "BOOKINGS SHORTCUT",
-      "@/bookings_layout": ["src/layouts/users/professionals/bookings/Layout"],
+      "@/bookings_layout": ["src/layouts/users/bookings/Layout"],
 
       "_comment": "NAVBAR SHORTCUT",
       "@/navbar": ["src/layouts/navbar/Navbar"] 
