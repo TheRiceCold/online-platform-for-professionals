@@ -5,13 +5,13 @@ import {
 	Modal,
 	Stack,
 	Radio,
-	ModalOverlay,
-	ModalContent,
+	ModalBody,
+	RadioGroup,
 	ModalHeader,
 	ModalFooter,
-	ModalBody,
+	ModalContent,
+	ModalOverlay,
 	ModalCloseButton,
-	RadioGroup,
 } from "@chakra-ui/react"
 import Button from "@/components/Button"
 
@@ -35,8 +35,8 @@ const FinishModal = ({ tabStatus }) => {
 	}
 
 	const resetState = () => {
-		setShowedUp('true')
 		onClose()
+		setShowedUp('true')
 	}
 
 	return (
@@ -80,7 +80,7 @@ const FinishModal = ({ tabStatus }) => {
 				</ModalContent>
 			</Modal>
 		</>
-	);
-};
+	)
+}
 
-export default FinishModal;
+export default FinishModal

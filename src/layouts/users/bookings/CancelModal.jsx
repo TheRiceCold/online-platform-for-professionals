@@ -61,8 +61,8 @@ const CancelModal = () => {
 	}
 
 	const resetState = () => {
-		setReason('');
-		onClose();
+		setReason('')
+		onClose()
 	}
 
 	return (
@@ -72,7 +72,9 @@ const CancelModal = () => {
         variant="delete"
 				leftIcon={<DeleteIcon />}
 			>
-				<Text fontSize="sm">Cancel Appointment</Text>
+				<Text fontSize="sm">
+          Cancel Appointment
+        </Text>
 			</Button>
 			<Modal isOpen={isOpen} onClose={resetState} isCentered>
 				<ModalOverlay />

@@ -76,7 +76,7 @@ const BookingsList = ({tabStatus, setBookingLinks}) => {
           {!isLoading && bookingList?.map((booking, idx) => (
 						<Booking
               key={idx}
-              booking={booking}
+              booking={booking?.attributes}
               actionBtn={actionBtn}
             />
           ))}
