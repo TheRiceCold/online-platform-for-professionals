@@ -12,10 +12,7 @@ import {useUsers} from "@/users_context"
 function Professional() {
   const router = useRouter()
   const {userFullname, userRole} = useAuth()
-  const {navModals} = useUsers("professional")
-
-  if (userRole !== "professional")
-    router.push("/")
+  const {navModals} = useUsers(userRole)
 
   const id = router.query['professional_id']
 
@@ -24,14 +21,15 @@ function Professional() {
       <Head>
         <title>{userFullname} | Professional</title>
       </Head>
-      { userRole === "professional" && <ProfileLayout id={id}/> }
+      <ProfileLayout id={id}/>
 
-      {navModals.clienteleModal.isOpen && 
-        <ClienteleModal {...modals.clienteleModal}/>
-      }
-      {navModals.subscribersModal.isOpen && 
-        <SubscribersModal {...modals.subscribersModal}/>
-      }
+      {userRole === "professional" && (
+        navModals.clienteleModal.isOpen ?
+        <ClienteleModal {...modals.clienteleModal}/> :
+        navModals.subscribersModal.isOpen ?
+          <SubscribersModal {...modals.subscribersModal}/> :
+            null
+      )}
     </main>
   )
 }

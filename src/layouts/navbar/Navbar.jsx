@@ -21,7 +21,6 @@ import {useColorMode, useDisclosure} from "@chakra-ui/react"
 function Navbar(props) {
   const {
     links, 
-    modals,
     styles, 
     withSearch, 
   } = props
@@ -55,7 +54,7 @@ function Navbar(props) {
         </NextLink>
         {withSearch && <SearchBar colorMode={colorMode}/>}
         <Flex alignItems="center">
-          <Links modals={modals} links={links}/>
+          <Links links={links}/>
           <Stack direction="row" spacing={6}>
             <Button onClick={toggleColorMode} bg="none">
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}

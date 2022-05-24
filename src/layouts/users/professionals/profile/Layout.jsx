@@ -16,8 +16,9 @@ import { capitalize } from "@/utils/stringHelpers"
 
 function ProfessionalLayout({id}) {
   const {user} = useAuth()
-  const {userImage} = useAuth() // Temporary Image
-  const {navLinks, getProfessional} = useUsers("professional")
+  const {userImage, userRole} = useAuth() // Temporary Image
+  const {navLinks} = useUsers(userRole)
+  const {getProfessional} = useUsers("professional")
 
   const {data, isError, isLoading} = useQuery(
     ["professional", id],
@@ -39,9 +40,8 @@ function ProfessionalLayout({id}) {
   const servicesSize = workPortfolios?.length
   const recentService = !!servicesSize && services[servicesSize]
 
-
   {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
-  return (!user.professionalId ? <RegisterModal/> :
+  return (!user.professionalId && userRole === "professional" ? <RegisterModal/> :
     <>
       <Navbar styles={styles} links={navLinks}/>
       {isError ? <Heading>User not found</Heading>
