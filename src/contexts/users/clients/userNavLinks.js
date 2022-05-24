@@ -1,21 +1,25 @@
-const userNavLinks = (id, modals)=> {
-  console.log(modals)
+function userNavLinks(id, modals) {
+	const prefixPath = (to) => `/clients/${id}/${to}`;
 
-  const prefixPath = to => `/clients/${id}/${to}`
-  return [
-    { label: "Profile", href: prefixPath("") },
-    { label: "Connections", children: [
-      { 
-        label: "My Professionals",
-        href: ""
-      },
-      { 
-        label: "Subscriptions",
-        href: prefixPath("cliente")
-      },
-    ]}, 
-    { label: "Find Professionals", href: "/professionals" },
-  ]
+	const { subscriptionsModal, myProfessionalsModal } = modals;
+
+	return [
+		{ label: 'Profile', href: prefixPath('') },
+		{
+			label: 'Connections',
+			children: [
+				{
+					label: 'My Professionals',
+					onClick: myProfessionalsModal.onOpen,
+				},
+				{
+					label: 'Subscriptions',
+					onClick: subscriptionsModal.onOpen,
+				},
+			],
+		},
+		{ label: 'Find Professionals', href: '/professionals' },
+	];
 }
 
-export {userNavLinks}
+export { userNavLinks };
