@@ -1,16 +1,21 @@
-import styles from '@/styles/Auth.module.sass';
+import styles from "@/styles/Auth.module.sass"
 
-import Head from 'next/head'
-import AuthLayout from '@/layouts/auth/Layout'
+import Head from "next/head"
+import AuthLayout from "@/layouts/auth/Layout"
 
-import {useState} from 'react'
-import {useAuth} from '@/auth_context'
-import {useMutation} from 'react-query'
-import {useStorage} from '@/hooks/useStorage'
+import {useState} from "react"
+import {useAuth} from "@/auth_context"
+import {useMutation} from "react-query"
+import {useStorage} from "@/hooks/useStorage"
 
 function Login() {
+	const { 
+    login, 
+    dispatch, 
+    loginInputs, 
+    LoginStatuses 
+  } = useAuth()
 	const storage = useStorage();
-	const { login, dispatch, loginInputs, LoginStatuses } = useAuth()
 	const [alerts, setAlerts] = useState();
 	const status = new LoginStatuses(storage, dispatch, setAlerts)
 
