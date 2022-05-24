@@ -4,6 +4,7 @@ import {createContext} from "react"
 import {useAuth} from "@/auth_context"
 import {userNavLinks} from "./userNavLinks"
 import {userMenuItems} from "./userMenuItems"
+import {useDisclosure} from "@chakra-ui/react"
 
 const ClientsContext = createContext()
 
@@ -15,14 +16,20 @@ const ClientsProvider = ({ children }) => {
 	const menuItems = settingsModal =>
 		userMenuItems(settingsModal, logout)
 
-  const navLinks = modals => 
-    userNavLinks(user.clientId, modals) 
+
+  const navModals = {
+    subscriptions: useDisclosure(),
+    myProfessionals: useDisclosure()
+  }
+
+  const navLinks = userNavLinks(user.clientId, navModals) 
 
 	return (
 		<Provider
 			value={{
-				menuItems,
 				navLinks,
+				menuItems,
+        navModals,
 
 				getClients: call.getAll,
 				getClient: call.getById,

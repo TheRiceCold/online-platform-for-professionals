@@ -2,7 +2,7 @@ import styles from "@/styles/Admin.module.sass"
 
 import Head from "next/head"
 import Navbar from "@/layouts/navbar/Navbar"
-import AdminLayout from "@/layouts/admin/Layout"
+import AdminLayout from "@/layouts/users/admin/Layout"
 
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"

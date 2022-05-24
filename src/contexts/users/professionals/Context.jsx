@@ -2,6 +2,7 @@ import {createContext} from "react"
 import {useAuth} from "@/auth_context"
 import {userNavLinks} from "./userNavLinks"
 import {userMenuItems} from "./userMenuItems"
+import {useDisclosure} from "@chakra-ui/react"
 import {zodResolver} from "@hookform/resolvers/zod"
 
 import Schema from "./Schema"
@@ -23,13 +24,18 @@ const ProfessionalsProvider = ({children}) => {
   const menuItems = modals => 
     userMenuItems(modals, logout)
 
-  const navLinks = modals => 
-    userNavLinks(user.professionalId, modals) 
+  const navModals = {
+    clienteleModal: useDisclosure(),
+    subscribersModal: useDisclosure()
+  }
+
+  const navLinks = userNavLinks(user.professionalId, navModals) 
 
   return (
     <Provider value={{
       navLinks,
       menuItems,
+      navModals,
 
       // Form
       inputs: Inputs, 

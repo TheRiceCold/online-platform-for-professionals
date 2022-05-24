@@ -7,32 +7,29 @@ import ProfileLayout from "@/professionals_layout/profile/Layout"
 
 import {useRouter} from "next/router"
 import {useAuth} from "@/auth_context"
-import {useDisclosure} from "@chakra-ui/react"
+import {useUsers} from "@/users_context"
 
 function Professional() {
   const router = useRouter()
   const {userFullname, userRole} = useAuth()
+  const {navModals} = useUsers("professional")
 
   if (userRole !== "professional")
     router.push("/")
 
-  const modals = {
-    clienteleModal: useDisclosure(),
-    subscribersModal: useDisclosure()
-  }
+  const id = router.query['professional_id']
 
   return (
     <main className={styles.main}>
       <Head>
         <title>{userFullname} | Professional</title>
       </Head>
-      { userRole === "professional" && 
-        <ProfileLayout modals={modals}/>
-      }
-      {modals && modals.clienteleModal.isOpen && 
+      { userRole === "professional" && <ProfileLayout id={id}/> }
+
+      {navModals.clienteleModal.isOpen && 
         <ClienteleModal {...modals.clienteleModal}/>
       }
-      {modals && modals.subscribersModal.isOpen && 
+      {navModals.subscribersModal.isOpen && 
         <SubscribersModal {...modals.subscribersModal}/>
       }
     </main>
