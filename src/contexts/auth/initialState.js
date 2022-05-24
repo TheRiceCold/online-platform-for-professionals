@@ -7,6 +7,9 @@ export {initialState}
 const storage = useStorage()
 const secret = process.env.NEXT_PUBLIC_SECRET
 
+const host = process.env.NEXT_PUBLIC_API
+console.log(secret, host)
+
 const storedAuthData = CryptoAES.decrypt(
   storage.getItem({
     type: "session",
