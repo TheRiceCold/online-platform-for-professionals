@@ -20,19 +20,22 @@ import {useBookings} from "@/bookings_context"
 import {useDisclosure} from "@chakra-ui/react"
 import { useMutation } from "react-query"
 
-const FinishModal = ({ tabStatus }) => {
+const FinishModal = ({ tabStatus, email }) => {
   const {createBooking} = useBookings()
 
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	// TODO client_showed_up value in request body
-	const [showedUp, setShowedUp] = useState('true')
+	const [showedUp, setShowedUp] = useState("true")
 
   const createMutation = useMutation(createBooking)
 
 	const setBookingStatus = () => {
 		// TODO post /bookings to create client as show or no show
-    createMutation.mutate(showedUp)
+    const data = showedUp === "true" ? true : false
+    createMutation.mutate({showedUp: data, email})
 	}
+
+  console.log(email)
 
 	const resetState = () => {
 		onClose()

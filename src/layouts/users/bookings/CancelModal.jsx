@@ -18,18 +18,17 @@ import {DeleteIcon} from '@chakra-ui/icons'
 import {useState} from "react"
 import {useQuery} from "react-query"
 import {useUsers} from "@/users_context"
+import {useBookings} from "@/bookings_context"
 import {useDisclosure} from "@chakra-ui/react"
 import {useCalendlyToken} from "@/calendly_token_context"
 
-const CancelModal = () => {
+const CancelModal = ({uuid}) => {
 	const {isOpen, onOpen, onClose} = useDisclosure()
 	// TODO client_showed_up value in request body
 	const [reason, setReason] = useState('')
 
-  const {
-    postCancelEvent,
-    getCalendlyToken,
-  } = useCalendlyToken()
+  const {postCancelEvent} = useBookings()
+  const {getCalendlyToken} = useCalendlyToken()
   const {getUserProfessional} = useUsers("professional")
 	const handleInputChange = e => setReason(e.target.value)
 
@@ -49,7 +48,7 @@ const CancelModal = () => {
     }
   )
 
-	const cancelEvent = () => {
+	const cancelEvent = async () => {
 		// TODO call calendly api to cancel event
 		// BASE_URL = 'https://api.calendly.com'
 		// endpoint: "/scheduled_events/#{event_uuid}/cancellation",
@@ -57,7 +56,7 @@ const CancelModal = () => {
 		// url: "#{BASE_URL}#{endpoint}",
 		// authorization: calendly token,
 		// payload: { "reason": cancellation_reason }.to_json)
-    postCancelEvent(calendlyToken, reason)
+    await postCancelEvent(uuid, calendlyToken, reason)
 	}
 
 	const resetState = () => {

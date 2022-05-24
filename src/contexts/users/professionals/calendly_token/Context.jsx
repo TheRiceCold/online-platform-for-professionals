@@ -23,8 +23,6 @@ const CalendlyTokenProvider = ({children}) => {
       updateCalendlyToken: call.update,
       deleteCalendlyToken: call.delete,
 
-      // events
-      postCancelEvent: call.cancel,
     }}>
       {children}
     </Provider>

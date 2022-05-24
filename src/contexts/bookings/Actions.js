@@ -21,9 +21,12 @@ function Actions(user) {
     return await Axios.get(url, config)
   }
 
-  this.create = async data => { 
-    const url = `professionals/${user.professionalId}/bookings?`
-    return await Axios.post(url, data, config)
+  this.create = async ({showedUp, email}) => { 
+    const url = `professionals/${user.professionalId}/bookings?invitee_email=${email}`
+    return await Axios.post(url, {
+      client_showed_up: showedUp,
+      finished: true
+    }, config)
   }
 
   this.update = async (id, data) => {
@@ -34,6 +37,17 @@ function Actions(user) {
   this.delete = async id => {
     const url = `professionals/${user.professionalId}/bookings/${id}`
     return await Axios.delete(url, config)
+  }
+
+  this.cancel = async (uuid, calendlyToken, reason) => {
+    const baseUrl = "https://api.calendly.com"
+    return await Axios.post(
+      `${baseUrl}/scheduled_events/${uuid}/cancellation`,
+      { reason },
+      { headers: 
+        { Authorization: `Bearer ${calendlyToken}`}
+      }
+    )
   }
 }
 

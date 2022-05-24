@@ -19,7 +19,10 @@ const BookingsProvider = ({children}) => {
 
       createBooking: call.create,
       updateBooking: call.update,
-      deleteBooking: call.delete
+      deleteBooking: call.delete,
+
+      // events
+      postCancelEvent: call.cancel,
     }}>
       {children}
     </Provider>

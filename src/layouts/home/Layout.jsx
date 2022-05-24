@@ -45,9 +45,8 @@ function HomeLayout() {
             </Text>
           </Heading>
           <Text color={'gray.500'} maxW={'3xl'}>
-            Never miss a meeting. Never be late for one too. Keep track of your
-            meetings and receive smart reminders in appropriate times. Read your
-            smart “Daily Agenda” every morning.
+            Finding professionals has never been this easy. Search for the type of
+            professional you need and book an appointment with the one you prefer the most!          
           </Text>
           <Button 
             variant="primary"

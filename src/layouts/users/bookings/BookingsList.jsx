@@ -5,19 +5,11 @@ import {
   TableContainer, 
 } from '@chakra-ui/react'
 import Booking from "./Booking"
-import CancelModal from "./CancelModal"
-import FinishModal from "./FinishModal"
-import ReviewModal from "./ReviewModal"
 
 import {useQueries} from "react-query"
-import {useAuth} from "@/auth_context"
-import {useEffect, useState} from "react"
 import {useBookings} from "@/bookings_context"
 
 const BookingsList = ({tabStatus, setBookingLinks}) => {
-  const {userRole} = useAuth()
-	const [actionBtn, setActionBtn] = useState(<CancelModal />)
-
   const {getFilterBookings} = useBookings()
   const [
     {data: bookingList, isLoading},
@@ -36,28 +28,6 @@ const BookingsList = ({tabStatus, setBookingLinks}) => {
     }
   ])
 
-	useEffect(() => {
-		switch (tabStatus) {
-			case 'active':
-				setActionBtn(<CancelModal />)
-				break;
-			case 'pending':
-				setActionBtn(<FinishModal tabStatus={tabStatus} />)
-				break;
-			case 'finished':
-
-				if (userRole === 'professional') {
-					setActionBtn(<FinishModal tabStatus={tabStatus} />)
-				} else if (userRole === 'client') {
-					setActionBtn(<ReviewModal tabStatus={tabStatus} />)
-				}
-				break;
-			case 'canceled':
-				setActionBtn('')
-				break;
-		}
-	}, [tabStatus])
-
 	return (
 		<TableContainer>
 			<Table variant="simple" size="lg">
@@ -68,18 +38,22 @@ const BookingsList = ({tabStatus, setBookingLinks}) => {
 						<Th>Event Type</Th>
 						<Th>Client Name</Th>
 						<Th>Client Email</Th>
+						<Th>Type</Th>
 						<Th>Location</Th>
 						{tabStatus === 'canceled' ? '' : <Th>Actions</Th>}
 					</Tr>
 				</Thead>
 				<Tbody>
-          {!isLoading && bookingList?.map((booking, idx) => (
-						<Booking
-              key={idx}
-              booking={booking?.attributes}
-              actionBtn={actionBtn}
-            />
-          ))}
+          {!isLoading && bookingList?.map(
+            (booking, idx) => (
+              <Booking
+                key={idx}
+                uuid={booking?.id}
+                tabStatus={tabStatus}
+                booking={booking?.attributes}
+              />
+            )
+          )}
 				</Tbody>
 			</Table>
 		</TableContainer>
