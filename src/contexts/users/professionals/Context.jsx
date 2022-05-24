@@ -25,8 +25,8 @@ const ProfessionalsProvider = ({children}) => {
     userMenuItems(modals, logout)
 
   const navModals = {
-    clienteleModal: useDisclosure(),
-    subscribersModal: useDisclosure()
+    clientele: useDisclosure(),
+    subscribers: useDisclosure()
   }
 
   const navLinks = userNavLinks(user.professionalId, navModals) 

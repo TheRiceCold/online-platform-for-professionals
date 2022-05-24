@@ -1,9 +1,9 @@
 import styles from "@/styles/users/Profile.module.sass"
 
 import Head from "next/head"
+import Layout from "@/professionals_layout/profile/Layout"
 import ClienteleModal from "@/layouts/modals/ClienteleModal"
 import SubscribersModal from "@/layouts/modals/SubscribersModal"
-import ProfileLayout from "@/professionals_layout/profile/Layout"
 
 import {useRouter} from "next/router"
 import {useAuth} from "@/auth_context"
@@ -21,13 +21,13 @@ function Professional() {
       <Head>
         <title>{userFullname} | Professional</title>
       </Head>
-      <ProfileLayout id={id}/>
+      <Layout id={id}/>
 
       {userRole === "professional" && (
-        navModals.clienteleModal.isOpen ?
-        <ClienteleModal {...modals.clienteleModal}/> :
-        navModals.subscribersModal.isOpen ?
-          <SubscribersModal {...modals.subscribersModal}/> :
+        navModals.clientele.isOpen ?
+        <ClienteleModal {...navModals.clientele}/> :
+        navModals.subscribers.isOpen ?
+          <SubscribersModal {...navModals.subscribers}/> :
             null
       )}
     </main>

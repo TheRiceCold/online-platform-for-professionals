@@ -1,5 +1,4 @@
-const userNavLinks = (id, modals)=> {
-  console.log(modals)
+const userNavLinks = (id, modal)=> {
 
   const prefixPath = to => `/clients/${id}/${to}`
   return [
@@ -7,11 +6,11 @@ const userNavLinks = (id, modals)=> {
     { label: "Connections", children: [
       { 
         label: "My Professionals",
-        href: ""
+        onClick: modal.myProfessionals.onOpen
       },
       { 
         label: "Subscriptions",
-        href: prefixPath("cliente")
+        onClick: modal.subscriptions.onOpen
       },
     ]}, 
     { label: "Find Professionals", href: "/professionals" },
