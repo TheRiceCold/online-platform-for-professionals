@@ -5,11 +5,13 @@ import {
   useMutation,
   useQueryClient
 } from "react-query"
+import {useState} from "react"
 import {useForm} from "react-hook-form"
 import {useServices} from "@/services_context"
 import {capitalize} from "@/utils/stringHelpers"
 
 function FormModal(props) {
+  const [alerts, setAlerts] = useState()
   const {action, selectedId, setAlert} = props
   const header = capitalize(`${action} Service`)
 
@@ -33,6 +35,16 @@ function FormModal(props) {
         const message = action === "update" ? 
           "Update Successful" : "New service has been added"
         setAlert({ message, status: "success" })
+      },
+      onError: error => {
+        const {status, data} = error?.response
+        const messages = data?.errors.map(error => error.title)
+
+        setAlerts(messages.map(
+          message => {
+            return {status: "error", message}
+          })
+        )
       }
     })
 
@@ -43,7 +55,11 @@ function FormModal(props) {
   }
  
   return (
-    <Modal {...props} header={header}>
+    <Modal 
+      {...props} 
+      alerts={alerts}
+      header={header}
+    >
       <Form
         inputs={inputs}
         submitValue="Save"

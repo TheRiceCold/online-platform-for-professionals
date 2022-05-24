@@ -36,12 +36,9 @@ const RegisterModal = () => {
       const {status, data} = error?.response
       const messages = data?.errors.map(error => error.title)
 
-      console.log(error)
-
-      if (status === 422)
-        setAlerts(messages.map(
-          message => {
-            return {status: "error", message}
+      setAlerts(messages.map(
+        message => {
+          return {status: "error", message}
         })
       )
     }

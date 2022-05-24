@@ -14,6 +14,7 @@ const userNavLinks = (id, modal)=> {
       },
     ]}, 
     { label: "Find Professionals", href: "/professionals" },
+    { label: "Bookings", href: prefixPath("bookings") }, 
   ]
 }
 

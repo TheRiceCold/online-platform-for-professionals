@@ -8,15 +8,15 @@ import {useRouter} from "next/router"
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"
 
-function ProfessionalBookings() {
-  const router = useRouter()
+function ClientBookings() {
 	const {userRole, userFullname} = useAuth()
-	const {navLinks} = useUsers("professional")
+	const {navLinks} = useUsers("client")
+  const router = useRouter()
 
-  if (userRole !== "professional")
+  if (userRole !== "client")
     router.push("/")
   
-	return (userRole === "professional" &&
+	return (userRole === "client" &&
 		<main className={styles.main}>
 			<Head>
 				<title>{userFullname} | Bookings</title>
@@ -27,4 +27,4 @@ function ProfessionalBookings() {
 	)
 }
 
-export default ProfessionalBookings
+export default ClientBookings

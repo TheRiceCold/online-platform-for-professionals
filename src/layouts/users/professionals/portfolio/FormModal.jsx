@@ -5,11 +5,13 @@ import {
   useMutation,
   useQueryClient
 } from "react-query"
+import {useState} from "react"
 import {useForm} from "react-hook-form"
 import {capitalize} from "@/utils/stringHelpers"
 import {useWorkPortfolios} from "@/work_portfolios_context"
 
 function FormModal(props) {
+  const [alerts, setAlerts] = useState()
   const {action, selectedId, setAlert} = props
   const header = capitalize(`${action} Portfolio`)
 
@@ -31,6 +33,16 @@ function FormModal(props) {
         const message = action === "update" ? 
           "Update Successful" : "New portfolio has been added"
         setAlert({ message, status: "success" })
+      },
+      onError: error => {
+        const {status, data} = error?.response
+        const messages = data?.errors.map(error => error.title)
+
+        setAlerts(messages.map(
+          message => {
+            return {status: "error", message}
+          })
+        )
       }
     })
 
@@ -41,7 +53,11 @@ function FormModal(props) {
   }
 
   return (
-    <Modal {...props} header={header}>
+    <Modal 
+      {...props} 
+      alerts={alerts}
+      header={header}
+    >
       <Form
         inputs={inputs}
         submitValue="Save"
