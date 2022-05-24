@@ -7,18 +7,22 @@ const Thead = ({table, isSort}) => (
     boxShadow="base" 
   >
     {
-      table.headerGroups.map(hGroup => {
+      table.headerGroups.map((hGroup, i) => {
         const hGroupProps = hGroup.getHeaderGroupProps()
         return (
-          <Tr {...hGroupProps}>
+          <Tr key={i} {...hGroupProps}>
             {
-              hGroup.headers.map(col => {
+              hGroup.headers.map((col, j) => {
                 const sortToggle = col.getSortByToggleProps()
                 const headerProps = col.getHeaderProps(sortToggle)
                 const sortLabel = col.isSorted ? (col.isSortedDesc ? " ▲" : " ▼") : ""
 
                 return (
-                  <Th {...headerProps} textAlign="center">
+                  <Th 
+                    key={i+j}
+                    {...headerProps} 
+                    textAlign="center"
+                  >
                     {col.render("Header")}
                     {isSort && <span>{sortLabel}</span>}
                   </Th>

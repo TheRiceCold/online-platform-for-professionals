@@ -7,17 +7,17 @@ const Tbody = ({table, isPaginated}) => {
   return (
     <ChakraTbody {...getTableBodyProps()}>
       {
-        rows.map(row => {
+        rows.map((row, i) => {
           prepareRow(row)
           const rowProps = row.getRowProps()
           return ( 
-            <Tr {...rowProps}>
+            <Tr key={i} {...rowProps}>
               {
-                row.cells.map(cell => {
+                row.cells.map((cell, j) => {
                   const cellProps = cell.getCellProps()
                   const cellRender = cell.render("Cell")
                   return ( 
-                    <Td {...cellProps} textAlign="center">
+                    <Td key={i+j}{...cellProps} textAlign="center">
                       {cellRender}
                     </Td> 
                   )

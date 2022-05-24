@@ -19,4 +19,7 @@ const Checkbox = forwardRef(
   }
 )
 
+// fix eslint missing display name error 
+Checkbox.displayName = "Checkbox"
+
 export default Checkbox
