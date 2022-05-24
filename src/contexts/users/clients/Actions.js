@@ -12,9 +12,8 @@ function Actions(user) {
 
   this.getById = async ({queryKey}) => {
     const [_, id] = queryKey
-    await Axios.get(path+id, config)
+    return await Axios.get(path+id, config)
   }
-
 
   this.delete = async id => 
     await Axios.delete(path+id, config)

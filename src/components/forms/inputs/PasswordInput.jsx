@@ -21,8 +21,8 @@ function PasswordInput(props) {
       <Input 
         id={id}
         type={type}
-        {...props.register(id)}
         placeholder={label}
+        {...props.register(id)}
         autoComplete={autoComplete}
       />
       <InputRightElement width="4em">

@@ -1,13 +1,13 @@
 import styles from "@/styles/users/Professionals.module.sass"
 
-import {Stack} from "@chakra-ui/react"
 import Button from "@/components/Button"
+import {Stack, Tooltip} from "@chakra-ui/react"
 import CalendlyButton from "@/components/booking/CalendlyButton"
 
 import {useAuth} from "@/auth_context"
-import {useMutation} from "react-query"
 import {useToast} from "@chakra-ui/react"
 import {useState, useEffect} from "react"
+import {useMutation, useQuery} from "react-query"
 import {useConnections} from "@/connections_context"
 
 function ActionButtons({selectedId}) {
@@ -18,7 +18,19 @@ function ActionButtons({selectedId}) {
     userAttributes
   } = useAuth()
   const [toasts, setToasts] = useState()
-  const {createConnection} = useConnections()
+  const {createConnection, getSubscriptions} = useConnections()
+
+  const {data: subscriptions} = useQuery(
+    "subscriptions",
+    getSubscriptions, {
+      enabled: userRole === "client"
+    }
+  )
+
+  const disableSubscribe = !!subscriptions?.find(
+    subscription => subscription.relationships 
+      .professional.data.id === selectedId
+  )
 
   const mutation = useMutation(
     createConnection, {
@@ -59,11 +71,17 @@ function ActionButtons({selectedId}) {
     }) 
   }
 
+  console.log(disableSubscribe)
+
   return (
     <Stack spacing={3} className={styles.actions}>
       {userRole === "client" && (
         <>
-          <Button className={styles.subscribe} onClick={handleSubscribe}>
+          <Button 
+            className={styles.subscribe} 
+            onClick={handleSubscribe}
+            disabled={disableSubscribe}
+          >
             Subscribe
           </Button>
           {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
