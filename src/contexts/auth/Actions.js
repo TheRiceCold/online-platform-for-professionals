@@ -12,7 +12,7 @@ function Actions(dispatch, token) {
     await Axios.post("login", { user: {...data} })
 
   this.update = async data => 
-    await Axios.patch("signup", this.signupData(data))
+    await Axios.patch("signup", this.signupData(data), config)
 
   this.logout = async () => {
     await Axios.delete("logout", config)

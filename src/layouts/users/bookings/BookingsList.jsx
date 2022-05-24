@@ -9,24 +9,31 @@ import CancelModal from "./CancelModal"
 import FinishModal from "./FinishModal"
 import ReviewModal from "./ReviewModal"
 
-import {
-	upcomingBookings,
-	finishedBookings,
-	canceledBookings,
-} from '@/data/mock_bookings'
+// import {
+// 	upcomingBookings,
+// 	finishedBookings,
+// 	canceledBookings,
+// } from '@/data/mock_bookings'
 import {useQuery} from "react-query"
 import {useEffect, useState} from "react"
 import {useBookings} from "@/bookings_context"
 
 const BookingsList = ({ tabStatus }) => {
   console.log(tabStatus)
-	const [bookingsList, setBookingsList] = useState(upcomingBookings)
+
+	const [bookingsList, setBookingsList] = useState([])
 	const [actionBtn, setActionBtn] = useState(<CancelModal />)
 
+
   const {getFilterBookings} = useBookings()
-  const {data: bookings} = useQuery(
+  const {data: bookings, isLoading} = useQuery(
     [`bookings_${tabStatus}`, tabStatus], 
-      getFilterBookings
+      getFilterBookings, {
+      onSuccess: data => {
+        setBookingsList(data)
+      },
+      select: data => data.data
+    }
   )
 
 	// TODO For changing to what is used on app
@@ -39,18 +46,18 @@ const BookingsList = ({ tabStatus }) => {
 		// TODO Remove when above is okay
 		switch (tabStatus) {
 			case 'active':
-				setBookingsList(upcomingBookings);
-				setActionBtn(<CancelModal />);
+				setBookingsList(bookings);
+				setActionBtn(<CancelModal />)
 				break;
 			case 'pending':
-				setBookingsList(finishedBookings);
-				setActionBtn(<FinishModal tabStatus={tabStatus} />);
+				setBookingsList(bookings);
+				setActionBtn(<FinishModal tabStatus={tabStatus} />)
 				break;
 			case 'finished':
-				setBookingsList(finishedBookings);
+				setBookingsList(bookings);
 
 				// TODO For change to actual user role
-				let currentUser = { role: 'professional' };
+				let currentUser = { role: 'professional' }
 				// let currentUser = { role: 'client' };
 				if (currentUser.role === 'professional') {
 					setActionBtn(<FinishModal tabStatus={tabStatus} />)
@@ -59,11 +66,13 @@ const BookingsList = ({ tabStatus }) => {
 				}
 				break;
 			case 'canceled':
-				setBookingsList(canceledBookings);
-				setActionBtn('');
+				setBookingsList(bookings)
+				setActionBtn('')
 				break;
 		}
 	}, [tabStatus])
+
+  console.log(bookings)
 
 	return (
 		<TableContainer>
@@ -80,10 +89,10 @@ const BookingsList = ({ tabStatus }) => {
 					</Tr>
 				</Thead>
 				<Tbody>
-					{bookingsList.map((booking, idx) => (
-						<Booking 
-              key={idx} 
-              booking={booking} 
+          {!isLoading && bookingsList?.map((booking, idx) => (
+						<Booking
+              key={idx}
+              booking={booking}
               actionBtn={actionBtn}
             />
           ))}
