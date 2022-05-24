@@ -9,39 +9,42 @@ import CancelModal from "./CancelModal"
 import FinishModal from "./FinishModal"
 import ReviewModal from "./ReviewModal"
 
-import {useQuery} from "react-query"
+import {useQueries} from "react-query"
 import {useAuth} from "@/auth_context"
 import {useEffect, useState} from "react"
 import {useBookings} from "@/bookings_context"
 
-const BookingsList = ({ tabStatus }) => {
+const BookingsList = ({tabStatus, setBookingLinks}) => {
   const {userRole} = useAuth()
-	const [bookingsList, setBookingsList] = useState([])
 	const [actionBtn, setActionBtn] = useState(<CancelModal />)
 
   const {getFilterBookings} = useBookings()
-  const {data: bookings, isLoading} = useQuery(
-    [`bookings_${tabStatus}`, tabStatus], 
-      getFilterBookings, {
-      onSuccess: data => {
-        setBookingsList(data)
-      },
+  const [
+    {data: bookingList, isLoading},
+    {data: bookingLinks},
+  ] = useQueries([
+    {
+      queryKey:[`bookings_${tabStatus}`, tabStatus],
+      queryFn: getFilterBookings, 
       select: data => data.data
+    },
+    {
+      queryKey:[`bookings_links`, tabStatus],
+      queryFn: getFilterBookings, 
+      onSuccess: data => setBookingLinks(data),
+      select: data => data.links
     }
-  )
+  ])
 
 	useEffect(() => {
 		switch (tabStatus) {
 			case 'active':
-				setBookingsList(bookings);
 				setActionBtn(<CancelModal />)
 				break;
 			case 'pending':
-				setBookingsList(bookings);
 				setActionBtn(<FinishModal tabStatus={tabStatus} />)
 				break;
 			case 'finished':
-				setBookingsList(bookings);
 
 				if (userRole === 'professional') {
 					setActionBtn(<FinishModal tabStatus={tabStatus} />)
@@ -50,7 +53,6 @@ const BookingsList = ({ tabStatus }) => {
 				}
 				break;
 			case 'canceled':
-				setBookingsList(bookings)
 				setActionBtn('')
 				break;
 		}
@@ -71,7 +73,7 @@ const BookingsList = ({ tabStatus }) => {
 					</Tr>
 				</Thead>
 				<Tbody>
-          {!isLoading && bookingsList?.map((booking, idx) => (
+          {!isLoading && bookingList?.map((booking, idx) => (
 						<Booking
               key={idx}
               booking={booking}

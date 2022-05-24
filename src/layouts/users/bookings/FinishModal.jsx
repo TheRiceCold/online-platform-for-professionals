@@ -16,7 +16,7 @@ import {
 import Button from "@/components/Button"
 
 import {useState} from "react"
-import {useBookings} from "@/bookings_layout"
+import {useBookings} from "@/bookings_context"
 import {useDisclosure} from "@chakra-ui/react"
 import { useMutation } from "react-query"
 

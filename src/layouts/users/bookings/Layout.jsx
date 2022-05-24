@@ -6,10 +6,11 @@ import BookingsList from "./BookingsList"
 import Pagination from "@/professionals_layout/search/sidebar/Pagination"
 
 import {useState} from "react"
-import {bookingLinks} from "@/data/mock_links"
+// import {bookingLinks} from "@/data/mock_links"
 
 function BookingsLayout() {
 	const [tabStatus, setTabStatus] = useState('active')
+  const [bookingLinks, setBookingLinks] = useState([])
 
 	return (
 		<section className={styles.layout}>
@@ -18,7 +19,10 @@ function BookingsLayout() {
           tabStatus={tabStatus} 
           setTabStatus={setTabStatus} 
         />
-				<BookingsList tabStatus={tabStatus} />
+				<BookingsList 
+          tabStatus={tabStatus} 
+          setBookingLinks={setBookingLinks}
+        />
 			</Box>
 			{/* bookingLinks pass is changed based on response*/}
 			<Pagination links={bookingLinks} />
