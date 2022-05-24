@@ -22,9 +22,7 @@ function CalendlyTokenModal(props) {
     createCalendlyToken, 
     updateCalendlyToken
   } = useCalendlyToken()
-  const {
-    getUserProfessional
-  } = useUsers("professional")
+  const {getUserProfessional} = useUsers("professional")
 
   const formHook = useForm()
   const {data: calendlyTokenId} = useQuery(

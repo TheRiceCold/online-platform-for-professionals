@@ -16,15 +16,22 @@ import {
 import Button from "@/components/Button"
 
 import {useState} from "react"
+import {useBookings} from "@/bookings_layout"
 import {useDisclosure} from "@chakra-ui/react"
+import { useMutation } from "react-query"
 
 const FinishModal = ({ tabStatus }) => {
+  const {createBooking} = useBookings()
+
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	// TODO client_showed_up value in request body
 	const [showedUp, setShowedUp] = useState('true')
 
+  const createMutation = useMutation(createBooking)
+
 	const setBookingStatus = () => {
 		// TODO post /bookings to create client as show or no show
+    createMutation.mutate(showedUp)
 	}
 
 	const resetState = () => {

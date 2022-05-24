@@ -9,21 +9,15 @@ import CancelModal from "./CancelModal"
 import FinishModal from "./FinishModal"
 import ReviewModal from "./ReviewModal"
 
-// import {
-// 	upcomingBookings,
-// 	finishedBookings,
-// 	canceledBookings,
-// } from '@/data/mock_bookings'
 import {useQuery} from "react-query"
+import {useAuth} from "@/auth_context"
 import {useEffect, useState} from "react"
 import {useBookings} from "@/bookings_context"
 
 const BookingsList = ({ tabStatus }) => {
-  console.log(tabStatus)
-
+  const {userRole} = useAuth()
 	const [bookingsList, setBookingsList] = useState([])
 	const [actionBtn, setActionBtn] = useState(<CancelModal />)
-
 
   const {getFilterBookings} = useBookings()
   const {data: bookings, isLoading} = useQuery(
@@ -36,14 +30,7 @@ const BookingsList = ({ tabStatus }) => {
     }
   )
 
-	// TODO For changing to what is used on app
 	useEffect(() => {
-		// TODO
-		// get bookings with query params tabStatus
-		// ex/ response = /bookings?status=${tabstatus}
-		//  setBookingsList(response[:data])
-
-		// TODO Remove when above is okay
 		switch (tabStatus) {
 			case 'active':
 				setBookingsList(bookings);
@@ -56,12 +43,9 @@ const BookingsList = ({ tabStatus }) => {
 			case 'finished':
 				setBookingsList(bookings);
 
-				// TODO For change to actual user role
-				let currentUser = { role: 'professional' }
-				// let currentUser = { role: 'client' };
-				if (currentUser.role === 'professional') {
+				if (userRole === 'professional') {
 					setActionBtn(<FinishModal tabStatus={tabStatus} />)
-				} else if (currentUser.role === 'client') {
+				} else if (userRole === 'client') {
 					setActionBtn(<ReviewModal tabStatus={tabStatus} />)
 				}
 				break;
@@ -71,8 +55,6 @@ const BookingsList = ({ tabStatus }) => {
 				break;
 		}
 	}, [tabStatus])
-
-  console.log(bookings)
 
 	return (
 		<TableContainer>
