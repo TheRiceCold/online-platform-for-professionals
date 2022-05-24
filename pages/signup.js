@@ -1,7 +1,7 @@
 import styles from "@/styles/Auth.module.sass"
 
 import Head from "next/head"
-import AuthLayout from "@/layouts/auth/layout"
+import AuthLayout from "./src/layouts/auth/layout"
 
 import {useState} from "react"
 import {useAuth} from "@/auth_context"
