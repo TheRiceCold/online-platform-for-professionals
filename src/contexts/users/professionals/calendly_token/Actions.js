@@ -23,6 +23,16 @@ function Actions(user) {
   }
   
   this.delete = async id => await Axios.delete(path+id, config)
+
+  this.cancel = async (eventUuid, calendlyToken, reason) => {
+    console.log(eventUuid, calendlyToken, reason)
+    // const baseUrl = "https://api.calendly.com/"
+    // return await axios.post(
+    //   `${baseUrl}${uuid}/cancellation`, 
+    //   {payload: reason }, 
+    //   { authorization: calendlyToken}
+    // )
+  }
 }
 
 export default Actions

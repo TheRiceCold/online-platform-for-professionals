@@ -14,6 +14,8 @@ import {
 
 import {useState} from "react"
 import {useDisclosure} from "@chakra-ui/react"
+import {useReviews} from "@/contexts/reviews/Context"
+import { useMutation } from "react-query"
 
 const ReviewModal = ({ tabStatus }) => {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -21,21 +23,30 @@ const ReviewModal = ({ tabStatus }) => {
 	const [review, setReview] = useState('')
 	const [rating, setRating] = useState('')
 
+  const {
+    createReview,
+    updateReview
+  } = useReviews()
 	const handleInputChange = (e) => setReview(e.target.value);
+
+  const createMutation = useMutation(createReview)
+  const updateMutation = useMutation(updateReview)
 
 	const addReview = () => {
 		// TODO post /professionals/:professional_id/review to create client as show or no show
+    createMutation.mutate() 
 	};
 
 	const editReview = () => {
 		// TODO post /professionals/:professional_id/review/:id to create client as show or no show
+    updateMutation.mutate()
 	};
 
 	const resetState = () => {
-		setReview('');
-		setRating(0);
-		onClose();
-	};
+		setReview('')
+		setRating(0)
+		onClose()
+	}
 
 	return (
 		<>

@@ -23,7 +23,7 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 				className={isCurrentPage('pending')}
 				onClick={() => setTabStatus('pending')}
 			>
-				<Tooltip
+				<Tooltip // Not Working
 					// TODO Change label based on if the current user is a professional or client
 					// Client label:
 					// label='Wait for the professional to mark your appointment as finished before you can add a review'

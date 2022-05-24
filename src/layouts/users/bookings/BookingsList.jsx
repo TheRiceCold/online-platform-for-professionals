@@ -9,58 +9,51 @@ import CancelModal from "./CancelModal"
 import FinishModal from "./FinishModal"
 import ReviewModal from "./ReviewModal"
 
-import {
-	upcomingBookings,
-	finishedBookings,
-	canceledBookings,
-} from '@/data/mock_bookings'
-import {useQuery} from "react-query"
+import {useQueries} from "react-query"
+import {useAuth} from "@/auth_context"
 import {useEffect, useState} from "react"
 import {useBookings} from "@/bookings_context"
 
-const BookingsList = ({ tabStatus }) => {
-  console.log(tabStatus)
-	const [bookingsList, setBookingsList] = useState(upcomingBookings)
+const BookingsList = ({tabStatus, setBookingLinks}) => {
+  const {userRole} = useAuth()
 	const [actionBtn, setActionBtn] = useState(<CancelModal />)
 
   const {getFilterBookings} = useBookings()
-  const {data: bookings} = useQuery(
-    [`bookings_${tabStatus}`, tabStatus], 
-      getFilterBookings
-  )
+  const [
+    {data: bookingList, isLoading},
+    {data: bookingLinks},
+  ] = useQueries([
+    {
+      queryKey:[`bookings_${tabStatus}`, tabStatus],
+      queryFn: getFilterBookings, 
+      select: data => data.data
+    },
+    {
+      queryKey:[`bookings_links`, tabStatus],
+      queryFn: getFilterBookings, 
+      onSuccess: data => setBookingLinks(data),
+      select: data => data.links
+    }
+  ])
 
-	// TODO For changing to what is used on app
 	useEffect(() => {
-		// TODO
-		// get bookings with query params tabStatus
-		// ex/ response = /bookings?status=${tabstatus}
-		//  setBookingsList(response[:data])
-
-		// TODO Remove when above is okay
 		switch (tabStatus) {
 			case 'active':
-				setBookingsList(upcomingBookings);
-				setActionBtn(<CancelModal />);
+				setActionBtn(<CancelModal />)
 				break;
 			case 'pending':
-				setBookingsList(finishedBookings);
-				setActionBtn(<FinishModal tabStatus={tabStatus} />);
+				setActionBtn(<FinishModal tabStatus={tabStatus} />)
 				break;
 			case 'finished':
-				setBookingsList(finishedBookings);
 
-				// TODO For change to actual user role
-				let currentUser = { role: 'professional' };
-				// let currentUser = { role: 'client' };
-				if (currentUser.role === 'professional') {
+				if (userRole === 'professional') {
 					setActionBtn(<FinishModal tabStatus={tabStatus} />)
-				} else if (currentUser.role === 'client') {
+				} else if (userRole === 'client') {
 					setActionBtn(<ReviewModal tabStatus={tabStatus} />)
 				}
 				break;
 			case 'canceled':
-				setBookingsList(canceledBookings);
-				setActionBtn('');
+				setActionBtn('')
 				break;
 		}
 	}, [tabStatus])
@@ -80,10 +73,10 @@ const BookingsList = ({ tabStatus }) => {
 					</Tr>
 				</Thead>
 				<Tbody>
-					{bookingsList.map((booking, idx) => (
-						<Booking 
-              key={idx} 
-              booking={booking} 
+          {!isLoading && bookingList?.map((booking, idx) => (
+						<Booking
+              key={idx}
+              booking={booking}
               actionBtn={actionBtn}
             />
           ))}
