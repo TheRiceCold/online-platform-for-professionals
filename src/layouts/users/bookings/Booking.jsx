@@ -1,5 +1,5 @@
-import { getDate, getTime } from '@/utils/dateHelpers';
-import { Tr, Td } from '@chakra-ui/react';
+import { getDate, getTime } from '@/utils/dateHelpers'
+import { Tr, Td } from '@chakra-ui/react'
 
 const Booking = ({ booking, actionBtn }) => {
 	return (
@@ -17,4 +17,4 @@ const Booking = ({ booking, actionBtn }) => {
 	);
 };
 
-export default Booking;
+export default Booking

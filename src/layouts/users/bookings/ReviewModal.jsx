@@ -16,10 +16,10 @@ import {useState} from "react"
 import {useDisclosure} from "@chakra-ui/react"
 
 const ReviewModal = ({ tabStatus }) => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { isOpen, onOpen, onClose } = useDisclosure()
 	// TODO client_showed_up value in request body
-	const [review, setReview] = useState('');
-	const [rating, setRating] = useState('');
+	const [review, setReview] = useState('')
+	const [rating, setRating] = useState('')
 
 	const handleInputChange = (e) => setReview(e.target.value);
 
@@ -94,7 +94,7 @@ const ReviewModal = ({ tabStatus }) => {
 				</ModalContent>
 			</Modal>
 		</>
-	);
-};
+	)
+}
 
-export default ReviewModal;
+export default ReviewModal

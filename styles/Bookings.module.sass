@@ -5,33 +5,41 @@ $secondary: #ff652f
 $tertiary: #ffe400
 
 .layout
-    width: 100vw
+  width: 100vw
+  display: flex
+  overflow-x: hidden
+  margin-top: 1.5rem
+  align-items: center
+  flex-direction: column
+
+  .tabBar
+    height: 5vh
+    border-bottom: solid $primary 1px
     display: flex
-    flex-direction: column
     align-items: center
-    margin-top: 1.5rem
-    .tabBar
-        height: 5vh
-        border-bottom: solid $primary 1px
-        display: flex
-        align-items: center
-    .activeTab
-        height: 100%
-        border-radius: 0
-        color: white
-        background: $primary   
-        &:focus
-            background: $primary  
-    .tab
-        height: 100%  
-        border-radius: 0
-        &:hover
-            background: darken(gray, 10%)
-    .bookingContainer
-        border: solid $primary 1px  
-        .finishBtn
-            border-radius: 25px
-            background: $secondary
-            padding: 1.5rem 0.8rem
+
+  .activeTab
+    height: 100%
+    border-radius: 0
+    color: white
+    background: $primary   
+    &:focus
+      background: $primary  
+
+  .tab
+    height: 100%  
+    border-radius: 0
+    &:hover
+      background: darken(gray, 10%)
+
+  .bookingContainer
+    width: 95vw
+    border: solid $primary 1px  
+
+    .finishBtn
+      border-radius: 25px
+      background: $secondary
+      padding: 1.5rem 0.8rem
+
 .submitBtn
-    background: $secondary !important
+  background: $secondary !important

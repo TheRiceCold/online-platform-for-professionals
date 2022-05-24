@@ -1,5 +1,5 @@
 import Modal from "@/components/overlay/Modal"
-import UserConnectionList from "../connections/UserConnectionList"
+import UserConnectionList from "../users/connections/UserConnectionList"
 
 import {useQuery} from "react-query"
 import {useDisclosure} from "@chakra-ui/react"

@@ -13,10 +13,7 @@ function BookingsLayout() {
 
 	return (
 		<section className={styles.layout}>
-			<Box 
-        width={[1, 3 / 4]}
-        className={styles.bookingContainer} 
-      >
+			<Box className={styles.bookingContainer}>
 				<TabBar 
           tabStatus={tabStatus} 
           setTabStatus={setTabStatus} 

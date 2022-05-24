@@ -5,7 +5,6 @@ import {
 	Modal,
 	Stack,
 	Radio,
-	Button,
 	ModalOverlay,
 	ModalContent,
 	ModalHeader,
@@ -14,29 +13,30 @@ import {
 	ModalCloseButton,
 	RadioGroup,
 } from "@chakra-ui/react"
+import Button from "@/components/Button"
 
 import {useState} from "react"
 import {useDisclosure} from "@chakra-ui/react"
 
 const FinishModal = ({ tabStatus }) => {
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { isOpen, onOpen, onClose } = useDisclosure()
 	// TODO client_showed_up value in request body
-	const [showedUp, setShowedUp] = useState('true');
+	const [showedUp, setShowedUp] = useState('true')
 
 	const setBookingStatus = () => {
 		// TODO post /bookings to create client as show or no show
-	};
+	}
 
 	const resetState = () => {
-		setShowedUp('true');
-		onClose();
-	};
+		setShowedUp('true')
+		onClose()
+	}
 
 	return (
 		<>
 			<Button
 				onClick={onOpen}
-				className={styles.finishBtn}
+        variant="primary"
 				leftIcon={tabStatus === 'pending' ? <CheckIcon /> : <EditIcon />}
 			>
 				<Text fontSize="sm">

@@ -1,26 +1,29 @@
-import styles from '@/styles/Bookings.module.sass';
-import { DeleteIcon } from '@chakra-ui/icons';
+import styles from '@/styles/Bookings.module.sass'
+
 import {
-	Button,
 	Text,
 	Modal,
-	ModalOverlay,
-	ModalContent,
+	Input,
+	ModalBody,
 	ModalHeader,
 	ModalFooter,
-	ModalBody,
+	ModalOverlay,
+	ModalContent,
 	ModalCloseButton,
-	useDisclosure,
-	Input,
-} from '@chakra-ui/react';
-import { useState } from 'react';
+} from "@chakra-ui/react"
+
+import Button from "@/components/Button"
+import {DeleteIcon} from '@chakra-ui/icons'
+
+import {useState} from "react"
+import {useDisclosure} from "@chakra-ui/react"
 
 const CancelModal = () => {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 	// TODO client_showed_up value in request body
 	const [reason, setReason] = useState('');
 
-	const handleInputChange = (e) => setReason(e.target.value);
+	const handleInputChange = e => setReason(e.target.value)
 
 	const cancelEvent = () => {
 		// TODO call calendly api to cancel event
@@ -41,7 +44,7 @@ const CancelModal = () => {
 		<>
 			<Button
 				onClick={onOpen}
-				className={styles.finishBtn}
+        variant="delete"
 				leftIcon={<DeleteIcon />}
 			>
 				<Text fontSize="sm">Cancel Appointment</Text>

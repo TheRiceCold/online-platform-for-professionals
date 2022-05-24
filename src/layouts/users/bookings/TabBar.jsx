@@ -7,7 +7,7 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 	const isCurrentPage = (status) => {
 		let className = status === tabStatus ? styles.activeTab : styles.tab;
 		return className;
-	};
+	}
 
 	return (
 		<Box className={styles.tabBar}>

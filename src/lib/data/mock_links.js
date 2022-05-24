@@ -2,7 +2,6 @@ let professionalLinks = {
 	self: 'http://localhost:3001/professionals?page=1',
 	first: 'http://localhost:3001/professionals?page=1',
 	next: 'http://localhost:3001/professionals?page=2',
-	// prev: 'http://localhost:3001/professionals?page=7',
 	last: 'http://localhost:3001/professionals?page=8',
 };
 

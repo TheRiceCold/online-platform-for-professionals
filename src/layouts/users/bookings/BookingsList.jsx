@@ -1,18 +1,33 @@
+import { 
+  Table, 
+  Tr, Th, 
+  Thead, Tbody,
+  TableContainer, 
+} from '@chakra-ui/react'
+import Booking from "./Booking"
+import CancelModal from "./CancelModal"
+import FinishModal from "./FinishModal"
+import ReviewModal from "./ReviewModal"
+
 import {
 	upcomingBookings,
 	finishedBookings,
 	canceledBookings,
-} from '@/data/mock_bookings';
-import { TableContainer, Table, Thead, Tr, Th, Tbody } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import Booking from './Booking';
-import CancelModal from './CancelModal';
-import FinishModal from './FinishModal';
-import ReviewModal from './ReviewModal';
+} from '@/data/mock_bookings'
+import {useQuery} from "react-query"
+import {useEffect, useState} from "react"
+import {useBookings} from "@/bookings_context"
 
 const BookingsList = ({ tabStatus }) => {
-	const [bookingsList, setBookingsList] = useState(upcomingBookings);
-	const [actionBtn, setActionBtn] = useState(<CancelModal />);
+  console.log(tabStatus)
+	const [bookingsList, setBookingsList] = useState(upcomingBookings)
+	const [actionBtn, setActionBtn] = useState(<CancelModal />)
+
+  const {getFilterBookings} = useBookings()
+  const {data: bookings} = useQuery(
+    [`bookings_${tabStatus}`, tabStatus], 
+      getFilterBookings
+  )
 
 	// TODO For changing to what is used on app
 	useEffect(() => {
@@ -38,9 +53,9 @@ const BookingsList = ({ tabStatus }) => {
 				let currentUser = { role: 'professional' };
 				// let currentUser = { role: 'client' };
 				if (currentUser.role === 'professional') {
-					setActionBtn(<FinishModal tabStatus={tabStatus} />);
+					setActionBtn(<FinishModal tabStatus={tabStatus} />)
 				} else if (currentUser.role === 'client') {
-					setActionBtn(<ReviewModal tabStatus={tabStatus} />);
+					setActionBtn(<ReviewModal tabStatus={tabStatus} />)
 				}
 				break;
 			case 'canceled':
@@ -48,7 +63,7 @@ const BookingsList = ({ tabStatus }) => {
 				setActionBtn('');
 				break;
 		}
-	}, [tabStatus]);
+	}, [tabStatus])
 
 	return (
 		<TableContainer>
@@ -65,13 +80,17 @@ const BookingsList = ({ tabStatus }) => {
 					</Tr>
 				</Thead>
 				<Tbody>
-					{bookingsList.map((booking, i) => {
-						return <Booking key={i} booking={booking} actionBtn={actionBtn} />;
-					})}
+					{bookingsList.map((booking, idx) => (
+						<Booking 
+              key={idx} 
+              booking={booking} 
+              actionBtn={actionBtn}
+            />
+          ))}
 				</Tbody>
 			</Table>
 		</TableContainer>
-	);
-};
+	)
+}
 
-export default BookingsList;
+export default BookingsList
