@@ -18,12 +18,18 @@ import {capitalize} from "@/utils/stringHelpers"
 function ProfileOverview({selectedId}) {
   const {getProfessional} = useUsers("professional")
   const [
-    {data: userDetails, isLoading},
+    {data: included, isLoading},
+    {data: userDetails},
     {data: attributes},
     {data: relationships},
   ] = useQueries([
     {
       queryKey: ["included", selectedId],
+      queryFn: getProfessional,
+      select: data => data.included
+    },
+    {
+      queryKey: ["userDetails", selectedId],
       queryFn: getProfessional, 
       select: data => data.included[0].attributes
     },
@@ -35,7 +41,7 @@ function ProfileOverview({selectedId}) {
     {
       queryKey: ["relationships", selectedId],
       queryFn: getProfessional,
-      select: data => data.data.relationsships
+      select: data => data.data.relationships
     }
   ])
 
@@ -101,12 +107,14 @@ function ProfileOverview({selectedId}) {
           {!isLoading && !!workPortfolios?.length ? "Work Portfolio" : "No work portflio"}
 				</Text>
 				<UnorderedList>
-					{!isLoading && workPortfolios?.map((portfolio, idx) => (
+					{!isLoading && workPortfolios?.map((portfolio, idx) => {
+            return (
             <ListItem key={idx}>
-              <Text>{portfolio.title}</Text>
-              <Text>{portfolio.details}</Text>
+              <Text>{portfolio?.title}</Text>
+              <Text>{portfolio?.details}</Text>
             </ListItem>
-          ))}
+            )
+          })}
 				</UnorderedList>
 				<Text color="#14a76c" fontSize="2xl" mt={4}>
           {!isLoading && !!reviews?.length ? "Reviews" : "No reviews yet"}

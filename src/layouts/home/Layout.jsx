@@ -4,7 +4,7 @@ import {
   Text, Heading,
   Flex, Stack, Container,
 } from '@chakra-ui/react'
-import Navbar from "../navbar/Navbar"
+import Navbar from "@/navbar"
 import Button from "@/components/Button"
 
 import {useRouter} from "next/router"

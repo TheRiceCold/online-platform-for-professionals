@@ -1,7 +1,7 @@
 import styles from "@/styles/users/Profile.module.sass"
 
 import Head from "next/head"
-import Navbar from "@/layouts/navbar/Navbar"
+import Navbar from "@/navbar"
 import Layout from "@/clients_layout/profile/Layout"
 
 import {useAuth} from "@/auth_context"

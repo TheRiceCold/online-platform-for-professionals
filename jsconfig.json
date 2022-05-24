@@ -30,7 +30,13 @@
       "@/professionals_layout/*": ["src/layouts/users/professionals/*"],
       "@/clients_layout/*": ["src/layouts/users/clients/*"],
       "@/admin_layout/*": ["src/layouts/users/admin/*"],
-      "@/users_layout/*": ["src/layouts/users/*"]
-    }
+      "@/users_layout/*": ["src/layouts/users/*"],
+
+      "_comment": "BOOKINGS SHORTCUT",
+      "@/bookings_layout": ["src/layouts/users/professionals/bookings/Layout"],
+
+      "_comment": "NAVBAR SHORTCUT",
+      "@/navbar": ["src/layouts/navbar/Navbar"] 
+    },
   }
 }

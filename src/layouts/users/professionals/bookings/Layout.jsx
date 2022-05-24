@@ -1,53 +1,32 @@
-import MoonLoader from "react-spinners/MoonLoader"
-import {Box, HStack, Heading} from "@chakra-ui/react"
-import RadioCard from "@/components/forms/radios/RadioCard"
+import styles from '@/styles/Bookings.module.sass'
+
+import TabBar from "./TabBar"
+import {Box} from "@chakra-ui/react"
+import BookingsList from "./BookingsList"
+import Pagination from "@/professionals_layout/search/sidebar/Pagination"
 
 import {useState} from "react"
-import {useQuery} from "react-query"
-import {useBookings} from "@/bookings_context"
-import {useRadioGroup} from "@chakra-ui/react"
+import {bookingLinks} from "@/data/mock_links"
 
 function BookingsLayout() {
-  const [filter, setFilter] = useState("")
-  const options = ["all", "active", "pending", "canceled", "finished"]
-  const {getFilterBookings} = useBookings()
+	const [tabStatus, setTabStatus] = useState('active')
 
-  const {data, isLoading, status} = useQuery(
-    [`${filter}_bookings`, filter], 
-    getFilterBookings, { retry: false }
-  )
-
-  const {getRootProps, getRadioProps} = useRadioGroup({
-    name: "status",
-    defaultValue: "active",
-    onChange: status => {
-      setFilter(status === "all" ? "" : status)
-    },
-  })
-
-  const group = getRootProps()
-
-  return (isLoading ? (
-    <Box mt={36} mr={32}>
-      <MoonLoader 
-        size={100}
-        color="white" 
-      /> 
-    </Box>
-    ) : status === 401 ? 
-      <Heading mt={8}>
-        Unauthorized, please register your calendly token
-      </Heading> 
-      : <HStack {...group} mt={8}>
-        {options.map(value => {
-          const radio = getRadioProps({ value })
-          return (
-            <RadioCard key={value} {...radio}>
-              {value}
-            </RadioCard>
-          )
-        })}
-    </HStack>
-  )}
+	return (
+		<section className={styles.layout}>
+			<Box 
+        width={[1, 3 / 4]}
+        className={styles.bookingContainer} 
+      >
+				<TabBar 
+          tabStatus={tabStatus} 
+          setTabStatus={setTabStatus} 
+        />
+				<BookingsList tabStatus={tabStatus} />
+			</Box>
+			{/* bookingLinks pass is changed based on response*/}
+			<Pagination links={bookingLinks} />
+		</section>
+	)
+}
 
 export default BookingsLayout

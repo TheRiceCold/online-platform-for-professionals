@@ -1,29 +1,28 @@
 import styles from '@/styles/Bookings.module.sass'
 
 import Head from "next/head"
-import Navbar from "@/layouts/navbar/Navbar"
-import Layout from "@/layouts/users/bookings/Layout"
+import Navbar from "@/navbar"
+import Layout from "@/bookings_layout"
 
+import {useRouter} from "next/router"
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"
-import {useDisclosure} from "@chakra-ui/react"
 
 function Bookings() {
+  const router = useRouter()
 	const {userRole, userFullname} = useAuth()
-	const {navLinks} = useUsers(userRole)
+	const {navLinks} = useUsers("professional")
 
-  const modals = {
-    clienteleModal: useDisclosure(),
-    subscribersModal: useDisclosure()
-  }
-
+  if (userRole !== "professional")
+    router.push("/")
+  
 	return (
 		<main className={styles.main}>
 			<Head>
 				<title>{userFullname} | Bookings</title>
 			</Head>
-			<Navbar styles={styles} links={navLinks(modals)} />
-			<Layout />
+			<Navbar styles={styles} links={navLinks}/>
+			<Layout/>
 		</main>
 	)
 }

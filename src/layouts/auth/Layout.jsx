@@ -2,9 +2,9 @@ import styles from "@/styles/Auth.module.sass"
 
 import Links from "./Links"
 import Modal from "./Modal"
+import Navbar from "@/navbar"
 import AuthForm from "./Form"
 import Footer from "../footer/Footer"
-import Navbar from "../navbar/Navbar"
 import Alert from "@/components/feedback/Alert"
 import {Link, Container} from "@chakra-ui/react"
 

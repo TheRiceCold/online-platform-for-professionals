@@ -25,7 +25,7 @@ function Items(props) {
         )}) : (
           <Flex justify="center" w="100vw" mt={16}>
             <Heading size="md" ml={10}>
-              No work portfolios yet
+              No work service yet
             </Heading>
           </Flex>
         )

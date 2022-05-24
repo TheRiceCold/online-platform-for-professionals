@@ -41,7 +41,7 @@ function Navbar(props) {
           display={{ md: 'none' }}
           onClick={isOpen ? onClose : onOpen}
         />
-        <NextLink to="" className={styles.logo}>
+        <NextLink to="/" className={styles.logo}>
           <Image 
             mr={8}
             alt="logo"
