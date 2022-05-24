@@ -7,13 +7,14 @@ import {useForm} from "react-hook-form"
 import {useUsers} from "@/users_context"
 import {useToast} from "@chakra-ui/react"
 import {useEffect, useState} from "react"
-import {useMutation, useQuery} from "react-query"
 import {useCalendlyToken} from "@/calendly_token_context"
+import {useMutation, useQuery, useQueryClient} from "react-query"
 
 function CalendlyTokenModal(props) {
   const toast = useToast()
-  const [action, setAction] = useState("create")
+  const queryClient = useQueryClient()
   const [toasts, setToasts] = useState()
+  const [action, setAction] = useState("create")
   const {
     inputs, 
     getCalendlyToken,
@@ -54,7 +55,7 @@ function CalendlyTokenModal(props) {
       : createCalendlyToken, {
       onSuccess: () => {
         setToasts([{
-          title: "Token Saved",
+          title: "Token has been saved",
           duration: 3000,
           variant: "solid",
           isClosable: true,
@@ -83,6 +84,7 @@ function CalendlyTokenModal(props) {
   useEffect(() => {
     if (toasts) 
       toasts.forEach(message => toast(message))
+      queryClient.invalidateQueries("calendly_token_id")
   }, [JSON.stringify(toasts)])
 
   const handleDelete = async() => {
@@ -94,7 +96,7 @@ function CalendlyTokenModal(props) {
         variant: "solid",
         isClosable: true,
       }])
-      onClose()
+      props.onClose()
     } catch(error) { console.log(error) }
   }
 
