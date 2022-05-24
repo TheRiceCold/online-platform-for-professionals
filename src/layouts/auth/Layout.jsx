@@ -19,6 +19,7 @@ function AuthLayout(props) {
   const router = useRouter()
   const {alerts, isLoginPage} = props
   const {onOpen : openModal, ...modalProps} = useModal()
+
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Login", href: "/login" },

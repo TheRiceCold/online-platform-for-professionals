@@ -18,15 +18,16 @@ import NextLink from "@/components/navigation/Link"
 import {useAuth} from "@/auth_context"
 import {useColorMode, useDisclosure} from "@chakra-ui/react"
 
-function Navbar({styles, links, withSearch}) {
+function Navbar(props) {
+  const {
+    links, 
+    modals,
+    styles, 
+    withSearch, 
+  } = props
   const {user} = useAuth()
   const {isOpen, onOpen, onClose} = useDisclosure()
   const {colorMode, toggleColorMode} = useColorMode()
-
-  const modals = {
-    clienteleModal: useDisclosure(),
-    subscribersModal: useDisclosure()
-  }
 
   const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
 
@@ -54,7 +55,7 @@ function Navbar({styles, links, withSearch}) {
         </NextLink>
         {withSearch && <SearchBar colorMode={colorMode}/>}
         <Flex alignItems="center">
-          <Links links={links} modals={modals}/>
+          <Links modals={modals} links={links}/>
           <Stack direction="row" spacing={6}>
             <Button onClick={toggleColorMode} bg="none">
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
@@ -66,7 +67,7 @@ function Navbar({styles, links, withSearch}) {
       {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as="nav" spacing={4}>
-              {links(modals).map(({href, label}, idx)=> (
+              {links.map(({href, label}, idx)=> (
                 <Link key={idx} href={href}>
                   {label}
                 </Link>

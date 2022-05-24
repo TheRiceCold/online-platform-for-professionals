@@ -1,6 +1,6 @@
 import Modal from "@/components/overlay/Modal"
-import UserConnectionList from "../UserConnectionList"
 import AlertDialog from "@/components/overlay/AlertDialog"
+import UserConnectionList from "../connections/UserConnectionList"
 
 import {useQuery} from "react-query"
 import {useDisclosure} from "@chakra-ui/react"

@@ -1,5 +1,5 @@
 import Modal from "@/components/overlay/Modal"
-import UserConnectionList from "../UserConnectionList"
+import UserConnectionList from "../connections/UserConnectionList"
 
 import {useQuery} from "react-query"
 import {useConnections} from "@/connections_context"

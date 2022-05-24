@@ -8,7 +8,7 @@ import {useQuery} from "react-query"
 import {useAuth} from "@/auth_context"
 import {useUsers} from "@/users_context"
 
-function ProfessionalLayout() {
+function ProfessionalLayout({modals}) {
   const {user} = useAuth()
   const {navLinks, getUserProfessional} = useUsers("professional")
   const {
@@ -18,6 +18,7 @@ function ProfessionalLayout() {
     userLocation,
     userContactNumber,
   } = useAuth()
+
 
   const {isLoading, data} = useQuery(
     "user_professional",
@@ -34,7 +35,7 @@ function ProfessionalLayout() {
   {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
   return (user.professionalId ? 
     <>
-      <Navbar styles={styles} links={navLinks}/>
+      <Navbar styles={styles} links={navLinks(modals)}/>
       <Flex as="section" className={styles.layout}>
         <article className={styles.left}>
           <Avatar 
