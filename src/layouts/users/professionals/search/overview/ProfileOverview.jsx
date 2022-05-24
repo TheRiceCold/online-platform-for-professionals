@@ -3,11 +3,13 @@ import styles from "@/styles/users/Professionals.module.sass"
 import {
   Text, 
   Avatar,
+  Skeleton,
   Flex, Box,
-	UnorderedList, ListItem,
+	UnorderedList, ListItem, 
 } from "@chakra-ui/react"
 import ActionButtons from "./ActionButtons"
 import {StarIcon} from "@chakra-ui/icons"
+import Link from "@/components/navigation/Link"
 
 import {useQueries} from "react-query"
 import {useUsers} from "@/users_context"
@@ -56,16 +58,25 @@ function ProfileOverview({selectedId}) {
             />
 					</Box>
 					<Box>
-						<Text className={styles.name} fontSize="xl">
-              {capitalize(`${userDetails?.firstName} ${userDetails?.lastName}`)}
-						</Text>
-						<Text className={styles.field} fontSize="xl">
-							{field}
-						</Text>
-						<Text color="gray.500">
-              0{userDetails?.contactNumber} 
-              {" "} | {userDetails?.email}
-            </Text>
+            <Skeleton isLoaded={!isLoading}>
+              <Link 
+                className={styles.name} 
+                to={`/professionals/${selectedId}`}
+              >
+                {capitalize(`${userDetails?.firstName} ${userDetails?.lastName}`)}
+              </Link>
+            </Skeleton>
+            <Skeleton isLoaded={!isLoading}>
+              <Text className={styles.field}>
+                {field}
+              </Text>
+            </Skeleton>
+            <Skeleton isLoaded={!isLoading}>
+              <Text color="gray.500">
+                0{userDetails?.contactNumber} 
+                {" "} | {userDetails?.email}
+              </Text>
+            </Skeleton>
 					</Box>
 				</Box>
         <ActionButtons selectedId={selectedId}/>

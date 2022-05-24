@@ -1,7 +1,7 @@
 import styles from "@/styles/users/Professionals.module.sass"
 
+import {Stack} from "@chakra-ui/react"
 import Button from "@/components/Button"
-import {Stack, Tooltip} from "@chakra-ui/react"
 import CalendlyButton from "@/components/booking/CalendlyButton"
 
 import {useAuth} from "@/auth_context"
@@ -71,8 +71,6 @@ function ActionButtons({selectedId}) {
     }) 
   }
 
-  console.log(disableSubscribe)
-
   return (
     <Stack spacing={3} className={styles.actions}>
       {userRole === "client" && (
@@ -84,7 +82,6 @@ function ActionButtons({selectedId}) {
           >
             Subscribe
           </Button>
-          {/* TODO Disable button if not subscribed (client.subscription.includes(professional)) */}
           <CalendlyButton
             firstName={userAttributes.firstName}
             lastName={userAttributes.lastName}
