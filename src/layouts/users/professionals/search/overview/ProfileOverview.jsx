@@ -21,6 +21,7 @@ function ProfileOverview({ selectedId }) {
 		{ data: userDetails, isLoading },
 		{ data: attributes },
 		{ data: relationships },
+		{ data: included },
 	] = useQueries([
 		{
 			queryKey: ['included', selectedId],
@@ -37,6 +38,11 @@ function ProfileOverview({ selectedId }) {
 			queryFn: getProfessional,
 			select: (data) => data.data.relationships,
 		},
+		{
+			queryKey: ['included', selectedId],
+			queryFn: getProfessional,
+			select: (data) => data.included,
+		},
 	]);
 
 	const field = attributes?.field;
@@ -44,8 +50,6 @@ function ProfileOverview({ selectedId }) {
 	const services = relationships?.services.data;
 	const workPortfolios = relationships?.workPortfolios.data;
 	const reviews = relationships?.reviews.data;
-
-	console.log(relationships);
 
 	return (
 		<Box className={styles.overview_content}>
@@ -77,16 +81,18 @@ function ProfileOverview({ selectedId }) {
 				</Text>
 				<UnorderedList spacing={3}>
 					{!isLoading &&
-						services?.map((service, idx) => (
-							<ListItem key={idx}>
-								<Text>{service.title}</Text>
-								<Text>{service.details}</Text>
-								<Text as="i">
-									{' '}
-									Php {service.minPrice}-{service.maxPrice}
-								</Text>
-							</ListItem>
-						))}
+						included
+							.filter((data) => data.type === 'service')
+							?.map((service, idx) => (
+								<ListItem key={idx}>
+									<Text>{service.attributes.title}</Text>
+									<Text>{service.attributes.details}</Text>
+									<Text as="i">
+										{' '}
+										Php {service.attributes.minPrice}-{service.attributes.maxPrice}
+									</Text>
+								</ListItem>
+							))}
 				</UnorderedList>
 				<Text color="#14a76c" fontSize="2xl" mt={4}>
 					{!isLoading && !!workPortfolios?.length
@@ -95,25 +101,32 @@ function ProfileOverview({ selectedId }) {
 				</Text>
 				<UnorderedList>
 					{!isLoading &&
-						workPortfolios?.map((portfolio, idx) => (
-							<ListItem key={idx}>
-								<Text>{portfolio.title}</Text>
-								<Text>{portfolio.details}</Text>
-							</ListItem>
-						))}
+						included
+							.filter((data) => data.type === 'workPortfolio')
+							?.map((workPort, idx) => (
+								<ListItem key={idx}>
+									<Text>{workPort.attributes.title}</Text>
+									<Text>{workPort.attributes.details}</Text>
+								</ListItem>
+							))}
 				</UnorderedList>
 				<Text color="#14a76c" fontSize="2xl" mt={4}>
 					{!isLoading && !!reviews?.length ? 'Reviews' : 'No reviews yet'}
 				</Text>
 				{!isLoading &&
-					reviews?.map((review, idx) => (
-						<Box key={idx}>
-							{[...Array(5)].map((n, i) => (
-								<StarIcon key={i} color={i + 1 < review.rating ? '#ff652f' : 'gray'} />
-							))}
-							<Text>{review.body}</Text>
-						</Box>
-					))}
+					included
+						.filter((data) => data.type === 'review')
+						?.map((review, idx) => (
+							<Box key={idx}>
+								{[...Array(5)].map((n, i) => (
+									<StarIcon
+										key={i}
+										color={i < review.attributes.rating ? '#ff652f' : 'gray'}
+									/>
+								))}
+								<Text my={2}>{review.attributes.body}</Text>
+							</Box>
+						))}
 			</Box>
 		</Box>
 	);
