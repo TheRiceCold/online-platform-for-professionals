@@ -1,4 +1,4 @@
-import "@/styles/globals.sass"
+import "../styles/globals.sass"
 
 import {QueryClientProvider, QueryClient} from "react-query"
 import {ReactQueryDevtools} from "react-query/devtools"

@@ -6,13 +6,23 @@ function Actions(dispatch, token) {
   const config = { headers: { Authorization: token } }
 
   this.signup = async data => 
-    await Axios.post("signup", this.signupData(data))
+    await Axios.post(
+      "api/signup", 
+      this.signupData(data)
+    )
 
   this.login = async data => 
-    await Axios.post("login", { user: {...data} })
+    await Axios.post(
+      "api/login", 
+      { user: {...data} }
+    )
 
   this.update = async data => 
-    await Axios.patch("signup", this.signupData(data), config)
+    await Axios.patch(
+      "api/signup", 
+      this.signupData(data), 
+      config
+    )
 
   this.logout = async () => {
     await Axios.delete("logout", config)

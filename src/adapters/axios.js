@@ -8,4 +8,7 @@ const baseURL = (env === "development")
 
 const headers = { Accept: "application/json" }
 
-export default Axios.create({ baseURL, headers })
+export default Axios.create({ 
+  baseURL: "https://fierce-reaches-02100.herokuapp.com/", 
+  headers 
+})
