@@ -1,22 +1,22 @@
-import styles from "@/styles/Auth.module.sass"
+import styles from "@/styles/Auth.module.sass";
 
-import Head from "next/head"
-import AuthLayout from "@/layouts/auth/Layout"
+import Head from "next/head";
+import AuthLayout from "@/layouts/auth/Layout";
 
-import {useState} from "react"
-import {useAuth} from "@/auth_context"
-import {useHelpers} from "@/helpers_context"
-import {useMutation, useQueries} from "react-query"
+import {useState} from "react";
+import {useAuth} from "@/auth_context";
+import {useHelpers} from "@/helpers_context";
+import {useMutation, useQueries} from "react-query";
 
 function SignUp() {
-  const [alerts, setAlerts] = useState([])
-  const {getCities, getRegions} = useHelpers()
+  const [alerts, setAlerts] = useState([]);
+  const {getCities, getRegions} = useHelpers();
 
   const {
     signup, 
     signupInputs,
     SignupStatuses
-  } = useAuth()
+  } = useAuth();
 
   const [
     {data: cities}, 
@@ -30,16 +30,16 @@ function SignUp() {
       queryKey: "regions", 
       queryFn: getRegions
     }
-  ])
+  ]);
 
-  const inputs = signupInputs(regions, cities)
+  const inputs = signupInputs(regions, cities);
 
-  const status = new SignupStatuses(setAlerts)
+  const status = new SignupStatuses(setAlerts);
   
   const mutation = useMutation(signup, { 
     onSuccess: status.onSuccess,
     onError: status.onError
-  })
+  });
 
   return (
     <main className={styles.main}>
@@ -52,7 +52,7 @@ function SignUp() {
         mutation={mutation}
       />
     </main>
-  )
+  );
 }
 
-export default SignUp
+export default SignUp;
