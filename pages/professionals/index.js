@@ -1,21 +1,19 @@
-import styles from "@/styles/users/Professionals.module.sass"
+import styles from "@/styles/users/Professionals.module.sass";
 
-import Head from "next/head"
-import Navbar from "@/layouts/navbar/Navbar"
-import Layout from "@/professionals_layout/search/Layout"
+import Layout from "@/professionals_layout/search/Layout";
+import Navbar from "@/layouts/navbar/Navbar";
+import Meta from "@/components/Meta";
 
-import {useAuth} from "@/auth_context"
-import {useUsers} from "@/users_context"
+import { useUsers } from "@/users_context";
+import { useAuth } from "@/auth_context";
 
 const Professionals = () => {
-  const {userRole} = useAuth()
-  const {navLinks} = useUsers(userRole)
+  const {userRole} = useAuth();
+  const {navLinks} = useUsers(userRole);
 
 	return (
 		<main className={styles.main}>
-			<Head>
-				<title>Professionals</title>
-			</Head>
+      <Meta title="Professionals" />
 			<Navbar styles={styles} links={navLinks}/>
 			<Layout/>
 		</main>

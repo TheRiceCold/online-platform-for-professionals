@@ -1,4 +1,4 @@
-import CryptoAES from "crypto-js/aes"
+import CryptoAES from "crypto-js/aes";
 
 function Statuses(storage, dispatch, setAlerts) {
   this.storage = storage
@@ -17,21 +17,22 @@ function Statuses(storage, dispatch, setAlerts) {
 
     let authData = {
       id, 
-      token, 
+      token,
       attributes,
       isAuth: true,
     }
 
-    const role = attributes?.role.toLowerCase()
+    const role = attributes?.role.toLowerCase();
+
     switch(role){
       case "professional":
-        const professionalId = relationships?.professional?.data.id
-        authData = {professionalId, ...authData}
-        break
+        const professionalId = relationships?.professional?.data.id;
+        authData = {professionalId, ...authData};
+        break;
       case "client":
-        const clientId = relationships?.client?.data.id
-        authData = {clientId, ...authData}
-        break
+        const clientId = relationships?.client?.data.id;
+        authData = {clientId, ...authData};
+        break;
     }
 
     this.storage.setItem({
@@ -40,17 +41,20 @@ function Statuses(storage, dispatch, setAlerts) {
       value: CryptoAES.encrypt(JSON.stringify(authData), secret)
     })
 
-    location.reload()
+    location.reload();
     // NOT_NECESSARY: page reloads after login and gets stored data
     // this.dispatch({type: "LOGIN", payload: authData})
   }
 
   this.onError = error => {
-    const {status, data} = error?.response
-    const message = data?.error
+    const {status, data} = error?.response;
+    const message = data?.error;
 
     if (status === 401) 
-      this.setAlerts([{status: "error", message}])
+      this.setAlerts([{ 
+        status: "error", 
+        message
+      }]);
   }
 }
 

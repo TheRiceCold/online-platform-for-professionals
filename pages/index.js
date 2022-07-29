@@ -1,15 +1,15 @@
 import styles from "@/styles/Home.module.sass";
 
-import Head from "next/head";
-import Footer from "@/layouts/footer/Footer";
 import HomeLayout from "@/layouts/home/Layout";
+import Footer from "@/layouts/footer/Footer";
+import Meta from "@/components/Meta";
 
-import {useRouter} from "next/router";
-import {useAuth} from "@/auth_context";
+import { useAuth } from "@/auth_context";
+import { useRouter } from "next/router";
 
 const Home = () => {
+  const { userRole, user } = useAuth();
   const router = useRouter();
-  const {userRole, user} = useAuth();
 
   switch(userRole) {
     case "professional": 
@@ -26,11 +26,9 @@ const Home = () => {
 
   return (
     <main className={styles.main}>
-      <Head>
-        <title>Home</title>
-      </Head> 
-      <HomeLayout/>
-      <Footer/>
+      <Meta title="Home" />
+      <HomeLayout />
+      <Footer />
     </main>
   );
 };

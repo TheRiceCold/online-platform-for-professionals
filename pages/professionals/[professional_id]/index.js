@@ -1,22 +1,21 @@
-import styles from "@/styles/users/Profile.module.sass"
+import styles from "@/styles/users/Profile.module.sass";
 
-import Head from "next/head"
-import Layout from "@/professionals_layout/profile/Layout"
+import Layout from "@/professionals_layout/profile/Layout";
+import Meta from "@/components/Meta";
 
-import {useRouter} from "next/router"
-import {useAuth} from "@/auth_context"
+import { useAuth } from "@/auth_context";
+import { useRouter } from "next/router";
 
 function Professional() {
-  const router = useRouter()
-  const {userFullname} = useAuth()
+  const {userFullname} = useAuth();
+  const router = useRouter();
 
-  const id = router.query['professional_id']
+  const title = `${userFullname} | Professional`;
+  const id = router.query['professional_id'];
 
   return (
     <main className={styles.main}>
-      <Head>
-        <title>{userFullname} | Professional</title>
-      </Head>
+      <Meta title={title} />
       <Layout id={id}/>
     </main>
   )

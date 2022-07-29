@@ -2,14 +2,16 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@/styles/*": ["styles/*"],
+
       "@/layouts/*": ["src/layouts/*"],
       "@/contexts/*": ["src/contexts/*"],
       "@/components/*": ["src/components/*"],
-      
-      "@/styles/*": ["styles/*"],
+
       "@/data/*": ["src/lib/data/*"],
       "@/hooks/*": ["src/lib/hooks/*"],
       "@/utils/*": ["src/lib/utils/*"],
+      "@/constants/*": ["src/lib/constants/*"],
 
       "_comment": "axios shortcut",
       "@/axios": ["src/adapters/axios"],
@@ -17,7 +19,6 @@
       "_comment": "--------------- CONTEXT SHORTCUTS ---------------",
       "@/auth_context": ["src/contexts/auth/Context"],
       "@/users_context": ["src/contexts/users/Context"],
-      "@/helpers_context": ["src/contexts/helpers/Context"],
       "@/reviews_context": ["src/contexts/reviews/Context"],
       "@/bookings_context": ["src/contexts/bookings/Context"],
       "@/connections_context": ["src/contexts/connections/Context"],

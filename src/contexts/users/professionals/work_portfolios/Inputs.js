@@ -5,7 +5,8 @@ const Inputs = [
   },
   {
     id: "details",
-    label: "Portfolio Details"
+    type: "textarea",
+    label: "Portfolio Details",
   }
 ]
 

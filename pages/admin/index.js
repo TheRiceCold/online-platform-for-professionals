@@ -1,23 +1,22 @@
-import styles from "@/styles/Admin.module.sass"
+import styles from "@/styles/Admin.module.sass";
 
-import Head from "next/head"
-import Navbar from "@/layouts/navbar/Navbar"
-import AdminLayout from "@/layouts/users/admin/Layout"
+import AdminLayout from "@/layouts/users/admin/Layout";
+import Navbar from "@/layouts/navbar/Navbar";
+import Meta from "@/components/Meta";
 
-import {useAuth} from "@/auth_context"
-import {useUsers} from "@/users_context"
+import { useUsers } from "@/users_context";
+import { useAuth } from "@/auth_context";
 
 const Admin = () => {
-  const {userFullname} = useAuth()
-  const {navLinks} = useUsers("admin")
+  const title = `${userFullname} | Admin`;
+  const { navLinks } = useUsers("admin");
+  const { userFullname } = useAuth();
 
   return (
     <main className={styles.main}>
-      <Head>
-        <title>{userFullname} | Admin</title>
-      </Head>
-      <Navbar styles={styles} links={navLinks}/>
-      <AdminLayout/>
+      <Meta title={title} />
+      <Navbar styles={styles} links={navLinks} />
+      <AdminLayout />
     </main>
   )
 }

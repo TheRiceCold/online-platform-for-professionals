@@ -1,57 +1,73 @@
 import styles from "@/styles/Auth.module.sass"
 
-import Links from "./Links"
-import Modal from "./Modal"
-import Navbar from "@/navbar"
-import AuthForm from "./Form"
-import Footer from "../footer/Footer"
-import Alert from "@/components/feedback/Alert"
-import {Link, Container} from "@chakra-ui/react"
+import { Link, Container } from "@chakra-ui/react";
+import Alert from "@/components/feedback/Alert";
+import Footer from "../footer/Footer";
+import AuthForm from "./Form";
+import Navbar from "@/navbar";
+import Modal from "./Modal";
+import Links from "./Links";
 
-import {useRouter} from "next/router"
-import {useAuth} from "@/auth_context"
-import useMount from "@/hooks/useMount"
-import {useDisclosure as useModal} from "@chakra-ui/react"
+import { useDisclosure as useModal } from "@chakra-ui/react";
+import { useAuth } from "@/auth_context";
+import { useRouter } from "next/router";
+import useMount from "@/hooks/useMount";
+import { useState } from "react";
 
 function AuthLayout(props) {
-  const {user} = useAuth()
+  const { user } = useAuth();
+  const { alerts, isLoginPage } = props;
+  const { onOpen : openModal, ...modalProps } = useModal();
+  const [confirmedAccount, setConfirmedAccount] = useState("");
 
-  const router = useRouter()
-  const {alerts, isLoginPage} = props
-  const {onOpen : openModal, ...modalProps} = useModal()
+  const router = useRouter();
 
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Login", href: "/login" },
     { label: "Signup", href: "/signup" },
-  ]
+  ];
 
-  useMount(() => { if (user.isAuth) router.push("/") })
+  useMount(() => { 
+    if (user.isAuth) router.push("/") 
+    setConfirmedAccount(router.query["confirmed_account"]);
+  });
 
-  return (!user.isAuth && 
+    console.log(confirmedAccount === "true");
+  return (
     <>
-      <Navbar styles={styles} links={navLinks}/>
-      {alerts && 
-        alerts.map((alert, i) => (
-          <Alert key={i} {...alert}/>
-        ))
+      {!user.isAuth && 
+        <>
+          <Navbar styles={styles} links={navLinks}/>
+          {alerts && 
+            alerts.map((alert, i) => (
+              <Alert key={i} {...alert} />
+            ))
+          }
+          {confirmedAccount && isLoginPage &&
+            <Alert 
+              message="Your account has been confirmed! You can now login your account"  
+              status="success" 
+            />
+          }
+          <Container className={styles.layout}>
+            <AuthForm {...props}/>
+            <Links isLoginPage={isLoginPage}/>
+            {isLoginPage && (
+              <Link
+                onClick={openModal}
+                className={styles.link}
+              > 
+                I have not received an email
+              </Link>
+            )}
+          </Container>
+          <Modal {...modalProps} heading="Resend Confirmation"/>
+          <Footer/>
+        </>
       }
-      <Container className={styles.layout}>
-        <AuthForm {...props}/>
-        <Links isLoginPage={isLoginPage}/>
-        {isLoginPage && (
-          <Link
-            onClick={openModal}
-            className={styles.link}
-          > 
-            I have not received an email
-          </Link>
-        )}
-      </Container>
-      <Modal {...modalProps} heading="Resend Confirmation"/>
-      <Footer/>
     </>
-  )
+  );
 }
 
-export default AuthLayout
+export default AuthLayout;

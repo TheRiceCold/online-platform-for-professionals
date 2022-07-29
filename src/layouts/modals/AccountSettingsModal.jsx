@@ -1,13 +1,13 @@
 import Form from "@/components/forms/Form"
 import Modal from "@/components/overlay/Modal"
 
-import {useAuth} from "@/auth_context"
-import {useForm} from "react-hook-form"
-import {useHelpers} from "@/helpers_context"
-import {useMutation, useQueries} from "react-query"
+import { useMutation, useQueries } from "react-query";
+import { hostURL } from "@/constants/environments";
+import { useForm } from "react-hook-form";
+import { useAuth } from "@/auth_context";
+import axios from "axios";
 
 function AccountSettingsModal(props) {
-  const {getCities, getRegions} = useHelpers()
   const {updateInputs, updateAccount} = useAuth()
 
   const formHook = useForm()
@@ -20,15 +20,23 @@ function AccountSettingsModal(props) {
   ] = useQueries([
     { 
       queryKey: "cities", 
-      queryFn: getCities 
+      queryFn: async() => {
+        const url = `${hostURL}/api/locations/cities`;
+        const { data } = await axios(url);
+        return data;
+      }
     }, 
     { 
       queryKey: "regions", 
-      queryFn: getRegions
+      queryFn: async() => {
+        const url = `${hostURL}/api/locations/regions`;
+        const { data } = await axios(url);
+        return data;
+      }
     }
   ])
 
-  const inputs = updateInputs(regions, cities)
+  const inputs = updateInputs(regions, cities);
 
   return (
     <Modal

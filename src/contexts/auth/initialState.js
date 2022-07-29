@@ -7,9 +7,11 @@ export {initialState}
 const storage = useStorage();
 const secret = process.env.NEXT_PUBLIC_SECRET;
 
-const storedAuthData = CryptoAES.decrypt(storage.getItem({ type: "session", key: "auth_data" }) ?? "", secret);
+const storedAuthData = CryptoAES.decrypt(
+  storage.getItem({ type: "session", key: "auth_data" }) ?? "", secret
+);
 
-let authData = storedAuthData && storedAuthData.toString(CryptoENC);
+let authData = storedAuthData?.toString(CryptoENC);
 authData = authData && JSON.parse(authData);
 
 let initialState = {

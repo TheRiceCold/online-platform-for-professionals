@@ -10,8 +10,8 @@ import {
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
-} from '@chakra-ui/react'
-import {EmailIcon} from "@chakra-ui/icons"
+} from "@chakra-ui/react";
+import {EmailIcon} from "@chakra-ui/icons";
 
 const AuthModal = props => (
   <>
@@ -44,6 +44,6 @@ const AuthModal = props => (
       </ModalContent>
     </Modal>
   </>
-)
+);
 
-export default AuthModal
+export default AuthModal;

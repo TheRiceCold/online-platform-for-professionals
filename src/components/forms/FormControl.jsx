@@ -1,36 +1,41 @@
 import {
-  FormLabel, 
+  FormControl as ChakraFormControl,
   FormErrorMessage,
-  FormControl as ChakraFormControl
-} from "@chakra-ui/react"
-import Input from "./inputs/TextInput"
-import PhoneInput from "./inputs/PhoneInput"
-import RadioGroup from "./radios/RadioGroup"
-import SelectInput from "./selects/SelectInput"
-import PasswordInput from "./inputs/PasswordInput"
+  FormLabel
+} from "@chakra-ui/react";
+
+import PasswordInput from "./inputs/PasswordInput";
+import SelectInput from "./selects/SelectInput";
+import RadioGroup from "./radios/RadioGroup";
+import PhoneInput from "./inputs/PhoneInput";
+import TextArea from "./inputs/TextArea";
+import Input from "./inputs/TextInput";
 
 function FormControl(props) {
-  const {input, error, noLabel} = props
-  const {id, label, required} = input
+  const { input, error, noLabel } = props;
+  const { id, label, required } = input;
 
   const inputType = () => {
     switch (input.type) {
       case "tel":
-        return <PhoneInput {...props}/>
+        return <PhoneInput {...props} />
 
       case "password": 
-        return <PasswordInput {...props}/>
+        return <PasswordInput {...props} />
 
       case "select": 
-        return <SelectInput {...props}/>
+        return <SelectInput {...props} />
 
       case "radio":
-        return <RadioGroup {...props}/>
+        return <RadioGroup {...props} />
+
+      case "textarea":
+        return <TextArea {...props} />
 
       default:
-        return <Input {...props}/>
+        return <Input {...props} />
     }
-  }
+  };
 
   return (
     <ChakraFormControl
@@ -48,7 +53,7 @@ function FormControl(props) {
         {error && error?.message}
       </FormErrorMessage>
     </ChakraFormControl>
-  )
+  );
 }
 
-export default FormControl
+export default FormControl;

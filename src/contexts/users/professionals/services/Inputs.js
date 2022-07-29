@@ -5,6 +5,7 @@ const Inputs = [
   },
   {
     id: "details",
+    type: "textarea",
     label: "Service Details"
   },
   {

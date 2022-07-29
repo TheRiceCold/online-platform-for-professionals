@@ -1,11 +1,10 @@
-import {Text} from "@chakra-ui/react"
-import Link from "@/components/navigation/Link"
+import Link from "@/components/navigation/Link";
+import { Text } from "@chakra-ui/react";
 
-function Links({isLoginPage}) {
-  const href = isLoginPage ? "/signup" : "/login"
-  const linkText = isLoginPage ? "Join now" : "Sign in"
-  const labelText = isLoginPage ? 
-    "No Account?" : "Already have an account?"
+function Links({ isLoginPage }) {
+  const href = isLoginPage ? "/signup" : "/login";
+  const linkText = isLoginPage ? "Join now" : "Sign in";
+  const labelText = isLoginPage ? "No Account?" : "Already have an account?";
 
   return (
     <Text mt={4} mt={4}>
@@ -14,7 +13,7 @@ function Links({isLoginPage}) {
         {linkText}
       </Link>
     </Text>
-  )
+  );
 }
 
-export default Links
+export default Links;

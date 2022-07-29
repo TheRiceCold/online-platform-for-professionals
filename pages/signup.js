@@ -1,16 +1,16 @@
 import styles from "@/styles/Auth.module.sass";
 
-import Head from "next/head";
 import AuthLayout from "@/layouts/auth/Layout";
+import Meta from "@/components/Meta";
+import Axios from "@/axios";
+import axios from "axios";
 
-import {useState} from "react";
-import {useAuth} from "@/auth_context";
-import {useHelpers} from "@/helpers_context";
-import {useMutation, useQueries} from "react-query";
+import { useMutation, useQueries } from "react-query";
+import { useAuth } from "@/auth_context";
+import { useState } from "react";
 
-function SignUp() {
+function SignUp({ cities, regions }) {
   const [alerts, setAlerts] = useState([]);
-  const {getCities, getRegions} = useHelpers();
 
   const {
     signup, 
@@ -18,23 +18,8 @@ function SignUp() {
     SignupStatuses
   } = useAuth();
 
-  const [
-    {data: cities}, 
-    {data: regions}
-  ] = useQueries([
-    { 
-      queryKey: "cities", 
-      queryFn: getCities 
-    }, 
-    { 
-      queryKey: "regions", 
-      queryFn: getRegions
-    }
-  ]);
-
-  const inputs = signupInputs(regions, cities);
-
   const status = new SignupStatuses(setAlerts);
+  const inputs = signupInputs(regions, cities);
   
   const mutation = useMutation(signup, { 
     onSuccess: status.onSuccess,
@@ -43,9 +28,7 @@ function SignUp() {
 
   return (
     <main className={styles.main}>
-      <Head>
-        <title>Create an Account</title>
-      </Head>
+      <Meta title="Create an Account"/>
       <AuthLayout 
         alerts={alerts}
         inputs={inputs}
@@ -53,6 +36,19 @@ function SignUp() {
       />
     </main>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const baseURL = "http://localhost:3000/api/locations/";
+  const { data: cities }= await axios(`${baseURL}cities`);
+  const { data: regions }= await axios(`${baseURL}regions`);
+  
+  return {
+    props: {
+      cities, 
+      regions,
+    }
+  }
 }
 
 export default SignUp;

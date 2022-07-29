@@ -1,29 +1,32 @@
 import styles from '@/styles/Bookings.module.sass'
 
-import Head from "next/head"
-import Navbar from "@/navbar"
-import Layout from "@/bookings_layout"
+import Layout from "@/bookings_layout";
+import Meta from "@/components/Meta";
+import Navbar from "@/navbar";
 
-import {useRouter} from "next/router"
-import {useAuth} from "@/auth_context"
-import {useUsers} from "@/users_context"
+import { useUsers } from "@/users_context";
+import { useAuth } from "@/auth_context";
+import { useRouter } from "next/router";
 
 function ProfessionalBookings() {
-  const router = useRouter()
-	const {userRole, userFullname} = useAuth()
-	const {navLinks} = useUsers("professional")
+	const { navLinks } = useUsers("professional");
+	const { userRole, userFullname } = useAuth();
 
-  if (userRole !== "professional")
-    router.push("/")
+  const title = `${userFullname} | Bookings`;
+  const router = useRouter();
+
+  if (userRole !== "professional") router.push("/");
   
-	return (userRole === "professional" &&
-		<main className={styles.main}>
-			<Head>
-				<title>{userFullname} | Bookings</title>
-			</Head>
-			<Navbar styles={styles} links={navLinks}/>
-			<Layout/>
-		</main>
+	return (
+    <> 
+      {userRole === "professional" &&
+        <main className={styles.main}>
+          <Meta title={title} />
+          <Navbar styles={styles} links={navLinks} />
+          <Layout />
+        </main>
+      }
+    </>
 	)
 }
 

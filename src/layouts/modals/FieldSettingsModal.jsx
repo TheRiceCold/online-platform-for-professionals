@@ -1,23 +1,27 @@
-import Form from "@/components/forms/Form"
-import Modal from "@/components/overlay/Modal"
+import Modal from "@/components/overlay/Modal";
+import Form from "@/components/forms/Form";
 
-import {useForm} from "react-hook-form"
-import {useUsers} from "@/users_context"
-import {useHelpers} from "@/helpers_context"
-import {useMutation, useQuery} from "react-query"
+import { useMutation, useQuery } from "react-query";
+import { hostURL } from "@/constants/environments";
+import { useUsers } from "@/users_context";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function FieldSettingsModal(props) {
   const {
     inputs,
     resolver,
-    updateUserProfessional,
-  } = useUsers("professional")
-  const {getFields} = useHelpers()
+    updateUserProfessional
+  } = useUsers("professional");
 
-  const formHook = useForm({resolver})
-  const {data: fields} = useQuery("fields", getFields)
-  const mutation = useMutation(updateUserProfessional, { })
-  const submitHandler = data => mutation.mutate({...data})
+  const formHook = useForm({ resolver });
+  const { data: fields } = useQuery("fields", async() => {
+    const url = `${hostURL}/api/professionals/fields`;
+    const {data} = await axios(url);
+    return data;
+  });
+  const mutation = useMutation(updateUserProfessional, { });
+  const submitHandler = data => mutation.mutate({...data});
 
   return (
     <Modal
@@ -33,7 +37,7 @@ function FieldSettingsModal(props) {
         submitHandler={submitHandler}
       />
     </Modal>
-  )
+  );
 }
 
 export default FieldSettingsModal
