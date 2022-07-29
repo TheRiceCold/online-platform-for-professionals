@@ -27,6 +27,7 @@ function ClientBookings() {
           <Layout/>
         </main>
       }
+    </>
 	)
 }
 
