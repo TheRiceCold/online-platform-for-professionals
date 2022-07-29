@@ -25,7 +25,7 @@ function AuthLayout(props) {
   const navLinks = [
     { label: "Home", href: "/" },
     { label: "Login", href: "/login" },
-    { label: "Signup", href: "/signup" },
+    { label: "Signup", href: "/signup" }
   ];
 
   useMount(() => { 
@@ -33,7 +33,6 @@ function AuthLayout(props) {
     setConfirmedAccount(router.query["confirmed_account"]);
   });
 
-    console.log(confirmedAccount === "true");
   return (
     <>
       {!user.isAuth && 

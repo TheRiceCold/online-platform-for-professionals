@@ -8,11 +8,11 @@ import { useAuth } from "@/auth_context";
 import axios from "axios";
 
 function AccountSettingsModal(props) {
-  const {updateInputs, updateAccount} = useAuth()
+  const {updateInputs, updateAccount} = useAuth();
 
-  const formHook = useForm()
-  const mutation = useMutation(updateAccount, { })
-  const submitHandler = data => mutation.mutate({...data})
+  const formHook = useForm();
+  const mutation = useMutation(updateAccount, { });
+  const submitHandler = data => mutation.mutate({ ...data });
 
   const [
     {data: cities}, 

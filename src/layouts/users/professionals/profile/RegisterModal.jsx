@@ -15,7 +15,7 @@ import axios from "axios";
 const RegisterModal = () => {
   const router = useRouter();
   const [alerts, setAlerts] = useState();
-  const {user, dispatch, logout} = useAuth();
+  const { user, dispatch, logout } = useAuth();
 
   const {
     inputs, 

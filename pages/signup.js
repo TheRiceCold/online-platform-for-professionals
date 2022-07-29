@@ -2,10 +2,10 @@ import styles from "@/styles/Auth.module.sass";
 
 import AuthLayout from "@/layouts/auth/Layout";
 import Meta from "@/components/Meta";
-import Axios from "@/axios";
 import axios from "axios";
 
 import { useMutation, useQueries } from "react-query";
+import { hostURL } from "@/constants/environments";
 import { useAuth } from "@/auth_context";
 import { useState } from "react";
 
@@ -39,9 +39,9 @@ function SignUp({ cities, regions }) {
 }
 
 export async function getServerSideProps(ctx) {
-  const baseURL = "http://localhost:3000/api/locations/";
-  const { data: cities }= await axios(`${baseURL}cities`);
-  const { data: regions }= await axios(`${baseURL}regions`);
+  const url = `${hostURL}/api/locations/`;
+  const { data: cities }= await axios(`${url}cities`);
+  const { data: regions }= await axios(`${url}regions`);
   
   return {
     props: {
