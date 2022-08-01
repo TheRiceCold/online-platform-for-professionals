@@ -58,9 +58,6 @@ function FormModal(props) {
         formHook={formHook}
         submitHandler={submitHandler}
       />
-      <pre>
-        {JSON.stringify(formHook.watch(), null, 2)} 
-      </pre>
     </Modal>
   );
 }
