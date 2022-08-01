@@ -1,24 +1,45 @@
-import styles from "@/styles/Admin.module.sass";
+import styles from "~/styles/Admin.module.sass";
 
-import AdminLayout from "@/layouts/users/admin/Layout";
-import Navbar from "@/layouts/navbar/Navbar";
-import Meta from "@/components/Meta";
+import { Box, useDisclosure as useAlert } from "@chakra-ui/react";
+import { useUsers } from "~/contexts/users/Context";
+import { useAuth } from "~/contexts/auth/Context";
+import { Meta, Navbar } from "~/components";
 
-import { useUsers } from "@/users_context";
-import { useAuth } from "@/auth_context";
+import AlertDialog from "~/components/overlay/AlertDialog";
+import Table from "~/components/table/Table";
 
-const Admin = () => {
-  const title = `${userFullname} | Admin`;
-  const { navLinks } = useUsers("admin");
+function Admin() {
   const { userFullname } = useAuth();
+  const deleteAlertDialog = useAlert();
+  const title = `${userFullname} | Admin`;
+  const { navLinks, fakeUsers, userTable } = useUsers("admin");
 
   return (
     <main className={styles.main}>
       <Meta title={title} />
       <Navbar styles={styles} links={navLinks} />
-      <AdminLayout />
+      <Box mt={8}>
+        <Table 
+          isSort
+          isSearch
+          isStriped
+          isPaginated
+          data={fakeUsers} 
+          // stripeColor="teal"
+          searchLabel="Search user"
+          columns={userTable(deleteAlertDialog)}
+        />
+        <AlertDialog
+          // isCentered
+          buttonColor="red"
+          header="Delete User"
+          buttonLabel="Delete"
+          {...deleteAlertDialog}
+          label="Are you sure? You can't undo this action afterwards."
+        />
+      </Box>
     </main>
-  )
+  );
 }
 
-export default Admin
+export default Admin;

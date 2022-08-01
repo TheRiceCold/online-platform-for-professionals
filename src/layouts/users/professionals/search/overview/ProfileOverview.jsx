@@ -1,22 +1,23 @@
-import styles from "@/styles/users/Professionals.module.sass"
+import styles from "~/styles/users/Professionals.module.sass"
 
+import { capitalize } from "~/lib/utils/stringHelpers";
+import { useUsers } from "~/contexts/users/Context";
+import { StarIcon } from "@chakra-ui/icons";
+import { useQueries } from "react-query";
 import {
-  Text, 
-  Avatar,
-  Skeleton,
+	UnorderedList, 
   Flex, Box,
-	UnorderedList, ListItem, 
+  Skeleton,
+  ListItem, 
+  Avatar,
+  Text, 
 } from "@chakra-ui/react"
-import ActionButtons from "./ActionButtons"
-import {StarIcon} from "@chakra-ui/icons"
-import Link from "@/components/navigation/Link"
 
-import {useQueries} from "react-query"
-import {useUsers} from "@/users_context"
-import {capitalize} from "@/utils/stringHelpers"
+import Link from "~/components/navigation/Link";
+import ActionButtons from "./ActionButtons";
 
-function ProfileOverview({selectedId}) {
-  const {getProfessional} = useUsers("professional")
+function ProfileOverview({ selectedId }) {
+  const { getProfessional } = useUsers("professional");
   const [
     {data: included, isLoading},
     {data: userDetails},
@@ -45,11 +46,11 @@ function ProfileOverview({selectedId}) {
     }
   ])
 
-  const field = attributes?.field
-  const headline = attributes?.headline
-  const services = relationships?.services.data
-  const workPortfolios = relationships?.workPortfolios.data
-  const reviews = relationships?.reviews.data
+  const field = attributes?.field;
+  const headline = attributes?.headline;
+  const reviews = relationships?.reviews.data;
+  const services = relationships?.services.data;
+  const workPortfolios = relationships?.workPortfolios.data;
 
 	return (
 		<Box className={styles.overview_content}>
@@ -129,7 +130,7 @@ function ProfileOverview({selectedId}) {
         ))}
 			</Box>
 		</Box>
-	)
+	);
 }
 
-export default ProfileOverview
+export default ProfileOverview;

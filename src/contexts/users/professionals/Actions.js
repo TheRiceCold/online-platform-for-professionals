@@ -1,28 +1,28 @@
-import Axios from "@/axios"
-import CryptoAES from "crypto-js/aes"
-import CryptoENC from "crypto-js/enc-utf8"
-import {useStorage} from "@/hooks/useStorage"
-import {capitalize} from "@/utils/stringHelpers"
+import { capitalize } from "~/lib/utils/stringHelpers";
+import { useStorage } from "~/lib/hooks/useStorage";
+
+import CryptoENC from "crypto-js/enc-utf8";
+import Axios from "~/lib/adapters/axios";
+import CryptoAES from "crypto-js/aes";
 
 function Actions(user) {
-  const {token} = user
-  const path = "professionals/"
-  const config = { headers: { Authorization: token } }
+  const path = "professionals/";
+  const config = { headers: { Authorization: user.token } };
 
   this.getAll = async() => {
-    const {data} = await Axios.get(path, config)
-    return data
+    const { data } = await Axios.get(path, config);
+    return data;
   }
 
-  this.getById = async({queryKey}) => {
-    const [_, id] = queryKey
-    const {data} = await Axios.get(path+id, config)
-    return data
+  this.getById = async({ queryKey }) => {
+    const [_, id] = queryKey;
+    const { data } = await Axios.get(path+id, config);
+    return data;
   }
 
   this.getUser = async() => {
-    const {data} = await Axios.get(path+user.professionalId, config)
-    return data
+    const { data } = await Axios.get(path+user.professionalId, config);
+    return data;
   }
 
   this.create = async data => {
@@ -30,68 +30,67 @@ function Actions(user) {
       professional: {
         user_id: user.id,
         ...data
-      } 
-    }, config)
+      }
+    }, config);
 
     if (res.status === 201) {
-      const storage = useStorage()
-      const professionalId = res?.data?.included[0]?.relationships?.professional?.data.id
+      const storage = useStorage();
+      const professionalId = res?.data?.included[0]?.relationships?.professional?.data.id;
 
-      const secret = process.env.NEXT_PUBLIC_SECRET
+      const secret = process.env.NEXT_PUBLIC_SECRET;
       const storedAuthData = CryptoAES.decrypt(
         storage.getItem({
           type: "session",
           key: "auth_data"
-        }) ?? "", secret)
+        }) ?? "", secret);
 
 
-      let authData = storedAuthData && storedAuthData.toString(CryptoENC)
-      authData = authData && JSON.parse(authData)
-      authData.professionalId = professionalId
+      let authData = storedAuthData && storedAuthData.toString(CryptoENC);
+      authData = authData && JSON.parse(authData);
+      authData.professionalId = professionalId;
 
       storage.setItem({
         type: "session",
         key: "auth_data",
         value: CryptoAES.encrypt(JSON.stringify(authData), secret)
-      })
+      });
     }
     
-    return res
+    return res;
   }
 
-  this.update = async(id, data) => 
-    await Axios.patch(path+id, {
-      professional: { ...data }
-    }, config)
+  this.update = async(id, data) => await Axios.patch(
+    path+id, 
+    { professional: { ...data } }, 
+    config
+  );
 
-  this.delete = async id => 
-    await Axios.delete(path+id, config)
+  this.delete = async id => await Axios.delete(path+id, config);
 
   // User 
-  this.updateUser = async data => 
-    await this.update(user.professionalId, data)
+  this.updateUser = async data => await this.update(user.professionalId, data);
 
   // User Attributes
   this.getAttributes = async() => {
-    const {included} = await this.getById(user.professionalId)
-    return included[0].attributes
+    const {included} = await this.getById(user.professionalId);
+    return included[0].attributes;
   }
 
   this.getFullname = async() => {
-    const {firstName, lastName} = await this.getAttributes()
-    return capitalize(`${firstName} ${lastName}`)
+    const {firstName, lastName} = await this.getAttributes();
+    return capitalize(`${firstName} ${lastName}`);
   }
 
   this.getLocation = async() => {
-    const {city, region} = await this.getAttributes()
-    return `${city}, ${region}, Philippines`
+    const {city, region} = await this.getAttributes();
+    return `${city}, ${region}, Philippines`;
   }
 
   // Professional Attributes
   this.getContactInfo = async() => {
-    const {data} = await this.getById(user.professionalId)
-    return data?.attributes
+    const {data} = await this.getById(user.professionalId);
+    return data?.attributes;
   }
 }
 
-export default Actions
+export default Actions;

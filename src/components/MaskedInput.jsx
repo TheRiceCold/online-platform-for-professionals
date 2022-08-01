@@ -1,21 +1,17 @@
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 import {
-  ViewIcon, 
-  ViewOffIcon
-} from "@chakra-ui/icons"
-import {
-  FormLabel,
-  FormControl,
-  Button, Tooltip,
-  Input, InputGroup, 
   InputRightElement,
-} from "@chakra-ui/react"
-
-import {useState} from "react"
+  Input, InputGroup, 
+  Button, Tooltip,
+  FormControl,
+  FormLabel,
+} from "@chakra-ui/react";
 
 function MaskedInput (props) {
-  const [show, setShow] = useState(false)
-  const type = (show ? "text" : "password")
-  const Icon = (show ? <ViewOffIcon/> : <ViewIcon/>)
+  const [show, setShow] = useState(false);
+  const type = show ? "text" : "password";
+  const Icon = show ? <ViewOffIcon/> : <ViewIcon/>;
 
   return (
     <FormControl mt={16}>
@@ -36,7 +32,7 @@ function MaskedInput (props) {
         </InputRightElement>
       </InputGroup>
     </FormControl>
-  )
+  );
 }
 
-export default MaskedInput
+export default MaskedInput;

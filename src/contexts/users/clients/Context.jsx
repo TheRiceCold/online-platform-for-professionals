@@ -1,31 +1,29 @@
 import Actions from "./Actions"
 
-import {createContext} from "react"
-import {useAuth} from "@/auth_context"
-import {userNavLinks} from "./userNavLinks"
-import {userMenuItems} from "./userMenuItems"
-import {useDisclosure} from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/react";
+import { userMenuItems } from "./userMenuItems";
+import { userNavLinks } from "./userNavLinks";
+import { useAuth } from "../../auth/Context";
+import { createContext } from "react";
 
-const ClientsContext = createContext()
+const ClientsContext = createContext();
 
 const ClientsProvider = ({ children }) => {
-	const { Provider } = ClientsContext
-	const { user, logout } = useAuth()
-	const call = new Actions(user)
+	const { user, logout } = useAuth();
+	const call = new Actions(user);
 
 	const menuItems = settingsModal =>
-		userMenuItems(settingsModal, logout)
-
+		userMenuItems(settingsModal, logout);
 
   const navModals = {
     subscriptions: useDisclosure(),
     myProfessionals: useDisclosure()
-  }
+  };
 
-  const navLinks = userNavLinks(user.clientId, navModals) 
+  const navLinks = userNavLinks(user.clientId, navModals);
 
 	return (
-		<Provider
+		<ClientsContext.Provider
 			value={{
 				navLinks,
 				menuItems,
@@ -37,8 +35,8 @@ const ClientsProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</Provider>
+		</ClientsContext.Provider>
 	);
 };
 
-export {ClientsContext, ClientsProvider}
+export { ClientsContext, ClientsProvider }

@@ -1,27 +1,27 @@
-import styles from "@/styles/Components.module.sass"
+import styles from "~/styles/Components.module.sass"
 
-import Button from "@/components/Button"
-import {MoonLoader} from "react-spinners"
-import {CloseIcon} from "@chakra-ui/icons"
-import {Avatar, Box, Flex, Heading} from "@chakra-ui/react"
-import AlertDialog from "@/components/overlay/AlertDialog"
+import { useConnections } from "~/contexts/connections/Context";
+import { Avatar, Box, Flex, Heading } from "@chakra-ui/react";
+import { capitalize } from "~/lib/utils/stringHelpers";
+import { useDisclosure } from "@chakra-ui/react";
+import { CloseIcon } from "@chakra-ui/icons";
+import { MoonLoader } from "react-spinners";
+import { useMutation } from "react-query";
 
-import {useMutation} from "react-query"
-import {useDisclosure} from "@chakra-ui/react"
-import {capitalize} from "@/utils/stringHelpers"
-import {useConnections} from "@/connections_context"
+import AlertDialog from "./overlay/AlertDialog";
+import Button from "./Button";
 
 function UserConnectionList(props) {
-  const {isLoading, connections, query} = props
-  const deleteAlertDialog = useDisclosure()
+  const { isLoading, connections, query } = props;
+  const deleteAlertDialog = useDisclosure();
 
-  const {deleteConnection} = useConnections()
-  const deleteMutation = useMutation(deleteConnection)
+  const { deleteConnection } = useConnections();
+  const deleteMutation = useMutation(deleteConnection);
 
   const handleDelete = () => {
     // deleteMutation.mutate()
     console.log("delete connection")    
-  }
+  };
 
   return (
     <Box className={styles.list_wrapper}>
@@ -76,4 +76,4 @@ function UserConnectionList(props) {
   )
 }
 
-export default UserConnectionList
+export default UserConnectionList;

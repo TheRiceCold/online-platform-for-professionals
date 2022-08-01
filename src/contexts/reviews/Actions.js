@@ -1,12 +1,11 @@
-import Axios from "@/axios"
+import Axios from "~/lib/adapters/axios";
 
 function Actions(user) {
-  const {token} = user
-  const path = id => `professionals/${id}/reviews/`
-  const config = { headers: { Authorization: token } }
+  const path = id => `professionals/${id}/reviews/`;
+  const config = { headers: { Authorization: user.token } };
 
   this.getAll = async professionalId => { 
-    const url = path(professionalId)
+    const url = path(professionalId);
     return await Axios.get(url, config)
   }
 

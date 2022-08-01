@@ -1,45 +1,41 @@
-import styles from '@/styles/Bookings.module.sass'
+import styles from "~/styles/Bookings.module.sass";
 
+import { DeleteIcon } from "@chakra-ui/icons";
+import { Button } from "~/components";
 import {
-	Text,
-	Modal,
-	Input,
-	ModalBody,
-	ModalHeader,
-	ModalFooter,
+	ModalCloseButton,
 	ModalOverlay,
 	ModalContent,
-	ModalCloseButton,
-} from "@chakra-ui/react"
+	ModalFooter,
+	ModalHeader,
+	ModalBody,
+	Modal,
+	Input,
+	Text,
+} from "@chakra-ui/react";
 
-import Button from "@/components/Button"
-import {DeleteIcon} from '@chakra-ui/icons'
-
-import {useState} from "react"
-import {useQuery} from "react-query"
-import {useUsers} from "@/users_context"
-import {useDisclosure} from "@chakra-ui/react"
-import {useCalendlyToken} from "@/calendly_token_context"
+import { useCalendlyToken } from "~/contexts/users/professionals/calendly_token/Context";
+import { useUsers } from "~/contexts/users/Context";
+import { useDisclosure } from "@chakra-ui/react";
+import { useQuery } from "react-query";
+import { useState } from "react";
 
 const CancelModal = () => {
-	const {isOpen, onOpen, onClose} = useDisclosure()
+	const { isOpen, onOpen, onClose } = useDisclosure();
 	// TODO client_showed_up value in request body
-	const [reason, setReason] = useState('')
+	const [reason, setReason] = useState("");
 
-  const {
-    postCancelEvent,
-    getCalendlyToken,
-  } = useCalendlyToken()
-  const {getUserProfessional} = useUsers("professional")
-	const handleInputChange = e => setReason(e.target.value)
+  const { postCancelEvent, getCalendlyToken } = useCalendlyToken();
+  const { getUserProfessional } = useUsers("professional");
+	const handleInputChange = e => setReason(e.target.value);
 
-  const {data: calendlyTokenId} = useQuery(
+  const { data: calendlyTokenId } = useQuery(
     "calendly_token_id", 
     getUserProfessional, {
       select: data => data.data.relationships
         .calendlyToken.data.id,
     }
-  )
+  );
 
   const {data: calendlyToken} = useQuery(
     ["calendly_token", calendlyTokenId],
@@ -97,10 +93,7 @@ const CancelModal = () => {
             >
 							Cancel
 						</Button>
-						<Button 
-              onClick={cancelEvent} 
-              className={styles.submitBtn}
-            >
+						<Button onClick={cancelEvent} className={styles.submitBtn}>
 							Submit
 						</Button>
 					</ModalFooter>

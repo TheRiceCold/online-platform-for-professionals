@@ -1,38 +1,35 @@
 import {
-  SunIcon, 
-  MoonIcon,
-  CloseIcon,
   HamburgerIcon, 
-} from "@chakra-ui/icons"
+  CloseIcon,
+  MoonIcon,
+  SunIcon, 
+} from "@chakra-ui/icons";
 import {
-  Box, Flex,
-  IconButton,
   Image, Stack,
   Link, Button,
-} from "@chakra-ui/react"
-import Links from "./Links"
-import UserMenu from "./userMenu/UserMenu"
-import SearchBar from "@/components/SearchBar"
-import NextLink from "@/components/navigation/Link"
-import ClienteleModal from "@/layouts/modals/ClienteleModal"
-import SubscribersModal from "@/layouts/modals/SubscribersModal"
-import SubscriptionsModal from "@/layouts/modals/SubscriptionsModal"
-import MyProfessionalsModal from "@/layouts/modals/MyProfessionalsModal"
+  IconButton,
+  Box, Flex,
+} from "@chakra-ui/react";
 
-import {useAuth} from "@/auth_context"
-import {useUsers} from "@/users_context"
-import {useColorMode, useDisclosure} from "@chakra-ui/react"
+import { useDisclosure, useColorMode } from "@chakra-ui/react";
+import { useUsers } from "~/contexts/users/Context";
+import { useAuth } from "~/contexts/auth/Context";
+
+import MyProfessionalsModal from "../modals/MyProfessionalsModal";
+import SubscriptionsModal from "../modals/SubscriptionsModal";
+import SubscribersModal from "../modals/SubscribersModal";
+import ClienteleModal from "../modals/ClienteleModal";
+import UserMenu from "./userMenu/UserMenu";
+import NextLink from "../navigation/Link";
+import SearchBar from "../SearchBar";
+import Links from "./Links";
 
 function Navbar(props) {
-  const {
-    links, 
-    styles, 
-    withSearch, 
-  } = props
-  const {user, userRole} = useAuth()
-  const {navModals} = useUsers(userRole)
-  const {isOpen, onOpen, onClose} = useDisclosure()
-  const {colorMode, toggleColorMode} = useColorMode()
+  const { links, styles, withSearch } = props;
+  const { user, userRole } = useAuth();
+  const { navModals } = useUsers(userRole);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
   const NavIcon = isOpen ? <CloseIcon/> : <HamburgerIcon/>
 
   return (
@@ -93,7 +90,7 @@ function Navbar(props) {
         ) : null
       }
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

@@ -1,5 +1,5 @@
-import Axios from "@/axios";
-import {useStorage} from "@/hooks/useStorage";
+import { useStorage } from "~/lib/hooks/useStorage";
+import Axios from "~/lib/adapters/axios";
 
 function Actions(dispatch, token) {
   const storage = useStorage();

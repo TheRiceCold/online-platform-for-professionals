@@ -1,18 +1,16 @@
-import {useAuth} from '@/auth_context'
-import {useContext, createContext} from "react"
+import { useContext, createContext } from "react";
+import { useAuth } from "../auth/Context";
 
-import Actions from "./Actions"
+import Actions from "./Actions";
 
-const ConnectionsContext = createContext()
+const ConnectionsContext = createContext();
 
-const ConnectionsProvider = ({children}) => {
-  const {Provider} = ConnectionsContext
-  const {user} = useAuth()
-
-  const call = new Actions(user)
+const ConnectionsProvider = ({ children }) => {
+  const {user} = useAuth();
+  const call = new Actions(user);
 
   return (
-    <Provider value={{ 
+    <ConnectionsContext.Provider value={{ 
       createConnection: call.create,
       getSubscribers: call.getSubscribers,
       getClientele: call.getClientele,
@@ -21,9 +19,9 @@ const ConnectionsProvider = ({children}) => {
       deleteConnection: call.delete
     }}>
       {children}
-    </Provider>
-  )
+    </ConnectionsContext.Provider>
+  );
 }
 
-export default ConnectionsProvider
-export const useConnections = () => useContext(ConnectionsContext)
+export default ConnectionsProvider;
+export const useConnections = () => useContext(ConnectionsContext);

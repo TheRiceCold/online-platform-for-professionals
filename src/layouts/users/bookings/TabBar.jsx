@@ -1,7 +1,6 @@
-import styles from '@/styles/Bookings.module.sass';
-import { InfoIcon } from '@chakra-ui/icons';
-
-import { Box, Button, Tooltip, Text } from '@chakra-ui/react';
+import styles from "~/styles/Bookings.module.sass";
+import { Box, Button, Tooltip, Text } from "@chakra-ui/react";
+import { InfoIcon } from "@chakra-ui/icons";
 
 const TabBar = ({ tabStatus, setTabStatus }) => {
 	const isCurrentPage = (status) => {
@@ -13,15 +12,15 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 		<Box className={styles.tabBar}>
 			<Button
 				variant="ghost"
-				className={isCurrentPage('active')}
-				onClick={() => setTabStatus('active')}
+				className={isCurrentPage("active")}
+				onClick={() => setTabStatus("active")}
 			>
 				Upcoming
 			</Button>
 			<Button
 				variant="ghost"
-				className={isCurrentPage('pending')}
-				onClick={() => setTabStatus('pending')}
+				className={isCurrentPage("pending")}
+				onClick={() => setTabStatus("pending")}
 			>
 				<Tooltip // Not Working
 					// TODO Change label based on if the current user is a professional or client
@@ -37,8 +36,8 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 			</Button>
 			<Button
 				variant="ghost"
-				className={isCurrentPage('finished')}
-				onClick={() => setTabStatus('finished')}
+				className={isCurrentPage("finished")}
+				onClick={() => setTabStatus("finished")}
 			>
 				{/* TODO Add condition to render Tooltip if current user is a client
 					Client label:
@@ -53,8 +52,8 @@ const TabBar = ({ tabStatus, setTabStatus }) => {
 			</Button>
 			<Button
 				variant="ghost"
-				className={isCurrentPage('canceled')}
-				onClick={() => setTabStatus('canceled')}
+				className={isCurrentPage("canceled")}
+				onClick={() => setTabStatus("canceled")}
 			>
 				Canceled
 			</Button>

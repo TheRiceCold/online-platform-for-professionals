@@ -1,13 +1,13 @@
-import styles from "@/styles/users/Professionals.module.sass"
+import styles from "~/styles/users/Professionals.module.sass"
 
-import {Box} from "@chakra-ui/react"
-import UsersSidebar from "./sidebar/UsersSidebar"
-import ProfileOverview from "./overview/ProfileOverview"
+import ProfileOverview from "./overview/ProfileOverview";
+import UsersSidebar from "./sidebar/UsersSidebar";
 
-import {useState} from "react"
+import { Box } from "@chakra-ui/react";
+import { useState } from "react";
 
 const ProfessionalsLayout = () => {
-  const [selectedId, setSelectedId] = useState(null)
+  const [selectedId, setSelectedId] = useState(null);
 
 	return (
     <Box 
@@ -17,7 +17,7 @@ const ProfessionalsLayout = () => {
       <UsersSidebar setSelectedId={setSelectedId}/>
       {selectedId && <ProfileOverview selectedId={selectedId}/>}
     </Box>
-	)
+	);
 }
 
-export default ProfessionalsLayout
+export default ProfessionalsLayout;

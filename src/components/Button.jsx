@@ -1,14 +1,14 @@
-import {Button as ChakraButton} from "@chakra-ui/react"
+import { Button as ChakraButton } from "@chakra-ui/react";
+import { useColorModeValue } from "@chakra-ui/react";
 
-import {useColorModeValue} from "@chakra-ui/react"
+function Button({ children, ...props }) {
+  const primaryBg = useColorModeValue("teal.300", "teal.600");
+  const primaryHoverBg = useColorModeValue("teal.400", "teal.700");
 
-function Button({children, ...props}) {
-  const primaryBg = useColorModeValue("teal.300", "teal.600")
-  const primaryHoverBg = useColorModeValue("teal.400", "teal.700")
-  const delBg = useColorModeValue("red.400", "red.500")
-  const delHoverBg = useColorModeValue("red.500", "red.600")
+  const delBg = useColorModeValue("red.400", "red.500");
+  const delHoverBg = useColorModeValue("red.500", "red.600");
 
-  const isPrimary = props.variant === "primary"
+  const isPrimary = props.variant === "primary";
 
   const primaryProps = isPrimary ? {
     colorScheme: "teal",
@@ -19,7 +19,7 @@ function Button({children, ...props}) {
       colorScheme: "red",
       bg: delBg,
       _hover: { bg: delHoverBg }
-    } : null
+    } : null;
 
   return (
     <ChakraButton
@@ -30,7 +30,7 @@ function Button({children, ...props}) {
     >
       {children}
     </ChakraButton>
-  )
+  );
 }
 
-export default Button
+export default Button;

@@ -6,6 +6,7 @@ import {
 
 import PasswordInput from "./inputs/PasswordInput";
 import SelectInput from "./selects/SelectInput";
+import ImageUpload from "./files/ImageUpload";
 import RadioGroup from "./radios/RadioGroup";
 import PhoneInput from "./inputs/PhoneInput";
 import TextArea from "./inputs/TextArea";
@@ -19,25 +20,22 @@ function FormControl(props) {
     switch (input.type) {
       case "tel":
         return <PhoneInput {...props} />
-
       case "password": 
         return <PasswordInput {...props} />
-
       case "select": 
         return <SelectInput {...props} />
-
       case "radio":
         return <RadioGroup {...props} />
-
       case "textarea":
         return <TextArea {...props} />
-
+      case "image":
+        return <ImageUpload {...props} />
       default:
         return <Input {...props} />
     }
   };
 
-  return (
+  return (input.type !== "image" ?
     <ChakraFormControl
       key={id}
       isInvalid={error}
@@ -53,7 +51,7 @@ function FormControl(props) {
         {error && error?.message}
       </FormErrorMessage>
     </ChakraFormControl>
-  );
+  : inputType());
 }
 
 export default FormControl;

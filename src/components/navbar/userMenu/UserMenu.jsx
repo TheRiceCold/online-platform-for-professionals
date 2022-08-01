@@ -2,15 +2,19 @@ import {
   Text, Avatar,
   Menu, MenuButton, 
   Box, HStack, VStack, 
-} from "@chakra-ui/react"
-import MenuList from "./MenuList"
-import {ChevronDownIcon} from "@chakra-ui/icons"
+} from "@chakra-ui/react";
+import MenuList from "./MenuList";
+import { ChevronDownIcon } from "@chakra-ui/icons";
 
-import {useAuth} from "@/auth_context"
-import {capitalize} from "@/utils/stringHelpers"
+import { capitalize } from "~/lib/utils/stringHelpers";
+import { useAuth } from "~/contexts/auth/Context";
 
 const UserMenu = () => {
-  const {userImage, userFullname, userRole} = useAuth()
+  const {
+    userRole,
+    userImage, 
+    userFullname, 
+  } = useAuth();
 
   return (
     <Menu>
@@ -18,10 +22,11 @@ const UserMenu = () => {
         <HStack>
           <Avatar size="sm" src={userImage}/>
           <VStack
-            display={{ base: 'none', md: 'flex' }}
-            alignItems="flex-start"
+            ml="2"
             spacing="1px"
-            ml="2">
+            alignItems="flex-start"
+            display={{ base: 'none', md: 'flex' }}
+          >
             <Text fontSize="sm">{userFullname}</Text>
             <Text fontSize="xs" color="gray.500">
               {capitalize(userRole)}
@@ -34,7 +39,7 @@ const UserMenu = () => {
       </MenuButton>
       <MenuList />
     </Menu>
-  )
-}
+  );
+};
 
-export default UserMenu
+export default UserMenu;

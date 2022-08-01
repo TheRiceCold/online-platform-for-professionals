@@ -6,6 +6,7 @@ const Schema = z.object({
     .min(1, { message: "Title can't be empty" }),
   details: z.string()
     .min(1, { message: "Details can't be empty" }),
+  image_url: z.string(),
 })
 
 export default Schema

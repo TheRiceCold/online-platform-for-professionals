@@ -1,4 +1,4 @@
-import Link from "@/components/navigation/Link";
+import Link from "~/components/navigation/Link";
 import { Text } from "@chakra-ui/react";
 
 function Links({ isLoginPage }) {

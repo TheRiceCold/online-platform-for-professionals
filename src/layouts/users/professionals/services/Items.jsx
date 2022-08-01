@@ -1,13 +1,13 @@
-import Card from "./Card"
-import MoonLoader from "react-spinners/MoonLoader"
-import {Flex, Grid, Heading} from "@chakra-ui/react"
+import Card from "./Card";
+import MoonLoader from "react-spinners/MoonLoader";
 
-import {useQuery} from "react-query"
-import {useServices} from "@/services_context"
+import { useServices } from "~/contexts/users/professionals/services/Context";
+import { Flex, Grid, Heading } from "@chakra-ui/react";
+import { useQuery } from "react-query"
 
 function Items(props) {
-  const {getServices} = useServices()
-  const {isLoading, data: services} = useQuery("services", getServices)
+  const { getServices } = useServices();
+  const { isLoading, data: services } = useQuery("services", getServices);
 
   return (isLoading ? 
     <Flex alignItems="center" h="50vh">
@@ -31,7 +31,7 @@ function Items(props) {
         )
       }
     </Grid>
-  )
+  );
 }
 
-export default Items
+export default Items;

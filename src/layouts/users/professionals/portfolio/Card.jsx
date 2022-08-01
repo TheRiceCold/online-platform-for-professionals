@@ -1,34 +1,34 @@
+import { useColorModeValue } from "@chakra-ui/react";
+import { Button } from "~/components"
 import {
-  Center,
-  Box, Stack,
   Heading, Text,
-} from "@chakra-ui/react"
-import Button from "@/components/Button"
-
-import {useColorModeValue} from "@chakra-ui/react"
+  Box, Stack,
+  Center,
+  Image,
+} from "@chakra-ui/react";
 
 function Card(props) {
   const {
     modal,
+    portfolio,
     setAction, 
     setSelectedId, 
     deleteAlertDialog,
-    portfolio
-  } = props
+  } = props;
 
-  const {id, attributes} = portfolio
-  const {title, details} = attributes
+  const { id, attributes } = portfolio;
+  const { title, details } = attributes;
 
   const handleUpdate = () => {
-    setAction("update")
-    setSelectedId(id)
-    modal.onOpen()
-  }
+    setAction("update");
+    setSelectedId(id);
+    modal.onOpen();
+  };
 
   const handleDeleteAlert = () => {
-    setSelectedId(id)
-    deleteAlertDialog.onOpen()
-  }
+    setSelectedId(id);
+    deleteAlertDialog.onOpen();
+  };
 
   return (
     <Center py={6}>
@@ -41,6 +41,7 @@ function Card(props) {
         bg={useColorModeValue('white', 'gray.900')}
       >
         <Stack>
+          <Image src={attributes.imageUrl} height={250} />
           <Heading
             fontSize={'2xl'}
             color={useColorModeValue('gray.700', 'white')}
@@ -74,7 +75,7 @@ function Card(props) {
         </Stack>
       </Box>
     </Center>
-  )
+  );
 }
 
-export default Card
+export default Card;

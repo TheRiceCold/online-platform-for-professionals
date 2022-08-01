@@ -1,7 +1,7 @@
-import Axios from "@/axios";
+import Axios from "~/lib/adapters/axios";
 
 const handler = async(req, res) => {
-  const {data} = await Axios("cities");
+  const { data } = await Axios("cities");
 
   const cities = data.map(city => {
     return {

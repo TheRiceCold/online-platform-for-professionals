@@ -1,30 +1,34 @@
-import Button from "@/components/Button"
-import Form from "@/components/forms/Form"
-import Modal from "@/components/overlay/Modal"
-import MaskedInput from "@/components/MaskedInput"
+import MaskedInput from "../MaskedInput";
+import Modal from "../overlay/Modal";
+import Form from "../forms/Form";
+import Button from "../Button";
 
-import {useForm} from "react-hook-form"
-import {useUsers} from "@/users_context"
-import {useToast} from "@chakra-ui/react"
-import {useEffect, useState} from "react"
-import {useCalendlyToken} from "@/calendly_token_context"
-import {useMutation, useQuery, useQueryClient} from "react-query"
+import { useCalendlyToken } from "~/contexts/users/professionals/calendly_token/Context";
+import { useUsers } from "~/contexts/users/Context";
+import { useEffect, useState } from "react";
+import { useToast } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+import { 
+  useQuery, 
+  useMutation, 
+  useQueryClient,
+} from "react-query";
 
 function CalendlyTokenModal(props) {
-  const toast = useToast()
-  const queryClient = useQueryClient()
-  const [toasts, setToasts] = useState()
-  const [action, setAction] = useState("create")
+  const toast = useToast();
+  const queryClient = useQueryClient();
+  const [toasts, setToasts] = useState();
+  const [action, setAction] = useState("create");
   const {
     inputs, 
     getCalendlyToken,
     deleteCalendlyToken,
     createCalendlyToken, 
     updateCalendlyToken
-  } = useCalendlyToken()
-  const {getUserProfessional} = useUsers("professional")
+  } = useCalendlyToken();
+  const { getUserProfessional } = useUsers("professional");
 
-  const formHook = useForm()
+  const formHook = useForm();
   const {data: calendlyTokenId} = useQuery(
     "calendly_token_id", 
     getUserProfessional, {
@@ -34,15 +38,15 @@ function CalendlyTokenModal(props) {
           setAction("update")
       }
     }
-  )
+  );
 
-  const {data: calendlyToken} = useQuery(
+  const { data: calendlyToken } = useQuery(
     ["calendly_token", calendlyTokenId],
     getCalendlyToken, {
       enabled: !!calendlyTokenId,
       select: data => data.attributes.authorization
     }
-  )
+  );
 
   const mutation = useMutation(
     action === "update" ? 
@@ -58,11 +62,11 @@ function CalendlyTokenModal(props) {
           variant: "solid",
           isClosable: true,
           status: "success",
-        }])
-        props.onClose()
+        }]);
+        props.onClose();
       },
       onError: error => {
-        const {errors} = error?.response?.data
+        const {errors} = error?.response?.data;
         setToasts(
           errors.map(error => {
             return {
@@ -73,17 +77,17 @@ function CalendlyTokenModal(props) {
               isClosable: true,
             }
           })
-        )
+        );
     },
   })
 
-  const submitHandler = data => mutation.mutate({...data})
+  const submitHandler = data => mutation.mutate({...data});
 
   useEffect(() => {
     if (toasts) 
       toasts.forEach(message => toast(message))
       queryClient.invalidateQueries("calendly_token_id")
-  }, [JSON.stringify(toasts)])
+  }, [JSON.stringify(toasts)]);
 
   const handleDelete = async() => {
     try {
@@ -96,7 +100,7 @@ function CalendlyTokenModal(props) {
       }])
       props.onClose()
     } catch(error) { console.log(error) }
-  }
+  };
 
   return (
     <Modal
@@ -132,7 +136,7 @@ function CalendlyTokenModal(props) {
         </>
       }
     </Modal>
-  )
-}
+  );
+};
 
-export default CalendlyTokenModal
+export default CalendlyTokenModal;

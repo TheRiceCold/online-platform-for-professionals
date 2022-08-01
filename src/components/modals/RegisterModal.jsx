@@ -1,18 +1,19 @@
 import { Flex, Heading } from "@chakra-ui/react";
-import Modal from "@/components/overlay/Modal";
-import Form from "@/components/forms/Form";
-import Button from "@/components/Button";
 
+import { hostURL } from "~/lib/constants/environments";
 import { useQuery, useMutation } from "react-query";
-import { useUsers } from "@/contexts/users/Context";
-import { hostURL } from "@/constants/environments";
-import { useAuth } from "@/contexts/auth/Context";
+import { useUsers } from "~/contexts/users/Context";
+import { useAuth } from "~/contexts/auth/Context";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import { useState } from "react";
+
+import Modal from "../overlay/Modal";
+import Form from "../forms/Form";
+import Button from "../Button";
 import axios from "axios";
 
-const RegisterModal = () => {
+function RegisterModal() {
   const router = useRouter();
   const [alerts, setAlerts] = useState();
   const { user, dispatch, logout } = useAuth();
@@ -73,7 +74,7 @@ const RegisterModal = () => {
         submitHandler={data => mutation.mutate({...data})}
       />
     </Modal>
-  )
+  );
 }
 
-export default RegisterModal
+export default RegisterModal;

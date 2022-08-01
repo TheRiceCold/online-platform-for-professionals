@@ -1,15 +1,31 @@
-import styles from '@/styles/Components.module.sass'
+import styles from "~/styles/Components.module.sass";
 
-import {Button} from "@chakra-ui/react"
-import {PopupModal} from "react-calendly"
-import {CalendarIcon} from "@chakra-ui/icons"
+import { useUsers } from "~/contexts/users/Context";
+import { CalendarIcon } from "@chakra-ui/icons";
+import { PopupModal } from "react-calendly";
+import { Button } from "@chakra-ui/react";
+import { useQuery } from "react-query";
+import { useState } from "react";
 
-import {useState} from "react"
-
-const CalendlyButton = (props) => {
+function CalendlyButton(props) {
 	// TODO Replace with how to get client details if useContext will be used
-	const { firstName, lastName, email } = props;
+	const { 
+    email, selectedId,
+    lastName, firstName
+  } = props;
 	const [isOpen, setIsOpen] = useState(false);
+  const { getProfessional } = useUsers("professional");
+
+  const { data: calendlyData }  = useQuery(
+    ["selected", selectedId], 
+    getProfessional, 
+    {select: data => 
+      data.included.find(currentValue => {
+      if (currentValue.type === "calendlyToken")
+        return currentValue;
+      }) 
+    }
+  );
 
 	return (
 		<div>
@@ -21,10 +37,8 @@ const CalendlyButton = (props) => {
 				Easy Book
 			</Button>
 			<PopupModal
-				// TODO EDIT URL TO be dynamic
-				// = user.professional.calendly_token.scheduling_url
-				url="https://calendly.com/godfreyperalta"
-				rootElement={document.getElementById('__next')}
+				url={calendlyData?.attributes.schedulingUrl}
+				rootElement={document.getElementById("__next")}
 				prefill={{
 					email: email,
 					firstName: firstName,
@@ -36,6 +50,6 @@ const CalendlyButton = (props) => {
 			/>
 		</div>
 	);
-};
+}
 
 export default CalendlyButton;

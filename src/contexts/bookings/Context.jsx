@@ -1,18 +1,16 @@
-import {useAuth} from '@/auth_context'
-import {useContext, createContext} from "react"
+import { useAuth } from "../auth/Context";
+import { useContext, createContext } from "react";
 
-import Actions from "./Actions"
+import Actions from "./Actions";
 
-const BookingsContext = createContext()
+const BookingsContext = createContext();
 
 const BookingsProvider = ({children}) => {
-  const {Provider} = BookingsContext
-  const {user} = useAuth()
-
-  const call = new Actions(user)
+  const { user } = useAuth();
+  const call = new Actions(user);
 
   return (
-    <Provider value={{ 
+    <BookingsContext.Provider value={{ 
       getBookings: call.getAll,
       getFilterBookings: call.getByFilter,
       getBooking: call.getById,
@@ -22,9 +20,9 @@ const BookingsProvider = ({children}) => {
       deleteBooking: call.delete
     }}>
       {children}
-    </Provider>
+    </BookingsContext.Provider>
   )
 }
 
-export default BookingsProvider
-export const useBookings = () => useContext(BookingsContext)
+export default BookingsProvider;
+export const useBookings = () => useContext(BookingsContext);

@@ -1,15 +1,15 @@
-import styles from "@/styles/Home.module.sass";
+import styles from "~/styles/Home.module.sass";
 
-import HomeLayout from "@/layouts/home/Layout";
-import Footer from "@/layouts/footer/Footer";
-import Meta from "@/components/Meta";
-
-import { useAuth } from "@/auth_context";
+import { useAuth } from "~/contexts/auth/Context";
+import { Meta, Navbar } from "~/components";
 import { useRouter } from "next/router";
 
+import HomeLayout from "~/layouts/HomeLayout";
+import Footer from "~/layouts/Footer";
+
 const Home = () => {
-  const { userRole, user } = useAuth();
   const router = useRouter();
+  const { userRole, user } = useAuth();
 
   switch(userRole) {
     case "professional": 
@@ -26,6 +26,10 @@ const Home = () => {
 
   return (
     <main className={styles.main}>
+      <Navbar styles={styles} links={[
+        { type: "button", label: "Login", href: "/login" },
+        { type: "button", label: "Sign up", href: "/signup" },
+      ]}/>
       <Meta title="Home" />
       <HomeLayout />
       <Footer />

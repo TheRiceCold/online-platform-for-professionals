@@ -1,38 +1,35 @@
-import {createContext} from "react"
-import {useAuth} from "@/auth_context"
-import {userNavLinks} from "./userNavLinks"
-import {userMenuItems} from "./userMenuItems"
-import {useDisclosure} from "@chakra-ui/react"
-import {zodResolver} from "@hookform/resolvers/zod"
+import { zodResolver} from "@hookform/resolvers/zod";
+import { useDisclosure } from "@chakra-ui/react";
+import { userMenuItems } from "./userMenuItems";
+import { userNavLinks } from "./userNavLinks";
+import { useAuth} from "../../auth/Context";
+import { createContext } from "react";
 
-import Schema from "./Schema"
-import Inputs from "./Inputs"
-
-// Actions
+import WorkPortfoliosProvider from "./work_portfolios/Context";
+import CalendlyTokenProvider from "./calendly_token/Context";
+import ServicesProvider from "./services/Context";
+import Schema from "./Schema";
+import Inputs from "./Inputs";
 import Actions from "./Actions"
-import ServicesProvider from "./services/Context"
-import CalendlyTokenProvider from "./calendly_token/Context"
-import WorkPortfoliosProvider from "./work_portfolios/Context"
 
-const ProfessionalsContext = createContext()
+const ProfessionalsContext = createContext();
 
 const ProfessionalsProvider = ({children}) => {
-  const {Provider} = ProfessionalsContext
-  const {user, logout} = useAuth()
-  const call = new Actions(user)
+  const {user, logout} = useAuth();
+  const call = new Actions(user);
 
   const menuItems = modals => 
-    userMenuItems(modals, logout)
+    userMenuItems(modals, logout);
 
   const navModals = {
     clientele: useDisclosure(),
     subscribers: useDisclosure()
-  }
+  };
 
-  const navLinks = userNavLinks(user.professionalId, navModals) 
+  const navLinks = userNavLinks(user.professionalId, navModals);
 
   return (
-    <Provider value={{
+    <ProfessionalsContext.Provider value={{
       navLinks,
       menuItems,
       navModals,
@@ -64,7 +61,7 @@ const ProfessionalsProvider = ({children}) => {
           </WorkPortfoliosProvider>
         </ServicesProvider>
       </CalendlyTokenProvider>
-    </Provider>
+    </ProfessionalsContext.Provider>
   )
 }
 

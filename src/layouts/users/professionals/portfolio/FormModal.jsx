@@ -1,27 +1,24 @@
-import Form from "@/components/forms/Form"
-import Modal from "@/components/overlay/Modal"
+import Modal from "~/components/overlay/Modal";
+import Form from "~/components/forms/Form";
 
-import {
-  useMutation,
-  useQueryClient
-} from "react-query"
-import {useState} from "react"
-import {useForm} from "react-hook-form"
-import {capitalize} from "@/utils/stringHelpers"
-import {useWorkPortfolios} from "@/work_portfolios_context"
+import { useWorkPortfolios } from "~/contexts/users/professionals/work_portfolios/Context";
+import { useQueryClient, useMutation } from "react-query";
+import { capitalize } from "~/lib/utils/stringHelpers";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 function FormModal(props) {
-  const [alerts, setAlerts] = useState()
-  const {action, selectedId, setAlert} = props
-  const header = capitalize(`${action} Portfolio`)
+  const [alerts, setAlerts] = useState();
+  const { action, selectedId, setAlert } = props;
+  const header = capitalize(`${action} Portfolio`);
 
   const {
     inputs, resolver,
     createWorkPortfolio, 
     updateWorkPortfolio,
-  } = useWorkPortfolios()
-  const queryClient = useQueryClient()
-  const formHook = useForm({resolver})
+  } = useWorkPortfolios();
+  const queryClient = useQueryClient();
+  const formHook = useForm({ resolver });
 
   const mutation = useMutation(
     (action === "update")
@@ -44,20 +41,16 @@ function FormModal(props) {
           })
         )
       }
-    })
+    });
 
   const submitHandler = data => {
     const submittedData = (action === "update") 
       ? {selectedId, ...data} : {...data}
     mutation.mutate(submittedData)
-  }
+  };
 
   return (
-    <Modal 
-      {...props} 
-      alerts={alerts}
-      header={header}
-    >
+    <Modal {...props} alerts={alerts} header={header}>
       <Form
         inputs={inputs}
         submitValue="Save"
@@ -65,8 +58,11 @@ function FormModal(props) {
         formHook={formHook}
         submitHandler={submitHandler}
       />
+      <pre>
+        {JSON.stringify(formHook.watch(), null, 2)} 
+      </pre>
     </Modal>
-  )
+  );
 }
 
-export default FormModal
+export default FormModal;

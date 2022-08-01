@@ -1,18 +1,18 @@
-import styles from "@/styles/users/Professionals.module.sass"
+import styles from "~/styles/users/Professionals.module.sass";
 
+import { StarIcon } from "@chakra-ui/icons";
 import {
-	Avatar,
-	Box, Text,
 	SkeletonCircle,
-} from "@chakra-ui/react"
-import {StarIcon} from "@chakra-ui/icons"
+	Box, Text,
+	Avatar,
+} from "@chakra-ui/react";
 
 function ProfileDescription(props) {
   const {
     user, img, 
     isLoading, 
     setSelectedId,
-  } = props
+  } = props;
 
 	return (
     <Box 

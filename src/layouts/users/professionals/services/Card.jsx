@@ -1,11 +1,10 @@
+import { useColorModeValue } from "@chakra-ui/react";
+import { Button } from "~/components";
 import {
-  Center,
-  Box, Stack,
   Heading, Text,
-} from "@chakra-ui/react"
-import Button from "@/components/Button"
-
-import {useColorModeValue} from "@chakra-ui/react"
+  Box, Stack,
+  Center,
+} from "@chakra-ui/react";
 
 function Card(props) {
   const {
@@ -14,24 +13,21 @@ function Card(props) {
     setAction, 
     setSelectedId, 
     deleteAlertDialog,
-  } = props
+  } = props;
 
-  const {id, attributes} = service
-  const {
-    title, details, 
-    minPrice, maxPrice
-  } = attributes
+  const { id, attributes } = service;
+  const { title, details, minPrice, maxPrice } = attributes;
 
   const handleUpdate = () => {
-    setAction("update")
-    setSelectedId(id)
-    modal.onOpen()
-  }
+    setAction("update");
+    setSelectedId(id);
+    modal.onOpen();
+  };
 
   const handleDeleteAlert = () => {
-    setSelectedId(id)
-    deleteAlertDialog.onOpen()
-  }
+    setSelectedId(id);
+    deleteAlertDialog.onOpen();
+  };
 
   return (
     <Center py={6}>
@@ -65,22 +61,16 @@ function Card(props) {
           alignItems="center"
           justifyContent="space-around"
         >
-          <Button 
-            variant="primary"
-            onClick={handleUpdate}
-          >
+          <Button variant="primary" onClick={handleUpdate}>
             Edit
           </Button>
-          <Button 
-            variant="delete"
-            onClick={handleDeleteAlert}
-          >
+          <Button variant="delete" onClick={handleDeleteAlert}>
             Delete
           </Button>
         </Stack>
       </Box>
     </Center>
-  )
+  );
 }
 
-export default Card
+export default Card;

@@ -1,7 +1,15 @@
-import styles from '@/styles/Components.module.sass'
+import styles from "~/styles/Components.module.sass"
 
-import {Box, IconButton, Button, ButtonGroup} from '@chakra-ui/react'
-import {ArrowLeftIcon, ArrowRightIcon} from '@chakra-ui/icons'
+import {
+  Box, 
+  Button, 
+  IconButton, 
+  ButtonGroup,
+} from "@chakra-ui/react"
+import {
+  ArrowLeftIcon, 
+  ArrowRightIcon,
+} from "@chakra-ui/icons"
 
 const Pagination = ({ links }) => {
   links = links || []
@@ -32,18 +40,14 @@ const Pagination = ({ links }) => {
 					icon={<ArrowLeftIcon />}
 					isDisabled={checkPage(links.first)}
 				/>
-				{links.prev ? (
+				{links.prev && (
 					<Button className={styles.pagination}>{pageNumber(links.prev)}</Button>
-				) : (
-					''
-				)}
+        )}
 				<Button className={styles.pagination} isActive={true}>
 					{pageNumber(links.self)}
 				</Button>
-				{links.next ? (
+				{links.next && (
 					<Button className={styles.pagination}>{pageNumber(links.next)}</Button>
-				) : (
-					''
 				)}
 				<IconButton
 					className={styles.paginatiojjj}
@@ -54,7 +58,7 @@ const Pagination = ({ links }) => {
 				/>
 			</ButtonGroup>
 		</Box>
-	)
+	);
 }
 
-export default Pagination
+export default Pagination;

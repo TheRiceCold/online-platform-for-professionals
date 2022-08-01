@@ -11,10 +11,15 @@ function Form(props) {
     mutation,
     submitValue,
     submitHandler,
-  } = props
+  } = props;
 
-  const {register, formState, handleSubmit} = formHook
   const isGrouped = inputs[0].hasOwnProperty("inputs")
+  const { 
+    register, 
+    setValue,
+    formState, 
+    handleSubmit, 
+  } = formHook;
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
@@ -31,6 +36,7 @@ function Form(props) {
           key={input.id}
           noLabel={noLabel}
           register={register}
+          setValue={setValue}
           error={formState.errors[input.id]}
         /> 
       ))}

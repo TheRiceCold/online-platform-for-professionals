@@ -1,16 +1,16 @@
-import styles from '@/styles/Bookings.module.sass'
+import styles from "~/styles/Bookings.module.sass";
 
-import TabBar from "./TabBar"
-import {Box} from "@chakra-ui/react"
-import BookingsList from "./BookingsList"
-import Pagination from "@/professionals_layout/search/sidebar/Pagination"
+import Pagination from "../professionals/search/sidebar/Pagination";
+import BookingsList from "./BookingsList";
+import TabBar from "./TabBar";
 
-import {useState} from "react"
+import { Box } from "@chakra-ui/react";
+import { useState } from "react";
 // import {bookingLinks} from "@/data/mock_links"
 
 function BookingsLayout() {
-	const [tabStatus, setTabStatus] = useState('active')
-  const [bookingLinks, setBookingLinks] = useState([])
+	const [tabStatus, setTabStatus] = useState("active");
+  const [bookingLinks, setBookingLinks] = useState([]);
 
 	return (
 		<section className={styles.layout}>

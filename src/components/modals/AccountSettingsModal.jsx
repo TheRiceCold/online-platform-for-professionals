@@ -1,10 +1,10 @@
-import Form from "@/components/forms/Form"
-import Modal from "@/components/overlay/Modal"
-
+import { hostURL } from "~/lib/constants/environments";
 import { useMutation, useQueries } from "react-query";
-import { hostURL } from "@/constants/environments";
+import { useAuth } from "~/contexts/auth/Context";
 import { useForm } from "react-hook-form";
-import { useAuth } from "@/auth_context";
+
+import Modal from "../overlay/Modal";
+import Form from "../forms/Form";
 import axios from "axios";
 
 function AccountSettingsModal(props) {

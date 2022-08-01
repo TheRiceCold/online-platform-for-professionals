@@ -1,27 +1,25 @@
-import ServiceItems from "./Items"
-import FormModal from "./FormModal"
-import {Heading} from "@chakra-ui/react"
-import Button from "@/components/Button"
-import Alert from "@/components/feedback/Alert"
-import AlertDialog from "@/components/overlay/AlertDialog"
+import { Heading } from "@chakra-ui/react";
+import { Button } from "~/components";
 
-import {
-  useMutation,
-  useQueryClient
-} from "react-query"
-import {useState} from "react"
-import {useServices} from "@/services_context"
-import {useDisclosure} from "@chakra-ui/react"
+import AlertDialog from "~/components/overlay/AlertDialog";
+import Alert from "~/components/feedback/Alert";
+import FormModal from "./FormModal";
+import ServiceItems from "./Items";
+
+import { useServices } from "~/contexts/users/professionals/services/Context";
+import { useMutation, useQueryClient } from "react-query";
+import { useDisclosure } from "@chakra-ui/react";
+import { useState } from "react";
 
 function ServicesLayout() {
-  const modal = useDisclosure()
-  const queryClient = useQueryClient()
-  const [alert, setAlert] = useState()
-  const {deleteService} = useServices()
-  const deleteAlertDialog = useDisclosure()
+  const modal = useDisclosure();
+  const queryClient = useQueryClient();
+  const [alert, setAlert] = useState();
+  const { deleteService } = useServices();
+  const deleteAlertDialog = useDisclosure();
 
-  const [action, setAction] = useState("create")
-  const [selectedId, setSelectedId] = useState()
+  const [action, setAction] = useState("create");
+  const [selectedId, setSelectedId] = useState();
 
   const deleteMutation = useMutation(deleteService, {
     onSuccess: async() => {
@@ -29,15 +27,15 @@ function ServicesLayout() {
       queryClient.invalidateQueries("services")
       setAlert({message: "Service deleted", status: "success"})
     }
-  })
+  });
 
   const handleDelete = async () => 
-    await deleteMutation.mutateAsync(selectedId)
+    await deleteMutation.mutateAsync(selectedId);
 
   const handleCreate = () => {
     setAction("create")
     modal.onOpen()
-  }
+  };
 
   return (
     <>
@@ -70,8 +68,7 @@ function ServicesLayout() {
         label="Are you sure? You can't undo this action afterwards."
       />
     </>
-  )
+  );
 }
 
-
-export default ServicesLayout
+export default ServicesLayout;

@@ -1,6 +1,6 @@
 import CryptoAES from "crypto-js/aes";
 import CryptoENC from "crypto-js/enc-utf8";
-import {useStorage} from "@/hooks/useStorage";
+import { useStorage } from "~/lib/hooks/useStorage";
 
 export {initialState}
 

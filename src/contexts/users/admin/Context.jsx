@@ -1,25 +1,23 @@
-import UserTable from "./UserTable"
+import { useAuth } from "../../auth/Context";
+import { userMenuItems } from "./menuItems";
+import { useRouter } from "next/router";
+import { navLinks } from "./navLinks";
+import { createContext } from "react";
 
-import {createContext} from "react"
-import {navLinks} from "./navLinks"
-import {useRouter} from "next/router"
-import {useAuth} from '@/auth_context'
-import fakeUsers from "./fakeUsers.json"
-import {userMenuItems} from "./menuItems"
+import fakeUsers from "./fakeUsers.json";
+import UserTable from "./UserTable";
 
-const AdminContext = createContext()
+const AdminContext = createContext();
 
 const AdminProvider = ({ children }) => {
-	const {Provider} = AdminContext
+	const router = useRouter();
+	const { user, logout } = useAuth();
 
-	const {user, logout} = useAuth()
-	const router = useRouter()
-
-	const menuItems = (openSettings) =>
-		userMenuItems(user, router, logout, openSettings)
+	const menuItems = openSettings =>
+		userMenuItems(user, router, logout, openSettings);
 
 	return (
-		<Provider
+		<AdminContext.Provider
 			value={{
 				menuItems,
 				navLinks: navLinks(user.id),
@@ -29,8 +27,8 @@ const AdminProvider = ({ children }) => {
 			}}
 		>
 			{children}
-		</Provider>
+		</AdminContext.Provider>
 	);
 };
 
-export {AdminContext, AdminProvider}
+export { AdminContext, AdminProvider };

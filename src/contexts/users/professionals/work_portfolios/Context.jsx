@@ -1,21 +1,20 @@
-import Inputs from "./Inputs"
-import Schema from "./Schema"
-import Actions from "./Actions"
+import Actions from "./Actions";
+import Schema from "./Schema";
+import Inputs from "./Inputs";
 
-import {useAuth} from "@/auth_context"
-import {createContext, useContext} from "react"
-import {zodResolver} from "@hookform/resolvers/zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createContext, useContext } from "react";
+import { useAuth } from "../../../auth/Context";
 
-const WorkPortfoliosContext = createContext()
+const WorkPortfoliosContext = createContext();
 
-const WorkPortfoliosProvider = ({children}) => {
-  const {Provider} = WorkPortfoliosContext
-  const {user} = useAuth()
+const WorkPortfoliosProvider = ({ children }) => {
+  const {user} = useAuth();
 
   const call = new Actions(user) 
 
   return (
-    <Provider value={{
+    <WorkPortfoliosContext.Provider value={{
       inputs: Inputs,
       resolver: zodResolver(Schema),
 
@@ -26,7 +25,7 @@ const WorkPortfoliosProvider = ({children}) => {
       deleteWorkPortfolio: call.delete,
     }}>
       {children}
-    </Provider>
+    </WorkPortfoliosContext.Provider>
   )
 }
 

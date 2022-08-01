@@ -1,29 +1,26 @@
-import Form from "@/components/forms/Form"
-import Modal from "@/components/overlay/Modal"
+import Form from "~/components/forms/Form";
+import Modal from "~/components/overlay/Modal";
 
-import {
-  useMutation,
-  useQueryClient
-} from "react-query"
-import {useState} from "react"
-import {useForm} from "react-hook-form"
-import {useServices} from "@/services_context"
-import {capitalize} from "@/utils/stringHelpers"
+import { useServices } from "~/contexts/users/professionals/services/Context";
+import { useMutation, useQueryClient } from "react-query";
+import { capitalize } from "~/lib/utils/stringHelpers";
+import { useForm} from "react-hook-form";
+import { useState } from "react";
 
 function FormModal(props) {
-  const [alerts, setAlerts] = useState()
-  const {action, selectedId, setAlert} = props
-  const header = capitalize(`${action} Service`)
+  const [alerts, setAlerts] = useState();
+  const { action, selectedId, setAlert } = props;
+  const header = capitalize(`${action} Service`);
 
   const {
     inputs, 
     resolver,
     createService, 
     updateService,
-  } = useServices()
+  } = useServices();
 
-  const queryClient = useQueryClient()
-  const formHook = useForm({mode: "onChange", resolver})
+  const queryClient = useQueryClient();
+  const formHook = useForm({ mode: "onChange", resolver });
 
   const mutation = useMutation(
     (action === "update")
@@ -52,7 +49,7 @@ function FormModal(props) {
     const submittedData = (action === "update") 
       ? {selectedId, ...data} : {...data}
     mutation.mutate(submittedData)
-  }
+  };
  
   return (
     <Modal 
@@ -68,7 +65,7 @@ function FormModal(props) {
         submitHandler={submitHandler}
       />
     </Modal>
-  )
+  );
 }
 
 export default FormModal

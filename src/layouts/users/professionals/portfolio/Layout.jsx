@@ -1,27 +1,26 @@
-import FormModal from "./FormModal"
-import PortfolioItems from "./Items"
-import {Heading} from "@chakra-ui/react"
-import Button from "@/components/Button"
-import Alert from "@/components/feedback/Alert"
-import AlertDialog from "@/components/overlay/AlertDialog"
+import AlertDialog from "~/components/overlay/AlertDialog";
+import Alert from "~/components/feedback/Alert";
+import FormModal from "./FormModal";
+import PortfolioItems from "./Items";
 
+import { useWorkPortfolios } from "~/contexts/users/professionals/work_portfolios/Context";
+import { Heading, useDisclosure } from "@chakra-ui/react";
+import { Button } from "~/components";
+import {useState} from "react";
 import {
+  useQueryClient,
   useMutation,
-  useQueryClient
-} from "react-query"
-import {useState} from "react"
-import {useDisclosure} from "@chakra-ui/react"
-import {useWorkPortfolios} from "@/work_portfolios_context"
+} from "react-query";
 
 function PortfolioLayout() {
-  const modal = useDisclosure()
-  const queryClient = useQueryClient()
-  const [alert, setAlert] = useState()
-  const deleteAlertDialog = useDisclosure()
-  const {deleteWorkPortfolio} = useWorkPortfolios()
+  const modal = useDisclosure();
+  const queryClient = useQueryClient();
+  const [alert, setAlert] = useState();
+  const deleteAlertDialog = useDisclosure();
+  const { deleteWorkPortfolio } = useWorkPortfolios();
 
-  const [action, setAction] = useState("create")
-  const [selectedId, setSelectedId] = useState()
+  const [action, setAction] = useState("create");
+  const [selectedId, setSelectedId] = useState();
 
   const deleteMutation = useMutation(deleteWorkPortfolio, {
     onSuccess: async() => {
@@ -29,7 +28,7 @@ function PortfolioLayout() {
       queryClient.invalidateQueries("work_portfolios")
       setAlert({message: "Portfolio deleted", status: "success"})
     }
-  })
+  });
 
   const handleDelete = async () => 
     await deleteMutation.mutateAsync(selectedId)
@@ -37,7 +36,7 @@ function PortfolioLayout() {
   const handleCreate = () => {
     setAction("create")
     modal.onOpen()
-  }
+  };
 
   return (
     <>
@@ -70,7 +69,7 @@ function PortfolioLayout() {
         label="Are you sure? You can't undo this action afterwards."
       />
     </>
-  )
+  );
 }
 
-export default PortfolioLayout
+export default PortfolioLayout;

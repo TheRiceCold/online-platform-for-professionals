@@ -1,36 +1,34 @@
-import styles from "@/styles/Bookings.module.sass"
-import {PlusSquareIcon, StarIcon} from "@chakra-ui/icons"
+import styles from "~/styles/Bookings.module.sass";
+
+import { PlusSquareIcon, StarIcon } from "@chakra-ui/icons";
 import {
-	Modal,
-	ModalBody,
-	ModalHeader,
-	ModalFooter,
-	ModalContent,
-	ModalOverlay,
+	Button, IconButton,
 	ModalCloseButton,
 	Text, Textarea,
-	Button, IconButton,
-} from "@chakra-ui/react"
+	ModalOverlay,
+	ModalContent,
+	ModalFooter,
+	ModalHeader,
+	ModalBody,
+	Modal,
+} from "@chakra-ui/react";
 
-import {useState} from "react"
-import {useDisclosure} from "@chakra-ui/react"
-import {useReviews} from "@/contexts/reviews/Context"
-import { useMutation } from "react-query"
+import { useReviews } from "~/contexts/reviews/Context";
+import { useDisclosure } from "@chakra-ui/react";
+import { useMutation } from "react-query";
+import { useState } from "react";
 
 const ReviewModal = ({ tabStatus }) => {
-	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { isOpen, onOpen, onClose } = useDisclosure();
 	// TODO client_showed_up value in request body
-	const [review, setReview] = useState('')
-	const [rating, setRating] = useState('')
+	const [review, setReview] = useState("");
+	const [rating, setRating] = useState("");
 
-  const {
-    createReview,
-    updateReview
-  } = useReviews()
-	const handleInputChange = (e) => setReview(e.target.value);
+  const { createReview, updateReview } = useReviews();
+	const handleInputChange = e => setReview(e.target.value);
 
-  const createMutation = useMutation(createReview)
-  const updateMutation = useMutation(updateReview)
+  const createMutation = useMutation(createReview);
+  const updateMutation = useMutation(updateReview);
 
 	const addReview = () => {
 		// TODO post /professionals/:professional_id/review to create client as show or no show
@@ -105,7 +103,7 @@ const ReviewModal = ({ tabStatus }) => {
 				</ModalContent>
 			</Modal>
 		</>
-	)
+	);
 }
 
-export default ReviewModal
+export default ReviewModal;

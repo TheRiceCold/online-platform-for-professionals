@@ -1,18 +1,18 @@
-import styles from "@/styles/Components.module.sass"
+import styles from "~/styles/Components.module.sass";
 
+import { useDisclosure } from "@chakra-ui/react";
 import {
-  Flex,
-  AlertIcon,
-  CloseButton,
-  AlertDescription,
   Alert as ChakraAlert, 
-} from '@chakra-ui/react'
-import {useDisclosure} from '@chakra-ui/react'
+  AlertDescription,
+  CloseButton,
+  AlertIcon,
+  Flex,
+} from "@chakra-ui/react";
 
-function Alert({message, status, variant}) {
-  const {isOpen, onClose} = useDisclosure({defaultIsOpen: true})
+function Alert({ message, status, variant }) {
+  const { isOpen, onClose } = useDisclosure({ defaultIsOpen: true });
 
-  return isOpen && (
+  return (isOpen && (
     <Flex className={styles.alertContainer}>
       <ChakraAlert 
         status={status} 
@@ -31,7 +31,7 @@ function Alert({message, status, variant}) {
         />
       </ChakraAlert>
     </Flex>
-  )
+  ));
 }
 
-export default Alert
+export default Alert;

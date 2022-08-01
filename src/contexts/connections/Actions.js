@@ -1,4 +1,4 @@
-import Axios from "@/axios"
+import Axios from "~/lib/adapters/axios";
 
 function Actions(user) {
   const {token} = user
@@ -35,4 +35,4 @@ function Actions(user) {
     await Axios.delete(`connections/${id}`, config)
 }
 
-export default Actions
+export default Actions;

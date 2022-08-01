@@ -1,4 +1,4 @@
-import Axios from "@/axios"
+import Axios from "~/lib/adapters/axios";
 
 function Actions(user) {
   const {token} = user
@@ -10,7 +10,7 @@ function Actions(user) {
     return data
   }
 
-  this.getByFilter = async ({queryKey})=> {
+  this.getByFilter = async ({ queryKey })=> {
     const [_, status] = queryKey
     const {data} = await Axios.get(path+`?status=${status}`, config)
     return data

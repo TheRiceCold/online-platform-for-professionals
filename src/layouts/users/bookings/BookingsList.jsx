@@ -1,24 +1,24 @@
+import { useBookings } from "~/contexts/bookings/Context";
+import { useAuth } from "~/contexts/auth/Context";
+import { useEffect, useState } from "react";
+import { useQueries } from "react-query";
 import { 
-  Table, 
-  Tr, Th, 
-  Thead, Tbody,
   TableContainer, 
-} from '@chakra-ui/react'
-import Booking from "./Booking"
-import CancelModal from "./CancelModal"
-import FinishModal from "./FinishModal"
-import ReviewModal from "./ReviewModal"
+  Thead, Tbody,
+  Tr, Th, 
+  Table, 
+} from "@chakra-ui/react";
 
-import {useQueries} from "react-query"
-import {useAuth} from "@/auth_context"
-import {useEffect, useState} from "react"
-import {useBookings} from "@/bookings_context"
+import CancelModal from "./CancelModal";
+import FinishModal from "./FinishModal";
+import ReviewModal from "./ReviewModal";
+import Booking from "./Booking";
 
-const BookingsList = ({tabStatus, setBookingLinks}) => {
-  const {userRole} = useAuth()
-	const [actionBtn, setActionBtn] = useState(<CancelModal />)
+const BookingsList = ({ tabStatus, setBookingLinks }) => {
+  const { userRole } = useAuth();
+	const [actionBtn, setActionBtn] = useState(<CancelModal />);
 
-  const {getFilterBookings} = useBookings()
+  const { getFilterBookings } = useBookings();
   const [
     {data: bookingList, isLoading},
     {data: bookingLinks},
@@ -38,25 +38,23 @@ const BookingsList = ({tabStatus, setBookingLinks}) => {
 
 	useEffect(() => {
 		switch (tabStatus) {
-			case 'active':
-				setActionBtn(<CancelModal />)
+			case "active":
+				setActionBtn(<CancelModal />);
 				break;
-			case 'pending':
-				setActionBtn(<FinishModal tabStatus={tabStatus} />)
+			case "pending":
+				setActionBtn(<FinishModal tabStatus={tabStatus} />);
 				break;
-			case 'finished':
-
-				if (userRole === 'professional') {
-					setActionBtn(<FinishModal tabStatus={tabStatus} />)
-				} else if (userRole === 'client') {
-					setActionBtn(<ReviewModal tabStatus={tabStatus} />)
-				}
+			case "finished":
+				if (userRole === 'professional') 
+					setActionBtn(<FinishModal tabStatus={tabStatus} />);
+				else if (userRole === 'client')
+					setActionBtn(<ReviewModal tabStatus={tabStatus} />);
 				break;
-			case 'canceled':
-				setActionBtn('')
+			case "canceled":
+				setActionBtn("");
 				break;
 		}
-	}, [tabStatus])
+	}, [tabStatus]);
 
 	return (
 		<TableContainer>
@@ -69,7 +67,7 @@ const BookingsList = ({tabStatus, setBookingLinks}) => {
 						<Th>Client Name</Th>
 						<Th>Client Email</Th>
 						<Th>Location</Th>
-						{tabStatus === 'canceled' ? '' : <Th>Actions</Th>}
+						{tabStatus === "canceled" ? "" : <Th>Actions</Th>}
 					</Tr>
 				</Thead>
 				<Tbody>
@@ -83,7 +81,7 @@ const BookingsList = ({tabStatus, setBookingLinks}) => {
 				</Tbody>
 			</Table>
 		</TableContainer>
-	)
+	);
 }
 
-export default BookingsList
+export default BookingsList;

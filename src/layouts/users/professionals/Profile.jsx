@@ -1,44 +1,43 @@
-import styles from "@/styles/users/Profile.module.sass"
+import styles from "~/styles/users/Profile.module.sass";
 
-import RegisterModal from "./RegisterModal"
-import Navbar from "@/layouts/navbar/Navbar"
+import { capitalize } from "~/lib/utils/stringHelpers";
+import { useUsers } from "~/contexts/users/Context";
+import { useAuth } from "~/contexts/auth/Context";
+import { useQuery } from "react-query";
+import { Navbar } from "~/components";
 import {
-  Flex, 
-  Avatar, 
-  Heading,
   Skeleton,
-} from "@chakra-ui/react"
+  Heading,
+  Avatar, 
+  Flex, 
+} from "@chakra-ui/react";
 
-import {useQuery} from "react-query"
-import {useAuth} from "@/auth_context"
-import {useUsers} from "@/users_context"
-import { capitalize } from "@/utils/stringHelpers"
+import RegisterModal from "~/components/modals/RegisterModal";
 
-function ProfessionalLayout({id}) {
-  const {user} = useAuth()
-  const {userImage, userRole} = useAuth() // Temporary Image
-  const {navLinks} = useUsers(userRole)
-  const {getProfessional} = useUsers("professional")
+function ProfessionalLayout({ id }) {
+  const { getProfessional } = useUsers("professional");
+  const { userImage, userRole, user } = useAuth(); // Temporary Image
+  const { navLinks } = useUsers(userRole);
 
-  const {data, isError, isLoading} = useQuery(
+  const { data, isError, isLoading } = useQuery(
     ["professional", id],
-    getProfessional, {
-      retry: false
-    })
+    getProfessional, 
+    { retry: false }
+  );
 
-  const attributes = data?.data.attributes.field
-  const details = data?.included[0].attributes
-  const fullname = capitalize(`${details?.firstName} ${details?.lastName}`)
-  const location = capitalize(`${details?.city}, ${details?.region}, Philippines`)
+  const attributes = data?.data.attributes.field;
+  const details = data?.included[0].attributes;
+  const fullname = capitalize(`${details?.firstName} ${details?.lastName}`);
+  const location = capitalize(`${details?.city}, ${details?.region}, Philippines`);
   const field = attributes?.field
 
-  const workPortfolios = data?.data.relationships.workPortfolios.data
-  const workPortfolioSize = workPortfolios?.length
-  const recentPortfolio = !!workPortfolioSize && workPortfolios[workPortfolioSize]
+  const workPortfolios = data?.data.relationships.workPortfolios.data;
+  const workPortfolioSize = workPortfolios?.length;
+  const recentPortfolio = !!workPortfolioSize && workPortfolios[workPortfolioSize];
 
-  const services = data?.data.relationships.services.data
-  const servicesSize = workPortfolios?.length
-  const recentService = !!servicesSize && services[servicesSize]
+  const services = data?.data.relationships.services.data;
+  const servicesSize = workPortfolios?.length;
+  const recentService = !!servicesSize && services[servicesSize];
 
   {/*  CHECK IF USER is REGISTERED AS PROFESSIONAL */}
   return (!user.professionalId && userRole === "professional" ? <RegisterModal/> :
@@ -74,7 +73,7 @@ function ProfessionalLayout({id}) {
                 <div className={styles.data}>
                   <h4>Contact Number</h4>
                   <Skeleton isLoaded={!isLoading}>
-                    <p>0{details?.contactNumber}</p>
+                    <p>+63{details?.contactNumber}</p>
                   </Skeleton>
                 </div>
               </div>
@@ -99,7 +98,7 @@ function ProfessionalLayout({id}) {
         </Flex> 
       }
     </>
-  )
+  );
 }
 
-export default ProfessionalLayout
+export default ProfessionalLayout;

@@ -1,36 +1,40 @@
-import styles from "@/styles/users/Professionals.module.sass"
+import styles from "~/styles/users/Professionals.module.sass"
 
-import {Stack} from "@chakra-ui/react"
-import Button from "@/components/Button"
-import CalendlyButton from "@/components/booking/CalendlyButton"
+import { Stack } from "@chakra-ui/react";
+import { Button } from "~/components";
 
-import {useAuth} from "@/auth_context"
-import {useToast} from "@chakra-ui/react"
-import {useState, useEffect} from "react"
-import {useMutation, useQuery} from "react-query"
-import {useConnections} from "@/connections_context"
+import { useConnections } from "~/contexts/connections/Context";
+import { useMutation, useQuery } from "react-query";
+import { useAuth } from "~/contexts/auth/Context";
+import { useToast } from "@chakra-ui/react"
+import { useState, useEffect } from "react";
 
-function ActionButtons({selectedId}) {
-  const toast = useToast()
+import CalendlyButton from "~/components/booking/CalendlyButton";
+
+function ActionButtons({ selectedId }) {
   const {
     user, 
     userRole, 
     userAttributes
-  } = useAuth()
-  const [toasts, setToasts] = useState()
-  const {createConnection, getSubscriptions} = useConnections()
+  } = useAuth();
+  const { 
+    createConnection, 
+    getSubscriptions 
+  } = useConnections();
+  const toast = useToast();
+  const [toasts, setToasts] = useState();
 
   const {data: subscriptions} = useQuery(
     "subscriptions",
     getSubscriptions, {
       enabled: userRole === "client"
     }
-  )
+  );
 
   const disableSubscribe = !!subscriptions?.find(
     subscription => subscription.relationships 
       .professional.data.id === selectedId
-  )
+  );
 
   const mutation = useMutation(
     createConnection, {
@@ -57,40 +61,41 @@ function ActionButtons({selectedId}) {
           })
         )
       },
-  })
+  });
 
   useEffect(() => {
     if (toasts) 
       toasts.forEach(message => toast(message))
-  }, [JSON.stringify(toasts)])
+  }, [JSON.stringify(toasts)]);
 
   const handleSubscribe = () => {
     mutation.mutate({
       client_id: user.clientId,
       professional_id: selectedId
     }) 
-  }
+  };
 
   return (
     <Stack spacing={3} className={styles.actions}>
       {userRole === "client" && (
         <>
           <Button 
-            className={styles.subscribe} 
             onClick={handleSubscribe}
             disabled={disableSubscribe}
+            className={styles.subscribe} 
           >
             Subscribe
           </Button>
           <CalendlyButton
-            firstName={userAttributes.firstName}
-            lastName={userAttributes.lastName}
+            selectedId={selectedId}
             email={userAttributes.email}
+            lastName={userAttributes.lastName}
+            firstName={userAttributes.firstName}
           />
         </>
       )}
     </Stack>
-  )
+  );
 }
 
 export default ActionButtons

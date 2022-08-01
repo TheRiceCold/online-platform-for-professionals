@@ -1,21 +1,20 @@
-import Inputs from "./Inputs"
-import Schema from "./Schema"
-import Actions from "./Actions"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { createContext, useContext } from "react";
+import { useAuth } from "../../../auth/Context";
 
-import {useAuth} from "@/auth_context"
-import {createContext, useContext} from "react"
-import {zodResolver} from "@hookform/resolvers/zod"
+import Actions from "./Actions";
+import Schema from "./Schema";
+import Inputs from "./Inputs";
 
-const ServicesContext = createContext()
+const ServicesContext = createContext();
 
 const ServicesProvider = ({children}) => {
-  const {Provider} = ServicesContext
-  const {user} = useAuth()
+  const { user } = useAuth();
 
-  const call = new Actions(user) 
+  const call = new Actions(user);
 
   return (
-    <Provider value={{
+    <ServicesContext.Provider value={{
       inputs: Inputs,
       resolver: zodResolver(Schema),
 
@@ -26,7 +25,7 @@ const ServicesProvider = ({children}) => {
       deleteService: call.delete,
     }}>
       {children}
-    </Provider>
+    </ServicesContext.Provider>
   )
 }
 

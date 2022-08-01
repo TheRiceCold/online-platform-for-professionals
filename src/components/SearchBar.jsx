@@ -1,62 +1,61 @@
-import styles from "@/styles/Components.module.sass"
+import styles from "~/styles/Components.module.sass";
 
-import Axios from "axios"
-import {useQuery} from "react-query"
-import {useState, useRef} from "react"
-import useDebounce from "@/hooks/useDebounce"
-import ClipLoader from "react-spinners/ClipLoader"
-import useClickOutside from "@/hooks/useClickOutside"
-import {motion, AnimatePresence} from "framer-motion"
-import {SearchIcon, CloseIcon} from "@chakra-ui/icons"
+import {SearchIcon, CloseIcon} from "@chakra-ui/icons";
+import {motion, AnimatePresence} from "framer-motion";
+import {useState, useRef} from "react";
+import {useQuery} from "react-query";
+
+import useClickOutside from "~/lib/hooks/useClickOutside";
+import ClipLoader from "react-spinners/ClipLoader";
+import useDebounce from "~/lib/hooks/useDebounce";
+import Axios from "axios";
 
 const containerVariants = {
   expanded: { height: "16em" },
   collapsed: { height: "2em" }
-}
+};
 
-function SearchInput({colorMode}) {
-  const ref = useRef()
-  const inputRef = useRef()
-  const [isExpanded, setExpanded] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
-  const animate = isExpanded ? "expanded" : "collapsed"
+function SearchInput({ colorMode }) {
+  const ref = useRef();
+  const inputRef = useRef();
+  const [isExpanded, setExpanded] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const animate = isExpanded ? "expanded" : "collapsed";
 
   const handleChange = e => {
     e.preventDefault()
     setSearchQuery(e.target.value)
-  }
+  };
 
-  const debouncedSearchQuery = useDebounce(searchQuery)
+  const debouncedSearchQuery = useDebounce(searchQuery);
 
   const handleClose = () => {
     setExpanded(false)
     inputRef.current.value =""
-  }
+  };
 
-  useClickOutside(ref, () => setExpanded(false))
+  useClickOutside(ref, () => setExpanded(false));
 
   const prepSearchQuery = query => {
-    const uri = `http://api.tvmaze.com/search/shows?q=${query}`
-    return encodeURI(uri)
-  }
+    const uri = `http://api.tvmaze.com/search/shows?q=${query}`;
+    return encodeURI(uri);
+  };
 
   const getSomething = async() => {
     if(!searchQuery || searchQuery.trim() === "")
-      return
+      return;
 
-    const URL = prepSearchQuery(searchQuery)
+    const URL = prepSearchQuery(searchQuery);
 
-    const {data} = await Axios.get(URL)
-    return data
+    const {data} = await Axios.get(URL);
+    return data;
   }
 
   const {data, isLoading} = useQuery(
     "search", getSomething, {
       enabled: debouncedSearchQuery === searchQuery
     }
-  )
-
-  console.log("Result: ", data)
+  );
 
   return (
     <motion.div
@@ -107,8 +106,8 @@ function SearchInput({colorMode}) {
         )}
       </div>
     </motion.div>
-  )
+  );
 }
 
-export default SearchInput
+export default SearchInput;
 

@@ -1,12 +1,12 @@
-import styles from "@/styles/Auth.module.sass";
+import styles from "~/styles/Auth.module.sass";
 
-import AuthLayout from "@/layouts/auth/Layout";
-import Meta from "@/components/Meta";
+import AuthLayout from "~/layouts/auth/Layout";
+import { Meta } from "~/components";
 import axios from "axios";
 
+import { hostURL } from "~/lib/constants/environments";
 import { useMutation, useQueries } from "react-query";
-import { hostURL } from "@/constants/environments";
-import { useAuth } from "@/auth_context";
+import { useAuth } from "~/contexts/auth/Context";
 import { useState } from "react";
 
 function SignUp({ cities, regions }) {
@@ -44,10 +44,7 @@ export async function getServerSideProps(ctx) {
   const { data: regions }= await axios(`${url}regions`);
   
   return {
-    props: {
-      cities, 
-      regions,
-    }
+    props: { cities, regions }
   }
 }
 

@@ -1,12 +1,12 @@
-import styles from "@/styles/Auth.module.sass";
+import styles from "~/styles/Auth.module.sass";
 
-import AuthLayout from "../src/layouts/auth/Layout";
-import Meta from "@/components/Meta";
-
-import { useStorage } from "@/hooks/useStorage";
+import { useStorage } from "~/lib/hooks/useStorage";
+import { useAuth } from "~/contexts/auth/Context";
 import { useMutation } from "react-query";
-import { useAuth } from "@/auth_context";
+import { Meta } from "~/components";
 import { useState } from "react";
+
+import AuthLayout from "~/layouts/auth/Layout";
 
 function Login() {
 	const { 
@@ -14,7 +14,7 @@ function Login() {
     dispatch, 
     loginInputs, 
     LoginStatuses 
-  } = useAuth()
+  } = useAuth();
 	const storage = useStorage();
 	const [alerts, setAlerts] = useState();
 	const status = new LoginStatuses(storage, dispatch, setAlerts);
@@ -26,7 +26,7 @@ function Login() {
 
 	return (
 		<main className={styles.main}>
-      <Meta title="Login"/>
+      <Meta title="Login" />
 			<AuthLayout
 				isLoginPage
 				alerts={alerts}

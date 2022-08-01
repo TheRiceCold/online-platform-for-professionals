@@ -1,8 +1,19 @@
-import {AdminContext, AdminProvider} from "./admin/Context"
-import {ClientsContext, ClientsProvider} from "./clients/Context"
-import {ProfessionalsContext, ProfessionalsProvider} from "./professionals/Context"
-
-import {useContext, createContext} from "react"
+import { 
+  ProfessionalsContext, 
+  ProfessionalsProvider 
+} from "./professionals/Context";
+import { 
+  ClientsContext, 
+  ClientsProvider 
+} from "./clients/Context";
+import { 
+  AdminContext, 
+  AdminProvider
+} from "./admin/Context";
+import {
+  useContext, 
+  createContext
+} from "react";
 
 function UsersContext(role) {
   switch(role) {
@@ -17,8 +28,8 @@ function UsersContext(role) {
   }
 }
 
-function UsersProvider({children}) {
-  const {Provider} = UsersContext()
+function UsersProvider({ children }) {
+  const { Provider } = UsersContext();
 
   return (
     <Provider value={{ }}>
@@ -30,8 +41,8 @@ function UsersProvider({children}) {
         </ClientsProvider>
       </AdminProvider>
     </Provider>
-  )
+  );
 }
 
-export default UsersProvider
-export const useUsers = role => useContext(UsersContext(role))
+export default UsersProvider;
+export const useUsers = role => useContext(UsersContext(role));

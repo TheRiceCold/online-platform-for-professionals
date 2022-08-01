@@ -1,12 +1,11 @@
-import styles from '@/styles/Bookings.module.sass'
+import styles from "~/styles/Bookings.module.sass";
 
-import Layout from "@/bookings_layout";
-import Meta from "@/components/Meta";
-import Navbar from "@/navbar";
-
-import { useUsers } from "@/users_context";
-import { useAuth } from "@/auth_context";
+import { useUsers } from "~/contexts/users/Context";
+import { useAuth } from "~/contexts/auth/Context";
+import { Meta, Navbar } from "~/components";
 import { useRouter } from "next/router";
+
+import Layout from "~/layouts/users/bookings/Layout";
 
 function ProfessionalBookings() {
 	const { navLinks } = useUsers("professional");

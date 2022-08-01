@@ -1,24 +1,23 @@
-import styles from "@/styles/users/Profile.module.sass"
+import styles from "~/styles/users/Profile.module.sass";
 
-import {Flex, Avatar} from "@chakra-ui/react"
+import { useConnections } from "~/contexts/connections/Context";
+import { useAuth } from "~/contexts/auth/Context";
+import { Flex, Avatar } from "@chakra-ui/react";
+import { useQueries } from "react-query";
 
-import {useQueries} from "react-query"
-import {useAuth} from "@/auth_context"
-import {useConnections} from "@/connections_context"
-
-const ClientLayout = () => {
+function ClientLayout() {
   const {
     userImage,
     userEmail,
     userFullname,
     userLocation,
     userContactNumber,
-  } = useAuth()
+  } = useAuth();
 
   const {
     getSubscriptions, 
     getMyProfessionals
-  } = useConnections()
+  } = useConnections();
 
   const [
     {data: subscriptions},
@@ -62,7 +61,7 @@ const ClientLayout = () => {
               </div>
               <div className={styles.data}>
                 <h4>Contact Number</h4>
-                <p>{userContactNumber}</p>
+                <p>+63{userContactNumber}</p>
               </div>
             </div>
           </div>
@@ -80,11 +79,10 @@ const ClientLayout = () => {
               </div>
             </div>
           </div>
-
         </article>
 			</Flex>
 		</>
 	);
-};
+}
 
 export default ClientLayout;

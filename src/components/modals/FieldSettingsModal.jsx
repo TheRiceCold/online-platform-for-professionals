@@ -1,10 +1,10 @@
-import Modal from "@/components/overlay/Modal";
-import Form from "@/components/forms/Form";
-
+import { hostURL } from "~/lib/constants/environments";
 import { useMutation, useQuery } from "react-query";
-import { hostURL } from "@/constants/environments";
-import { useUsers } from "@/users_context";
+import { useUsers } from "~/contexts/users/Context";
 import { useForm } from "react-hook-form";
+
+import Modal from "../overlay/Modal";
+import Form from "../forms/Form";
 import axios from "axios";
 
 function FieldSettingsModal(props) {
@@ -38,6 +38,6 @@ function FieldSettingsModal(props) {
       />
     </Modal>
   );
-}
+};
 
-export default FieldSettingsModal
+export default FieldSettingsModal;

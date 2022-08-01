@@ -7,7 +7,11 @@ const Inputs = [
     id: "details",
     type: "textarea",
     label: "Portfolio Details",
+  },
+  { 
+    id: "image_url", 
+    type: "image",
   }
-]
+];
 
-export default Inputs
+export default Inputs;

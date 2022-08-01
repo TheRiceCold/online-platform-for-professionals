@@ -1,48 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/styles/*": ["styles/*"],
-
-      "@/layouts/*": ["src/layouts/*"],
-      "@/contexts/*": ["src/contexts/*"],
-      "@/components/*": ["src/components/*"],
-
-      "@/data/*": ["src/lib/data/*"],
-      "@/hooks/*": ["src/lib/hooks/*"],
-      "@/utils/*": ["src/lib/utils/*"],
-      "@/constants/*": ["src/lib/constants/*"],
-
-      "_comment": "axios shortcut",
-      "@/axios": ["src/adapters/axios"],
-
-      "_comment": "--------------- CONTEXT SHORTCUTS ---------------",
-      "@/auth_context": ["src/contexts/auth/Context"],
-      "@/users_context": ["src/contexts/users/Context"],
-      "@/reviews_context": ["src/contexts/reviews/Context"],
-      "@/bookings_context": ["src/contexts/bookings/Context"],
-      "@/connections_context": ["src/contexts/connections/Context"],
-      "@/work_portfolios_context": [
-        "src/contexts/users/professionals/work_portfolios/Context"
-      ],
-      "@/services_context": [
-        "src/contexts/users/professionals/services/Context"
-      ],
-      "@/calendly_token_context": [
-        "src/contexts/users/professionals/calendly_token/Context"
-      ],
-
-      "_comment": "--------------- LAYOUT SHORTCUTS ---------------",
-      "@/professionals_layout/*": ["src/layouts/users/professionals/*"],
-      "@/clients_layout/*": ["src/layouts/users/clients/*"],
-      "@/admin_layout/*": ["src/layouts/users/admin/*"],
-      "@/users_layout/*": ["src/layouts/users/*"],
-
-      "_comment": "--------------- BOOKINGS SHORTCUTS ---------------",
-      "@/bookings_layout": ["src/layouts/users/bookings/Layout"],
-
-      "_comment": "--------------- NAVBAR SHORTCUTS ---------------",
-      "@/navbar": ["src/layouts/navbar/Navbar"] 
+    "baseUrl": "src",
+    "paths": { 
+      "~/*": ["*"],
+      "~/styles/*": ["../styles/*"]
     },
   }
 }

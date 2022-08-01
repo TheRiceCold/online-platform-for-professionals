@@ -1,18 +1,16 @@
-import Actions from "./Actions"
+import Actions from "./Actions";
 
-import {useAuth} from "@/auth_context"
-import {createContext, useContext} from "react"
+import { createContext, useContext } from "react";
+import { useAuth } from "../../../auth/Context";
 
-const CalendlyTokenContext = createContext()
+const CalendlyTokenContext = createContext();
 
-const CalendlyTokenProvider = ({children}) => {
-  const {Provider} = CalendlyTokenContext
-  const {user} = useAuth()
-
-  const call = new Actions(user) 
+const CalendlyTokenProvider = ({ children }) => {
+  const { user } = useAuth();
+  const call = new Actions(user);
 
   return (
-    <Provider value={{
+    <CalendlyTokenContext.Provider value={{
       inputs: [{ 
         id: "authorization",
         label: "Calendly Token",
@@ -27,10 +25,10 @@ const CalendlyTokenProvider = ({children}) => {
       postCancelEvent: call.cancel,
     }}>
       {children}
-    </Provider>
-  )
+    </CalendlyTokenContext.Provider>
+  );
 }
 
-export default CalendlyTokenProvider
+export default CalendlyTokenProvider;
 
-export const useCalendlyToken = () => useContext(CalendlyTokenContext)
+export const useCalendlyToken = () => useContext(CalendlyTokenContext);

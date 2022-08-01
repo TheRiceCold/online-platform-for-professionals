@@ -1,21 +1,19 @@
-import Inputs from "./Inputs"
-import Schema from "./Schema"
-import Actions from "./Actions"
+import Inputs from "./Inputs";
+import Schema from "./Schema";
+import Actions from "./Actions";
 
-import {createContext} from "react"
-import {useAuth} from "@/auth_context"
-import {zodResolver} from "@hookform/resolvers/zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useAuth } from "../auth/Context";
+import { createContext } from "react";
 
-const ReviewsContext = createContext()
+const ReviewsContext = createContext();
 
-const ReviewsProvider = ({children}) => {
-  const {Provider} = ReviewsContext
-  const {user} = useAuth()
-
-  const call = new Actions(user) 
+const ReviewsProvider = ({ children }) => {
+  const { user } = useAuth();
+  const call = new Actions(user);
 
   return (
-    <Provider value={{
+    <ReviewsContext.Provider value={{
       inputs: Inputs,
       resolver: zodResolver(Schema),
 
@@ -26,8 +24,8 @@ const ReviewsProvider = ({children}) => {
       deleteReview: call.delete,
     }}>
       {children}
-    </Provider>
-  )
+    </ReviewsContext.Provider>
+  );
 }
 
-export default ReviewsProvider
+export default ReviewsProvider;
